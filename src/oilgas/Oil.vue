@@ -7,7 +7,7 @@
                 </template>
             </van-nav-bar>
         </div>
-        <div>
+        <div class="test">
             <van-tabs @click="onClick">
                 <van-tab v-for="(item,index) in tabList" :key="index" :title="item.name"/> 
             </van-tabs>
@@ -57,7 +57,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	.test{
+		// border: 1px solid red;
+		// position: fixed;
+		// top:100px;
+		// left: 0;
+		
+	}
     #main{
+		// position: relative;
         font-size: 16px;
         .van-tab__text{
             font-size: 14px;

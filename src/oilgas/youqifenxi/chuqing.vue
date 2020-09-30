@@ -1,14 +1,28 @@
 <template>
 	<div style="position: relative; width: 100%; background-color: #DADBDB;">
-		<div class="map">
-			<div id="tab_button">
-				<span v-for="(item,index) in tablist" :key='index' @click="tabButton(index)" v-bind:class="[{tab_button_two:index == selected},{tab_button_one:true}]">{{item}}</span>
+		<div :class="[{tanchuang:true},{tanchuang_one: show}]">
+			<div style="width: 100%;height: 100%;overflow: auto;">
+				<table class="table_one_t">
+					<tr>
+						<th v-for="(th,index) in tableTh" :key='index'>{{th}}</th>
+					</tr>
+					<tr v-for="(tr,index) in listData" :key='index'>
+						<td v-for="(td,index) in tr" :key='index'>
+							{{td}}
+						</td>
+					</tr>
+				</table>
 			</div>
+			<img id="close" :style="{'left':closeLeft}" src="../../assets/img/industryAnalysis/关闭.png" alt="图片未显示" @click="tanchuangClose()">
+		</div>
+		<div id="tab_button" :style="{'left':screenLeft}">
+			<span v-for="(item,index) in tablist" :key='index' @click="tabButton(index)" v-bind:class="[{tab_button_two:index == selected},{tab_button_one:true}]">{{item}}</span>
 		</div>
 		<!-- 储情分析的主要内容 -->
-		<div id="confess_content" v-if="a">
-			<div class="chart" style="position: relative;">
-				<div id="tab_oil">
+		<div id="confess_content" v-if="a" style="background-color: #DADBDB;">
+			<img class="map" @click.prevent="tanchuangShow()" src="../../assets/img/industryAnalysis/地图.png" alt="图片未显示">
+			<div class="chart">
+				<div class="tab_oil">
 					<span v-for="(item,index) in tablist_one" :key='index' @click="tabButton_one(index)" v-bind:class="[{tab_oil_two:index == selected_one},{tab_oil_one:true}]">{{item}}</span>
 				</div>
 				<div class="fontSize_div">
@@ -18,8 +32,9 @@
 				<!-- <div class="echarts" id="echartsOne"></div> -->
 				<div class="echarts" id="echartsOne"></div>
 			</div>
-			<div class="chart" style="position: relative;">
-				<div id="tab_oil">
+			<div class="chart">
+				<div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
+				<div class="tab_oil">
 					<span v-for="(item,index) in tablist_two" :key='index' @click="tabButton_two(index)" v-bind:class="[{tab_oil_two:index == selected_two},{tab_oil_one:true}]">{{item}}</span>
 				</div>
 				<div class="fontSize_div">
@@ -28,29 +43,30 @@
 				</div>
 				<div class="echarts" id="echartsTwo"></div>
 			</div>
-			<div class="chart" style="position: relative;">
-				<div id="tab_oil">
+			<div class="chart">
+				<div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
+				<div class="tab_oil">
 					<span v-for="(item,index) in tablist_three" :key='index' @click="tabButton_three(index)" v-bind:class="[{tab_oil_two:index == selected_three},{tab_oil_one:true}]">{{item}}</span>
 					<div id="table">
 						<div style="font: bold 13px '微软雅黑';color: #3A6DDA;position: relative;top: 30px;">油田采储排名<span style="color: #FF9311 ;font-style: italic;">Top</span></div>
 						<table :class="[{table_one:!g},{table_two:g}]">
 							<tr>
-								<th v-for="th in tableTh_one">{{th}}</th>
+								<th v-for="(th,index) in tableTh_one" :key='index'>{{th}}</th>
 							</tr>
-							<tr v-for="(tr,index) in listData_one">
+							<tr v-for="(tr,index) in listData_one" :key='index'>
 								<td>{{index+1}}</td>
-								<td v-for="td in tr">
+								<td v-for="(td,index) in tr" :key='index'>
 									{{td}}
 								</td>
 							</tr>
 						</table>
 						<table :class="[{table_one:g},{table_two:!g}]">
 							<tr>
-								<th v-for="th in tableTh_two">{{th}}</th>
+								<th v-for="th,index in tableTh_two" :key='index'>{{th}}</th>
 							</tr>
-							<tr v-for="(tr,index) in listData_two">
+							<tr v-for="(tr,index) in listData_two" :key='index'>
 								<td>{{index+1}}</td>
-								<td v-for="td in tr">
+								<td v-for="td,index in tr" :key='index'>
 									{{td}}
 								</td>
 							</tr>
@@ -63,50 +79,26 @@
 
 
 		<div id="produce_content" v-show="b">
-			<div class="chart" style="position: relative;">
-				<div id="tab_oil">
-					<span v-for="(item,index) in tablist_four" :key='index' @click="tabButton_one(index)" v-bind:class="[{tab_oil_two:index == selected_one},{tab_oil_one:true}]">{{item}}</span>
+			<img class="map" @click.prevent="tanchuangShow()" src="../../assets/img/industryAnalysis/地图.png" alt="图片未显示">
+			<div class="chart">
+				<div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
+				<div class="tab_oil">
+					<span v-for="(item,index) in tablist_four" :key='index' @click="tabButton_four(index)" v-bind:class="[{tab_oil_two:index == selected_four},{tab_oil_one:true}]">{{item}}</span>
 				</div>
 				<div class="echarts_one" id="echartsThree"></div>
 			</div>
-			<div class="chart" style="position: relative;">
-				<div id="tab_oil">
-					<span v-for="(item,index) in tablist_two" :key='index' @click="tabButton_two(index)" v-bind:class="[{tab_oil_two:index == selected_two},{tab_oil_one:true}]">{{item}}</span>
+			<div class="chart">
+				<div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
+				<div class="tab_oil">
+					<span v-for="(item,index) in tablist_five" :key='index' @click="tabButton_five(index)" v-bind:class="[{tab_oil_two:index == selected_five},{tab_oil_one:true}]">{{item}}</span>
 				</div>
-				<div class="fontSize_div">
-					<div class="fontSize">0.66</div>
-					<div class="fontSize">立方米</div>
-				</div>
-				<div class="echarts" id="echartsTwo"></div>
+				<div class="echarts_one" id="echartsFour"></div>
 			</div>
-			<div class="chart" style="position: relative;">
-				<div id="tab_oil">
-					<span v-for="(item,index) in tablist_three" :key='index' @click="tabButton_three(index)" v-bind:class="[{tab_oil_two:index == selected_three},{tab_oil_one:true}]">{{item}}</span>
-					<div id="table">
-						<div style="font: bold 13px '微软雅黑';color: #3A6DDA;position: relative;top: 30px;">油田采储排名<span style="color: #FF9311 ;font-style: italic;">Top</span></div>
-						<table :class="[{table_one:!g},{table_two:g}]">
-							<tr>
-								<th v-for="th in tableTh_one">{{th}}</th>
-							</tr>
-							<tr v-for="(tr,index) in listData_one">
-								<td>{{index+1}}</td>
-								<td v-for="td in tr">
-									{{td}}
-								</td>
-							</tr>
-						</table>
-						<table :class="[{table_one:g},{table_two:!g}]">
-							<tr>
-								<th v-for="th in tableTh_two">{{th}}</th>
-							</tr>
-							<tr v-for="(tr,index) in listData_two">
-								<td>{{index+1}}</td>
-								<td v-for="td in tr">
-									{{td}}
-								</td>
-							</tr>
-						</table>
-					</div>
+			<div class="chart">
+				<div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
+				<div class="tab_oil">
+					<span v-for="(item,index) in tablist_six" :key='index' @click="tabButton_six(index)" v-bind:class="[{tab_oil_two:index == selected_six},{tab_oil_one:true}]">{{item}}</span>
+					<div class="echarts_one" id="echartsFive"></div>
 				</div>
 			</div>
 		</div>
@@ -125,24 +117,99 @@
 		name: 'FuncFormsBase',
 		data() {
 			return {
-
+				screenWidth: document.body.clientWidth, // 屏幕宽
+				screenLeft: '',
+				show: 0, //控制弹窗显示
+				closeLeft: 0, //关闭按钮居中
+				tableTh: ['名称', '所属盟市', '面积', '经纬度', '远景资源量', '预测资源量', '控制储量', '探明储量'],
+				listData: [{
+						name: '乌里雅斯太油田',
+						leaguerea: '锡林郭勒盟',
+						area: '5.5万平方公里',
+						latitude: '43°23′10″~45°24′27″',
+						vision: '3256',
+						prediction: '1456',
+						control: '1300',
+						proved: '1200'
+					},
+					{
+						name: '宝力格油田',
+						leaguerea: '锡林郭勒盟',
+						area: '4314.12平方公里',
+						latitude: '41°10′10″~43°24′10″',
+						vision: '2687',
+						prediction: '1856',
+						control: '1399',
+						proved: '780'
+					},
+					{
+						name: '新苏木油田',
+						leaguerea: '锡林郭勒盟',
+						area: '5万平方公里',
+						latitude: '46°16′10″~46°24′15″',
+						vision: '3100',
+						prediction: '2756',
+						control: '2678',
+						proved: '2670'
+					},
+					{
+						name: '哈达图油田',
+						leaguerea: '锡林郭勒盟',
+						area: '432平方公里',
+						latitude: '43°17′10″~45°24′15″',
+						vision: '2890',
+						prediction: '1956',
+						control: '1780',
+						proved: '870'
+					},
+					{
+						name: '锡林油田',
+						leaguerea: '锡林郭勒盟',
+						area: '234平方公里',
+						latitude: '44°17′10″~40°24′15″',
+						vision: '3200',
+						prediction: '2056',
+						control: '1890',
+						proved: '960'
+					},
+					{
+						name: '乌兰诺尔油田',
+						leaguerea: '锡林郭勒盟',
+						area: '5.5万平方公里',
+						latitude: '47°18′10″~46°24′15″',
+						vision: '3199',
+						prediction: '2099',
+						control: '2000',
+						proved: '677'
+					},
+				],
 				tablist: ['储情分析', '生产-原油天然气', '生产-炼化煤化企业'],
 				tablist_one: ['原油剩余技术储量', '原油剩余经济储量'],
 				tablist_two: ['天然气剩余技术储量', '天然气剩余经济储量'],
 				tablist_three: ['油田采储比排名', '气田采储比排名'],
-				tablist_four: ['原油产量分析','天然气产量分析'],
-				tablist_five: ['本年度原油生产自给率','本年度天然气生产自给率'],
-				tablist_six: ['本年度原油生产企业分布','本年度天然气生产企业分布'],
+				tablist_four: ['原油产量分析', '天然气产量分析'],
+				tablist_five: ['本年度原油生产自给率', '本年度天然气生产自给率'],
+				tablist_six: ['本年度原油生产企业分布', '本年度天然气生产企业分布'],
 				selected: '0',
 				selected_one: '0',
 				selected_two: '0',
 				selected_three: '0',
+				selected_four: '0',
+				selected_five: '0',
+				selected_six: '0',
+				//三个页面是否显示的三个参数
 				a: 1,
 				b: 0,
 				c: 0,
+				//页面里三个按钮
 				i: 0, //判断是否点击
 				j: 0,
 				g: 0,
+				//第二个页面的三个按钮
+				p_i: 0,
+				p_j: 0,
+				p_g: 0,
+				//第一个页面的图表数据
 				echarts: {
 					data_three: [{
 							value: 70,
@@ -245,6 +312,18 @@
 						}
 					],
 				},
+				//第二个页面的柱状图数据
+				bardata_one: [
+					[50, 50, 251, 400, 300, 250, 375, 500, 375, 250, 275, 520],
+					[250, 200, 374, '-', 375, '-', 175, 200, 175, '-', 260, 230],
+					['-', '-', '-', 100, '-', 125, '-', '-', '-', 150, '-', '-']
+				],
+				bardata_two: [
+					[40, 60, 234, 300, 300, 230, 375, 460, 385, 230, 275, 420],
+					[230, 220, 354, '-', 375, '-', 175, 210, 175, '-', 260, 230],
+					['-', '-', '-', 120, '-', 145, '-', '-', '-', 160, '-', '-']
+				],
+
 				tableTh_one: ['序号', '油田', '盟区', '采储比'],
 				listData_one: [{
 						oilfield: '吉祥油田',
@@ -304,9 +383,20 @@
 		mounted() {
 			this.drawLine('echartsOne', this.echarts.data_one);
 			this.drawLine('echartsTwo', this.echarts.data_two);
+			this.screenLeft = (this.screenWidth - 343) / 2 + 'px'
 			//this.drawLine_one('echartsThree')
 		},
 		methods: {
+			//取消图片默认样式
+			tanchuangShow() {
+				this.show = 1
+				this.$nextTick(function() {
+					this.closeLeft = (this.screenWidth - 35) / 2 + 'px'
+				})
+			},
+			tanchuangClose() {
+				this.show = 0
+			},
 			// 储情分析环形图
 			drawLine(name, arry) {
 				var echarts = require('echarts');
@@ -352,7 +442,7 @@
 					}]
 				});
 			},
-			drawLine_one(name) {
+			drawLine_one(name, arry) {
 				let echarts = require('echarts');
 				let myChart = echarts.init(document.getElementById(name));
 				myChart.setOption({
@@ -430,7 +520,7 @@
 									color: 'rgba(0,0,0,0)'
 								}
 							},
-							data: [50, 50, 251, 400, 300, 250, 375, 500, 375, 250, 275, 520]
+							data: arry[0]
 						},
 						{
 							name: '收入',
@@ -456,7 +546,7 @@
 								show: true,
 								position: 'top'
 							},
-							data: [250, 200, 374, '-', 375, '-', 175, 200, 175, '-', 260, 230]
+							data: arry[1]
 						},
 						{
 							name: '支出',
@@ -471,9 +561,121 @@
 								show: true,
 								position: 'bottom'
 							},
-							data: ['-', '-', '-', 100, '-', 125, '-', '-', '-', 150, '-', '-']
+							data: arry[2]
 						}
 					]
+				});
+			},
+			drawPie(name, arry) {
+				let echarts = require('echarts');
+				let myChart = echarts.init(document.getElementById(name));
+				myChart.setOption({
+					tooltip: {
+						trigger: "item",
+						formatter: "{a} <br/>{b}: {c} ({d}%)",
+					},
+					legend: {
+						orient: "vertical",
+						bottom: 'center',
+						right: 30,
+						itemGap: 30,
+						data: ["煤油", "汽油", "柴油"],
+						itemWidth: 15,
+						itemHeight: 10,
+						textStyle: {
+							color: '#9FA0A5',
+							fontSize: 12,
+						}
+					},
+					series: [{
+						name: "原油剩余技术储量",
+						type: "pie",
+						radius: ["40%", "55%"],
+						center: ["50%", "50%"],
+						label: {
+							formatter: "{b|{b}} \n\n\n {per|{d}%\n}",
+							padding: [0, -40, -15],
+							rich: {
+								per: {
+									fontSize: 12,
+									color: "#9FA0A5",
+								},
+								b: {
+									fontSize: 12,
+								},
+							},
+						},
+						labelLine: {
+							length: 15,
+							length2: 30,
+						},
+						data: [{
+								value: 40,
+								name: "煤油"
+							},
+							{
+								value: 20,
+								name: "汽油"
+							},
+							{
+								value: 40,
+								name: "柴油"
+							},
+						],
+						color: ["#96F0F2", "#14DBA0", "#FF9A13"],
+					}],
+				});
+			},
+			drawPie_one(name, arry) {
+				let echarts = require('echarts');
+				let myChart = echarts.init(document.getElementById(name));
+				myChart.setOption({
+					tooltip: {
+						trigger: "item",
+						formatter: "{a} <br/>{b}: {c} ({d}%)",
+					},
+					legend: {
+						orient: "vertical",
+						bottom: 'center',
+						right: 30,
+						itemGap: 30,
+						data: ["中石油", "中石化"],
+						itemWidth: 15,
+						itemHeight: 10,
+					},
+					series: [{
+						name: "原油剩余技术储量",
+						type: "pie",
+						radius: ["40%", "55%"],
+						center: ["50%", "50%"],
+						label: {
+							formatter: "{b|{b}} \n\n\n {per|{d}%\n}",
+							padding: [0, -40, -15],
+							rich: {
+								per: {
+									fontSize: 12,
+									color: "#9FA0A5",
+								},
+								b: {
+									fontSize: 12,
+								},
+							},
+						},
+						labelLine: {
+							length: 15,
+							length2: 30,
+						},
+						data: [{
+								value: 23,
+								name: "中石化"
+							},
+							{
+								value: 77,
+								name: "中石油"
+							},
+						],
+						color: ["#96F0F2", "#97C5FF"],
+					}],
 				});
 			},
 			//主要按钮
@@ -484,7 +686,7 @@
 					this.a = 1
 					this.b = 0
 					this.c = 0
-					this.$nextTick(function(){
+					this.$nextTick(function() {
 						this.drawLine('echartsOne', this.echarts.data_one)
 						this.drawLine('echartsTwo', this.echarts.data_two);
 					})
@@ -494,8 +696,10 @@
 					this.a = 0
 					this.b = 1
 					this.c = 0
-					this.$nextTick(function(){
-						this.drawLine_one('echartsThree')
+					this.$nextTick(function() {
+						this.drawLine_one('echartsThree', this.bardata_one)
+						this.drawPie('echartsFour')
+						this.drawPie_one('echartsFive')
 					})
 				}
 				if (2 == id) {
@@ -505,6 +709,8 @@
 					console.log('生产天然气')
 				}
 			},
+
+			/* 第一个页面的点击按钮 */
 			//内容里的第一个按钮
 			tabButton_one(id) {
 				this.selected_one = id
@@ -539,16 +745,113 @@
 					this.g = 0
 				}
 			},
+
+			/* 第二个页面的三个点击按钮 */
+			//内容里的第一个按钮
+			tabButton_four(id) {
+				this.selected_four = id;
+				if (this.p_i == 0 && id == 1) {
+					this.drawLine_one('echartsThree', this.bardata_two)
+					this.p_i = 1
+				}
+				if (this.p_i == 1 && id == 0) {
+					this.drawLine_one('echartsThree', this.bardata_one)
+					this.p_i = 0
+				}
+			},
+			//内容里的第二个按钮
+			tabButton_five(id) {
+				this.selected_five = id
+				if (this.p_j == 0 && id == 1) {
+					this.drawPie('echartsFour', this.echarts.data_four);
+					this.p_j = 1
+				}
+				if (this.P_j == 1 && id == 0) {
+					this.drawPie('echartsFour', this.echarts.data_two);
+					this.p_j = 0
+				}
+			},
+			//内容里的第三个按钮
+			tabButton_six(id) {
+				this.selected_six = id
+				if (this.p_g == 0 && id == 1) {
+					this.p_g = 1
+				}
+				if (this.p_g == 1 && id == 0) {
+					this.p_g = 0
+				}
+			},
+
+
+
+
+
+
+
+
+
+
+
 		}
 	}
 </script>
 
 <style scoped>
+	/* 弹出框 */
+	.tanchuang {
+		position: absolute;
+		width: 100%;
+		height: 314.5px;
+		background-color: #4C4C4C;
+		z-index: 3;
+		display: none;
+	}
+
+	.tanchuang_one {
+		position: absolute;
+		width: 100%;
+		height: 314.5px;
+		background-color: #4C4C4C;
+		z-index: 3;
+		display: block;
+	}
+
+	.table_one_t {
+		font-family: PingFang SC;
+		border-collapse: collapse;
+		width: 800px;
+		margin: 50px auto;
+	}
+
+	.table_one_t th,
+	.table_one_t td {
+		font-size: 14px;
+		border: 1px solid #B9BEC9;
+		padding: 3px 7px 2px 7px;
+		text-align: center;
+		background-color: white;
+	}
+
+	.table_one_t th {
+		background-color: #D8DBDE;
+	}
+
+	#close {
+		width: 35px;
+		height: 35px;
+		position: absolute;
+		top: 205px;
+	}
+
+
+
 	#tab_button {
 		width: 343px;
 		height: 29px;
 		background-color: rgba(0, 0, 0, 0.15);
-		margin: 0px auto;
+		position: absolute;
+		top: 20px;
+		z-index: 2;
 		border-radius: 5px;
 	}
 
@@ -585,9 +888,6 @@
 		width: 100%;
 		height: 314.5px;
 		background-color: #DADBDB;
-		background-size: cover;
-		padding: 15px 0 0 0;
-		background-image: url(../../assets/img/industryAnalysis/地图.png);
 	}
 
 	/* 储情分析内容 */
@@ -595,8 +895,8 @@
 		width: 100%;
 		height: 289px;
 		background-color: white;
-		margin: 5px 0 0 0;
-		padding: 10px 0 0 0;
+		padding: 10px 0;
+		position: relative;
 	}
 
 	.echarts {
@@ -609,14 +909,11 @@
 		background-size: 65px 65px;
 
 	}
+
 	.echarts_one {
 		width: 100%;
 		height: 242px;
 		margin: 20px auto;
-		background-repeat: no-repeat;
-		background-position: 50% 37%;
-		background-size: 65px 65px;
-	
 	}
 
 	/* 文字块 */
@@ -635,7 +932,7 @@
 
 
 	/* 按钮样式调整 */
-	#tab_oil {
+	.tab_oil {
 		width: 345px;
 		height: 31px;
 		background-color: white;
@@ -680,14 +977,14 @@
 	}
 
 	.table_one {
-		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		font-family: PingFang SC;
 		width: 100%;
 		border-collapse: collapse;
 		margin: 50px auto;
 	}
 
 	.table_two {
-		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		font-family: PingFang SC;
 		width: 100%;
 		border-collapse: collapse;
 		margin: 50px auto;
@@ -705,6 +1002,7 @@
 	.table_one th {
 		background-color: #D8DBDE;
 	}
+
 
 
 	/* 主要内容隐藏 */

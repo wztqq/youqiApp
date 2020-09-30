@@ -25,7 +25,7 @@ export default {
                 router:'ChuQing'
             },{
                 name:'天然气保供中心',
-                router:'ProjectManagement'
+                router:'Shengchanguanli'
             },{
                 name:'油气生产管理',
                 router:'Yunayou'

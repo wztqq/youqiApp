@@ -22,13 +22,22 @@ import 'vue-good-table/dist/vue-good-table.css'
 
 Vue.prototype.$echarts = echarts;
 
+//引入ViewUI
+import ViewUI from 'view-design';
+import 'view-design/dist/styles/iview.css';
+
+//引入less
+import less from 'less';
+
 // 把 vuex 的代码仓库引入到当前页面
 import store from './store/store.js'
 
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.use(Element)
+Vue.use(Element);
+Vue.use(ViewUI);
+Vue.use(less);
 
 // 图片懒加载
 // import VuelazyLoad from 'vue-lazyload'

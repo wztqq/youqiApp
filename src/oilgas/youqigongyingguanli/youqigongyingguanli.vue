@@ -235,7 +235,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #tab_button {
   width: 343px;
   height: 29px;
@@ -280,7 +280,7 @@ export default {
   background-color: #dadbdb;
   background-size: cover;
   padding: 15px 0 0 0;
-  background-image: url(../../assets/img/youqigongyingguanli/map.png);
+  /* background-image: url(../../assets/img/youqigongyingguanli/map.png); */
 }
 
 /* 储情分析内容 */

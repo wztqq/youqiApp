@@ -4,7 +4,6 @@
 			<el-tab-pane label="生产管理" name="first" :key="'first'">
 				<child1></child1>
 			</el-tab-pane>
-
 			<el-tab-pane label="供应管理" name="second" :key="'second'">
 				<child2></child2>
 			</el-tab-pane>
@@ -56,6 +55,14 @@
 		}
 	}
 </script>
-<style>
-	
+<style scoped>
+.scgl /deep/ .el-tabs__nav{
+    position: fixed;
+    top: 90px;
+	z-index:1;
+	background-color: #fff;
+}
+.scgl /deep/.el-tabs__content{
+	padding-top:116px
+}
 </style>

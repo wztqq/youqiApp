@@ -1,13 +1,13 @@
 <template>
     <div id="main">
-        <div>
+        <div class="top">
             <van-nav-bar title="标题" left-text="返回" left-arrow>
                 <template #right>
                     <van-icon name="search" size="18" />
                 </template>
             </van-nav-bar>
         </div>
-        <div class="test">
+        <div class="title">
             <van-tabs @click="onClick">
                 <van-tab v-for="(item,index) in tabList" :key="index" :title="item.name"/> 
             </van-tabs>
@@ -34,7 +34,7 @@ export default {
         },
         {
           name: "天然气保供中心",
-          router: "ChuQing"
+          router: "Shengchanguanli"
         },
         {
           name: "油气生产管理",
@@ -64,19 +64,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	// .test{
-		// border: 1px solid red;
-		// position: fixed;
-		// top:100px;
-		// left: 0;
-		
-	// }
     #main{
-		// position: relative;
         font-size: 16px;
         .van-tab__text{
             font-size: 14px;
             height: .8rem;
         }
     }
+.top{
+      position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+.title{
+      position: fixed;
+    z-index: 1;
+    top: 46px;
+}
 </style>

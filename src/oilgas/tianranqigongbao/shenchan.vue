@@ -1,8 +1,32 @@
 <template>
     <div class="child1" style="background-color: #E6E8EC;">
-        <div class="map"></div>
+        <div :class="[{tanchuang:true},{tanchuang_one: show}]">
+            <div style="width: 100%;height: 100%;overflow: auto;margin: 50px auto">
+                <div class="table-title">鄂尔多斯</div>
+                <table class="table_one_t">
+                    <tr>
+                        <th v-for="(th,index) in tableTh" :key="index">{{th}}</th>
+                    </tr>
+                    <tr v-for="(tr,index) in listData" :key="index">
+                        <td v-for="(td,index) in tr" :key="index">{{td}}</td>
+                    </tr>
+                </table>
+            </div>
+            <img
+                    id="close"
+                    :style="{'left':closeLeft}"
+                    src="../../assets/img/industryAnalysis/关闭.png"
+                    alt="图片未显示"
+                    @click="tanchuangClose()"
+            />
+        </div>
+        <img
+                @click.prevent="tanchuangShow()"
+                class="map"
+                src="../../assets/img/oilgas/shenchan.png"
+        />
         <!--柱状图-->
-        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+        <div style="background-color: #fff;padding-top: 18px">
             <div class="scFristqh">
                 <el-tabs v-model="activeName" @tab-click="handleClick">
                     <el-tab-pane label="天然气月产量分析" name="1"></el-tab-pane>
@@ -53,6 +77,82 @@
             return {
                 activeName: '1',
                 activeNamePie: '1',
+                screenWidth: document.body.clientWidth, // 屏幕宽
+                screenLeft: "",
+                show: 0, //控制弹窗显示
+                closeLeft: 0, //关闭按钮居中
+                tableTh: [
+                    "名称",
+                    "企业人数",
+                    "面积",
+                    "经纬度",
+                    "远景资源量",
+                    "预测资源量",
+                    "控制储量",
+                    "探明储量"
+                ],
+                listData: [
+                    {
+                        name: "乌里雅斯太油田",
+                        leaguerea: "锡林郭勒盟",
+                        area: "5.5万平方公里",
+                        latitude: "43°23′10″~45°24′27″",
+                        vision: "3256",
+                        prediction: "1456",
+                        control: "1300",
+                        proved: "1200"
+                    },
+                    {
+                        name: "宝力格油田",
+                        leaguerea: "锡林郭勒盟",
+                        area: "4314.12平方公里",
+                        latitude: "41°10′10″~43°24′10″",
+                        vision: "2687",
+                        prediction: "1856",
+                        control: "1399",
+                        proved: "780"
+                    },
+                    {
+                        name: "新苏木油田",
+                        leaguerea: "锡林郭勒盟",
+                        area: "5万平方公里",
+                        latitude: "46°16′10″~46°24′15″",
+                        vision: "3100",
+                        prediction: "2756",
+                        control: "2678",
+                        proved: "2670"
+                    },
+                    {
+                        name: "哈达图油田",
+                        leaguerea: "锡林郭勒盟",
+                        area: "432平方公里",
+                        latitude: "43°17′10″~45°24′15″",
+                        vision: "2890",
+                        prediction: "1956",
+                        control: "1780",
+                        proved: "870"
+                    },
+                    {
+                        name: "锡林油田",
+                        leaguerea: "锡林郭勒盟",
+                        area: "234平方公里",
+                        latitude: "44°17′10″~40°24′15″",
+                        vision: "3200",
+                        prediction: "2056",
+                        control: "1890",
+                        proved: "960"
+                    },
+                    {
+                        name: "乌兰诺尔油田",
+                        leaguerea: "锡林郭勒盟",
+                        area: "5.5万平方公里",
+                        latitude: "47°18′10″~46°24′15″",
+                        vision: "3199",
+                        prediction: "2099",
+                        control: "2000",
+                        proved: "677"
+                    }
+                ],
                 legendDataOne: ['天然气月产量', '同比变化'],
                 legendDataTwo: ['天然气月产量', '储量'],
                 xAxisDataOne: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
@@ -69,6 +169,16 @@
 
         },
         methods: {
+            //取消图片默认样式
+            tanchuangShow() {
+                this.show = 1;
+                this.$nextTick(function() {
+                    this.closeLeft = (this.screenWidth - 35) / 2 + "px";
+                });
+            },
+            tanchuangClose() {
+                this.show = 0;
+            },
             //天然气月产量分析柱状图
             drawBar(barId, legendData, xAxisData, barName, seriesName, seriesDataOne, seriesDataTwo) {
                 let myChart = this.$echarts.init(document.getElementById(barId));
@@ -453,10 +563,10 @@
 
 <style scoped>
     .map {
-        height: 309px;
+        /*height: 309px;*/
         width: 100%;
-        background-size: cover;
-        background: url(../../assets/img/oilgas/shenchan.png) no-repeat;
+       /* background-size: cover;
+        background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
     }
 
     .scFristqh {
@@ -522,5 +632,56 @@
         color: #394564;
         padding-left: 14px;
         font-weight: bold;
+    }
+    .tanchuang {
+        position: absolute;
+        width: 100%;
+        height: 314.5px;
+        background-color: #4c4c4c;
+        z-index: 3;
+        display: none;
+    }
+
+    .tanchuang_one {
+        position: absolute;
+        width: 100%;
+        height: 314.5px;
+        background-color: #4c4c4c;
+        z-index: 3;
+        display: block;
+    }
+
+    .table_one_t {
+        font-family: PingFang SC;
+        border-collapse: collapse;
+        width: 800px;
+
+    }
+
+    .table_one_t th,
+    .table_one_t td {
+        font-size: 14px;
+        border: 1px solid #b9bec9;
+        padding: 3px 7px 2px 7px;
+        text-align: center;
+        background-color: white;
+    }
+
+    .table_one_t th {
+        background-color: #d8dbde;
+    }
+
+    #close {
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        top: 205px;
+    }
+    .table-title{
+        color: #246BD7;
+        font-size: 14px;
+        padding: 10px;
+        width: 800px;
+        background-color: #fff;
     }
 </style>

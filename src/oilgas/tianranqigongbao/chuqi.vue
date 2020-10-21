@@ -1,6 +1,17 @@
 <template>
-    <div class="child1" style="background-color: #E6E8EC;">
-        <div class="map"></div>
+    <div class="child3" style="background-color: #E6E8EC;">
+        <div class="map-box">
+            <div class="map-content">
+                <el-tabs :tab-position="tabPosition">
+                    <el-tab-pane label="设施建设情况" class="des"></el-tab-pane>
+                    <el-tab-pane label="本年度租赁情况" class="des"></el-tab-pane>
+                </el-tabs>
+            </div>
+            <img
+                    class="map"
+                    src="../../assets/img/oilgas/chuqi.png"
+            />
+        </div>
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="title">
                 本年度储气能力
@@ -51,6 +62,7 @@
         data() {
             return {
                 activeNamePie: '1',
+                tabPosition:'left'
             };
         },
         mounted() {
@@ -229,10 +241,8 @@
 
 <style scoped>
     .map {
-        height: 309px;
+        height: auto;
         width: 100%;
-        background-size: cover;
-        background: url(../../assets/img/oilgas/shenchan.png) no-repeat;
     }
 
     .scFristqh {
@@ -298,5 +308,42 @@
         color: #394564;
         padding-left: 14px;
         font-weight: bold;
+    }
+    .child3 .map-box{
+        position: relative;
+    }
+    .child3 .map-box /deep/ .des{
+        font-size: 12px;
+        color: #7D87A1;
+    }
+    .child3 .map-content{
+        position: absolute;
+        background: rgba(248, 251, 254, 0.77);
+        border: 1px solid #D6E6F4;
+        box-shadow: 0 0 35px 0 rgba(119, 148, 193, 0.45);
+        border-radius: 3px;
+        top:140px;
+        left: 19px;
+    }
+    .child3 .map-box /deep/ .el-tabs__nav-wrap::after{
+        display: none;
+    }
+    .child3 .map-box /deep/ .el-tabs--left .el-tabs__item.is-left{
+        text-align: left;
+    }
+    .child3 .map-box /deep/ .el-tabs__item.is-active{
+        background-color: #e8f2fe;
+        color: #7D87A1;
+    }
+    .child3 .map-box /deep/ .el-tabs--left .el-tabs__header.is-left{
+        margin-right: 0;
+    }
+    .child3 .map-box /deep/ .el-tabs__active-bar{
+        display: none;
+    }
+    .child3 .map-box /deep/ .el-tabs__item{
+        color: #7D87A1;
+        height: 30px;
+        line-height: 30px;
     }
 </style>

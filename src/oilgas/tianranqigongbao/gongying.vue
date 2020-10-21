@@ -1,53 +1,66 @@
 <template>
-  <div class="child1" style="background-color: #E6E8EC;">
-    <div class="map"></div>
-    <!--第一个tab-->
-    <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
-      <div class="scFristqh">
-        <el-tabs v-model="supplyActiveName" @tab-click="supplyHandleClick">
-          <el-tab-pane label="天然气日供气量趋势分析" name="1"></el-tab-pane>
-          <el-tab-pane label="供气量与合同量对比分析" name="2" :laze="true"></el-tab-pane>
-        </el-tabs>
-      </div>
-      <div class="tabs-content">
-        <div id="supplyLine" style="width: 100%;height: 167px"  v-show="supplyActiveName==='1'"></div>
-        <div id="supplyLineTwo" style="width: 100%;height: 167px"  v-show="supplyActiveName==='2'"></div>
-      </div>
-    </div>
-    <!--饼图-->
-    <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
-      <div class="scFristqh">
-        <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
-          <el-tab-pane label="供气对象性质分析" name="1"></el-tab-pane>
-          <el-tab-pane label="供气单位结构分析" name="2" :laze="true"></el-tab-pane>
-        </el-tabs>
-      </div>
-      <div class="tabs-content">
-
-        <div>
-          <div class="fontSize_div">
-            <div class="fontSize">20</div>
-            <div class="fontSize" style="font-size: 14px">亿立方米</div>
-          </div>
-          <div id="supplyPieOne" style="width:100%;height:240px;" v-show="activeNamePie==='1'"></div>
+    <div class="child1" style="background-color: #E6E8EC;">
+        <div class="map-box" @click.prevent="showLayer" >
+            <div class="map-layer" v-show="show">
+                <div class="des">
+                    气田
+                </div>
+                <div class="des">
+                    日供气量:1000万方
+                </div>
+            </div>
+            <img
+                    class="map"
+                    src="../../assets/img/oilgas/gongying.png"
+            />
         </div>
 
-        <div id="supplyPieTwo" style="width:100%;height:240px;" v-show="activeNamePie==='2'" ref="second"></div>
-      </div>
+
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+            <div class="scFristqh">
+                <el-tabs v-model="supplyActiveName" @tab-click="supplyHandleClick">
+                    <el-tab-pane label="天然气日供气量趋势分析" name="1"></el-tab-pane>
+                    <el-tab-pane label="供气量与合同量对比分析" name="2" :laze="true"></el-tab-pane>
+                </el-tabs>
+            </div>
+            <div class="tabs-content">
+                <div id="supplyLine" style="width: 100%;height: 167px" v-show="supplyActiveName==='1'"></div>
+                <div id="supplyLineTwo" style="width: 100%;height: 167px" v-show="supplyActiveName==='2'"></div>
+            </div>
+        </div>
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+            <div class="scFristqh">
+                <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
+                    <el-tab-pane label="供气对象性质分析" name="1"></el-tab-pane>
+                    <el-tab-pane label="供气单位结构分析" name="2" :laze="true"></el-tab-pane>
+                </el-tabs>
+            </div>
+            <div class="tabs-content">
+
+                <div>
+                    <div class="fontSize_div">
+                        <div class="fontSize">20</div>
+                        <div class="fontSize" style="font-size: 14px">亿立方米</div>
+                    </div>
+                    <div id="supplyPieOne" style="width:100%;height:240px;" v-show="activeNamePie==='1'"></div>
+                </div>
+
+                <div id="supplyPieTwo" style="width:100%;height:240px;" v-show="activeNamePie==='2'" ref="second"></div>
+            </div>
+        </div>
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+            <div class="scFristqh">
+                <el-tabs v-model="activeNameBar" @tab-click="supplyBarClick">
+                    <el-tab-pane label="供气量与合同量差额分析" name="1"></el-tab-pane>
+                    <el-tab-pane label="未来30日供气量预测" name="2" :laze="true"></el-tab-pane>
+                </el-tabs>
+            </div>
+            <div class="content">
+                <div id="supplyBarTwo" style="width: 100%;height: 180px" v-show="activeNameBar==='1'"></div>
+                <div id="supplyLineThree" style="width: 100%;height: 180px" v-show="activeNameBar==='2'"></div>
+            </div>
+        </div>
     </div>
-    <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
-      <div class="scFristqh">
-        <el-tabs v-model="activeNameBar" @tab-click="supplyBarClick">
-          <el-tab-pane label="供气量与合同量差额分析" name="1"></el-tab-pane>
-          <el-tab-pane label="未来30日供气量预测" name="2" :laze="true"></el-tab-pane>
-        </el-tabs>
-      </div>
-      <div class="content">
-        <div id="supplyBarTwo" style="width: 100%;height: 180px" v-show="activeNameBar==='1'"></div>
-        <div id="supplyLineThree" style="width: 100%;height: 180px" v-show="activeNameBar==='2'"></div>
-      </div>
-    </div>
-  </div>
 </template>
 <script>
 
@@ -57,7 +70,8 @@
             return {
                 supplyActiveName: '1',
                 activeNamePie: '1',
-                activeNameBar:'1'
+                activeNameBar: '1',
+                show:false
             };
         },
         mounted() {
@@ -215,7 +229,7 @@
                 myChart.setOption(option);
             },
             // 天然气日供气量趋势分析tab切换
-            supplyHandleClick(tab,event) {
+            supplyHandleClick(tab, event) {
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         // 天然气产量与储量关联分析
@@ -225,7 +239,7 @@
 
             },
             // 供气对象性质分析tab切换
-            handlePieClick(tab,event) {
+            handlePieClick(tab, event) {
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         // 天然气月产量企业分布
@@ -235,7 +249,7 @@
 
             },
             // 供气量与合同量差额分析tab切换
-            supplyBarClick(tab,event){
+            supplyBarClick(tab, event) {
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         // 未来30日供气量预测
@@ -258,7 +272,7 @@
                     },
                     legend: {
                         data: ['天然气日供气量', '同比变化'],
-                        x:'right'
+                        x: 'right'
                     },
                     grid: {
                         left: '3%',
@@ -356,9 +370,9 @@
                         }
                     },
                     legend: {
-                        data: ['天然气日供气量','合同量'],
-                        x:'right',
-                        right:'20%'
+                        data: ['天然气日供气量', '合同量'],
+                        x: 'right',
+                        right: '20%'
                     },
                     xAxis: [
                         {
@@ -441,7 +455,7 @@
                 myChart.setOption(option);
             },
             // 供气量与合同量差额分析
-            drawSupplyBar(){
+            drawSupplyBar() {
                 let myChart = this.$echarts.init(document.getElementById('supplyBarTwo'));
                 // 指定图表的配置项和数据
                 let option = {
@@ -453,7 +467,7 @@
                     },
                     legend: {
                         data: ['差值'],
-                        x:'right'
+                        x: 'right'
                     },
                     grid: {
                         left: '3%',
@@ -469,15 +483,15 @@
                                     color: '#9B9DA1'
                                 }
                             },
-                            splitLine:{
-                                show:false
+                            splitLine: {
+                                show: false
                             }
                         }
                     ],
                     yAxis: [
                         {
                             type: 'category',
-                            name:'日期',
+                            name: '日期',
                             axisTick: {
                                 show: false
                             },
@@ -485,8 +499,8 @@
                             axisLabel: {
                                 formatter: '{value}'
                             },
-                            splitLine:{
-                                show:false
+                            splitLine: {
+                                show: false
                             },
                             axisLine: {
                                 lineStyle: {
@@ -539,7 +553,7 @@
                     },
                     legend: {
                         data: ['天然气日产量', '天然气日产量预测值'],
-                        x:'right'
+                        x: 'right'
                     },
                     grid: {
                         left: '3%',
@@ -561,7 +575,7 @@
                     ],
                     yAxis: [
                         {
-                            name:'亿立方',
+                            name: '亿立方',
                             type: 'value',
                             axisLine: {
                                 lineStyle: {
@@ -570,7 +584,7 @@
                             }
                         },
                         {
-                            name:'%',
+                            name: '%',
                             type: 'value',
                             axisLine: {
                                 lineStyle: {
@@ -621,80 +635,99 @@
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
             },
+            //点击地图显示供气量
+            showLayer(){
+                this.show=true
+            }
         }
     }
 </script>
 
 <style scoped>
-  .map {
-    height: 309px;
-    width: 100%;
-    background-size: cover;
-    background: url(../../assets/img/oilgas/shenchan.png) no-repeat;
-  }
+    .map {
+        width: 100%;
+        height: auto;
+    }
 
-  .scFristqh {
-    margin-bottom: 22px;
-    display: flex;
-    justify-content: center;
-  }
+    .scFristqh {
+        margin-bottom: 22px;
+        display: flex;
+        justify-content: center;
+    }
 
-  .scFristqh /deep/ .el-tabs__item {
-    color: #236BD7;
-    font-size: 13px;
-    height: 28px;
-    line-height: 28px;
-    width: 170px;
-    text-align: center;
-    padding: 0;
-    border-radius: 3px;
-  }
+    .scFristqh /deep/ .el-tabs__item {
+        color: #236BD7;
+        font-size: 13px;
+        height: 28px;
+        line-height: 28px;
+        width: 170px;
+        text-align: center;
+        padding: 0;
+        border-radius: 3px;
+    }
 
-  .scFristqh /deep/ .el-tabs__item.is-active {
-    background-color: #236BD7;
-    color: #fff;
-  }
+    .scFristqh /deep/ .el-tabs__item.is-active {
+        background-color: #236BD7;
+        color: #fff;
+    }
 
-  .scFristqh /deep/ .el-tabs {
-    width: 342px;
-    border: 1px solid #236BD7;
-    border-radius: 3px;
-  }
+    .scFristqh /deep/ .el-tabs {
+        width: 342px;
+        border: 1px solid #236BD7;
+        border-radius: 3px;
+    }
 
-  .scFristqh /deep/ .el-tabs__header {
-    margin: 0;
-  }
+    .scFristqh /deep/ .el-tabs__header {
+        margin: 0;
+    }
 
-  .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
-    display: none;
-  }
+    .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
+        display: none;
+    }
 
-  #supplyPieOne {
-    background-image: url(../../assets/img/industryAnalysis/椭圆.png);
-    background-repeat: no-repeat;
-    background-position: 50% 37%;
-    background-size: 65px 65px;
-  }
+    #supplyPieOne {
+        background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+        background-repeat: no-repeat;
+        background-position: 50% 37%;
+        background-size: 65px 65px;
+    }
 
-  /* 文字块 */
-  .fontSize_div {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-  }
+    /* 文字块 */
+    .fontSize_div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
 
-  .fontSize {
-    position: relative;
-    top: 70px;
-    color: #4D5F7B;
-    font: 25px bolder MicrosoftYaHe
-  }
+    .fontSize {
+        position: relative;
+        top: 70px;
+        color: #4D5F7B;
+        font: 25px bolder MicrosoftYaHe
+    }
 
-  .title {
-    font-size: 13px;
-    color: #394564;
-    padding-left: 14px;
-    font-weight: bold;
-  }
+    .title {
+        font-size: 13px;
+        color: #394564;
+        padding-left: 14px;
+        font-weight: bold;
+    }
+    .map-box{
+        position: relative;
+    }
+    .map-layer{
+        position: absolute;
+        width: 145px;
+        height: 88px;
+        background-image:url(../../assets/img/oilgas/gongyinglayer.png);
+        top: 130px;
+        left: 40px;
+        padding: 15px 15px 15px 23px;
+    }
+    .map-layer .des{
+        font-size: 10px;
+        color: #fff;
+        font-weight: bold;
+    }
 </style>

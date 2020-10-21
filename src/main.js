@@ -19,8 +19,8 @@ import echarts from "echarts";
 // table
 import VueGoodTablePlugin from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css'
-
-Vue.prototype.$echarts = echarts;
+import $ from 'jquery'
+Vue.prototype.$echarts = echarts
 
 //引入ViewUI
 import ViewUI from 'view-design';

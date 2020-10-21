@@ -47,7 +47,7 @@
 		data() {
 			return {
 				//默认第一个选项卡
-				activeName: "first",
+				activeName: "fourth",
 			}
 		},
 		mounted() {
@@ -57,12 +57,46 @@
 </script>
 <style scoped>
 .scgl /deep/ .el-tabs__nav{
-    position: fixed;
-    top: 90px;
-	z-index:1;
-	background-color: #fff;
+	position: fixed;
+	top: 100px;
+	left: 16px;
+	z-index:4;
 }
 .scgl /deep/.el-tabs__content{
-	padding-top:116px
+	padding-top:90px;
 }
+</style>
+<style lang="scss">
+	.scgl {
+		.el-tabs__nav {
+			width: 343px;
+			height: 29px;
+			overflow-x: auto;
+			background-color: rgba(0, 0, 0, 0.15);
+			border-radius: 5px;
+			display: flex;
+			.el-tabs__item {
+				width: 113px;
+				height: 25px;
+				font: 12px PingFangSC-Regular;
+				line-height: 25px;
+				margin-top: 2px;
+				text-align: center;
+				color: white;
+				&.is-active {
+					width: 113px;
+					height: 25px;
+					background-color: rgba(0, 0, 0, 0.3);
+					font: 12px PingFangSC-Regular;
+					line-height: 25px;
+					text-align: center;
+					border-radius: 5px;
+					border-bottom: 0;
+				}
+			}
+			.el-tabs__active-bar {
+				height: 0;
+			}
+		}
+	}
 </style>

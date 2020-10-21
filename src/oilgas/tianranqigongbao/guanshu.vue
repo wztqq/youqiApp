@@ -74,7 +74,7 @@ export default {
     return {
       timer: "",
       echartsQTGQ: "echartsQTGQ",
-      // echartsYTF: "echartsYTF",
+      echartsJSD: "echartsJSD",
       // echartsQKYC: "echartsQKYC",
       selected_one: 0,
       tablist_one: ["送气端主要气田供气占比", "送气端主要企业供气占比"],

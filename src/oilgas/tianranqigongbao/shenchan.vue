@@ -172,7 +172,7 @@
             //取消图片默认样式
             tanchuangShow() {
                 this.show = 1;
-                this.$nextTick(function() {
+                this.$nextTick(function () {
                     this.closeLeft = (this.screenWidth - 35) / 2 + "px";
                 });
             },
@@ -195,8 +195,8 @@
                     },
                     legend: {
                         data: legendData,
-                        x:'right',
-                        right:'20%'
+                        x: 'right',
+                        right: '20%'
                     },
                     xAxis: [
                         {
@@ -434,7 +434,7 @@
                 myChart.setOption(option);
             },
             // 天然气月产量柱状图切换
-            handleClick(tab,event) {
+            handleClick(tab, event) {
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         // 天然气产量与储量关联分析
@@ -445,7 +445,7 @@
 
             },
             // 天然气月产量企业分布切换
-            handlePieClick(tab,event) {
+            handlePieClick(tab, event) {
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         // 天然气月产量企业分布
@@ -469,7 +469,7 @@
                     },
                     legend: {
                         data: ['天然气月产量', '天然气月产量预测值'],
-                        x:'right'
+                        x: 'right'
                     },
                     grid: {
                         left: '3%',
@@ -518,10 +518,10 @@
                             areaStyle: {
                                 color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                                     offset: 0,
-                                    color: 'rgba(249,199,51)'
+                                    color: 'rgba(249,200,51,0.23)'
                                 }, {
                                     offset: 1,
-                                    color: 'rgba(249,199,51,0.39)'
+                                    color: 'rgba(249,200,51,0.23)'
                                 }])
                             },
                             data: [220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290]
@@ -544,13 +544,13 @@
                             areaStyle: {
                                 color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                                     offset: 0,
-                                    color: 'rgba(19,141,247)'
+                                    color: 'rgba(30,142,247,0.23)'
                                 }, {
                                     offset: 1,
-                                    color: 'rgba(19,141,247,0.23)'
+                                    color: 'rgba(30,142,247,0.23)'
                                 }])
                             },
-                            data: [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90]
+                            data: [300, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90]
                         }
                     ]
                 };
@@ -565,8 +565,8 @@
     .map {
         /*height: 309px;*/
         width: 100%;
-       /* background-size: cover;
-        background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
+        /* background-size: cover;
+         background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
     }
 
     .scFristqh {
@@ -633,6 +633,7 @@
         padding-left: 14px;
         font-weight: bold;
     }
+
     .tanchuang {
         position: absolute;
         width: 100%;
@@ -677,7 +678,8 @@
         position: absolute;
         top: 205px;
     }
-    .table-title{
+
+    .table-title {
         color: #246BD7;
         font-size: 14px;
         padding: 10px;

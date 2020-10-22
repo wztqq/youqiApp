@@ -1,6 +1,6 @@
 <template>
     <div class="child1" style="background-color: #E6E8EC;">
-        <div class="map-box" @click.prevent="showLayer" >
+        <div class="map-box" @click.prevent="showLayer">
             <div class="map-layer" v-show="show">
                 <div class="des">
                     气田
@@ -20,7 +20,7 @@
             <div class="scFristqh">
                 <el-tabs v-model="supplyActiveName" @tab-click="supplyHandleClick">
                     <el-tab-pane label="天然气日供气量趋势分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="供气量与合同量对比分析" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane label="供气量与合同量对比分析" name="2" ></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -32,7 +32,7 @@
             <div class="scFristqh">
                 <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
                     <el-tab-pane label="供气对象性质分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="供气单位结构分析" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane label="供气单位结构分析" name="2" ></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -52,7 +52,7 @@
             <div class="scFristqh">
                 <el-tabs v-model="activeNameBar" @tab-click="supplyBarClick">
                     <el-tab-pane label="供气量与合同量差额分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="未来30日供气量预测" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane label="未来30日供气量预测" name="2" ></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="content">
@@ -71,7 +71,7 @@
                 supplyActiveName: '1',
                 activeNamePie: '1',
                 activeNameBar: '1',
-                show:false
+                show: false
             };
         },
         mounted() {
@@ -636,8 +636,8 @@
                 myChart.setOption(option);
             },
             //点击地图显示供气量
-            showLayer(){
-                this.show=true
+            showLayer() {
+                this.show = true
             }
         }
     }
@@ -713,19 +713,22 @@
         padding-left: 14px;
         font-weight: bold;
     }
-    .map-box{
+
+    .map-box {
         position: relative;
     }
-    .map-layer{
+
+    .map-layer {
         position: absolute;
         width: 145px;
         height: 88px;
-        background-image:url(../../assets/img/oilgas/gongyinglayer.png);
+        background-image: url(../../assets/img/oilgas/gongyinglayer.png);
         top: 130px;
         left: 40px;
         padding: 15px 15px 15px 23px;
     }
-    .map-layer .des{
+
+    .map-layer .des {
         font-size: 10px;
         color: #fff;
         font-weight: bold;

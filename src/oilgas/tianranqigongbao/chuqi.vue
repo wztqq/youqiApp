@@ -29,7 +29,7 @@
             <div class="scFristqh">
                 <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
                     <el-tab-pane label="地方政府3天" name="1"></el-tab-pane>
-                    <el-tab-pane label="城燃5%" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane label="城燃5%" name="2" ></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">

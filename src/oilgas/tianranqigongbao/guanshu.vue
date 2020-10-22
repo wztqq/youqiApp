@@ -294,8 +294,7 @@ export default {
         width: calc(50% - 10px);
         padding: 5px;
         margin: 5px;
-        background: #6a7181;
-        opacity: .7;
+        background: rgba($color: #6a7181, $alpha: 0.7);
         p {
           color: #fff;
           line-height: 1.2em;

@@ -68,25 +68,28 @@ export default {
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: "cross",
-            label: {
-              backgroundColor: "#6a7985",
-            },
+            // 坐标轴指示器，坐标轴触发有效
+            type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
           },
         },
         legend: {
-          right: 10,
-          textStyle: {
-            color: "#9C9DA2",
-            // fontSize: ""
-          },
-          // itemWidth: 10,
-          // itemHeight: 10,
+          itemWidth: 10,
+          itemHeight: 6,
           data: this.optionObj.legendData,
+          x: "right",
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true,
         },
         xAxis: [
           {
-            type: "category",
+            type: "value",
+            splitLine: {
+              show: false,
+            },
             axisTick: {
               show: false, // 去除坐标轴间隔
             },
@@ -101,89 +104,54 @@ export default {
               textStyle: {
                 color: "#DADADA",
               },
-              rotate: 30
             },
-            boundaryGap: false,
-            data: this.optionObj.xData,
           },
         ],
         yAxis: [
           {
+            type: "category",
             name: this.optionObj.yName,
-            type: "value",
             axisTick: {
-              show: false, // 去除坐标轴间隔
+              show: false,
+            },
+            data: this.optionObj.yData,
+            axisLabel: {
+              formatter: "{value}",
+            },
+            splitLine: {
+              show: false,
             },
             axisLine: {
-              // 坐标轴样式
               lineStyle: {
-                color: "#DADADA",
-              },
-            },
-            axisLabel: {
-              // 坐标轴label样式
-              textStyle: {
-                color: "#DADADA",
+                color: "#9B9DA1",
               },
             },
           },
         ],
         series: [
           {
-            name: this.optionObj.seriesName1,
-            type: "line",
-            stack: "总量",
-            symbol: "circle",
-            smooth: true,
-            symbolSize: 6,
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                
-                { offset: 0, color: "rgba(41,145,244, 0.7" },
-                { offset: 1, color: "rgba(41,145,244, 0.1)" },
-              ]),
+            name: this.optionObj.seriesName,
+            type: "bar",
+            barWidth: 10,
+            data: this.optionObj.seriesData,
+            itemStyle: {
+              normal: {
+                color: new this.$echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                  { offset: 0, color: "#4572FF" }, //柱图渐变色
+                  { offset: 1, color: "#65FCFA" }, //柱图渐变色
+                ]),
+              },
             },
-            lineStyle: {
-              color: "#2991f4",
-              width: 2,
+            showBackground: true,
+            backgroundStyle: {
+              color: "#f7f7f7",
             },
-            color: "#2991f4",
-            data: this.optionObj.seriesData2,
           },
-          {
-            name: this.optionObj.seriesName2,
-            type: "line",
-            stack: "总量",
-            smooth: true,
-            symbol: "circle",
-            symbolSize: 6,
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                { offset: 0, color: "rgba(247,200,87, 0.7)" },
-                { offset: 1, color: "rgba(247,200,87, 0.1)" },
-              ]),
-            },
-            lineStyle: {
-              color: "#f8c94b",
-              width: 2,
-            },
-            color: "#f8c94b",
-            data: this.optionObj.seriesData1,
-          },
-          
         ],
       };
       this.chartBar.clear();
       this.chartBar.setOption(option);
-      // window.addEventListener("resize", function() {
-      //   this.chartBar.resize();  //页面大小变化后Echarts也更改大小
-      // });
     },
   },
-  // destroyed() {
-  //   window.removeEventListener("resize", () => {
-  //     this.chartBar.resize();
-  //   })
-  // }
 };
 </script>

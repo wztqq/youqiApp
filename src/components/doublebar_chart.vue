@@ -67,43 +67,28 @@ export default {
       let option = {
         tooltip: {
           trigger: "axis",
-          // formatter: "{a} <br/>{b}: {c} ({d}%)",
-          formatter: function (params) {
-            var str = "";
-            for (var i = 0; i < params.length; i++) {
-              if (params[i].seriesName === "天然气月产量") {
-                str +=
-                  "<p>" +
-                  params[i].seriesName +
-                  ":" +
-                  params[i].value +
-                  "亿立方米" +
-                  "</p >";
-              } else if (params[i].seriesName === "同比变化") {
-                str +=
-                  "<p>" +
-                  params[i].seriesName +
-                  ":" +
-                  params[i].value +
-                  "%" +
-                  "</p >";
-              }
-            }
-            return str;
+          axisPointer: {
+            type: "cross",
+            label: {
+              backgroundColor: "#999",
+            },
           },
         },
         legend: {
-          itemWidth: 10,
-          itemHeight: 6,
           data: this.optionObj.legendData,
           x: "right",
-          textStyle: {
-            color: "#9C9DA2",
-            // fontSize: ""
-          },
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          width:"90%",
+          containLabel: true,
         },
         xAxis: {
           type: "category",
+          boundaryGap: false,
+          data: this.optionObj.xData,
           axisTick: {
             show: false, // 去除坐标轴间隔
           },
@@ -119,37 +104,11 @@ export default {
               color: "#DADADA",
             },
           },
-          data: this.optionObj.xData,
         },
         yAxis: [
           {
-            type: "value",
             name: this.optionObj.yLeftName,
-            min: this.optionObj.leftMin,
-            max: this.optionObj.leftMax,
-            interval: this.optionObj.leftInterval,
-            axisTick: {
-              show: false, // 去除坐标轴间隔
-            },
-            axisLine: {
-              // 坐标轴样式
-              lineStyle: {
-                color: "#DADADA",
-              },
-            },
-            axisLabel: {
-              // 坐标轴label样式
-              textStyle: {
-                color: "#DADADA",
-              },
-            },
-          },
-          {
             type: "value",
-            name: this.optionObj.yRightName,
-            min: this.optionObj.rightMin,
-            max: this.optionObj.rightMax,
-            interval: this.optionObj.rightInterval,
             axisTick: {
               show: false, // 去除坐标轴间隔
             },
@@ -167,32 +126,54 @@ export default {
               },
             },
           },
+          // {
+          //   name: this.optionObj.yRightName,
+          //   type: "value",
+          //   axisLine: {
+          //     lineStyle: {
+          //       color: "#9B9DA1",
+          //     },
+          //   },
+          // },
         ],
         series: [
           {
             name: this.optionObj.legendData[0],
-            data: this.optionObj.seriesLeftData,
-            type: "bar",
-            barWidth: this.optionObj.barWidth,
+            type: "line",
+            symbol: "circle",
+            symbolSize: 6,
             itemStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                { offset: 0, color: "#39F8FF" },
-                { offset: 1, color: "#45BBFF" },
-              ]),
+              normal: {
+                color: "#12DFBD",
+                lineStyle: {
+                  // 系列级个性化折线样式
+                  type: "solid",
+                  color: "#12DFBD",
+                },
+              },
             },
+            areaStyle: {
+              color: "rgba(27,202,201,0.1)",
+            },
+            data: this.optionObj.seriesLeftData,
           },
           {
             name: this.optionObj.legendData[1],
             type: "line",
-            yAxisIndex: 1,
-            smooth: true,
-            symbolSize: this.optionObj.symbolSize,
-            data: this.optionObj.seriesRightData,
-            lineStyle: {
-              color: "#FBAF5D",
-              width: this.optionObj.lineWidth,
+            stack: "总量",
+            symbol: "circle",
+            symbolSize: 6,
+            itemStyle: {
+              normal: {
+                color: "#FBAF5D",
+                lineStyle: {
+                  // 系列级个性化折线样式
+                  type: "solid",
+                  color: "#FBAF5D",
+                },
+              },
             },
-            color: "#FBAF5D",
+            data: this.optionObj.seriesRightData,
           },
         ],
       };

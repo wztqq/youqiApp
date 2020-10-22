@@ -98,8 +98,8 @@ export default {
             center: ["50%", "40%"],
             labelLine: {
               normal: {
-                length: 10,
-                length2: 80,
+                length: 15,
+                length2: 90,
               },
             },
             label: {
@@ -107,7 +107,7 @@ export default {
                 show: true,
                 color: "#9C9DA2",
                 fontSize: 14,
-                formatter: "{d}%",
+                formatter: "{b}: {d}%",
                 rich: {
                   c: {
                     color: "#9C9DA2",
@@ -117,7 +117,7 @@ export default {
                     verticalAlign: "bottom",
                   },
                 },
-                padding: [0, -50, 25, -50],
+                padding: [0, -90, 25, -90],
               },
             },
 
@@ -132,28 +132,16 @@ export default {
                 color: function (params) {
                   var colorList = [
                     {
-                      c1: " #11D59C", 
-                      c2: "#24F6B2",
+                      c1: " #01A6FF", 
+                      c2: "#01A6FF",
                     },
                     {
-                      c1: " #FF860D",
-                      c2: "#FFA516",
+                      c1: " #FFD350",
+                      c2: "#FFD350",
                     },
                     {
-                      c1: "#969BF2",
-                      c2: "#31D9E5",
-                    },
-                    {
-                      c1: "#FF10B9",
-                      c2: "#D05FF0",
-                    },
-                    {
-                      c1: "#EB5539",
-                      c2: "#F0765F",
-                    },
-                    {
-                      c1: "#4310FF",
-                      c2: "#7FA6FF",
+                      c1: "#15E9EC",
+                      c2: "#15E9EC",
                     },
                   ];
                   return new echarts.graphic.LinearGradient(0, 0, 0, 1, [

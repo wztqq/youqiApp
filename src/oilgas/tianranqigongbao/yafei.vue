@@ -354,7 +354,7 @@ export default {
 }
 .fontSize {
   position: relative;
-  top: 85px;
+  top: 75px;
   font: 16px bolder microsoft-yahei;
 }
 
@@ -364,7 +364,7 @@ export default {
   // margin: 20px auto;
   background-image: url(../../assets/img/industryAnalysis/椭圆.png);
   background-repeat: no-repeat;
-  background-position: 50% 38%;
+  background-position: 50% 37%;
   background-size: 65px 65px;
 }
 </style>

@@ -6,7 +6,41 @@
                     <el-tab-pane label="设施建设情况" class="des"></el-tab-pane>
                     <el-tab-pane label="本年度租赁情况" class="des"></el-tab-pane>
                 </el-tabs>
+
             </div>
+
+            <div class="modal">
+                <div class="modal-city">包头市燃气调峰设备</div>
+                <div>
+                    <div class="modal-box">
+                        <div class="modal-des-box">
+                            <div class="modal-title">储气量：</div>
+                            <div class="model-des">0.92</div>
+                        </div>
+                        <div class="modal-des-box">
+                            <div class="modal-title">温度：</div>
+                            <div class="model-des">27&#176;</div>
+                        </div>
+                    </div>
+
+                    <div class="modal-box">
+                        <div class="modal-des-box">
+                            <div class="modal-title">压力：</div>
+                            <div class="model-des">0.92MP</div>
+                        </div>
+                        <div class="modal-des-box">
+                            <div class="modal-title">地方3天：</div>
+                            <div class="model-des">0.03亿m<sup>3</sup></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="modal-des-box" style="width: 180px;height: 30px;line-height: 30px">
+                            <span class="modal-title">地方3天：</span><span class="model-des">0.007万立方米</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <img
                     class="map"
                     src="../../assets/img/oilgas/chuqi.png"
@@ -29,7 +63,7 @@
             <div class="scFristqh">
                 <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
                     <el-tab-pane label="地方政府3天" name="1"></el-tab-pane>
-                    <el-tab-pane label="城燃5%" name="2" ></el-tab-pane>
+                    <el-tab-pane label="城燃5%" name="2"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -62,7 +96,7 @@
         data() {
             return {
                 activeNamePie: '1',
-                tabPosition:'left'
+                tabPosition: 'left'
             };
         },
         mounted() {
@@ -105,7 +139,7 @@
                     },
                     series: [
                         {
-                            name:'本年度储气能力',
+                            name: '本年度储气能力',
                             type: "pie",
                             radius: ["40%", "55%"],
                             center: ["50%", "40%"],
@@ -252,25 +286,54 @@
     }
 
     .scFristqh /deep/ .el-tabs__item {
-        color: #236BD7;
-        font-size: 13px;
-        height: 28px;
-        line-height: 28px;
-        width: 170px;
+        /* color: #236BD7;
+         font-size: 13px;
+         height: 28px;
+         line-height: 28px;
+         width: 170px;
+         text-align: center;
+         padding: 0;
+         border-radius: 3px;*/
+        width: 169.5px;
+        height: 25px;
+        font: 12px PingFangSC-Regular;
+        color: #3a6dda;
+        line-height: 25px;
+        float: left;
+        position: relative;
+        top: 2px;
+        left: 2px;
         text-align: center;
-        padding: 0;
-        border-radius: 3px;
+        padding-left: 0;
     }
 
     .scFristqh /deep/ .el-tabs__item.is-active {
-        background-color: #236BD7;
-        color: #fff;
+        /*background-color: #236BD7;
+        color: #fff;*/
+        width: 169.5px;
+        height: 25px;
+        background-color: #3a6dda;
+        font: 12px PingFangSC-Regular;
+        color: white;
+        line-height: 25px;
+        float: left;
+        position: relative;
+        top: 2px;
+        left: 2px;
+        text-align: center;
+        border-radius: 5px;
     }
 
     .scFristqh /deep/ .el-tabs {
-        width: 342px;
+        /*width: 342px;
         border: 1px solid #236BD7;
-        border-radius: 3px;
+        border-radius: 3px;*/
+        width: 345px;
+        height: 31px;
+        background-color: white;
+        margin: 0px auto;
+        border: 1px solid #3a6dda;
+        border-radius: 5px;
     }
 
     .scFristqh /deep/ .el-tabs__header {
@@ -279,6 +342,10 @@
 
     .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
         display: none;
+    }
+
+    .scFristqh /deep/ .el-tabs__nav-scroll {
+        height: 31px;
     }
 
     #gasPieTwo, #gasPieThree {
@@ -309,41 +376,92 @@
         padding-left: 14px;
         font-weight: bold;
     }
-    .child3 .map-box{
+
+    .child3 .map-box {
         position: relative;
     }
-    .child3 .map-box /deep/ .des{
+
+    .child3 .map-box /deep/ .des {
         font-size: 12px;
         color: #7D87A1;
     }
-    .child3 .map-content{
+
+    .child3 .map-content {
         position: absolute;
         background: rgba(248, 251, 254, 0.77);
         border: 1px solid #D6E6F4;
         box-shadow: 0 0 35px 0 rgba(119, 148, 193, 0.45);
         border-radius: 3px;
-        top:140px;
+        top: 140px;
         left: 19px;
     }
-    .child3 .map-box /deep/ .el-tabs__nav-wrap::after{
+
+    .child3 .map-box /deep/ .el-tabs__nav-wrap::after {
         display: none;
     }
-    .child3 .map-box /deep/ .el-tabs--left .el-tabs__item.is-left{
+
+    .child3 .map-box /deep/ .el-tabs--left .el-tabs__item.is-left {
         text-align: left;
     }
-    .child3 .map-box /deep/ .el-tabs__item.is-active{
+
+    .child3 .map-box /deep/ .el-tabs__item.is-active {
         background-color: #e8f2fe;
         color: #7D87A1;
     }
-    .child3 .map-box /deep/ .el-tabs--left .el-tabs__header.is-left{
+
+    .child3 .map-box /deep/ .el-tabs--left .el-tabs__header.is-left {
         margin-right: 0;
     }
-    .child3 .map-box /deep/ .el-tabs__active-bar{
+
+    .child3 .map-box /deep/ .el-tabs__active-bar {
         display: none;
     }
-    .child3 .map-box /deep/ .el-tabs__item{
+
+    .child3 .map-box /deep/ .el-tabs__item {
         color: #7D87A1;
         height: 30px;
         line-height: 30px;
+    }
+
+    .child3 .modal {
+        position: absolute;
+        background-image: url(../../assets/img/oilgas/chuqimodal.png);
+        border-radius: 3px;
+        top: 111px;
+        left: 180px;
+        color: #fff;
+        height: 200px;
+        width: 200px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        padding: 18px 10px 10px;
+    }
+
+    .modal-des-box {
+        background-color: rgba(106, 113, 129, 0.7);
+        text-align: center;
+        width: 85px;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .modal-city {
+        font-size: 13px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .modal-box {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .modal .modal-title {
+        color: #8fc8fa;
+    }
+
+    .modal .model-des {
+        font-weight: bold;
     }
 </style>

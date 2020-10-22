@@ -576,25 +576,54 @@
     }
 
     .scFristqh /deep/ .el-tabs__item {
-        color: #236BD7;
+       /* color: #236BD7;
         font-size: 13px;
         height: 28px;
         line-height: 28px;
         width: 170px;
         text-align: center;
         padding: 0;
-        border-radius: 3px;
+        border-radius: 3px;*/
+        width: 169.5px;
+        height: 25px;
+        font: 12px PingFangSC-Regular;
+        color: #3a6dda;
+        line-height: 25px;
+        float: left;
+        position: relative;
+        top: 2px;
+        left: 2px;
+        text-align: center;
+        padding-left: 0;
     }
 
     .scFristqh /deep/ .el-tabs__item.is-active {
-        background-color: #236BD7;
-        color: #fff;
+        /*background-color: #236BD7;
+        color: #fff;*/
+        width: 169.5px;
+        height: 25px;
+        background-color: #3a6dda;
+        font: 12px PingFangSC-Regular;
+        color: white;
+        line-height: 25px;
+        float: left;
+        position: relative;
+        top: 2px;
+        left: 2px;
+        text-align: center;
+        border-radius: 5px;
     }
 
     .scFristqh /deep/ .el-tabs {
-        width: 342px;
+        /*width: 342px;
         border: 1px solid #236BD7;
-        border-radius: 3px;
+        border-radius: 3px;*/
+        width: 345px;
+        height: 31px;
+        background-color: white;
+        margin: 0px auto;
+        border: 1px solid #3a6dda;
+        border-radius: 5px;
     }
 
     .scFristqh /deep/ .el-tabs__header {
@@ -604,7 +633,9 @@
     .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
         display: none;
     }
-
+    .scFristqh /deep/ .el-tabs__nav-scroll{
+        height: 31px;
+    }
     #PieOne {
         background-image: url(../../assets/img/industryAnalysis/椭圆.png);
         background-repeat: no-repeat;

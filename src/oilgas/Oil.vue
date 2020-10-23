@@ -42,7 +42,7 @@ export default {
         },
         {
           name: "油气供应管理",
-          router: "ChuQing"
+          router: "Youqigongyingguanli"
         },
         {
           name: "油气储运管理",

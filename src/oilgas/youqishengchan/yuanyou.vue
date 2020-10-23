@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative; width: 100%; background-color: #dadbdb">
+  <div style="position: relative; width: 100%; top: 80px;background-color: #dadbdb">
     <div id="tab_button" :style="{ left: screenLeft }">
       <span v-for="(item, index) in tablist" :key="index" @click="tabButton(index)" v-bind:class="[{ tab_button_two: index == selected },{ tab_button_one: true },]">{{ item }}</span>
     </div>
@@ -15,16 +15,16 @@
       </div>
 	 <div class="chart">
 		  <div style=" width: 100%;height: 8px;background-color: #dadbdb;margin-bottom: 10px;"></div>
-       <div style="font: bold 16px '微软雅黑';position: relative;top: 10px;left: 20px;">油田产量分布分析</div>
+       <div style="width: 150px ;font: bold 16px '微软雅黑';position: relative;top: 10px;left: 20px;">油田产量分布分析</div>
        	<div class="fontSize_div">
 					<div class="fontSize">{{pie_number}}</div>
 					<div class="fontSizeOne">万吨</div>
 				</div>
 		  <div class="echarts_two" id = "echartsTen"></div>
- 	 </div>
+ 	</div>
     </div>
 <!-- 第二个页面 -->
-    <div id="produce_content" v-show="b">
+    <div id="produce_content2" v-show="b">
       <img class="map" src="../../assets/img/produce-fx/producemap.png" alt="图片未显示"/>
       <div class="produce_logo" :style="{ left: logoposionleft1,top: logoposiontop1 }">
       <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示" >
@@ -65,12 +65,12 @@
       </div>
       <div class="chart">
       <div style=" width: 100%;height: 8px;background-color: #dadbdb;margin-bottom: 10px;"></div>
-      <div style="font: bold 16px '微软雅黑';position: relative;top: 10px;left: 20px;">平均负荷率变化趋势</div>
+      <div style="font: bold 16px '微软雅黑'; width: 150px position: relative;top: 10px;left: 20px;">平均负荷率变化趋势</div>
 		  <div class="echarts" id = "echartsEight"></div>
       </div>
     </div>
 <!-- 第三个页面 -->
- <div id="produce_content" v-show="c">
+ <div id="produce_content3" v-show="c">
       <img class="map" src="../../assets/img/produce-fx/producemap.png" alt="图片未显示"/>
       <div class="produce_logo" :style="{ left: logoposionleft7,top: logoposiontop7 }">
       <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"  @click=tanchuang7 >
@@ -110,7 +110,7 @@
       </div>
       </div>
 <!-- 第四个页面 -->
-<div id="produce_content" v-show="d">
+<div id="produce_content4" v-show="d">
       <img class="map" src="../../assets/img/produce-fx/producemap.png" alt="图片未显示"/>
       <div class="produce_logo" :style="{ left: logoposionleft9,top: logoposiontop9 }">
       <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示" >

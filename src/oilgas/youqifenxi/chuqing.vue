@@ -1,5 +1,5 @@
 <template>
-	<div style="position: relative; width: 100%; top: 80px; background-color: #DADBDB;">
+	<div style="position: relative; width: 100%; top: 93px; background-color: #DADBDB;">
 		<!-- 弹窗 -->
 		<div :class="[{tanchuang:true},{tanchuang_one: show}]">
 			<div style="width: 100%;height: 100%;overflow: auto;">
@@ -157,6 +157,11 @@
 			
 			
 			<div id="produce_refine" v-show="!d">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 				<img class="map" src="../../assets/img/industryAnalysis/炼化煤地图2.png" alt="图片未显示">
 				<div class="chart">
 					<div class="tab_oil">
@@ -200,9 +205,10 @@
 				<div class="chart">
 					<div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
 					<div class="tab_oil">
-						<span v-for="(item,index) in tablist_five" :key='index' @click="tabButton_eight(index)" v-bind:class="[{tab_oil_two:index == selected_eight},{tab_oil_one:true}]">{{item}}</span>
+						<span v-for="(item,index) in tablist_eight" :key='index' @click="tabButton_eight(index)" v-bind:class="[{tab_oil_two:index == selected_eight},{tab_oil_one:true}]">{{item}}</span>
 					</div>
-					<div class="echarts_one" id="echartsSeven"></div>
+					<div class="echarts_one" id="echartsEight" v-show='k1'></div>
+					<div class="echarts_one" id="echartsNine" v-show='!k1'></div>
 				</div>
 			</div>
 		</div>
@@ -222,7 +228,9 @@
 		data() {
 			return {
 				screenWidth: document.body.clientWidth, // 屏幕宽
+				screenHeight: document.body.clientHeight, // 屏幕高
 				screenLeft: '',
+				screenTop: '',
 				show: 0, //控制弹窗显示
 				closeLeft: 0, //关闭按钮居中
 				tableTh: ['名称','所属盟市','面积','经纬度','远景资源量','预测资源量','控制储量','探明储量'],
@@ -297,6 +305,7 @@
 				tablist_five: ['本年度原油生产自给率', '本年度天然气生产自给率'],
 				tablist_six: ['本年度原油生产企业分布', '本年度天然气生产企业分布'],
 				tablist_seven: ['成品油产量分析','煤制油产量分析','煤制气产量分析'],
+				tablist_eight: ['成品油生产结构分析','成品油自给率分析'],
 				// 第二个页面上月完成数值
 				last_month: 20,
 				// 第二个页面年度累计完成数值
@@ -334,6 +343,8 @@
 				p_i: 0,
 				p_j: 0,
 				p_g: 0,
+				//第二个页面的子切换按钮
+				k1:0,
 				//第一个页面的图表数据
 				echarts: {
 					data_three: [{
@@ -949,6 +960,169 @@
 					}],
 				});
 			},
+			
+//最后页面俩个图		
+		drawPie_five(name, arry) {
+			let echarts = require('echarts');
+			let myChart = echarts.init(document.getElementById(name));
+			myChart.setOption({
+			    tooltip: {
+			          trigger: "axis",
+			          axisPointer: {
+			            type: "cross",
+			            crossStyle: {
+			              color: "#999",
+			            },
+			          },
+			        },
+			    xAxis: [
+			      {
+			        type: "category",
+			        data: ["汽油","柴油","煤油"],
+			        axisPointer: {
+			          type: "shadow",
+			        },
+			        axisLabel: {
+			          fontSize: 12,
+			        },
+			        axisLine: {
+			          lineStyle: {
+			            color: "#ddd", // 颜色
+			            width: 1, // 粗细
+			          },
+			        },
+			        axisTick: {
+			          show: false,
+			        },
+			      },
+			    ],
+			    yAxis: [
+			      {
+			  name:"万吨",
+			        type: "value",
+			        min: 0,
+			        max: 125,
+			        interval: 25,
+			        axisLabel: {
+			          fontSize: 12,
+			        },
+			        axisLine: {
+			          lineStyle: {
+			            color: "#ddd", // 颜色
+			            width: 1, // 粗细
+			          },
+			        },
+			        axisTick: {
+			          show: false,
+			        },
+			      },
+			    ],
+			
+			    series: [{
+			        type: 'bar',
+			        itemStyle: {
+			            normal: {
+			                color: '#ddd',
+			                barBorderRadius: [20, 20, 20, 20]
+			            }
+			        },
+			        silent: true,
+			        barWidth: 20,
+			        barGap: '-1', 
+			        data: [110, 60, 80],
+			        label: {
+			     show: true,
+			     formatter:'{c0}/{c1}% ',
+			     position: 'top'
+			    },
+			    },
+			            {
+			        type: 'bar',
+			        itemStyle: {
+			        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+			                { offset: 0, color: "#63edd4" },
+			                { offset: 1, color: "rgba(14, 137, 238, 1)" },
+			              ]),
+			            barBorderRadius: [20, 20, 20, 20]
+			            },
+			        barWidth: 20,
+			        data: [50, 30, 55]
+			    }]
+			});
+		},	
+						
+		drawPie_four(name, arry) {
+			let echarts = require('echarts');
+			let myChart = echarts.init(document.getElementById(name));
+			let option = {
+			    tooltip: {
+			          trigger: "item",
+			          formatter: "{b}: {c} ({d}%)",
+			        },
+			        legend: {
+			          orient: "vertical",
+			          right:0,
+			          top:'center',
+			          textStyle:{
+			            color:'#9FA0A5',
+			            padding: [15, 30,2, 10],
+			            fontSize:12,
+			            },
+			          itemGap: 30,
+			          data: ["柴油", "煤油", "汽油"],
+			          itemWidth: 15,
+			          itemHeight: 10,
+			          formatter: function(name) {
+			                    var data = option.series[0].data;//获取series中的data
+			                    var total = 0;
+			                    var tarValue;
+			                    for (var i = 0, l = data.length; i < l; i++) {
+			                        total += data[i].value;
+			                        if (data[i].name == name) {
+			                            tarValue = data[i].value;
+			                        }
+			                    }
+			                    var p = ((tarValue / total) * 100);
+			                    return name + "\n" + p.toFixed() + "%";
+			                },
+			        },
+			        grid: {
+			          bottom: 40,
+			        },
+			        series: [
+			          {
+			            name: "成品油生产",
+			            type: "pie",
+			            radius: ["40%", "55%"],
+			            center: ["50%", "50%"],
+			            label: {
+			              show: false
+			            },
+			            data: [
+			              {
+			                value: 40,
+			                name: "柴油",
+			              },
+			              {
+			                value: 20,
+			                name: "煤油",
+			              },
+			              {
+			                value: 40,
+			                name: "汽油",
+			              }
+			            ],
+			            color: [
+			              "#15E9EC",
+			              "#FFD350",
+			              "#01A6FF",
+			            ],
+			          },
+			        ],
+				}
+			myChart.setOption(option);
+		},
+		
 			//主要按钮
 			tabButton(id) {
 				this.selected = id
@@ -1042,16 +1216,35 @@
 					this.imgUrl = this.imgUrlArry[0]
 					this.imgUrl2 = this.imgUrlArry[3]
 					this.d = 1
+					this.a = 0
+					this.b = 1
+					this.c = 0
+					this.p_i = 0
+					this.p_j = 0
+					this.p_g = 0
+					this.selected_four = 0
+					this.selected_five = 0
+					this.selected_six = 0
+					this.pie_number_two = 0.66
+					this.pie_one_number = this.produce_pie_oil[2]
+					this.pie_one_unit = this.produce_pie_oil[3]
+					this.bacolor = 1
 					this.$nextTick(function() {
-						this.drawLine_one('echartsSix', this.bardata_one)
+						this.drawLine_one('echartsThree', this.bardata_one)
+						this.drawPie('echartsFour',this.produce_pie_oil)
+						this.drawPie_one('echartsFive',this.produce_pieTwo_oil)
 					})
 				}else{
 					this.btn_shenchan_num = 0
 					this.imgUrl = this.imgUrlArry[1]
 					this.imgUrl2 = this.imgUrlArry[2]
 					this.d = 0
+					this.selected_seven = 0
+					this.selected_eight = 0
+					this.k1 = 1
 					this.$nextTick(function() {
 						this.drawLine_one('echartsSix', this.bardata_two)
+						this.drawPie_four('echartsEight');
 					})
 				}
 			},
@@ -1115,15 +1308,22 @@
 					this.unit = '万m³'
 				}
 			},
+			//炼化煤内容第二个按钮
 			tabButton_eight(id) {
-				this.selected_eight = id;
-				if (id == 1) {
-					
-				}
-				if (id == 0) {
-				}
-			},
-
+			      this.selected_eight = id;
+			      if (0 == id) {
+			        this.k1 = 1;
+			        this.$nextTick(function () {
+					   this.drawPie_four('echartsEight');
+			        });
+			      };
+			      if (1 == id) {
+			        this.k1 = 0;
+			        this.$nextTick(function () {
+					  this.drawPie_five('echartsNine');
+			        });
+			      }
+			    },
 
 
 
@@ -1180,7 +1380,7 @@
 		width: 35px;
 		height: 35px;
 		position: absolute;
-		top: 205px;
+		top: 255px;
 	}
 
 

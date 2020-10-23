@@ -9,7 +9,7 @@
         </div>
         <div class="title">
             <van-tabs @click="onClick">
-                <van-tab v-for="(item,index) in tabList" :key="index" :title="item.name"/> 
+                <van-tab v-for="(item,index) in tabList" :key="index" :title="item.name"/>
             </van-tabs>
         </div>
         <router-view></router-view>
@@ -73,12 +73,12 @@ export default {
     }
 .top{
       position: fixed;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
 }
 .title{
       position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 46px;
 }
 </style>

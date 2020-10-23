@@ -46,10 +46,10 @@
             <div class="fontSize">3000</div>
             <div class="fontSize">万方</div>
           </div>
-          <dount-chart class="echarts" :id="echartsQTGQ" :optionObj="optionObjLineQTGQ"></dount-chart>
+          <dount-chart class="echarts" :optionObj="optionObjLineQTGQ"></dount-chart>
         </div>
         <div class="chart-item" :key="timer" id="table" v-if="selected_one === 1">
-          <pie-chart :id="echartsGQQY" :optionObj="optionObjGQQY"></pie-chart>
+          <pie-chart :optionObj="optionObjGQQY"></pie-chart>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
             <div class="fontSize">3000</div>
             <div class="fontSize">万方</div>
           </div>
-          <pie-chart class="echarts" :id="echartsJSD" :optionObj="optionObjJSD"></pie-chart>
+          <pie-chart class="echarts" :optionObj="optionObjJSD"></pie-chart>
         </div>
       </div>
     </div>
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+
 export default {
   name: "qixiao",
   components: {
@@ -97,9 +98,6 @@ export default {
         },
       ],
       timer: "",
-      echartsQTGQ: "echartsQTGQ",
-      echartsJSD: "echartsJSD",
-      echartsGQQY: "echartsGQQY",
       selected_one: 0,
       tablist_one: ["送气端主要气田供气占比", "送气端主要企业供气占比"],
       tableTh_one: [

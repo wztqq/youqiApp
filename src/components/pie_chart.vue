@@ -1,8 +1,9 @@
 <template>
-  <div :id="id" style="width: 100%; height: 100%"></div>
+  <div :id="elId" ref="charts" style="width: 100%; height: 100%"></div>
 </template>
 <script>
 import echarts from "echarts";
+import uuidv1 from 'uuid/v1' 
 export default {
   name: "barLineEchart",
   props: {
@@ -26,12 +27,17 @@ export default {
   data() {
     return {
       chartBar: null,
+      elId: ""
     };
+  },
+  created() {
+    this.elId = uuidv1()
   },
   mounted: function () {
     this.$nextTick(function () {
       this.getBarOption();
     });
+    window.addEventListener('resize', this.getBarOption)
   },
   watch: {
     id() {
@@ -51,7 +57,8 @@ export default {
   methods: {
     getBarOption() {
       this.chartBar = null;
-      this.chartBar = echarts.init(document.getElementById(this.id));
+      // this.chartBar = echarts.init(document.getElementById(this.elId));
+      this.chartBar = echarts.init(this.$refs.charts);
       let option = {
         tooltip: {
           trigger: "item",
@@ -163,6 +170,9 @@ export default {
       this.chartBar.clear();
       this.chartBar.setOption(option);
     },
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.getBarOption)
   },
 };
 </script>

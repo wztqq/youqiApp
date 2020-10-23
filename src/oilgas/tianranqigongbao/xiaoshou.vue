@@ -26,14 +26,14 @@
             ]">{{ item }}</span>
         </div>
         <div class="chart-item" v-if="selected_one === 0">
-          <barline-chart :id="echartsGasXF" :optionObj="optionObjBarGasXF"></barline-chart>
+          <barline-chart :optionObj="optionObjBarGasXF"></barline-chart>
         </div>
         <div class="chart-item" v-if="selected_one === 1">
           <div class="fontSize_div">
             <div class="fontSize">0.508</div>
             <div class="fontSize">亿立方米</div>
           </div>
-          <dount-chart class="echarts" :id="echartsYQDW" :optionObj="optionObjYQDW"></dount-chart>
+          <dount-chart class="echarts" :optionObj="optionObjYQDW"></dount-chart>
         </div>
       </div>
 
@@ -53,13 +53,13 @@
             <div class="fontSize">3000</div>
             <div class="fontSize">万立方米</div>
           </div>
-          <dount-chart class="echarts" :id="echartsMs" :optionObj="optionObjMS"></dount-chart>
+          <dount-chart class="echarts" :optionObj="optionObjMS"></dount-chart>
         </div>
         <div class="chart-item" :key="timer" v-if="selected_two === 1">
           <div class="fontSize_div">
             <div class="fontSize onlynum">3000</div>
           </div>
-          <dount-chart class="echarts" :id="echartsXS" :optionObj="optionObjXS"></dount-chart>
+          <dount-chart class="echarts" :optionObj="optionObjXS"></dount-chart>
         </div>
       </div>
 
@@ -75,10 +75,10 @@
             ]">{{ item }}</span>
         </div>
         <div class="chart-item" v-if="selected_three === 0">
-          <doublebar-chart :id="echartsXFYC" :optionObj="optionObjXFYC"></doublebar-chart>
+          <doublebar-chart :optionObj="optionObjXFYC"></doublebar-chart>
         </div>
         <div class="chart-item" v-if="selected_three === 1">
-          <bothway-chart :id="echartsXFQKYC" :optionObj="optionObjXFQKYC"></bothway-chart>
+          <bothway-chart :optionObj="optionObjXFQKYC"></bothway-chart>
         </div>
       </div>
     </div>
@@ -98,12 +98,6 @@ export default {
   data() {
     return {
       timer: "",
-      echartsGasXF: "echartsGasXF",
-      echartsYQDW: "echartsYQDW",
-      echartsMs: "echartsMs",
-      echartsXS: "echartsXS",
-      echartsXFYC: "echartsXFYC",
-      echartsXFQKYC: "echartsXFQKYC",
       selected_one: 0,
       selected_two: 0,
       selected_three: 0,

@@ -34,6 +34,8 @@ const Shengchanguanli= () => import("./oilgas/tianranqigongbao/shengchanguanli.v
 const KuCun= () => import("./oilgas/youqichuyun/kucun.vue");
 // 油气销售
 const XSChengPinYou= () => import("./oilgas/youqixiaoshou/chengpinyou.vue");
+//油气供应 
+const Youqigongyingguanli= () => import("./oilgas/youqigongyingguanli/youqigongyingguanli.vue");
 // 将vue-router注册到全局，这样每一个组件都可以使用router-link和router-view组件了
 Vue.use(VueRouter);
 
@@ -131,7 +133,12 @@ var routes = [{
 				path: '/XSChengPinYou',
 				name: 'XSChengPinYou',
 				component: XSChengPinYou
-			}
+			},
+			{
+			    path: '/Youqigongyingguanli',
+			    name: 'Youqigongyingguanli',
+			    component: Youqigongyingguanli
+			 },
 		]
 	}
 

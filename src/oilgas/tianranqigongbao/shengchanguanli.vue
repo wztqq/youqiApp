@@ -58,12 +58,13 @@
 </script>
 <style scoped>
     .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs__nav {
-        position: fixed;
-        top: 90px;
-        z-index: 1;
-        background: rgba(6, 29, 39, 0.2);
-        border-radius: 14px;
         color: #fff;
+        height: 29px;
+        background-color: rgba(0, 0, 0, 0.15);
+        position: fixed;
+        top: 100px;
+        z-index: 2;
+        border-radius: 5px;
     }
 
     .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs__content {

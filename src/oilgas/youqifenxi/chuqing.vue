@@ -1,5 +1,5 @@
 <template>
-	<div style="position: relative; width: 100%; top: 80px; background-color: #DADBDB;">
+	<div style="position: relative; width: 100%; background-color: #DADBDB;">
 		<!-- 弹窗 -->
 		<div :class="[{tanchuang:true},{tanchuang_one: show}]">
 			<div style="width: 100%;height: 100%;overflow: auto;">

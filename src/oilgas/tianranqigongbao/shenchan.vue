@@ -93,8 +93,8 @@
                 ],
                 listData: [
                     {
-                        name: "乌里雅斯太油田",
-                        leaguerea: "锡林郭勒盟",
+                        name: "苏里格气田",
+                        leaguerea: "2000",
                         area: "5.5万平方公里",
                         latitude: "43°23′10″~45°24′27″",
                         vision: "3256",
@@ -103,8 +103,8 @@
                         proved: "1200"
                     },
                     {
-                        name: "宝力格油田",
-                        leaguerea: "锡林郭勒盟",
+                        name: "大牛地气田",
+                        leaguerea: "1300",
                         area: "4314.12平方公里",
                         latitude: "41°10′10″~43°24′10″",
                         vision: "2687",
@@ -113,8 +113,8 @@
                         proved: "780"
                     },
                     {
-                        name: "新苏木油田",
-                        leaguerea: "锡林郭勒盟",
+                        name: "靖边气田",
+                        leaguerea: "1300",
                         area: "5万平方公里",
                         latitude: "46°16′10″~46°24′15″",
                         vision: "3100",
@@ -123,8 +123,8 @@
                         proved: "2670"
                     },
                     {
-                        name: "哈达图油田",
-                        leaguerea: "锡林郭勒盟",
+                        name: "胜利井气田",
+                        leaguerea: "2100",
                         area: "432平方公里",
                         latitude: "43°17′10″~45°24′15″",
                         vision: "2890",
@@ -133,37 +133,21 @@
                         proved: "870"
                     },
                     {
-                        name: "锡林油田",
-                        leaguerea: "锡林郭勒盟",
+                        name: "乌审旗气田",
+                        leaguerea: "1980",
                         area: "234平方公里",
                         latitude: "44°17′10″~40°24′15″",
                         vision: "3200",
                         prediction: "2056",
                         control: "1890",
                         proved: "960"
-                    },
-                    {
-                        name: "乌兰诺尔油田",
-                        leaguerea: "锡林郭勒盟",
-                        area: "5.5万平方公里",
-                        latitude: "47°18′10″~46°24′15″",
-                        vision: "3199",
-                        prediction: "2099",
-                        control: "2000",
-                        proved: "677"
                     }
-                ],
-                legendDataOne: ['天然气月产量', '同比变化'],
-                legendDataTwo: ['天然气月产量', '储量'],
-                xAxisDataOne: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-                barOneSeriesDataOne: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                barOneSeriesDataTwo: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-
+                ]
             };
         },
         mounted() {
             //天然气月产量分析
-            this.drawBar('barOne', this.legendDataOne, this.xAxisDataOne, '%', '同比变化', this.barOneSeriesDataOne, this.barOneSeriesDataTwo)
+            this.drawBarOne();
             this.drawPie();
             this.drawLine()
 
@@ -180,28 +164,27 @@
                 this.show = 0;
             },
             //天然气月产量分析柱状图
-            drawBar(barId, legendData, xAxisData, barName, seriesName, seriesDataOne, seriesDataTwo) {
-                let myChart = this.$echarts.init(document.getElementById(barId));
+            drawBarOne() {
+                let myChart = this.$echarts.init(document.getElementById('barOne'));
                 // 指定图表的配置项和数据
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            crossStyle: {
-                                color: '#999'
-                            }
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                params[1].seriesName + ':' +
+                                params[1].value + '%'
                         }
                     },
                     legend: {
-                        data: legendData,
+                        data: ['天然气月产量', '同比变化'],
                         x: 'right',
                         right: '20%'
                     },
                     xAxis: [
                         {
                             type: 'category',
-                            data: xAxisData,
+                            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
                             axisPointer: {
                                 type: 'shadow'
                             },
@@ -218,8 +201,8 @@
                             type: 'value',
                             name: '亿立方',
                             min: 0,
-                            max: 250,
-                            interval: 50,
+                            max: 25,
+                            interval: 5,
                             axisLabel: {
                                 formatter: '{value}'
                             },
@@ -231,10 +214,10 @@
                         },
                         {
                             type: 'value',
-                            name: barName,
-                            min: 0,
-                            max: 25,
-                            interval: 5,
+                            name: '%',
+                            min: -2,
+                            max: 3,
+                            interval: 1,
                             axisLabel: {
                                 formatter: '{value}'
                             },
@@ -250,7 +233,7 @@
                             name: '天然气月产量',
                             type: 'bar',
                             barWidth: 20,
-                            data: seriesDataOne,
+                            data: [2.0, 4.9, 7.0, 23.2, 10, 2, 6, 9, 15, 12, 5, 2],
                             itemStyle: {
                                 normal: {
                                     color: new this.$echarts.graphic.LinearGradient(
@@ -264,9 +247,111 @@
                             }
                         },
                         {
-                            name: seriesName,
+                            name: '同比变化',
                             type: 'line',
-                            data: seriesDataTwo,
+                            yAxisIndex: 1,
+                            smooth: true,
+                            data: [-2, 0, 1, 2, -1.5, -2.5, 2.5, 2.3, 2, 3, -3, 3],
+                            itemStyle: {
+                                color: '#FBAF5D'
+                            }
+                        }
+                    ]
+                };
+
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            },
+            //天然气产量与储量关联分析
+            drawBarTwo() {
+                let myChart = this.$echarts.init(document.getElementById('barTwo'));
+                // 指定图表的配置项和数据
+                let option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                params[1].seriesName + ':' +
+                                params[1].value + '亿立方米'
+                        }
+                    },
+                    legend: {
+                        data: ['天然气月产量', '储量'],
+                        x: 'right',
+                        right: '20%'
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                            axisPointer: {
+                                type: 'shadow'
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#9B9DA1'
+                                }
+                            }
+
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: '亿立方',
+                            min: 0,
+                            max: 25,
+                            interval: 5,
+                            axisLabel: {
+                                formatter: '{value}'
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#9B9DA1'
+                                }
+                            }
+                        },
+                        {
+                            type: 'value',
+                            name: '',
+                            min: 0,
+                            max: 250,
+                            interval: 50,
+                            axisLabel: {
+                                formatter: '{value}'
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#9B9DA1'
+                                }
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '天然气月产量',
+                            type: 'bar',
+                            barWidth: 20,
+                            data: [2.0, 4.9, 7.0, 23.2, 10, 2, 6, 9, 15, 12, 5, 2],
+                            itemStyle: {
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#38F8FF'},                   //柱图渐变色
+                                            {offset: 1, color: '#45BBFF'},                   //柱图渐变色
+                                        ]
+                                    )
+                                }
+                            }
+                        },
+                        {
+                            name: '储量',
+                            type: 'line',
+                            smooth: true,
+                            yAxisIndex: 1,
+                            data: [20.0, 40.9, 70.0, 230.2, 100, 200, 60, 90, 150, 120, 50, 20],
                             itemStyle: {
                                 color: '#FBAF5D'
                             }
@@ -284,7 +369,7 @@
                 let option = {
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)"
                     },
                     legend: {
                         orient: "horizontal",
@@ -319,27 +404,27 @@
                                 length2: 30
                             },
                             data: [{
-                                value: 2000,
+                                value: 5.7,
                                 name: "苏里格气田"
                             },
                                 {
-                                    value: 900,
+                                    value: 2.5,
                                     name: "靖边气田"
                                 },
                                 {
-                                    value: 1533.2,
+                                    value: 4.4,
                                     name: "胜利井气田"
                                 },
                                 {
-                                    value: 766.6,
+                                    value: 2.2,
                                     name: "其他"
                                 },
                                 {
-                                    value: 1700,
+                                    value: 4.8,
                                     name: "大牛地气田"
                                 },
                                 {
-                                    value: 60,
+                                    value: 0.4,
                                     name: "乌审旗气田"
                                 }],
                             itemStyle: {
@@ -369,7 +454,7 @@
                 let option = {
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)"
                     },
                     legend: {
                         orient: 'vertical',
@@ -391,7 +476,7 @@
                                     tarValue = data[i].value;
                                 }
                             }
-                            var p = ((tarValue / total) * 100).toFixed(2);
+                            var p = ((tarValue / total) * 100).toFixed(1);
                             return name + " " + " " + p + "%";
                         },
                     },
@@ -405,11 +490,11 @@
                                 show: false
                             },
                             data: [{
-                                value: 6516,
+                                value: 17,
                                 name: "中石油"
                             },
                                 {
-                                    value: 1149,
+                                    value: 3,
                                     name: "中石化"
                                 },
                             ],
@@ -438,8 +523,7 @@
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         // 天然气产量与储量关联分析
-                        this.drawBar('barTwo', this.legendDataTwo, this.xAxisDataOne, '', '储量', this.barOneSeriesDataOne,
-                            this.barOneSeriesDataTwo)
+                        this.drawBarTwo()
                     })
                 }
 
@@ -460,11 +544,10 @@
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            label: {
-                                backgroundColor: '#999'
-                            }
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                params[1].seriesName + ':' +
+                                params[1].value + '亿立方米'
                         }
                     },
                     legend: {
@@ -492,6 +575,7 @@
                     yAxis: [
                         {
                             type: 'value',
+                            name: '亿立方',
                             axisLine: {
                                 lineStyle: {
                                     color: '#9B9DA1'
@@ -503,7 +587,7 @@
                         {
                             name: '天然气月产量',
                             type: 'line',
-                            stack: '总量',
+                            smooth: true,
                             symbol: 'circle',
                             symbolSize: 6,
                             itemStyle: {
@@ -529,7 +613,7 @@
                         {
                             name: '天然气月产量预测值',
                             type: 'line',
-                            stack: '总量',
+                            smooth: true,
                             symbol: 'circle',
                             symbolSize: 6,
                             itemStyle: {
@@ -561,160 +645,168 @@
     }
 </script>
 
-<style scoped>
-    .map {
-        /*height: 309px;*/
-        width: 100%;
-        /* background-size: cover;
-         background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
+<style scoped lang="scss">
+    .child1 {
+
+        .map {
+            /*height: 309px;*/
+            width: 100%;
+            /* background-size: cover;
+             background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
+        }
+
+        .scFristqh {
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scFristqh /deep/ .el-tabs__item {
+            /* color: #236BD7;
+             font-size: 13px;
+             height: 28px;
+             line-height: 28px;
+             width: 170px;
+             text-align: center;
+             padding: 0;
+             border-radius: 3px;*/
+            width: 169.5px;
+            height: 25px;
+            font: 12px PingFangSC-Regular;
+            color: #3a6dda;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            padding-left: 0;
+        }
+
+        .scFristqh /deep/ .el-tabs__item.is-active {
+            /*background-color: #236BD7;
+            color: #fff;*/
+            width: 169.5px;
+            height: 25px;
+            background-color: #3a6dda;
+            font: 12px PingFangSC-Regular;
+            color: white;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .scFristqh /deep/ .el-tabs {
+            /*width: 342px;
+            border: 1px solid #236BD7;
+            border-radius: 3px;*/
+            width: 345px;
+            height: 31px;
+            background-color: white;
+            margin: 0px auto;
+            border: 1px solid #3a6dda;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .scFristqh /deep/ .el-tabs__header {
+            margin: 0;
+        }
+
+        .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
+            display: none;
+        }
+
+        .scFristqh /deep/ .el-tabs__nav-scroll {
+            height: 31px;
+        }
+
+        #PieOne {
+            background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+            background-repeat: no-repeat;
+            background-position: 50% 37%;
+            background-size: 65px 65px;
+        }
+
+        /* 文字块 */
+        .fontSize_div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .fontSize {
+            position: relative;
+            top: 70px;
+            color: #4D5F7B;
+            font: 25px bolder MicrosoftYaHe
+        }
+
+        .title {
+            font-size: 13px;
+            color: #394564;
+            padding-left: 14px;
+            font-weight: bold;
+        }
+
+        .tanchuang {
+            position: absolute;
+            width: 100%;
+            height: 314.5px;
+            background-color: #4c4c4c;
+            z-index: 3;
+            display: none;
+        }
+
+        .tanchuang_one {
+            position: absolute;
+            width: 100%;
+            height: 314.5px;
+            background-color: #4c4c4c;
+            z-index: 3;
+            display: block;
+        }
+
+        .table_one_t {
+            font-family: PingFang SC;
+            border-collapse: collapse;
+            width: 800px;
+
+        }
+
+        .table_one_t th,
+        .table_one_t td {
+            font-size: 14px;
+            border: 1px solid #b9bec9;
+            padding: 3px 7px 2px 7px;
+            text-align: center;
+            background-color: white;
+        }
+
+        .table_one_t th {
+            background-color: #d8dbde;
+        }
+
+        #close {
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            top: 205px;
+        }
+
+        .table-title {
+            color: #246BD7;
+            font-size: 14px;
+            padding: 10px;
+            width: 800px;
+            background-color: #fff;
+        }
+
     }
 
-    .scFristqh {
-        margin-bottom: 22px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .scFristqh /deep/ .el-tabs__item {
-       /* color: #236BD7;
-        font-size: 13px;
-        height: 28px;
-        line-height: 28px;
-        width: 170px;
-        text-align: center;
-        padding: 0;
-        border-radius: 3px;*/
-        width: 169.5px;
-        height: 25px;
-        font: 12px PingFangSC-Regular;
-        color: #3a6dda;
-        line-height: 25px;
-        float: left;
-        position: relative;
-        top: 2px;
-        left: 2px;
-        text-align: center;
-        padding-left: 0;
-    }
-
-    .scFristqh /deep/ .el-tabs__item.is-active {
-        /*background-color: #236BD7;
-        color: #fff;*/
-        width: 169.5px;
-        height: 25px;
-        background-color: #3a6dda;
-        font: 12px PingFangSC-Regular;
-        color: white;
-        line-height: 25px;
-        float: left;
-        position: relative;
-        top: 2px;
-        left: 2px;
-        text-align: center;
-        border-radius: 5px;
-    }
-
-    .scFristqh /deep/ .el-tabs {
-        /*width: 342px;
-        border: 1px solid #236BD7;
-        border-radius: 3px;*/
-        width: 345px;
-        height: 31px;
-        background-color: white;
-        margin: 0px auto;
-        border: 1px solid #3a6dda;
-        border-radius: 5px;
-    }
-
-    .scFristqh /deep/ .el-tabs__header {
-        margin: 0;
-    }
-
-    .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
-        display: none;
-    }
-    .scFristqh /deep/ .el-tabs__nav-scroll{
-        height: 31px;
-    }
-    #PieOne {
-        background-image: url(../../assets/img/industryAnalysis/椭圆.png);
-        background-repeat: no-repeat;
-        background-position: 50% 37%;
-        background-size: 65px 65px;
-    }
-
-    /* 文字块 */
-    .fontSize_div {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-    }
-
-    .fontSize {
-        position: relative;
-        top: 70px;
-        color: #4D5F7B;
-        font: 25px bolder MicrosoftYaHe
-    }
-
-    .title {
-        font-size: 13px;
-        color: #394564;
-        padding-left: 14px;
-        font-weight: bold;
-    }
-
-    .tanchuang {
-        position: absolute;
-        width: 100%;
-        height: 314.5px;
-        background-color: #4c4c4c;
-        z-index: 3;
-        display: none;
-    }
-
-    .tanchuang_one {
-        position: absolute;
-        width: 100%;
-        height: 314.5px;
-        background-color: #4c4c4c;
-        z-index: 3;
-        display: block;
-    }
-
-    .table_one_t {
-        font-family: PingFang SC;
-        border-collapse: collapse;
-        width: 800px;
-
-    }
-
-    .table_one_t th,
-    .table_one_t td {
-        font-size: 14px;
-        border: 1px solid #b9bec9;
-        padding: 3px 7px 2px 7px;
-        text-align: center;
-        background-color: white;
-    }
-
-    .table_one_t th {
-        background-color: #d8dbde;
-    }
-
-    #close {
-        width: 35px;
-        height: 35px;
-        position: absolute;
-        top: 205px;
-    }
-
-    .table-title {
-        color: #246BD7;
-        font-size: 14px;
-        padding: 10px;
-        width: 800px;
-        background-color: #fff;
-    }
 </style>

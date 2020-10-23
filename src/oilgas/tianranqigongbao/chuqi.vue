@@ -10,7 +10,7 @@
             </div>
 
             <div class="modal">
-                <div class="modal-city">包头市燃气调峰设备</div>
+                <div class="modal-city">呼和浩特燃气调峰设备</div>
                 <div>
                     <div class="modal-box">
                         <div class="modal-des-box">
@@ -30,12 +30,14 @@
                         </div>
                         <div class="modal-des-box">
                             <div class="modal-title">地方3天：</div>
-                            <div class="model-des">0.03亿m<sup>3</sup></div>
+                            <!--<div class="model-des">0.03亿m<sup>3</sup></div>-->
+                            <div class="model-des">0.127亿立方米</div>
+
                         </div>
                     </div>
                     <div>
                         <div class="modal-des-box" style="width: 180px;height: 30px;line-height: 30px">
-                            <span class="modal-title">地方3天：</span><span class="model-des">0.007万立方米</span>
+                            <span class="modal-title">城燃企业5%：</span><span class="model-des">0.2135万立方米</span>
                         </div>
                     </div>
                 </div>
@@ -52,7 +54,7 @@
             </div>
             <div class="content">
                 <div class="fontSize_div">
-                    <div class="fontSize">20</div>
+                    <div class="fontSize">1.36</div>
                     <div class="fontSize" style="font-size: 14px">亿立方米</div>
                 </div>
                 <div id="gasPie" style="width: 100%;height: 240px"></div>
@@ -63,7 +65,7 @@
             <div class="scFristqh">
                 <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
                     <el-tab-pane label="地方政府3天" name="1"></el-tab-pane>
-                    <el-tab-pane label="城燃5%" name="2"></el-tab-pane>
+                    <el-tab-pane label="城燃企业5%" name="2"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -76,7 +78,7 @@
                 </div>
                 <div v-show="activeNamePie==='2'">
                     <div class="fontSize_div">
-                        <div class="fontSize">0.854</div>
+                        <div class="fontSize">0.8543</div>
                         <div class="fontSize" style="font-size: 14px">亿立方米</div>
                     </div>
                     <div id="gasPieThree" style="width:100%;height:240px;"
@@ -96,11 +98,59 @@
         data() {
             return {
                 activeNamePie: '1',
-                tabPosition: 'left'
-            };
+                tabPosition: 'left',
+                gasPieTwoData: [{
+                    value: 0.127,
+                    name: "阿拉善盟"
+                },
+                    {
+                        value: 0.127,
+                        name: "呼和浩特"
+                    },
+                    {
+                        value: 0.095,
+                        name: "锡林格勒"
+                    },
+                    {
+                        value: 0.064,
+                        name: "呼伦贝尔"
+                    },
+                    {
+                        value: 0.064,
+                        name: "鄂尔多斯"
+                    },
+                    {
+                        value: 0.031,
+                        name: "其他"
+                    }],
+                gasPieThreeData: [{
+                    value: 0.2135,
+                    name: "阿拉善盟"
+                },
+                    {
+                        value: 0.2135,
+                        name: "呼和浩特"
+                    },
+                    {
+                        value: 0.1597,
+                        name: "锡林格勒"
+                    },
+                    {
+                        value: 0.1076,
+                        name: "呼伦贝尔"
+                    },
+                    {
+                        value: 0.1076,
+                        name: "鄂尔多斯"
+                    },
+                    {
+                        value: 0.0524,
+                        name: "其他"
+                    }]
+            }
         },
         mounted() {
-            this.drawPie('gasPieTwo');
+            this.drawPie('gasPieTwo', this.gasPieTwoData);
             this.drawGasPie()
 
         },
@@ -111,7 +161,7 @@
                 let option = {
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        formatter: "{a} <br/>{b}: {c}亿立方米({d}%)"
                     },
                     legend: {
                         orient: 'vertical',
@@ -119,7 +169,7 @@
                         top: 70,
                         bottom: 20,
                         itemGap: 10,
-                        data: ["城燃5%", "地方政府3天"],
+                        data: ["城燃企业5%", "地方政府3天"],
                         itemWidth: 15,
                         itemHeight: 10,
                         // 使用回调函数
@@ -133,7 +183,7 @@
                                     tarValue = data[i].value;
                                 }
                             }
-                            var p = ((tarValue / total) * 100).toFixed(2);
+                            var p = ((tarValue / total) * 100).toFixed(1);
                             return name + " " + " " + p + "%";
                         },
                     },
@@ -147,11 +197,11 @@
                                 show: false
                             },
                             data: [{
-                                value: 6516,
-                                name: "城燃5%"
+                                value: 0.85,
+                                name: "城燃企业5%"
                             },
                                 {
-                                    value: 1149,
+                                    value: 0.51,
                                     name: "地方政府3天"
                                 },
                             ],
@@ -176,7 +226,7 @@
                 myChart.setOption(option);
             },
             //地方政府3天
-            drawPie(id) {
+            drawPie(id, seriesData) {
                 let myChart = this.$echarts.init(document.getElementById(id));
                 let option = {
                     tooltip: {
@@ -215,30 +265,7 @@
                                 length: 15,
                                 length2: 30
                             },
-                            data: [{
-                                value: 2000,
-                                name: "阿拉善盟"
-                            },
-                                {
-                                    value: 900,
-                                    name: "呼和浩特"
-                                },
-                                {
-                                    value: 1533.2,
-                                    name: "锡林格勒"
-                                },
-                                {
-                                    value: 766.6,
-                                    name: "呼伦贝尔"
-                                },
-                                {
-                                    value: 1700,
-                                    name: "鄂尔多斯"
-                                },
-                                {
-                                    value: 60,
-                                    name: "其他"
-                                }],
+                            data: seriesData,
                             itemStyle: {
                                 normal: {
                                     color: function (params) {
@@ -264,7 +291,7 @@
             handlePieClick(tab, event) {
                 if (tab.index == 1) {
                     this.$nextTick(() => {
-                        this.drawPie('gasPieThree');
+                        this.drawPie('gasPieThree', this.gasPieThreeData);
                     })
                 }
 
@@ -273,195 +300,199 @@
     }
 </script>
 
-<style scoped>
-    .map {
-        height: auto;
-        width: 100%;
+<style scoped lang="scss">
+    .child3 {
+        .map {
+            height: auto;
+            width: 100%;
+        }
+
+        .scFristqh {
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scFristqh /deep/ .el-tabs__item {
+            /* color: #236BD7;
+             font-size: 13px;
+             height: 28px;
+             line-height: 28px;
+             width: 170px;
+             text-align: center;
+             padding: 0;
+             border-radius: 3px;*/
+            width: 169.5px;
+            height: 25px;
+            font: 12px PingFangSC-Regular;
+            color: #3a6dda;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            padding-left: 0;
+        }
+
+        .scFristqh /deep/ .el-tabs__item.is-active {
+            /*background-color: #236BD7;
+            color: #fff;*/
+            width: 169.5px;
+            height: 25px;
+            background-color: #3a6dda;
+            font: 12px PingFangSC-Regular;
+            color: white;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .scFristqh /deep/ .el-tabs {
+            /*width: 342px;
+            border: 1px solid #236BD7;
+            border-radius: 3px;*/
+            width: 345px;
+            height: 31px;
+            background-color: white;
+            margin: 0px auto;
+            border: 1px solid #3a6dda;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .scFristqh /deep/ .el-tabs__header {
+            margin: 0;
+        }
+
+        .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
+            display: none;
+        }
+
+        .scFristqh /deep/ .el-tabs__nav-scroll {
+            height: 31px;
+        }
+
+        #gasPieTwo, #gasPieThree {
+            background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+            background-repeat: no-repeat;
+            background-position: 50% 37%;
+            background-size: 65px 65px;
+        }
+
+        /* 文字块 */
+        .fontSize_div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .fontSize {
+            position: relative;
+            top: 70px;
+            color: #4D5F7B;
+            font: 25px bolder MicrosoftYaHe
+        }
+
+        .title {
+            font-size: 13px;
+            color: #394564;
+            padding-left: 14px;
+            font-weight: bold;
+        }
+
+        .map-box {
+            position: relative;
+        }
+
+        map-box /deep/ .des {
+            font-size: 12px;
+            color: #7D87A1;
+        }
+
+        .map-content {
+            position: absolute;
+            background: rgba(248, 251, 254, 0.77);
+            border: 1px solid #D6E6F4;
+            box-shadow: 0 0 35px 0 rgba(119, 148, 193, 0.45);
+            border-radius: 3px;
+            top: 140px;
+            left: 19px;
+        }
+
+        .map-box /deep/ .el-tabs__nav-wrap::after {
+            display: none;
+        }
+
+        .map-box /deep/ .el-tabs--left .el-tabs__item.is-left {
+            text-align: left;
+        }
+
+        .map-box /deep/ .el-tabs__item.is-active {
+            background-color: #e8f2fe;
+            color: #7D87A1;
+        }
+
+        .map-box /deep/ .el-tabs--left .el-tabs__header.is-left {
+            margin-right: 0;
+        }
+
+        .map-box /deep/ .el-tabs__active-bar {
+            display: none;
+        }
+
+        .map-box /deep/ .el-tabs__item {
+            color: #7D87A1;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .modal {
+            position: absolute;
+            background-image: url(../../assets/img/oilgas/chuqimodal.png);
+            border-radius: 3px;
+            top: 111px;
+            left: 180px;
+            color: #fff;
+            height: 200px;
+            width: 200px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding: 18px 10px 10px;
+        }
+
+        .modal-des-box {
+            background-color: rgba(106, 113, 129, 0.7);
+            text-align: center;
+            width: 85px;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .modal-city {
+            font-size: 13px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .modal-box {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .modal .modal-title {
+            color: #8fc8fa;
+        }
+
+        .modal .model-des {
+            font-weight: bold;
+        }
     }
 
-    .scFristqh {
-        margin-bottom: 22px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .scFristqh /deep/ .el-tabs__item {
-        /* color: #236BD7;
-         font-size: 13px;
-         height: 28px;
-         line-height: 28px;
-         width: 170px;
-         text-align: center;
-         padding: 0;
-         border-radius: 3px;*/
-        width: 169.5px;
-        height: 25px;
-        font: 12px PingFangSC-Regular;
-        color: #3a6dda;
-        line-height: 25px;
-        float: left;
-        position: relative;
-        top: 2px;
-        left: 2px;
-        text-align: center;
-        padding-left: 0;
-    }
-
-    .scFristqh /deep/ .el-tabs__item.is-active {
-        /*background-color: #236BD7;
-        color: #fff;*/
-        width: 169.5px;
-        height: 25px;
-        background-color: #3a6dda;
-        font: 12px PingFangSC-Regular;
-        color: white;
-        line-height: 25px;
-        float: left;
-        position: relative;
-        top: 2px;
-        left: 2px;
-        text-align: center;
-        border-radius: 5px;
-    }
-
-    .scFristqh /deep/ .el-tabs {
-        /*width: 342px;
-        border: 1px solid #236BD7;
-        border-radius: 3px;*/
-        width: 345px;
-        height: 31px;
-        background-color: white;
-        margin: 0px auto;
-        border: 1px solid #3a6dda;
-        border-radius: 5px;
-    }
-
-    .scFristqh /deep/ .el-tabs__header {
-        margin: 0;
-    }
-
-    .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
-        display: none;
-    }
-
-    .scFristqh /deep/ .el-tabs__nav-scroll {
-        height: 31px;
-    }
-
-    #gasPieTwo, #gasPieThree {
-        background-image: url(../../assets/img/industryAnalysis/椭圆.png);
-        background-repeat: no-repeat;
-        background-position: 50% 37%;
-        background-size: 65px 65px;
-    }
-
-    /* 文字块 */
-    .fontSize_div {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-    }
-
-    .fontSize {
-        position: relative;
-        top: 70px;
-        color: #4D5F7B;
-        font: 25px bolder MicrosoftYaHe
-    }
-
-    .title {
-        font-size: 13px;
-        color: #394564;
-        padding-left: 14px;
-        font-weight: bold;
-    }
-
-    .child3 .map-box {
-        position: relative;
-    }
-
-    .child3 .map-box /deep/ .des {
-        font-size: 12px;
-        color: #7D87A1;
-    }
-
-    .child3 .map-content {
-        position: absolute;
-        background: rgba(248, 251, 254, 0.77);
-        border: 1px solid #D6E6F4;
-        box-shadow: 0 0 35px 0 rgba(119, 148, 193, 0.45);
-        border-radius: 3px;
-        top: 140px;
-        left: 19px;
-    }
-
-    .child3 .map-box /deep/ .el-tabs__nav-wrap::after {
-        display: none;
-    }
-
-    .child3 .map-box /deep/ .el-tabs--left .el-tabs__item.is-left {
-        text-align: left;
-    }
-
-    .child3 .map-box /deep/ .el-tabs__item.is-active {
-        background-color: #e8f2fe;
-        color: #7D87A1;
-    }
-
-    .child3 .map-box /deep/ .el-tabs--left .el-tabs__header.is-left {
-        margin-right: 0;
-    }
-
-    .child3 .map-box /deep/ .el-tabs__active-bar {
-        display: none;
-    }
-
-    .child3 .map-box /deep/ .el-tabs__item {
-        color: #7D87A1;
-        height: 30px;
-        line-height: 30px;
-    }
-
-    .child3 .modal {
-        position: absolute;
-        background-image: url(../../assets/img/oilgas/chuqimodal.png);
-        border-radius: 3px;
-        top: 111px;
-        left: 180px;
-        color: #fff;
-        height: 200px;
-        width: 200px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        padding: 18px 10px 10px;
-    }
-
-    .modal-des-box {
-        background-color: rgba(106, 113, 129, 0.7);
-        text-align: center;
-        width: 85px;
-        margin-bottom: 10px;
-        font-size: 12px;
-    }
-
-    .modal-city {
-        font-size: 13px;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .modal-box {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .modal .modal-title {
-        color: #8fc8fa;
-    }
-
-    .modal .model-des {
-        font-weight: bold;
-    }
 </style>

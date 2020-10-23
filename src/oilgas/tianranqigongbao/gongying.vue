@@ -1,5 +1,5 @@
 <template>
-    <div class="child1" style="background-color: #E6E8EC;">
+    <div class="child2" style="background-color: #E6E8EC;">
         <div class="map-box" @click.prevent="showLayer">
             <div class="map-layer" v-show="show">
                 <div class="des">
@@ -20,7 +20,7 @@
             <div class="scFristqh">
                 <el-tabs v-model="supplyActiveName" @tab-click="supplyHandleClick">
                     <el-tab-pane label="天然气日供气量趋势分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="供气量与合同量对比分析" name="2" ></el-tab-pane>
+                    <el-tab-pane label="供气量与合同量对比分析" name="2"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -32,15 +32,15 @@
             <div class="scFristqh">
                 <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
                     <el-tab-pane label="供气对象性质分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="供气单位结构分析" name="2" ></el-tab-pane>
+                    <el-tab-pane label="供气单位结构分析" name="2"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
 
                 <div>
                     <div class="fontSize_div">
-                        <div class="fontSize">20</div>
-                        <div class="fontSize" style="font-size: 14px">亿立方米</div>
+                        <div class="fontSize">3000</div>
+                        <div class="fontSize" style="font-size: 14px">万立方米</div>
                     </div>
                     <div id="supplyPieOne" style="width:100%;height:240px;" v-show="activeNamePie==='1'"></div>
                 </div>
@@ -52,7 +52,7 @@
             <div class="scFristqh">
                 <el-tabs v-model="activeNameBar" @tab-click="supplyBarClick">
                     <el-tab-pane label="供气量与合同量差额分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="未来30日供气量预测" name="2" ></el-tab-pane>
+                    <el-tab-pane label="未来30日供气量预测" name="2"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="content">
@@ -87,7 +87,7 @@
                 let option = {
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        formatter: "{a} <br/>{b}: {c}万立方米 ({d}%)"
                     },
                     legend: {
                         orient: "horizontal",
@@ -122,19 +122,19 @@
                                 length2: 30
                             },
                             data: [{
-                                value: 2000,
+                                value: 1035,
                                 name: "液化工厂"
                             },
                                 {
-                                    value: 900,
+                                    value: 540,
                                     name: "合成氨企业"
                                 },
                                 {
-                                    value: 1533.2,
+                                    value: 885,
                                     name: "燃气公司"
                                 },
                                 {
-                                    value: 766.6,
+                                    value: 540,
                                     name: "甲醇工厂"
                                 }],
                             itemStyle: {
@@ -164,7 +164,7 @@
                 let option = {
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        formatter: "{a} <br/>{b}: {c}万立方米 ({d}%)"
                     },
                     legend: {
                         orient: 'vertical',
@@ -186,7 +186,7 @@
                                     tarValue = data[i].value;
                                 }
                             }
-                            var p = ((tarValue / total) * 100).toFixed(2);
+                            var p = ((tarValue / total) * 100).toFixed(1);
                             return name + " " + " " + p + "%";
                         },
                     },
@@ -200,11 +200,11 @@
                                 show: false
                             },
                             data: [{
-                                value: 6516,
+                                value: 2550,
                                 name: "中石油"
                             },
                                 {
-                                    value: 1149,
+                                    value: 450,
                                     name: "中石化"
                                 },
                             ],
@@ -263,11 +263,10 @@
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            label: {
-                                backgroundColor: '#999'
-                            }
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                params[1].seriesName + ':' +
+                                params[1].value + '%'
                         }
                     },
                     legend: {
@@ -301,6 +300,7 @@
                                     color: '#9B9DA1'
                                 }
                             }
+
                         },
                         {
                             type: 'value',
@@ -316,8 +316,8 @@
                         {
                             name: '天然气日供气量',
                             type: 'line',
-                            stack: '总量',
                             symbol: 'circle',
+                            smooth: true,
                             symbolSize: 6,
                             itemStyle: {
                                 normal: {
@@ -331,14 +331,15 @@
                             areaStyle: {
                                 color: 'rgba(27,202,201,0.1)'
                             },
-                            data: [220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290]
+                            data: [55, 61, 56, 66, 59, 70, 68, 66, 59, 64, 62, 56]
                         },
                         {
                             name: '同比变化',
                             type: 'line',
-                            stack: '总量',
+                            smooth: true,
                             symbol: 'circle',
                             symbolSize: 6,
+                            yAxisIndex: 1,
                             itemStyle: {
                                 normal: {
                                     color: '#FBAF5D',
@@ -348,7 +349,7 @@
                                     }
                                 }
                             },
-                            data: [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90]
+                            data: [40, 50, 60, 60, 40, 50, 70, 40, 50, 60, 40, 50]
                         }
                     ]
                 };
@@ -362,11 +363,10 @@
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            crossStyle: {
-                                color: '#999'
-                            }
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                params[1].seriesName + ':' +
+                                params[1].value + '亿立方米'
                         }
                     },
                     legend: {
@@ -394,8 +394,8 @@
                             type: 'value',
                             name: '亿立方',
                             min: 0,
-                            max: 250,
-                            interval: 50,
+                            max: 120,
+                            interval: 20,
                             axisLabel: {
                                 formatter: '{value}'
                             },
@@ -408,8 +408,8 @@
                         {
                             type: 'value',
                             min: 0,
-                            max: 25,
-                            interval: 5,
+                            max: 120,
+                            interval: 20,
                             axisLabel: {
                                 formatter: '{value}'
                             },
@@ -425,7 +425,7 @@
                             name: '天然气日供气量',
                             type: 'bar',
                             barWidth: 20,
-                            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                            data: [55, 61, 56, 66, 59, 70, 68, 66, 59, 64, 62, 56],
                             itemStyle: {
                                 normal: {
                                     color: new this.$echarts.graphic.LinearGradient(
@@ -441,8 +441,10 @@
                         {
                             name: '合同量',
                             type: 'line',
+                            smooth: true,
                             symbolSize: 0,
-                            data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+                            yAxisIndex: 1,
+                            data: [60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
                             itemStyle: {
                                 color: '#FBAF5D'
                             }
@@ -544,11 +546,10 @@
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross',
-                            label: {
-                                backgroundColor: '#999'
-                            }
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                params[1].seriesName + ':' +
+                                params[1].value + '亿立方米'
                         }
                     },
                     legend: {
@@ -583,7 +584,7 @@
                                 }
                             }
                         },
-                        {
+                        /*{
                             name: '%',
                             type: 'value',
                             axisLine: {
@@ -591,12 +592,13 @@
                                     color: '#9B9DA1'
                                 }
                             }
-                        }
+                        }*/
                     ],
                     series: [
                         {
                             name: '天然气日产量',
                             type: 'line',
+                            smooth: true,
                             symbol: 'circle',
                             symbolSize: 6,
                             itemStyle: {
@@ -643,125 +645,168 @@
     }
 </script>
 
-<style scoped>
-    .map {
-        width: 100%;
-        height: auto;
+<style scoped lang="scss">
+    .child2 {
+
+        .map {
+            /*height: 309px;*/
+            width: 100%;
+            /* background-size: cover;
+             background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
+        }
+
+        .scFristqh {
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scFristqh /deep/ .el-tabs__item {
+            /* color: #236BD7;
+             font-size: 13px;
+             height: 28px;
+             line-height: 28px;
+             width: 170px;
+             text-align: center;
+             padding: 0;
+             border-radius: 3px;*/
+            width: 169.5px;
+            height: 25px;
+            font: 12px PingFangSC-Regular;
+            color: #3a6dda;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            padding-left: 0;
+        }
+
+        .scFristqh /deep/ .el-tabs__item.is-active {
+            /*background-color: #236BD7;
+            color: #fff;*/
+            width: 169.5px;
+            height: 25px;
+            background-color: #3a6dda;
+            font: 12px PingFangSC-Regular;
+            color: white;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .scFristqh /deep/ .el-tabs {
+            /*width: 342px;
+            border: 1px solid #236BD7;
+            border-radius: 3px;*/
+            width: 345px;
+            height: 31px;
+            background-color: white;
+            margin: 0px auto;
+            border: 1px solid #3a6dda;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .scFristqh /deep/ .el-tabs__header {
+            margin: 0;
+        }
+
+        .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
+            display: none;
+        }
+
+        .scFristqh /deep/ .el-tabs__nav-scroll {
+            height: 31px;
+        }
+
+        #PieOne {
+            background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+            background-repeat: no-repeat;
+            background-position: 50% 37%;
+            background-size: 65px 65px;
+        }
+
+        /* 文字块 */
+        .fontSize_div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .fontSize {
+            position: relative;
+            top: 70px;
+            color: #4D5F7B;
+            font: 25px bolder MicrosoftYaHe
+        }
+
+        .title {
+            font-size: 13px;
+            color: #394564;
+            padding-left: 14px;
+            font-weight: bold;
+        }
+
+        .tanchuang {
+            position: absolute;
+            width: 100%;
+            height: 314.5px;
+            background-color: #4c4c4c;
+            z-index: 3;
+            display: none;
+        }
+
+        .tanchuang_one {
+            position: absolute;
+            width: 100%;
+            height: 314.5px;
+            background-color: #4c4c4c;
+            z-index: 3;
+            display: block;
+        }
+
+        .table_one_t {
+            font-family: PingFang SC;
+            border-collapse: collapse;
+            width: 800px;
+
+        }
+
+        .table_one_t th,
+        .table_one_t td {
+            font-size: 14px;
+            border: 1px solid #b9bec9;
+            padding: 3px 7px 2px 7px;
+            text-align: center;
+            background-color: white;
+        }
+
+        .table_one_t th {
+            background-color: #d8dbde;
+        }
+
+        #close {
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            top: 205px;
+        }
+
+        .table-title {
+            color: #246BD7;
+            font-size: 14px;
+            padding: 10px;
+            width: 800px;
+            background-color: #fff;
+        }
+
     }
 
-    .scFristqh {
-        margin-bottom: 22px;
-        display: flex;
-        justify-content: center;
-    }
-    .scFristqh /deep/ .el-tabs__item {
-        /* color: #236BD7;
-         font-size: 13px;
-         height: 28px;
-         line-height: 28px;
-         width: 170px;
-         text-align: center;
-         padding: 0;
-         border-radius: 3px;*/
-        width: 169.5px;
-        height: 25px;
-        font: 12px PingFangSC-Regular;
-        color: #3a6dda;
-        line-height: 25px;
-        float: left;
-        position: relative;
-        top: 2px;
-        left: 2px;
-        text-align: center;
-        padding-left: 0;
-    }
-
-    .scFristqh /deep/ .el-tabs__item.is-active {
-        /*background-color: #236BD7;
-        color: #fff;*/
-        width: 169.5px;
-        height: 25px;
-        background-color: #3a6dda;
-        font: 12px PingFangSC-Regular;
-        color: white;
-        line-height: 25px;
-        float: left;
-        position: relative;
-        top: 2px;
-        left: 2px;
-        text-align: center;
-        border-radius: 5px;
-    }
-
-    .scFristqh /deep/ .el-tabs {
-        /*width: 342px;
-        border: 1px solid #236BD7;
-        border-radius: 3px;*/
-        width: 345px;
-        height: 31px;
-        background-color: white;
-        margin: 0px auto;
-        border: 1px solid #3a6dda;
-        border-radius: 5px;
-    }
-
-    .scFristqh /deep/ .el-tabs__header {
-        margin: 0;
-    }
-
-    .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
-        display: none;
-    }
-    .scFristqh /deep/ .el-tabs__nav-scroll{
-        height: 31px;
-    }
-
-    #supplyPieOne {
-        background-image: url(../../assets/img/industryAnalysis/椭圆.png);
-        background-repeat: no-repeat;
-        background-position: 50% 37%;
-        background-size: 65px 65px;
-    }
-
-    /* 文字块 */
-    .fontSize_div {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-    }
-
-    .fontSize {
-        position: relative;
-        top: 70px;
-        color: #4D5F7B;
-        font: 25px bolder MicrosoftYaHe
-    }
-
-    .title {
-        font-size: 13px;
-        color: #394564;
-        padding-left: 14px;
-        font-weight: bold;
-    }
-
-    .map-box {
-        position: relative;
-    }
-
-    .map-layer {
-        position: absolute;
-        width: 145px;
-        height: 88px;
-        background-image: url(../../assets/img/oilgas/gongyinglayer.png);
-        top: 130px;
-        left: 40px;
-        padding: 15px 15px 15px 23px;
-    }
-
-    .map-layer .des {
-        font-size: 10px;
-        color: #fff;
-        font-weight: bold;
-    }
 </style>

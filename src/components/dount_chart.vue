@@ -1,9 +1,8 @@
 <template>
-  <div :id="elId" style="width: 100%; height: 100%"></div>
+  <div style="width: 100%; height: 100%" :id="id"></div>
 </template>
 <script>
 import echarts from "echarts";
-import uuidv1 from 'uuid/v1' 
 export default {
   name: "barLineEchart",
   props: {
@@ -29,10 +28,7 @@ export default {
       chartBar: null,
     };
   },
-  created() {
-    this.elId = uuidv1()
-  },
-  mounted: function () {
+  created: function () {
     this.$nextTick(function () {
       this.getBarOption();
     });
@@ -55,7 +51,7 @@ export default {
   methods: {
     getBarOption() {
       this.chartBar = null;
-      this.chartBar = echarts.init(document.getElementById(this.elId));
+      this.chartBar = echarts.init(document.getElementById(this.id));
       let option = {
         tooltip: {
           trigger: "item",
@@ -93,6 +89,10 @@ export default {
           x: "center",
           top: '75%',
           data: this.optionObj.legendData,
+        },
+        grid: {
+          top: '3%',
+          bottom: '5%'
         },
         series: [
           {

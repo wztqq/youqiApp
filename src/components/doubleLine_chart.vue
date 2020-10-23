@@ -1,9 +1,8 @@
 <template>
-  <div :id="elId" style="width: 100%; height: 100%"></div>
+  <div style="width: 100%; height: 100%" :id="id"></div>
 </template>
 <script>
 import echarts from "echarts";
-import uuidv1 from 'uuid/v1' 
 export default {
   name: "barLineEchart",
   props: {
@@ -41,10 +40,7 @@ export default {
       chartBar: null,
     };
   },
-  created() {
-    this.elId = uuidv1()
-  },
-  mounted: function () {
+  created: function () {
     this.$nextTick(function () {
       this.getBarOption();
     });
@@ -67,7 +63,7 @@ export default {
   methods: {
     getBarOption() {
       this.chartBar = null;
-      this.chartBar = echarts.init(document.getElementById(this.elId));
+      this.chartBar = echarts.init(document.getElementById(this.id));
       let option = {
         tooltip: {
           trigger: "axis",
@@ -179,15 +175,7 @@ export default {
       };
       this.chartBar.clear();
       this.chartBar.setOption(option);
-      // window.addEventListener("resize", function() {
-      //   this.chartBar.resize();  //页面大小变化后Echarts也更改大小
-      // });
     },
   },
-  // destroyed() {
-  //   window.removeEventListener("resize", () => {
-  //     this.chartBar.resize();
-  //   })
-  // }
 };
 </script>

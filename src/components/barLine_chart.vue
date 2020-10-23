@@ -1,9 +1,8 @@
 <template>
-  <div :id="elId" style="width: 100%; height: 100%"></div>
+  <div style="width: 100%; height: 100%" :id="id"></div>
 </template>
 <script>
 import echarts from "echarts";
-import uuidv1 from 'uuid/v1' 
 export default {
   name: "barLineEchart",
   props: {
@@ -41,10 +40,7 @@ export default {
       chartBar: null,
     };
   },
-  created() {
-    this.elId = uuidv1()
-  },
-  mounted: function () {
+  created: function () {
     this.$nextTick(function () {
       this.getBarOption();
     });
@@ -67,12 +63,13 @@ export default {
   methods: {
     getBarOption() {
       this.chartBar = null;
-      this.chartBar = echarts.init(document.getElementById(this.elId));
+      this.chartBar = echarts.init(document.getElementById(this.id));
       let option = {
         tooltip: {
           trigger: "axis",
           // formatter: "{a} <br/>{b}: {c} ({d}%)",
           formatter: function (params) {
+            console.log(params)
             var str = "";
             for (var i = 0; i < params.length; i++) {
               if (params[i].seriesName === "天然气月产量") {

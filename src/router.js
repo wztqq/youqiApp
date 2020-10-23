@@ -27,7 +27,7 @@ import Indicatorsmonitoring from './components/Indicatorsmonitoring.vue'
 const ChuQing = () => import("./oilgas/youqifenxi/chuqing.vue");
 //油气生产管理
 const Yunayou= () => import("./oilgas/youqishengchan/yuanyou.vue");
-//const ChengPingYou= () => import("./oilgas/youqishengchan/chengpingyou.vue");
+const ChengPingYou= () => import("./oilgas/youqishengchan/chengpingyou.vue");
 //天然气保供中心
 const Shengchanguanli= () => import("./oilgas/tianranqigongbao/shengchanguanli.vue");
 // 油气储运

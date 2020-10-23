@@ -34,14 +34,14 @@
             <div class="fontSize">0.508</div>
             <div class="fontSize">亿立方米</div>
           </div>
-          <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
+          <dount-chart class="echarts" :id="echartsTFJGFX" :optionObj="optionObjTFJGFX"></dount-chart>
         </div>
       </div>
 
       <!-- 月调峰同比分析 -->
       <div class="chart module">
         <h4>月调峰同比分析</h4>
-        <barline-chart :optionObj="optionObjYTF"></barline-chart>
+        <barline-chart :id="echartsYTF" :optionObj="optionObjYTF"></barline-chart>
       </div>
 
       <!-- 天然气日消费缺口预测 && 调峰计划建议 -->
@@ -56,7 +56,7 @@
             ]">{{ item }}</span>
         </div>
         <div class="chart-item" v-if="selected_two === 0">
-          <doubleline-chart :optionObj="optionObjLineQKYC"></doubleline-chart>
+          <doubleline-chart :id="echartsQKYC" :optionObj="optionObjLineQKYC"></doubleline-chart>
         </div>
         <div class="chart-item" id="table" v-if="selected_two === 1">
           <table class="table_one">
@@ -84,6 +84,9 @@ export default {
   },
   data() {
     return {
+      echartsTFJGFX: "echartsTFJGFX",
+      echartsYTF: "echartsYTF",
+      echartsQKYC: "echartsQKYC",
       selected_one: 0,
       selected_two: 0,
       selected_three: "0",
@@ -351,7 +354,7 @@ export default {
 }
 .fontSize {
   position: relative;
-  top: 75px;
+  top: 85px;
   font: 16px bolder microsoft-yahei;
 }
 
@@ -361,7 +364,7 @@ export default {
   // margin: 20px auto;
   background-image: url(../../assets/img/industryAnalysis/椭圆.png);
   background-repeat: no-repeat;
-  background-position: 50% 37%;
+  background-position: 50% 38%;
   background-size: 65px 65px;
 }
 </style>

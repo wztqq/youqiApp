@@ -3,15 +3,13 @@
     <div id="confess_content" style="background-color: #dadbdb">
 
       <!-- banner -->
-      <div id="banner">
-        <img class="map"
-          src="../../assets/img/gasmap/sale_map.png"
-          alt="图片未显示"/>
-        <div class="banner">
-          <h4>***盟市</h4>
-          <p>昨日天然气消费量：100</p>
-          <p>累计天然气消费量：1000</p>
-        </div>
+      <img class="map"
+        src="../../assets/img/gasmap/sale_map.png"
+        alt="图片未显示"/>
+      <div class="banner">
+        <h4>***盟市</h4>
+        <p>昨日天然气消费量：100</p>
+        <p>累计天然气消费量：1000</p>
       </div>
 
       <!-- 天然气日消费量分析 && 用气单位结构分析 -->
@@ -26,14 +24,14 @@
             ]">{{ item }}</span>
         </div>
         <div class="chart-item" v-if="selected_one === 0">
-          <barline-chart :optionObj="optionObjBarGasXF"></barline-chart>
+          <barline-chart :id="echartsGasXF" :optionObj="optionObjBarGasXF"></barline-chart>
         </div>
         <div class="chart-item" v-if="selected_one === 1">
           <div class="fontSize_div">
             <div class="fontSize">0.508</div>
             <div class="fontSize">亿立方米</div>
           </div>
-          <dount-chart class="echarts" :optionObj="optionObjYQDW"></dount-chart>
+          <dount-chart class="echarts" :id="echartsYQDW" :optionObj="optionObjYQDW"></dount-chart>
         </div>
       </div>
 
@@ -53,13 +51,13 @@
             <div class="fontSize">3000</div>
             <div class="fontSize">万立方米</div>
           </div>
-          <dount-chart class="echarts" :optionObj="optionObjMS"></dount-chart>
+          <dount-chart class="echarts" :id="echartsMs" :optionObj="optionObjMS"></dount-chart>
         </div>
         <div class="chart-item" :key="timer" v-if="selected_two === 1">
           <div class="fontSize_div">
-            <div class="fontSize onlynum">3000</div>
+            <div class="fontSize">3000</div>
           </div>
-          <dount-chart class="echarts" :optionObj="optionObjXS"></dount-chart>
+          <dount-chart class="echarts" :id="echartsXS" :optionObj="optionObjXS"></dount-chart>
         </div>
       </div>
 
@@ -75,10 +73,8 @@
             ]">{{ item }}</span>
         </div>
         <div class="chart-item" v-if="selected_three === 0">
-          <doublebar-chart :optionObj="optionObjXFYC"></doublebar-chart>
         </div>
         <div class="chart-item" v-if="selected_three === 1">
-          <bothway-chart :optionObj="optionObjXFQKYC"></bothway-chart>
         </div>
       </div>
     </div>
@@ -92,12 +88,14 @@ export default {
     dountChart: () => import("@/components/dount_chart"),
     barlineChart: () => import("@/components/barLine_chart"),
     doublelineChart: () => import("@/components/doubleLine_chart"),
-    doublebarChart: () => import("@/components/doublebar_chart"),
-    bothwayChart: () => import("@/components/bothway_chart"),
   },
   data() {
     return {
       timer: "",
+      echartsGasXF: "echartsGasXF",
+      echartsYQDW: "echartsYQDW",
+      echartsMs: "echartsMs",
+      echartsXS: "echartsXS",
       selected_one: 0,
       selected_two: 0,
       selected_three: 0,
@@ -106,7 +104,7 @@ export default {
       tablist_three: ["日消费量预测", "日消费缺口预测"],
       optionObjBarGasXF: {
         legendData: ["天然气月产量", "同比变化"],
-        yLeftName: "亿立方",
+        yLeftName: "亿立方米",
         yRightName: "%",
         xData: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
         seriesLeftData: [6, 13, 18, 13, 13, 18, 13, 9, 13, 18, 13, 9],
@@ -166,34 +164,10 @@ export default {
           { value: 135, name: "兴胜燃气" },
         ],
       },
-      optionObjXFYC: {
-        legendData: ["天然气日消费量", "天然气日消费量预测值"],
-        xData: ["1月1日", "1月2日", "1月3日", "1月4日", "1月5日", "1月6日", "1月7日"],
-        yLeftName: "亿立方",
-        yRightName: "%",
-        seriesLeftData: [120, 132, 101, 134, 90, 230, 210],
-        seriesRightData:[220, 182, 191, 234, 290, 330, 310]
-      },
-      optionObjXFQKYC: {
-        legendData: ["差值"],
-        yName: "日期",
-        seriesName: "差值",
-        yData: ["1月1日", "1月2日", "1月3日", "1月4日", "1月5日", "1月6日", "1月7日"],
-        // yLeftName: "亿立方",
-        // yRightName: "%",
-        seriesData: [5, 6, -5, -6, 3.8, 4, 4],
-      },
     };
   },
   mounted() {
-
-  },
-  watch: {
-    selected_two() {
-      if(this.selected_one === 0) {
-        
-      } 
-    }
+    
   },
   methods: {
     tabButton_one(index) {
@@ -213,9 +187,7 @@ export default {
 <style lang="scss" scoped>
 #confess_content {
   width: 100%;
-  #banner {
-    position: relative;
-  }
+  position: relative;
   /* 关于地图内容的调整期 */
   .map {
     width: 100%;
@@ -228,9 +200,9 @@ export default {
     height: 80px;
     background: url("../../assets/img/gasmap/sale_banner.png");
     position: absolute;
-    top: 110px;
+    top: 85px;
     left: 15px;
-    // z-index: 1;
+    z-index: 1;
     h4 {
       color: #fff;
       font: bolder 12px MicrosoftYaHei;
@@ -331,20 +303,17 @@ export default {
 }
 .fontSize {
   position: relative;
-  top: 75px;
+  top: 85px;
   font: 16px bolder microsoft-yahei;
-  &.onlynum {
-    top: 88px;
-  }
 }
 
 .echarts {
   // width: 100%;
   // height: 100%;
   // margin: 20px auto;
-  background-image: url("../../assets/img/industryAnalysis/椭圆.png");
+  background-image: url(../../assets/img/industryAnalysis/椭圆.png);
   background-repeat: no-repeat;
-  background-position: 50% 37%;
+  background-position: 50% 38%;
   background-size: 65px 65px;
 }
 </style>

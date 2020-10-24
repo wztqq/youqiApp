@@ -22,7 +22,7 @@
 		</div>
 		<!-- 储情分析的主要内容 -->
 		<div id="confess_content" v-show="a" style="background-color: #DADBDB;">
-			<img class="map" @click.prevent="tanchuangShow()" src="../../assets/img/industryAnalysis/地图.png" alt="图片未显示">
+			<img class="map" @click.prevent="tanchuangShow()" src="../../assets/img/industryAnalysis/原油生产地图.png" alt="图片未显示">
 			<div class="chart">
 				<div class="tab_oil">
 					<span v-for="(item,index) in tablist_one" :key='index' @click="tabButton_one(index)" v-bind:class="[{tab_oil_two:index == selected_one},{tab_oil_one:true}]">{{item}}</span>
@@ -157,11 +157,11 @@
 			
 			
 			<div id="produce_refine" v-show="!d">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
+				<div id="clickbtn1" class="clickbtn" :style="{'left':left1,'top':top1}"></div>
+				<div id="clickbtn2" class="clickbtn" :style="{'left':left2,'top':top2}"></div>
+				<div id="clickbtn3" class="clickbtn" :style="{'left':left3,'top':top3}"></div>
+				<div id="clickbtn4" class="clickbtn" :style="{'left':left4,'top':top4}"></div>
+				<div id="clickbtn5" class="clickbtn" :style="{'left':left5,'top':top5}"></div>
 				<img class="map" src="../../assets/img/industryAnalysis/炼化煤地图2.png" alt="图片未显示">
 				<div class="chart">
 					<div class="tab_oil">
@@ -227,6 +227,25 @@
 		name: 'FuncFormsBase',
 		data() {
 			return {
+				/*
+				此处定义动态位置的变量
+				*/
+				left1:'',
+				top1:'',
+				left2:'',
+				top2:'',
+				left3:'',
+				top3:'',
+				left4:'',
+				top4:'',
+				left5:'',
+				top5:'',
+				left6:'',
+				top6:'',
+				
+				
+				
+				
 				screenWidth: document.body.clientWidth, // 屏幕宽
 				screenHeight: document.body.clientHeight, // 屏幕高
 				screenLeft: '',
@@ -567,6 +586,14 @@
 			this.screenLeft = (this.screenWidth - 343) / 2 + 'px'
 		},
 		methods: {
+			// 用于点击的div块绑定函数
+			onclick(){
+				document.getElementById(name)
+			},
+			
+			
+			
+			
 			//取消图片默认样式
 			tanchuangShow() {
 				this.show = 1
@@ -1382,8 +1409,11 @@
 		position: absolute;
 		top: 255px;
 	}
-
-
+	.clickbtn{
+		background-color: #000000;
+		position: absolute;
+	}
+	
 
 	#tab_button {
 		width: 343px;

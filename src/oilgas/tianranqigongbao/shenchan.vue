@@ -1,8 +1,6 @@
 <template>
-<<<<<<< HEAD
 	<div class="map"></div>
 </template>
-=======
     <div class="child1" style="background-color: #E6E8EC;">
         <div :class="[{tanchuang:true},{tanchuang_one: show}]">
             <div style="width: 100%;height: 100%;overflow: auto;margin: 50px auto">
@@ -59,7 +57,6 @@
                     </div>
                     <div id="PieOne" style="width:100%;height:240px;" v-show="activeNamePie==='1'"></div>
                 </div>
->>>>>>> 273ca3d492816043b76e2f49e9ef54114dd685ba
 
                 <div id="PieTwo" style="width:100%;height:240px;" v-show="activeNamePie==='2'" ref="second"></div>
             </div>
@@ -74,20 +71,10 @@
         </div>
     </div>
 </template>
+
+
+
 <script>
-<<<<<<< HEAD
-</script>
-
-<style>
-	.map {
-		width: 100%;
-		height: 300px;
-		background-color: #DADBDB;
-		background-size: cover;
-		background-image: url(../../assets/img/industryAnalysis/地图.png);
-	}
-=======
-
     export default {
         name: 'child1',
         data() {
@@ -825,6 +812,4 @@
         }
 
     }
-
->>>>>>> 273ca3d492816043b76e2f49e9ef54114dd685ba
 </style>

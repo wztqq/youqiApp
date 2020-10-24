@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
 	<div class="scgl">
 		<el-tabs v-model="activeName">
 			<el-tab-pane label="生产管理" name="first" :key="'first'">
@@ -25,7 +24,6 @@
 			</el-tab-pane>
 		</el-tabs>
 	</div>
-=======
     <div class="scgl">
         <el-tabs v-model="activeName" class="sec-nav">
             <el-tab-pane label="生产管理" name="first" :key="'first'">
@@ -51,7 +49,6 @@
             </el-tab-pane>
         </el-tabs>
     </div>
->>>>>>> 273ca3d492816043b76e2f49e9ef54114dd685ba
 </template>
 <script>
     import shenChan from './shenchan.vue'
@@ -84,12 +81,10 @@
         }
     }
 </script>
-<<<<<<< HEAD
 <style>
 	.el-tabs__item{
 		padding: 0 5px;
 	}
-=======
 <style scoped>
     .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs__nav {
         color: #fff;
@@ -129,5 +124,4 @@
     .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
             padding-left: 14px;
     }
->>>>>>> 273ca3d492816043b76e2f49e9ef54114dd685ba
 </style>

@@ -42,8 +42,8 @@ export default {
                 name:'能流图',
                 router:'energystream'
             },{
-                name:'指标监测',
-                router:'Indicatorsmonitoring'
+                name:'油气销售管理',
+                router:'YouqixiaoShou'
             }]
         }
     },

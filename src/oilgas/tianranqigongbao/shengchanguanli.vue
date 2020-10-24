@@ -4,7 +4,6 @@
 			<el-tab-pane label="生产管理" name="first" :key="'first'">
 				<child1></child1>
 			</el-tab-pane>
-
 			<el-tab-pane label="供应管理" name="second" :key="'second'">
 				<child2></child2>
 			</el-tab-pane>
@@ -57,5 +56,7 @@
 	}
 </script>
 <style>
-	
+	.el-tabs__item{
+		padding: 0 5px;
+	}
 </style>

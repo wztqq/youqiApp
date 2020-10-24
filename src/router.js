@@ -23,7 +23,6 @@ import energystream from './components/energystream.vue'
 import Indicatorsmonitoring from './components/Indicatorsmonitoring.vue'
 
 // 油气平台组件
-
 const ChuQing = () => import("./oilgas/youqifenxi/chuqing.vue");
 //油气生产管理
 const Yunayou= () => import("./oilgas/youqishengchan/yuanyou.vue");
@@ -31,6 +30,9 @@ const ChengPingYou= () => import("./oilgas/youqishengchan/chengpingyou.vue");
 
 //天然气保供中心
 const Shengchanguanli= () => import("./oilgas/tianranqigongbao/shengchanguanli.vue");
+
+//油气销售管理
+const YouqixiaoShou= () => import("./oilgas/youqixiaoshou/chengpinyou.vue");
 
 // 将vue-router注册到全局，这样每一个组件都可以使用router-link和router-view组件了
 Vue.use(VueRouter);
@@ -114,19 +116,12 @@ var routes = [{
 			{
 				path: '/Yunayou',
 				name: 'Yunayou',
-				component: Yunayou,
-				// children:[
-				// 	{
-				// 	path: '/ChengPingYou',
-				// 	name: 'ChengPingYou',
-				// 	component: ChengPingYou
-				// 	}
-				// ]
+				component: Yunayou
 			},
 			{
-				path: '/Shengchanguanli',
-				name: 'Shengchanguanli',
-				component: Shengchanguanli
+				path: '/YouqixiaoShou',
+				name: 'YouqixiaoShou',
+				component: YouqixiaoShou
 			}
 		]
 	}

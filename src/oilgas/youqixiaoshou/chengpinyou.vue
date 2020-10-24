@@ -1244,4 +1244,3 @@
 	.content {
 		display: none;
 	}
-</style>

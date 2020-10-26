@@ -59,6 +59,10 @@
           <barlChart :optionObj="optionObjRJGFX"></barlChart>
         </div>
         <div class="chart-item" v-if="selected_two === 1">
+          <div class="fontSize_div">
+            <div class="fontSize">9.5</div>
+            <div class="fontSize">亿立方米</div>
+          </div>
           <dount-chart class="echarts" :optionObj="optionObjXFJGFX"></dount-chart>
         </div>
       </div>

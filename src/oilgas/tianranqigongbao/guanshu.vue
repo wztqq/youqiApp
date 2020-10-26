@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <!-- 月调峰同比分析 -->
+      <!-- 接收端主要行业占比 -->
       <div class="chart module">
         <h4>接收端主要行业占比</h4>
         <div class="chart-item">

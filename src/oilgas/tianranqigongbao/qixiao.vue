@@ -26,7 +26,7 @@
           <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
         </div>
         <div class="chart-item" id="table" v-if="selected_one === 1">
-          <table class="table_one" style="width: 800px">
+          <table class="table_one" style="width: 650px">
             <tr>
               <th :width="th.width" v-for="(th,index) in tableTh_one" :key="index">{{th.value}}</th>
             </tr>
@@ -122,15 +122,15 @@ export default {
         },
         {
           value: "日进气量",
-          width: 150,
+          width: 100,
         },
         {
           value: "日出气量",
-          width: 150,
+          width: 100,
         },
         {
           value: "管存量",
-          width: 120,
+          width: 90,
         },
       ],
       listData_one: [

@@ -1,28 +1,28 @@
 <template>
-    <div class="scgl">
-        <el-tabs v-model="activeName" class="sec-nav">
-            <el-tab-pane label="生产管理" name="first" :key="'first'">
+    <div class="scgl scgl-tab">
+        <van-tabs v-model="activeName" class="sec-nav" type="border-card">
+            <van-tab title="生产管理" name="first" :key="'first'">
                 <child1></child1>
-            </el-tab-pane>
-            <el-tab-pane label="供应管理" name="second" :key="'second'" :lazy="true">
+            </van-tab>
+            <van-tab title="供应管理" name="second" :key="'second'">
                 <child2></child2>
-            </el-tab-pane>
-            <el-tab-pane label="储气管理" name="third" :key="'third'" :lazy="true">
+            </van-tab>
+            <van-tab title="储气管理" name="third" :key="'third'">
                 <child3></child3>
-            </el-tab-pane>
-            <el-tab-pane label="管输管理" name="fourth" :key="'fourth'" :lazy="true">
+            </van-tab>
+            <van-tab title="管输管理" name="fourth" :key="'fourth'">
                 <child4></child4>
-            </el-tab-pane>
-            <el-tab-pane label="销售管理" name="fifth" :key="'fifth'" :lazy="true">
+            </van-tab>
+            <van-tab title="销售管理" name="fifth" :key="'fifth'">
                 <child5></child5>
-            </el-tab-pane>
-            <el-tab-pane label="压非保民" name="sixth" :key="'sixth'" :lazy="true">
+            </van-tab>
+            <van-tab title="压非保民" name="sixth" :key="'sixth'">
                 <child6></child6>
-            </el-tab-pane>
-            <el-tab-pane label="气销总览" name="seventh" :key="'seventh'" :lazy="true">
+            </van-tab>
+            <van-tab title="气销总览" name="seventh" :key="'seventh'">
                 <child7></child7>
-            </el-tab-pane>
-        </el-tabs>
+            </van-tab>
+        </van-tabs>
     </div>
 </template>
 <script>
@@ -56,8 +56,8 @@
         }
     }
 </script>
-<style scoped>
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs__nav {
+<style scoped lang="scss">
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs__nav {
         color: #fff;
         height: 29px;
         background-color: rgba(0, 0, 0, 0.15);
@@ -67,11 +67,11 @@
         border-radius: 5px;
     }
 
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs__content {
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs__content {
         padding-top: 60px;
     }
 
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs__item {
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs__item {
         color: #fff;
         padding: 0 14px;
         font-size: 12px;
@@ -79,20 +79,54 @@
         height: 30px;
     }
 
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs__item.is-active {
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs__item.is-active {
         background-color: #01121F;
         opacity: 0.35;
         border-radius: 5px;
     }
 
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs__active-bar {
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs__active-bar {
         display: none;
     }
 
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs--bottom .el-tabs__item.is-bottom:nth-child(2),
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs--bottom .el-tabs__item.is-top:nth-child(2),
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs--top .el-tabs__item.is-bottom:nth-child(2),
-    .scgl /deep/ .sec-nav>.el-tabs__header .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
-            padding-left: 14px;
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs--bottom .van-tabs__item.is-bottom:nth-child(2),
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs--bottom .van-tabs__item.is-top:nth-child(2),
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs--top .van-tabs__item.is-bottom:nth-child(2),
+    .scgl /deep/ .sec-nav > .van-tabs__header .van-tabs--top .van-tabs__item.is-top:nth-child(2) {
+        padding-left: 14px;
+    }
+
+
+</style>
+<style lang="scss">
+    .scgl-tab {
+        .sec-nav .van-tabs__wrap {
+            position: fixed;
+            top: 100px;
+            z-index: 4;
+        }
+        .sec-nav .van-tabs__nav{
+            background-color: rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+            height: 29px;
+            line-height: 29px;
+            display: flex;
+            align-items: center;
+            padding: 0 2px;
+            margin: 0 16px;
+
+        }
+        .sec-nav .van-tabs__nav .van-tab{
+            color: #fff;
+            font-size: 12px;
+            height: 25px;
+            line-height: 25px;
+
+        }
+        .sec-nav .van-tabs__nav .van-tab.van-tab--active{
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
     }
 </style>

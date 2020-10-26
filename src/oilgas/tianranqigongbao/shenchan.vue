@@ -759,7 +759,7 @@
             width: 100%;
             height: 314.5px;
             background-color: #4c4c4c;
-            z-index: 3;
+            z-index: 5;
             display: none;
         }
 
@@ -768,7 +768,7 @@
             width: 100%;
             height: 314.5px;
             background-color: #4c4c4c;
-            z-index: 3;
+            z-index: 5;
             display: block;
         }
 

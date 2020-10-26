@@ -488,5 +488,8 @@
 		.modal .model-des {
 			font-weight: bold;
 		}
+		.el-tabs__nav{
+			z-index: 1;
+		}
 	}
 </style>

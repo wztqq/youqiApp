@@ -1,18 +1,13 @@
 <template>
     <div class="child2" style="background-color: #E6E8EC;">
-        <div class="map-box" @click.prevent="showLayer">
-            <div class="map-layer" v-show="show">
-                <div class="des">
-                    气田
-                </div>
-                <div class="des">
-                    日供气量:1000万方
-                </div>
+        <div id="banner">
+            <img class="map"
+                 src="../../assets/img/oilgas/gongying.png"
+                 alt="图片未显示"/>
+            <div class="banner">
+                <h4>***气田</h4>
+                <p>日供气量：1000万方</p>
             </div>
-            <img
-                    class="map"
-                    src="../../assets/img/oilgas/gongying.png"
-            />
         </div>
 
 
@@ -647,7 +642,37 @@
 
 <style scoped lang="scss">
     .child2 {
-
+        #banner {
+            position: relative;
+        }
+        /* 关于地图内容的调整期 */
+        .map {
+            width: 100%;
+            height: 314.5px;
+            background-color: #dadbdb;
+            overflow: hidden;
+        }
+        .banner {
+            width: 180px;
+            height: 80px;
+            background: url("../../assets/img/gasmap/sale_banner.png");
+            position: absolute;
+            top: 120px;
+            left: 15px;
+            // z-index: 1;
+            h4 {
+                color: #fff;
+                font: bolder 12px MicrosoftYaHei;
+                padding-top: 15px;
+                padding-left: 30px;
+            }
+            p {
+                font: 500 12px MicrosoftYaHei;
+                padding-top: 5px;
+                padding-left: 30px;
+                color: #fff;
+            }
+        }
         .map {
             /*height: 309px;*/
             width: 100%;

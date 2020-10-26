@@ -22,7 +22,18 @@
 		</div>
 		<!-- 储情分析的主要内容 -->
 		<div id="confess_content" v-show="a" style="background-color: #DADBDB;">
-			<img class="map" @click.prevent="tanchuangShow()" src="../../assets/img/industryAnalysis/原油生产地图.png" alt="图片未显示">
+			
+			<div class="clickbtn" :style="{'left':be_click_left(0.324),'top':be_click_top(0.728)}" @click="tanchuangShow(listData1,tableTh1)"></div>
+			<div class="clickbtn" :style="{'left':be_click_left(0.385),'top':be_click_top(0.779)}" @click="tanchuangShow(listData6,tableTh2)"></div>
+			<div class="clickbtn" :style="{'left':be_click_left(0.478),'top':be_click_top(0.662)}" @click="tanchuangShow(listData2,tableTh1)"></div>
+			<div class="clickbtn" :style="{'left':be_click_left(0.505),'top':be_click_top(0.615)}" @click="tanchuangShow(listData7,tableTh2)"></div>
+			<div class="clickbtn" :style="{'left':be_click_left(0.626),'top':be_click_top(0.535)}" @click="tanchuangShow(listData3,tableTh)"></div>
+			<div class="clickbtn" :style="{'left':be_click_left(0.680),'top':be_click_top(0.498)}" @click="tanchuangShow(listData8,tableTh2)"></div>
+			<div class="clickbtn" :style="{'left':be_click_left(0.773),'top':be_click_top(0.565)}" @click="tanchuangShow(listData4,tableTh1)"></div>
+			<div class="clickbtn" :style="{'left':be_click_left(0.693),'top':be_click_top(0.335)}" @click="tanchuangShow(listData5,tableTh1)"></div>
+			<div class="clickbtn" :style="{'left':be_click_left(0.715),'top':be_click_top(0.285)}" @click="tanchuangShow(listData9,tableTh2)"></div>
+
+			<img class="map"  src="../../assets/img/industryAnalysis/原油生产地图.png" alt="图片未显示">
 			<div class="chart">
 				<div class="tab_oil">
 					<span v-for="(item,index) in tablist_one" :key='index' @click="tabButton_one(index)" v-bind:class="[{tab_oil_two:index == selected_one},{tab_oil_one:true}]">{{item}}</span>
@@ -157,12 +168,20 @@
 			
 			
 			<div id="produce_refine" v-show="!d">
-				<div id="clickbtn1" class="clickbtn" :style="{'left':left1,'top':top1}"></div>
-				<div id="clickbtn2" class="clickbtn" :style="{'left':left2,'top':top2}"></div>
-				<div id="clickbtn3" class="clickbtn" :style="{'left':left3,'top':top3}"></div>
-				<div id="clickbtn4" class="clickbtn" :style="{'left':left4,'top':top4}"></div>
-				<div id="clickbtn5" class="clickbtn" :style="{'left':left5,'top':top5}"></div>
-				<img class="map" src="../../assets/img/industryAnalysis/炼化煤地图2.png" alt="图片未显示">
+				<div class="produce_tc" v-show="produce_tc">
+					<ul>
+						<li>{{page_c[0]}}</li>
+						<li>企业人数：<span>{{page_c[1]}}</span>人</li>
+						<li>上月粉煤加工量：<span>{{page_c[2]}}</span>万吨</li>
+						<li>上月天然气产量：<span>{{page_c[3]}}</span>万吨</li>
+					</ul>
+				</div>
+				<div class="clickbtn" :style="{'left':be_click_left(0.345),'top':be_click_top(0.778)}" @click="tanchuang(produce_tc,page_c2,1)"></div>
+				<div class="clickbtn" :style="{'left':be_click_left(0.375),'top':be_click_top(0.75)}" @click="tanchuang(produce_tc,page_c3,2)"></div>
+				<div class="clickbtn" :style="{'left':be_click_left(0.395),'top':be_click_top(0.778)}" @click="tanchuang(produce_tc,page_c4,3)"></div>
+				<div class="clickbtn" :style="{'left':be_click_left(0.473),'top':be_click_top(0.721)}" @click="tanchuang(produce_tc,page_c5,4)"></div>
+				<div class="clickbtn" :style="{'left':be_click_left(0.717),'top':be_click_top(0.566)}" @click="tanchuang(produce_tc,page_c1,5)"></div>
+				<img class="map" src="../../assets/img/industryAnalysis/炼化煤地图2.png" alt="图片未显示" @click.prevent="default_t">
 				<div class="chart">
 					<div class="tab_oil">
 						<span v-for="(item,index) in tablist_seven" :key='index' @click="tabButton_seven(index)" v-bind:class="[{tab_oil_four:index == selected_seven},{tab_oil_three:true}]">{{item}}</span>
@@ -227,23 +246,15 @@
 		name: 'FuncFormsBase',
 		data() {
 			return {
-				/*
-				此处定义动态位置的变量
-				*/
-				left1:'',
-				top1:'',
-				left2:'',
-				top2:'',
-				left3:'',
-				top3:'',
-				left4:'',
-				top4:'',
-				left5:'',
-				top5:'',
-				left6:'',
-				top6:'',
-				
-				
+				// 炼化煤页面弹窗
+				page_c: [],
+				page_c1: ['大唐煤制气',1200,100,1000],
+				page_c2: ['神华煤制油',1250,100,1000],
+				page_c3: ['新蒙能源煤制气',2000,100,1000],
+				page_c4: ['伊泰煤制油',1600,100,1000],
+				page_c5: ['成品油企业',1700,100,1000],
+				produce_tc: false,
+				xuan: 0,
 				
 				
 				screenWidth: document.body.clientWidth, // 屏幕宽
@@ -252,67 +263,295 @@
 				screenTop: '',
 				show: 0, //控制弹窗显示
 				closeLeft: 0, //关闭按钮居中
-				tableTh: ['名称','所属盟市','面积','经纬度','远景资源量','预测资源量','控制储量','探明储量'],
-				listData: [{
-						name: '乌里雅斯太油田',
-						leaguerea: '锡林郭勒盟',
-						area: '5.5万平方公里',
-						latitude: '43°23′10″~45°24′27″',
-						vision: '3256',
-						prediction: '1456',
-						control: '1300',
-						proved: '1200'
+				tableTh: [],
+				tableTh1: ['油田','面积','所属盟市','预测资源量','探明储量','剩余经济可采储量','剩余技术可采储量'],
+				tableTh2: ['气田','面积','所属盟市','预测资源量','探明储量','剩余经济可采储量','剩余技术可采储量'],
+				listData: [],
+				listData1: [{
+						"name": "吉祥油田",
+						"area": "5.5万平方公里",
+						"city": "巴彦淖尔市",
+						"prediction": "543.7万吨",
+						"proved": "350万吨",
+						"economic": "9万吨",
+						"technology": "21万吨"
 					},
 					{
-						name: '宝力格油田',
-						leaguerea: '锡林郭勒盟',
-						area: '4314.12平方公里',
-						latitude: '41°10′10″~43°24′10″',
-						vision: '2687',
-						prediction: '1856',
-						control: '1399',
-						proved: '780'
+						"name": "达尔其油田",
+						"area": "4314.12平方公里",
+						"city": "巴彦淖尔市",
+						"prediction": "300万吨",
+						"proved": "212万吨",
+						"economic": "5万吨",
+						"technology": "14万吨"
+					}],
+				listData2: [
+					{
+					    "name": "包尔油田",
+					    "area": "5万平方公里",
+					    "city": "乌兰察布市",
+					    "prediction": "624.9万吨",
+					    "proved": "450万吨",
+					    "economic": "11万吨",
+					    "technology": "27万吨"
 					},
 					{
-						name: '新苏木油田',
-						leaguerea: '锡林郭勒盟',
-						area: '5万平方公里',
-						latitude: '46°16′10″~46°24′15″',
-						vision: '3100',
-						prediction: '2756',
-						control: '2678',
-						proved: '2670'
+					    "name": "汗塞油田",
+					    "area": "432平方公里",
+					    "city": "乌兰察布市",
+					    "prediction": "500万吨",
+					    "proved": "300万吨",
+					    "economic": "7万吨",
+					    "technology": "20万吨"
+					}
+				],
+				listData3: [
+					{
+					        "name": "乌利雅斯太油田",
+					        "area": "234万平方公里",
+					        "city": "锡林郭勒盟",
+					        "prediction": "2049万吨",
+					        "proved": "1500万吨",
+					        "economic": "45万吨",
+					        "technology": "130万吨"
+					    },
+					    {
+					        "name": "宝力格油田",
+					        "area": "5.5万平方公里",
+					        "city": "锡林郭勒盟",
+					        "prediction": "1900万吨",
+					        "proved": "1300万吨",
+					        "economic": "40万吨",
+					        "technology": "80万吨"
+					    },
+					    {
+					        "name": "新苏木油田",
+					        "area": "357平方公里",
+					        "city": "锡林郭勒盟",
+					        "prediction": "1870万吨",
+					        "proved": "1200万吨",
+					        "economic": "35万吨",
+					        "technology": "75万吨"
+					    },
+					    {
+					        "name": "哈达图油田",
+					        "area": "1.3万平方公里",
+					        "city": "锡林郭勒盟",
+					        "prediction": "1840万吨",
+					        "proved": "1200万吨",
+					        "economic": "25万吨",
+					        "technology": "70万吨"
+					    },
+					    {
+					        "name": "锡林油田",
+					        "area": "452平方公里",
+					        "city": "锡林郭勒盟",
+					        "prediction": "1810万吨",
+					        "proved": "1100万吨",
+					        "economic": "20万吨",
+					        "technology": "65万吨"
+					    },
+					    {
+					        "name": "乌兰诺尔油田",
+					        "area": "612平方公里",
+					        "city": "锡林郭勒盟",
+					        "prediction": "1780万吨",
+					        "proved": "1100万吨",
+					        "economic": "15万吨",
+					        "technology": "60万吨"
+					    },
+					],
+				listData4: [
+					{
+					    "name": "科尔沁油田",
+					    "area": "3.5万平方公里",
+					    "city": "通辽市",
+					    "prediction": "600万吨",
+					    "proved": "420万吨",
+					    "economic": "13万吨",
+					    "technology": "28万吨"
 					},
 					{
-						name: '哈达图油田',
-						leaguerea: '锡林郭勒盟',
-						area: '432平方公里',
-						latitude: '43°17′10″~45°24′15″',
-						vision: '2890',
-						prediction: '1956',
-						control: '1780',
-						proved: '870'
+					    "name": "交力格油田",
+					    "area": "357平方公里",
+					    "city": "通辽市",
+					    "prediction": "550万吨",
+					    "proved": "380万吨",
+					    "economic": "8万吨",
+					    "technology": "26万吨"
 					},
 					{
-						name: '锡林油田',
-						leaguerea: '锡林郭勒盟',
-						area: '234平方公里',
-						latitude: '44°17′10″~40°24′15″',
-						vision: '3200',
-						prediction: '2056',
-						control: '1890',
-						proved: '960'
+					    "name": "广发油田",
+					    "area": "2.5万平方公里",
+					    "city": "通辽市",
+					    "prediction": "537万吨",
+					    "proved": "325万吨",
+					    "economic": "7万吨",
+					    "technology": "17万吨"
 					},
 					{
-						name: '乌兰诺尔油田',
-						leaguerea: '锡林郭勒盟',
-						area: '5.5万平方公里',
-						latitude: '47°18′10″~46°24′15″',
-						vision: '3199',
-						prediction: '2099',
-						control: '2000',
-						proved: '677'
+					    "name": "龙筒湾油田",
+					    "area": "452平方公里",
+					    "city": "通辽市",
+					    "prediction": "362.4万吨",
+					    "proved": "275万吨",
+					    "economic": "6万吨",
+					    "technology": "12万吨"
 					},
+					{
+					    "name": "科尔康油田",
+					    "area": "612平方公里",
+					    "city": "通辽市",
+					    "prediction": "2000万吨",
+					    "proved": "100万吨",
+					    "economic": "3万吨",
+					    "technology": "12万吨"
+					}
+				],
+				listData5: [
+					{
+					       "name": "苏仁诺尔油田",
+					       "area": "4.3万平方公里",
+					       "city": "呼伦贝尔市",
+					       "prediction": "2531万吨",
+					       "proved": "2000万吨",
+					       "economic": "50万吨",
+					       "technology": "106万吨"
+					   },
+					   {
+					       "name": "巴彦塔拉油田",
+					       "area": "657平方公里",
+					       "city": "呼伦贝尔市",
+					       "prediction": "2531万吨",
+					       "proved": "1800万吨",
+					       "economic": "45万吨",
+					       "technology": "106万吨"
+					   },
+					   {
+					       "name": "苏德尔特油田",
+					       "area": "2.1万平方公里",
+					       "city": "呼伦贝尔市",
+					       "prediction": "2531万吨",
+					       "proved": "1600万吨",
+					       "economic": "40万吨",
+					       "technology": "106万吨"
+					   },
+					   {
+					       "name": "呼和诺仁油田",
+					       "area": "752平方公里",
+					       "city": "呼伦贝尔市",
+					       "prediction": "2531万吨",
+					       "proved": "1537万吨",
+					       "economic": "37万吨",
+					       "technology": "106万吨"
+					   },
+					   {
+					       "name": "贝尔油田",
+					       "area": "412平方公里",
+					       "city": "呼伦贝尔市",
+					       "prediction": "2531万吨",
+					       "proved": "1500万吨",
+					       "economic": "35万吨",
+					       "technology": "106万吨"
+					   }
+				],
+				listData6: [
+					{
+					    "name": "胜利井气田",
+					    "area": "3341平方公里",
+					    "city": "鄂尔多斯市",
+					    "prediction": "5950万立方米",
+					    "proved": "3332万立方米",
+					    "economic": "1571万立方米",
+					     "technology": "952万立方米"
+					},
+					{
+					     "name": "苏里格气田",
+					      "area": "1.1万平方公里",
+					        "city": "鄂尔多斯市",
+					        "prediction": "4250万立方米",
+					        "proved": "2380万立方米",
+					        "economic": "1122万立方米",
+					        "technology": "680万立方米"
+					},
+					{
+					        "name": "靖边气田",
+					        "area": "2124.26平方公里",
+					        "city": "鄂尔多斯市",
+					        "prediction": "4250万立方米",
+					        "proved": "2380万立方米",
+					        "economic": "1122万立方米",
+					        "technology": "680万立方米"
+					    },
+					    {
+					        "name": "乌审旗气田",
+					        "area": "4362平方公里",
+					        "city": "鄂尔多斯市",
+					        "prediction": "4250万立方米",
+					        "proved": "2380万立方米",
+					        "economic": "1122万立方米",
+					        "technology": "680万立方米"
+					    },
+					    {
+					        "name": "大牛地气田",
+					        "area": "2134平方公里",
+					        "city": "鄂尔多斯市",
+					        "prediction": "2550万立方米",
+					        "proved": "1428万立方米",
+					        "economic": "673万立方米",
+					        "technology": "408万立方米"
+					    },
+				],
+				listData7: [
+					{
+						"name": "包尔气田",
+						"area": "1.5万平方公里",
+						"city": "乌兰察布市",
+						"prediction": "1000万立方米",
+						"proved": "560万立方米",
+						"economic": "264万立方米",
+						"technology": "160万立方米"
+					},
+				],
+				listData8: [
+					{
+						"name": "哈达图气田",
+						"area": "357平方公里",
+						"city": "锡林郭勒盟",
+						"prediction": "750万立方米",
+						"proved": "500万立方米",
+						"economic": "230万立方米",
+						"technology": "110万立方米"
+					},
+					{
+						"name": "宝力格气田",
+						"area": "2.2万平方公里",
+						"city": "锡林郭勒盟",
+						"prediction": "500万立方米",
+						"proved": "200万立方米",
+						"economic": "100万立方米",
+						"technology": "90万立方米"
+					},
+				],
+				listData9: [
+					{
+						"name": "贝尔气田",
+						"area": "657平方公里",
+						"city": "呼伦贝尔市",
+						"prediction": "980万立方米",
+						"proved": "510万立方米",
+						"economic": "213万立方米",
+						"technology": "122万立方米"
+					},
+					{
+						"name": "苏仁诺尔气田",
+						"area": "747平方公里",
+						"city": "呼伦贝尔市",
+						"prediction": "520万立方米",
+						"proved": "330万立方米",
+						"economic": "183万立方米",
+						"technology": "118万立方米"
+					}
 				],
 				tablist: ['储情分析','生产分析'],
 				tablist_one: ['原油剩余技术储量', '原油剩余经济储量'],
@@ -587,16 +826,21 @@
 		},
 		methods: {
 			// 用于点击的div块绑定函数
-			onclick(){
-				document.getElementById(name)
+			be_click_left(a){
+				return this.screenWidth * a + 'px'
 			},
-			
+			be_click_top(a){
+				return 314.5 * a + 'px'
+			},
+
 			
 			
 			
 			//取消图片默认样式
-			tanchuangShow() {
+			tanchuangShow(a,b) {
 				this.show = 1
+				this.listData = a
+				this.tableTh = b
 				this.$nextTick(function() {
 					this.closeLeft = (this.screenWidth - 35) / 2 + 'px'
 				})
@@ -1239,6 +1483,7 @@
 			//原油和炼化煤页面切换
 			tabButton_produce(id) {
 				if(id){
+					//
 					this.btn_shenchan_num = 1
 					this.imgUrl = this.imgUrlArry[0]
 					this.imgUrl2 = this.imgUrlArry[3]
@@ -1352,8 +1597,25 @@
 			      }
 			    },
 
-
-
+			// 炼化煤弹窗
+			tanchuang(a,arry,b){
+				if(a){
+					this.page_c = arry;
+					if(this.xuan == b){
+						this.xuan = b
+						this.produce_tc=!a
+					}
+					this.xuan = b
+				}else{
+					this.produce_tc=!a
+					this.xuan = b
+					this.page_c = arry;
+					}
+				},
+			//取消图片点击默认事件
+			default_t(){
+				console.log("点我干什么")
+			}
 
 
 
@@ -1373,6 +1635,35 @@
 		z-index: 3;
 		display: none;
 	}
+	
+	/* 炼化煤弹窗样式 */
+	.produce_tc{
+		width: 180px;
+		height: 100px;
+		background-color: rgba(37,54,104,0.6);
+		left: 190px;
+		top: 60px;
+		position: absolute;
+		padding-top: 8px;
+	}
+	.produce_tc ul li{
+		font-size: 10px;
+		color: #C9D6FD;
+		padding: 6px;
+		height: 18px;
+	}
+	.produce_tc ul :first-child{
+		font-weight: bold;
+		font-size: 15px;
+		padding: 4px;
+		color: white;
+	}
+	.produce_tc ul span{
+		font-size: 13px;
+		padding: 4px;
+		height: 18px;
+	}
+	/* 结束 */
 
 	.tanchuang_one {
 		position: absolute;
@@ -1410,7 +1701,9 @@
 		top: 255px;
 	}
 	.clickbtn{
-		background-color: #000000;
+		width: 13px;
+		height: 13px;
+		/* background-color: #000000; */
 		position: absolute;
 	}
 	
@@ -1421,7 +1714,7 @@
 		background-color: rgba(0, 0, 0, 0.15);
 		position: fixed;
 		top: 100px;
-		z-index: 2;
+		z-index: 4;
 		border-radius: 5px;
 	}
 

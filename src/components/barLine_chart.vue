@@ -1,15 +1,11 @@
 <template>
-  <div style="width: 100%; height: 100%" :id="id"></div>
+  <div ref="chart" style="width: 100%; height: 100%"></div>
 </template>
 <script>
 import echarts from "echarts";
 export default {
   name: "barLineEchart",
   props: {
-    id: {
-      type: String,
-      default: "chart",
-    },
     optionObj: {
       type: Object,
       default: () => {},
@@ -40,17 +36,12 @@ export default {
       chartBar: null,
     };
   },
-  created: function () {
+  mounted: function () {
     this.$nextTick(function () {
       this.getBarOption();
     });
   },
   watch: {
-    id() {
-      this.$nextTick(function () {
-        this.getBarOption();
-      });
-    },
     optionObj: {
       handler: function (newVal, oldVal) {
         if (newVal) {
@@ -63,13 +54,13 @@ export default {
   methods: {
     getBarOption() {
       this.chartBar = null;
-      this.chartBar = echarts.init(document.getElementById(this.id));
+      // this.chartBar = echarts.init(document.getElementById(this.id));
+      this.chartBar = echarts.init(this.$refs.chart);
       let option = {
         tooltip: {
           trigger: "axis",
           // formatter: "{a} <br/>{b}: {c} ({d}%)",
           formatter: function (params) {
-            console.log(params)
             var str = "";
             for (var i = 0; i < params.length; i++) {
               if (params[i].seriesName === "天然气月产量") {

@@ -1,16 +1,11 @@
 <template>
-  <div :id="elId" ref="charts" style="width: 100%; height: 100%"></div>
+  <div ref="chart" style="width: 100%; height: 100%"></div>
 </template>
 <script>
 import echarts from "echarts";
-import uuidv1 from 'uuid/v1' 
 export default {
   name: "barLineEchart",
   props: {
-    id: {
-      type: String,
-      default: "chart",
-    },
     optionObj: {
       type: Object,
       default: () => {},
@@ -27,24 +22,14 @@ export default {
   data() {
     return {
       chartBar: null,
-      elId: ""
     };
-  },
-  created() {
-    this.elId = uuidv1()
   },
   mounted: function () {
     this.$nextTick(function () {
       this.getBarOption();
     });
-    window.addEventListener('resize', this.getBarOption)
   },
   watch: {
-    id() {
-      this.$nextTick(function () {
-        this.getBarOption();
-      });
-    },
     optionObj: {
       handler: function (newVal, oldVal) {
         if (newVal) {
@@ -57,8 +42,8 @@ export default {
   methods: {
     getBarOption() {
       this.chartBar = null;
-      // this.chartBar = echarts.init(document.getElementById(this.elId));
-      this.chartBar = echarts.init(this.$refs.charts);
+      // this.chartBar = echarts.init(document.getElementById(this.id));
+      this.chartBar = echarts.init(this.$refs.chart);
       let option = {
         tooltip: {
           trigger: "item",
@@ -170,9 +155,6 @@ export default {
       this.chartBar.clear();
       this.chartBar.setOption(option);
     },
-  },
-  beforeDestroy () {
-    window.removeEventListener('resize', this.getBarOption)
   },
 };
 </script>

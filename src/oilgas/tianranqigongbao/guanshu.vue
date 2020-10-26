@@ -6,11 +6,15 @@
       <img class="map"
         src="../../assets/img/gasmap/yafei_map.png"
         alt="图片未显示"/>
-      <!-- <div class="banner">
-        <h4>***盟市</h4>
-        <p>昨日天然气消费量：100</p>
-        <p>累计天然气消费量：1000</p>
-      </div> -->
+      <div class="banner">
+        <h4>陕西四线输气管道</h4>
+        <div class="main-items">
+          <div class="item" v-for="(item, index) in bannerData" :key="index">
+            <p class="label">{{item.label}}</p>
+            <p>{{item.value}}</p>
+          </div>
+        </div>
+      </div>
       <!-- 日调峰记录查询 && 调峰结构分析 -->
       <div class="chart table">
         <div id="table">
@@ -38,25 +42,27 @@
             ]">{{ item }}</span>
         </div>
         <div class="chart-item" :key="timer" v-if="selected_one === 0">
-          <dount-chart :id="echartsQTGQ" :optionObj="optionObjLineQTGQ"></dount-chart>
+          <div class="fontSize_div">
+            <div class="fontSize">3000</div>
+            <div class="fontSize">万方</div>
+          </div>
+          <dount-chart class="echarts" :optionObj="optionObjLineQTGQ"></dount-chart>
         </div>
         <div class="chart-item" :key="timer" id="table" v-if="selected_one === 1">
-          <table class="table_one">
-            <tr>
-              <th :width="th.width" v-for="(th,index) in tableTh_two" :key="index">{{th.value}}</th>
-            </tr>
-            <tr v-for="(tr,index) in listData_two" :key="index">
-              <td>{{index+1}}</td>
-              <td v-for="(td,index) in tr" :key="index">{{td}}</td>
-            </tr>
-          </table>
+          <pie-chart :optionObj="optionObjGQQY"></pie-chart>
         </div>
       </div>
 
       <!-- 月调峰同比分析 -->
       <div class="chart module">
         <h4>接收端主要行业占比</h4>
-        <dount-chart :id="echartsJSD" :optionObj="optionObjJSD"></dount-chart>
+        <div class="chart-item">
+          <div class="fontSize_div">
+            <div class="fontSize">3000</div>
+            <div class="fontSize">万方</div>
+          </div>
+          <pie-chart class="echarts" :optionObj="optionObjJSD"></pie-chart>
+        </div>
       </div>
     </div>
   </div>
@@ -67,15 +73,30 @@ export default {
   name: "qixiao",
   components: {
     dountChart: () => import("@/components/dount_chart"),
-    barlineChart: () => import("@/components/barLine_chart"),
+    pieChart: () => import("@/components/pie_chart"),
     doublelineChart: () => import("@/components/doubleLine_chart"),
   },
   data() {
     return {
+      bannerData: [
+        {
+          label: "总里程(公里)",
+          value: 1114
+        },
+        {
+          label: "区内里程(公里)",
+          value: 27
+        },
+        {
+          label: "输送能力",
+          value: "250亿m³"
+        },
+        {
+          label: "起止年限",
+          value: "2016-2017"
+        },
+      ],
       timer: "",
-      echartsQTGQ: "echartsQTGQ",
-      echartsJSD: "echartsJSD",
-      // echartsQKYC: "echartsQKYC",
       selected_one: 0,
       tablist_one: ["送气端主要气田供气占比", "送气端主要企业供气占比"],
       tableTh_one: [
@@ -206,15 +227,23 @@ export default {
         legendData: ["化肥", "甲醇", "城市燃气"],
         seriesName: "接收端主要行业占比",
         seriesData: [
-          { value: 335, name: "化肥", selected: true },
+          { value: 335, name: "化肥" },
           { value: 310, name: "甲醇" },
           { value: 234, name: "城市燃气" },
+        ],
+      },
+      optionObjGQQY: {
+        legendData: ["中石油", "中石化"],
+        seriesName: "送气端主要企业供气占比",
+        seriesData: [
+          { value: 77, name: "中石油" },
+          { value: 23, name: "中石化" },
         ],
       },
     };
   },
   mounted() {
-    
+    this.timer = new Date().getTime()
   },
   methods: {
     tabButton_one(index) {
@@ -238,6 +267,45 @@ export default {
     height: 314.5px;
     background-color: #dadbdb;
     overflow: hidden;
+  }
+  .banner {
+    width: 240px;
+    height: 150px;
+    background: url("../../assets/img/gasmap/module_bg.png") no-repeat;
+    position: absolute;
+    top: 110px;
+    left: 15px;
+    background-size: cover;
+    h4 {
+      color: #fff;
+      font: bolder 12px MicrosoftYaHei;
+      padding-top: 10px;
+      text-align: center;
+    }
+    .main-items {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 5px 15px;
+      .item {
+        width: calc(50% - 10px);
+        padding: 5px;
+        margin: 5px;
+        background: #6a7181;
+        opacity: .7;
+        p {
+          color: #fff;
+          line-height: 1.2em;
+          font-size: 11;
+          text-align: center;
+          font-weight: bold;
+          &.label {
+            color: #8fc8fa;
+            font-size: 9px;
+          }
+        }
+      }
+    }
   }
   .chart {
     width: 100%;
@@ -331,7 +399,7 @@ export default {
 }
 .fontSize {
   position: relative;
-  top: 85px;
+  top: 75px;
   font: 16px bolder microsoft-yahei;
 }
 
@@ -339,9 +407,9 @@ export default {
   // width: 100%;
   // height: 100%;
   // margin: 20px auto;
-  background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+  background-image: url("../../assets/img/industryAnalysis/椭圆.png");
   background-repeat: no-repeat;
-  background-position: 50% 38%;
+  background-position: 50% 37%;
   background-size: 65px 65px;
 }
 </style>

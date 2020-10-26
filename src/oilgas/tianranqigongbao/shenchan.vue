@@ -1,6 +1,4 @@
 <template>
-	<div class="map"></div>
-</template>
     <div class="child1" style="background-color: #E6E8EC;">
         <div :class="[{tanchuang:true},{tanchuang_one: show}]">
             <div style="width: 100%;height: 100%;overflow: auto;margin: 50px auto">
@@ -71,10 +69,8 @@
         </div>
     </div>
 </template>
-
-
-
 <script>
+
     export default {
         name: 'child1',
         data() {
@@ -812,4 +808,5 @@
         }
 
     }
+
 </style>

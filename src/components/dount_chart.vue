@@ -148,6 +148,10 @@ export default {
                       c1: "#4310FF",
                       c2: "#7FA6FF",
                     },
+                    {
+                      c1: "#15E9EC",
+                      c2: "#15E9EC",
+                    },
                   ];
                   return new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                     {

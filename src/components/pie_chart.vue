@@ -124,16 +124,16 @@ export default {
                 color: function (params) {
                   var colorList = [
                     {
-                      c1: " #01A6FF", 
-                      c2: "#01A6FF",
-                    },
-                    {
                       c1: " #FFD350",
                       c2: "#FFD350",
                     },
                     {
                       c1: "#15E9EC",
                       c2: "#15E9EC",
+                    },
+                    {
+                      c1: " #01A6FF", 
+                      c2: "#01A6FF",
                     },
                   ];
                   return new echarts.graphic.LinearGradient(0, 0, 0, 1, [

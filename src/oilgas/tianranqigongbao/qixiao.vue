@@ -1,8 +1,359 @@
 <template>
+  <div>
+    <div id="confess_content" style="background-color: #dadbdb">
+
+      <!-- banner -->
+      <img class="map"
+        src="../../assets/img/gasmap/yafei_map.png"
+        alt="图片未显示"/>
+
+      <!-- 月产量分析 && 管线明细 -->
+      <div class="chart">
+        <div class="tab_oil">
+          <span v-for="(item, index) in tablist_one"
+            :key="index"
+            @click="tabButton_one(index)"
+            v-bind:class="[
+              { tab_oil_two: index == selected_one },
+              { tab_oil_one: true },
+            ]">{{ item }}</span>
+        </div>
+        <div class="chart-item" v-if="selected_one === 0">
+          <div class="fontSize_div">
+            <div class="fontSize">28453</div>
+            <div class="fontSize">吨</div>
+          </div>
+          <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
+        </div>
+        <div class="chart-item" id="table" v-if="selected_one === 1">
+          <table class="table_one" style="width: 800px">
+            <tr>
+              <th :width="th.width" v-for="(th,index) in tableTh_one" :key="index">{{th.value}}</th>
+            </tr>
+            <tr v-for="(tr,index) in listData_one" :key="index">
+              <td>{{index+1}}</td>
+              <td v-for="(td,index) in tr" :key="index">{{td}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- 月调峰同比分析 -->
+      <!-- <div class="chart module">
+        <h4>月调峰同比分析</h4>
+        <barline-chart :optionObj="optionObjYTF"></barline-chart>
+      </div> -->
+
+      <!-- 盟市日供应分析 && 消费结构分析 -->
+      <div class="chart">
+        <div class="tab_oil">
+          <span v-for="(item, index) in tablist_two"
+            :key="index"
+            @click="tabButton_two(index)"
+            v-bind:class="[
+              { tab_oil_two: index == selected_two },
+              { tab_oil_one: true },
+            ]">{{ item }}</span>
+        </div>
+        <div class="chart-item" v-if="selected_two === 0">
+          <barlChart :optionObj="optionObjRJGFX"></barlChart>
+        </div>
+        <div class="chart-item" v-if="selected_two === 1">
+          <dount-chart class="echarts" :optionObj="optionObjXFJGFX"></dount-chart>
+        </div>
+      </div>
+
+      <!-- 盟市地方3天储气能力 && 盟市城燃5%储气能力 -->
+      <div class="chart">
+        <div class="tab_oil">
+          <span v-for="(item, index) in tablist_three"
+            :key="index"
+            @click="tabButton_three(index)"
+            v-bind:class="[
+              { tab_oil_two: index == selected_three },
+              { tab_oil_one: true },
+            ]">{{ item }}</span>
+        </div>
+        <div class="chart-item" v-if="selected_three === 0">
+          <!-- <div class="fontSize_div">
+            <div class="fontSize">28453</div>
+            <div class="fontSize">吨</div>
+          </div> -->
+          <pie-chart :optionObj="optionObjMS3T"></pie-chart>
+        </div>
+        <div class="chart-item" v-if="selected_three === 1">
+          <!-- <div class="fontSize_div">
+            <div class="fontSize">28453</div>
+            <div class="fontSize">吨</div>
+          </div> -->
+          <pie-chart :optionObj="optionObjMS5"></pie-chart>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+export default {
+  name: "qixiao",
+  components: {
+    dountChart: () => import("@/components/dount_chart"),
+    barlineChart: () => import("@/components/barLine_chart"),
+    doublelineChart: () => import("@/components/doubleLine_chart"),
+    pieChart: () => import("@/components/pie_chart"),
+    barlChart: () => import("@/components/bar_line_chart"),
+  },
+  data() {
+    return {
+      selected_one: 0,
+      selected_two: 0,
+      selected_three: 0,
+      tablist_one: ["月产量分析", "管线明细"],
+      tablist_two: ["盟市日供应分析", "消费结构分析"],
+      tablist_three: ["盟市地方3天储气能力", "盟市城燃5%储气能力"],
+      tableTh_one: [
+        {
+          value: "序号",
+          width: 60,
+        },
+        {
+          value: "管道名称",
+          width: 300,
+        },
+        {
+          value: "日进气量",
+          width: 150,
+        },
+        {
+          value: "日出气量",
+          width: 150,
+        },
+        {
+          value: "管存量",
+          width: 120,
+        },
+      ],
+      listData_one: [
+        {
+          guanxian: "长庆气田·乌海·临河输气管道",
+          jinqi: "790",
+          chuqi: "790",
+          cunliang: "1600"
+        },
+        {
+          guanxian: "苏·东·准输气管",
+          jinqi: "1500",
+          chuqi: "1500",
+          cunliang: "1200"
+        },
+        {
+          guanxian: "长庆气田·呼和浩特天然气输气管道",
+          jinqi: "50",
+          chuqi: "50",
+          cunliang: "150"
+        },
+        {
+          guanxian: "长庆气田·呼和浩特天然气输气管道复线",
+          jinqi: "50",
+          chuqi: "50",
+          cunliang: "400"
+        },
+      ],
+      optionObjTFJGFX: {
+        legendData: ["苏里格气田", "大牛地气田", "靖边气田", "胜利井气田", "乌审旗气田"],
+        seriesName: "月产量分析",
+        seriesData: [
+          { value: 335, name: "苏里格气田" },
+          { value: 310, name: "大牛地气田" },
+          { value: 234, name: "靖边气田" },
+          { value: 135, name: "胜利井气田" },
+          { value: 738, name: "乌审旗气田" },
+        ],
+      },
+      optionObjXFJGFX: {
+        legendData: ["居民用气", "民生用气", "商业", "甲醛化肥企业", "可中断企业", "不可中断企业", "LNG企业用户"],
+        seriesName: "消费结构分析",
+        seriesData: [
+          { value: 335, name: "居民用气" },
+          { value: 310, name: "民生用气" },
+          { value: 234, name: "商业" },
+          { value: 135, name: "甲醛化肥企业" },
+          { value: 738, name: "可中断企业" },
+          { value: 738, name: "不可中断企业" },
+          { value: 738, name: "LNG企业用户" },
+        ],
+      },
+      optionObjRJGFX: {
+        legendData: ["日供气量(亿)", "基准值"],
+        yLeftName: "",
+        yRightName: "",
+        xData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
+        seriesLeftData: [0.05, 0.05, 0.07, 0.03, 0.04, 0.05],
+        barWidth: 10,
+        lineWidth: 2,
+        symbolSize: 0,
+        warnData: 0.06
+      },
+      optionObjYTF: {
+        legendData: ["天然气月产量", "同比变化"],
+        yLeftName: "亿立方米",
+        yRightName: "%",
+        xData: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+        seriesLeftData: [6, 13, 18, 13, 13, 18, 13, 9, 13, 18, 13, 9],
+        seriesRightData: [-0.5, 1, 2, 0.9, 0.9, 1.9, 0.9, 0.85, 1, 2.2, 1.4, 0.3],
+        barWidth: 10,
+        lineWidth: 2,
+        symbolSize: 8,
+        leftMin: 0,
+        leftMax: 25,
+        leftInterval: 5,
+        rightMin: -2,
+        rightMax: 3,
+        rightInterval: 1
+      },
+      optionObjMS3T: {
+        legendData: ["鄂尔多斯", "包头"],
+        seriesName: "盟市地方3天储气能力",
+        seriesData: [
+          { value: 34, name: "鄂尔多斯" },
+          { value: 66, name: "包头" },
+        ],
+      },
+      optionObjMS5: {
+        legendData: ["鄂尔多斯", "包头"],
+        seriesName: "盟市地方3天储气能力",
+        seriesData: [
+          { value: 70, name: "鄂尔多斯" },
+          { value: 30, name: "包头" },
+        ],
+      },
+    };
+  },
+  mounted() {
+    
+  },
+  methods: {
+    tabButton_one(index) {
+      this.selected_one = index;
+    },
+    tabButton_two(index) {
+      this.selected_two = index;
+    },
+    tabButton_three(index) {
+      this.selected_three = index;
+    },
+  },
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
+#confess_content {
+  width: 100%;
+  /* 关于地图内容的调整期 */
+  .map {
+    width: 100%;
+    height: 314.5px;
+    background-color: #dadbdb;
+    overflow: hidden;
+  }
+  .chart {
+    width: 100%;
+    height: 289px;
+    background-color: white;
+    padding: 10px 0;
+    position: relative;
+    .chart-item {
+      height: calc(100% - 25px);
+      // width: 100%;
+    }
+    &.module {
+      margin: 10px 0;
+      padding: 0 15px 15px;
+    }
+    h4 {
+      font: 500 13px 微软雅黑;
+      color: #394564;
+      line-height: 3em;
+    }
+  }
+  /* 按钮样式调整 */
+  .tab_oil {
+    width: 345px;
+    height: 31px;
+    background-color: white;
+    margin: 0px auto;
+    border: 1px solid #3a6dda;
+    border-radius: 5px;
+    .tab_oil_one {
+      width: 50%;
+      height: 29px;
+      font: 12px PingFangSC-Regular;
+      color: #3a6dda;
+      line-height: 29px;
+      float: left;
+      position: relative;
+      top: 0;
+      left: 0;
+      text-align: center;
+    }
+    .tab_oil_two {
+      width: 50%;
+      height: 29px;
+      background-color: #3a6dda;
+      font: 12px PingFangSC-Regular;
+      color: white;
+      line-height: 29px;
+      float: left;
+      position: relative;
+      top: 0;
+      left: 0;
+      text-align: center;
+      border-radius: 4px;
+    }
+  }
+}
+/* 表格 */
+#table {
+  width: calc(100% - 30px);
+  margin: 0 15px;
+  overflow-x: auto;
+  .table_one {
+    font-family: PingFang SC;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    th, td {
+      font-size: 14px;
+      border: 1px solid #b9bec9;
+      padding: 3px 7px 2px 7px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #d8dbde;
+    }
+  }
+}
+/* 文字块 */
+.fontSize_div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.fontSize {
+  position: relative;
+  top: 75px;
+  font: 16px bolder microsoft-yahei;
+}
+
+.echarts {
+  // width: 100%;
+  // height: 100%;
+  // margin: 20px auto;
+  background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+  background-repeat: no-repeat;
+  background-position: 50% 37%;
+  background-size: 65px 65px;
+}
 </style>

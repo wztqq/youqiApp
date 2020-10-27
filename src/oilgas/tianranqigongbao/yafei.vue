@@ -260,7 +260,7 @@ export default {
   /* 关于地图内容的调整期 */
   .map {
     width: 100%;
-    height: 314.5px;
+    margin-top: 93px;
     background-color: #dadbdb;
     overflow: hidden;
   }

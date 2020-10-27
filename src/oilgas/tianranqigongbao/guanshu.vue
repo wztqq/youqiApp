@@ -264,7 +264,7 @@ export default {
   /* 关于地图内容的调整期 */
   .map {
     width: 100%;
-    height: 314.5px;
+    margin-top: 93px;
     background-color: #dadbdb;
     overflow: hidden;
   }
@@ -273,7 +273,7 @@ export default {
     height: 150px;
     background: url("../../assets/img/gasmap/module_bg.png") no-repeat;
     position: absolute;
-    top: 110px;
+    top: 150px;
     left: 15px;
     background-size: cover;
     h4 {

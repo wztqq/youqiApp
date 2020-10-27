@@ -296,7 +296,7 @@
 <style scoped lang="scss">
 	.child3 {
 		.map {
-			height: auto;
+			margin-top: 93px;
 			width: 100%;
 		}
 
@@ -383,7 +383,7 @@
 		.fontSize_div {
 			position: absolute;
 			width: 100%;
-			height: 100%;
+			// height: 100%;
 			text-align: center;
 		}
 
@@ -451,7 +451,7 @@
 			position: absolute;
 			background-image: url(../../assets/img/oilgas/chuqimodal.png);
 			border-radius: 3px;
-			top: 111px;
+			top: 150px;
 			left: 180px;
 			color: #fff;
 			height: 200px;

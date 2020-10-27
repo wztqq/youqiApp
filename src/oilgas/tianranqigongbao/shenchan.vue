@@ -64,7 +64,7 @@
                 天然气月产量预测分析
             </div>
             <div class="content">
-                <div id="line" style="width: 100%;height: 167px"></div>
+                <div id="line" style="width: 100%;height: 240px"></div>
             </div>
         </div>
     </div>
@@ -649,6 +649,7 @@
     .child1 {
 
         .map {
+            margin-top: 93px;
             /*height: 309px;*/
             width: 100%;
             /* background-size: cover;
@@ -736,7 +737,7 @@
         .fontSize_div {
             position: absolute;
             width: 100%;
-            height: 100%;
+            // height: 100%;
             text-align: center;
         }
 

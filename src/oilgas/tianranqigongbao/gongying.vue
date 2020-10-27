@@ -51,8 +51,8 @@
                 </el-tabs>
             </div>
             <div class="content">
-                <div id="supplyBarTwo" style="width: 100%;height: 180px" v-show="activeNameBar==='1'"></div>
-                <div id="supplyLineThree" style="width: 100%;height: 180px" v-show="activeNameBar==='2'"></div>
+                <div id="supplyBarTwo" style="width: 100%;height: 240px" v-show="activeNameBar==='1'"></div>
+                <div id="supplyLineThree" style="width: 100%;height: 240px" v-show="activeNameBar==='2'"></div>
             </div>
         </div>
     </div>
@@ -648,7 +648,7 @@
         /* 关于地图内容的调整期 */
         .map {
             width: 100%;
-            height: 314.5px;
+            margin-top: 93px;
             background-color: #dadbdb;
             overflow: hidden;
         }
@@ -657,7 +657,7 @@
             height: 80px;
             background: url("../../assets/img/gasmap/sale_banner.png");
             position: absolute;
-            top: 120px;
+            top: 150px;
             left: 15px;
             // z-index: 1;
             h4 {
@@ -761,7 +761,7 @@
         .fontSize_div {
             position: absolute;
             width: 100%;
-            height: 100%;
+            // height: 100%;
             text-align: center;
         }
 

@@ -219,7 +219,7 @@ export default {
   /* 关于地图内容的调整期 */
   .map {
     width: 100%;
-    height: 314.5px;
+    margin-top: 93px;
     background-color: #dadbdb;
     overflow: hidden;
   }
@@ -228,7 +228,7 @@ export default {
     height: 80px;
     background: url("../../assets/img/gasmap/sale_banner.png");
     position: absolute;
-    top: 110px;
+    top: 150px;
     left: 15px;
     // z-index: 1;
     h4 {

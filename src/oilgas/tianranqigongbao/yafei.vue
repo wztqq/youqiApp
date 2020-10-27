@@ -346,7 +346,7 @@ export default {
 .fontSize_div {
   position: absolute;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   text-align: center;
 }
 .fontSize {

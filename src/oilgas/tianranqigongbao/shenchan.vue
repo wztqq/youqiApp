@@ -762,6 +762,7 @@
             background-color: #4c4c4c;
             z-index: 5;
             display: none;
+           top: 93px;
         }
 
         .tanchuang_one {
@@ -771,6 +772,7 @@
             background-color: #4c4c4c;
             z-index: 5;
             display: block;
+            top: 93px;
         }
 
         .table_one_t {

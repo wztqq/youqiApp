@@ -1,28 +1,28 @@
 <template>
     <div class="scgl scgl-tab">
-        <van-tabs v-model="activeName" class="sec-nav" type="border-card">
-            <van-tab title="生产管理" name="first" :key="'first'">
-                <child1></child1>
-            </van-tab>
-            <van-tab title="供应管理" name="second" :key="'second'">
-                <child2></child2>
-            </van-tab>
-            <van-tab title="储气管理" name="third" :key="'third'">
-                <child3></child3>
-            </van-tab>
-            <van-tab title="管输管理" name="fourth" :key="'fourth'">
-                <child4></child4>
-            </van-tab>
-            <van-tab title="销售管理" name="fifth" :key="'fifth'">
-                <child5></child5>
-            </van-tab>
-            <van-tab title="压非保民" name="sixth" :key="'sixth'">
-                <child6></child6>
-            </van-tab>
-            <van-tab title="气销总览" name="seventh" :key="'seventh'">
-                <child7></child7>
-            </van-tab>
-        </van-tabs>
+            <van-tabs v-model="activeName" class="sec-nav" type="border-card">
+                <van-tab title="生产管理" name="first" :key="'first'">
+                    <child1></child1>
+                </van-tab>
+                <van-tab title="供应管理" name="second" :key="'second'">
+                    <child2></child2>
+                </van-tab>
+                <van-tab title="储气管理" name="third" :key="'third'">
+                    <child3></child3>
+                </van-tab>
+                <van-tab title="管输管理" name="fourth" :key="'fourth'">
+                    <child4></child4>
+                </van-tab>
+                <van-tab title="销售管理" name="fifth" :key="'fifth'">
+                    <child5></child5>
+                </van-tab>
+                <van-tab title="压非保民" name="sixth" :key="'sixth'">
+                    <child6></child6>
+                </van-tab>
+                <van-tab title="气销总览" name="seventh" :key="'seventh'">
+                    <child7></child7>
+                </van-tab>
+            </van-tabs>
     </div>
 </template>
 <script>
@@ -104,6 +104,9 @@
             position: fixed;
             top: 100px;
             z-index: 4;
+            width: 340px;
+            margin-left: -170px;
+            left: 50%;
         }
         .sec-nav .van-tabs__nav{
             background-color: rgba(0, 0, 0, 0.15);
@@ -113,7 +116,8 @@
             display: flex;
             align-items: center;
             padding: 0 2px;
-            margin: 0 16px;
+            /*margin: 0 16px;*/
+
 
         }
         .sec-nav .van-tabs__nav .van-tab{

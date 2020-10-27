@@ -162,10 +162,9 @@
                         formatter: "{a} <br/>{b}: {c}万立方米 ({d}%)"
                     },
                     legend: {
-                        orient: 'vertical',
-                        right: 10,
-                        top: 70,
-                        bottom: 20,
+                        orient: 'horizontal',
+                        bottom: 10,
+                        left: "center",
                         itemGap: 10,
                         data: ["中石油", "中石化"],
                         itemWidth: 15,

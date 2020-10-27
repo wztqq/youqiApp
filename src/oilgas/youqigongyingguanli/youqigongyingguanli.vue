@@ -1,5 +1,20 @@
 <template>
-  <div style="position: relative; width: 100%; top:80px;background-color: #dadbdb">
+  <div style="position: relative; width: 100%; top: 93px; background-color: #dadbdb">
+    <div :class="[{tanchuang:true},{tanchuang_one: show}]">
+			<div style="width: 100%;height: 100%;overflow: auto;">
+				<table class="table_one_t">
+					<tr>
+						<th v-for="(th,index) in tableTh" :key='index'>{{th}}</th>
+					</tr>
+					<tr v-for="(tr,index) in listData" :key='index'>
+						<td v-for="(td,index) in tr" :key='index'>
+							{{td}}
+						</td>
+					</tr>
+				</table>
+			</div>
+			<img id="close" :style="{'left':closeLeft , 'top':'80%'}" src="../../assets/img/YouqiGongying/关闭.png" alt="图片未显示" @click="tanchuangClose()">
+		</div>
     <div id="tab_button" :style="{ left: screenLeft }">
       <span
         v-for="(item, index) in tablist"
@@ -12,25 +27,93 @@
         >{{ item }}</span
       >
     </div>
-    <!-- 储情分析的主要内容 -->
+    <!-- 油气供应管理的主要内容 -->
     <div id="confess_content" v-show="a" style="background-color: #dadbdb">
       <img
         class="map"
         src="../../assets/img/YouqiGongying/地图.png"
         alt="图片未显示"
       />
-      <div class="produce_logo" :style="{ left: logo_one,top: logo_one }">
-      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click=tanchuang >
+      <div class="Gongying_oil" v-show="produce_tc"><ul>
+        <li>{{page_c1}}</li>
+        <li>9月供应量 :<span>{{page_c2}}</span>万吨</li>
+      </ul></div>
+      <!-- this.logoposionleft7 = (this.screenWidth * 0.49) + 'px';
+          this.logoposiontop7 = (314.5 *0.71) + 'px'; -->
+      <!-- 巴彦淖尔 -->
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.31) + 'px',top: (314.5 *0.72) + 'px'}">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(1,listData_one)" >
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.33) + 'px',top: (314.5 *0.73) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(1,listData_one)" >
+      </div>
+      <!-- 乌兰察布 -->
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.46) + 'px',top: (314.5 *0.65) + 'px'}">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(2,listData_two)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.48) + 'px',top: (314.5 *0.66) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(2,listData_two)">
+      </div>
+      <!-- 锡林郭勒盟 -->
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.58) + 'px',top: (314.5 *0.54) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(3,listData_three)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.61) + 'px',top: (314.5 *0.54) + 'px'  }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(3,listData_three)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.64) + 'px',top: (314.5 *0.54) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(3,listData_three)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.62) + 'px',top: (314.5 *0.51) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(3,listData_three)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.65) + 'px',top: (314.5 *0.51) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(3,listData_three)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.67) + 'px',top: (314.5 *0.525) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(3,listData_three)">
+      </div>
+      <!-- 通辽 -->
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.78) + 'px',top: (314.5 *0.54) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(4,listData_four)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.78) + 'px',top: (314.5 *0.62) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(4,listData_four)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.8) + 'px',top: (314.5 *0.62) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(4,listData_four)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.78) + 'px',top: (314.5 *0.586) + 'px'  }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(4,listData_four)">
+      </div>
+      <div class="produce_logo" :style="{left:(this.screenWidth * 0.8) + 'px',top: (314.5 *0.56) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(4,listData_four)">
+      </div>
+      <!-- 呼伦贝尔 -->
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.68) + 'px',top: (314.5 *0.33) + 'px'  }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(5,listData_five)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.7) + 'px',top: (314.5 *0.34) + 'px'  }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(5,listData_five)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.7) + 'px',top: (314.5 *0.31) + 'px'  }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(5,listData_five)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.725) + 'px',top: (314.5 *0.33) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(5,listData_five)">
+      </div>
+      <div class="produce_logo" :style="{ left:(this.screenWidth * 0.725) + 'px',top: (314.5 *0.29) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/youjing.png" alt="图片未显示"  @click="tanchuangShow(5,listData_five)">
       </div>
       <div class="chart">
-        <div
+        <!-- <div
           style="
             width: 100%;
             height: 8px;
             background-color: #dadbdb;
             margin-bottom: 10px;
           "
-        ></div>
+        ></div> -->
         <div class="tab_oil">
           <span
             v-for="(item, index) in tablist_one"
@@ -72,39 +155,46 @@
           <div class="fontSize">0.66</div>
           <div class="fontSize">立方米</div>
         </div>
-        <div class="echarts_two" id="echartsTwo" v-show="j1"></div>
+        <div class="echarts_two" id="echartsTwo" v-show="j1">
+          <!-- <img
+        class="tuoyuan"
+        src="../../assets/img/YouqiGongying/椭圆.png"
+        alt="图片未显示"
+      /> -->
+        </div>
         <div class="echarts" id="echartsFour" v-show="j2"></div>
       </div>
+      
     </div>
-
+ 
     <div id="produce_content" v-show="b">
       <img
         class="map"
         src="../../assets/img/YouqiGongying/地图.png"
         alt="图片未显示"
       />
-       <div class="produce_logo" :style="{ left: logoposionleft7,top: logoposiontop7 }">
-      <img src="../../assets/img/YouqiGongying/gongchang.png" alt="图片未显示"  @click=tanchuang7 >
+       <div class="produce_logo" :style="{ left: (this.screenWidth * 0.49) + 'px',top: (314.5 *0.71) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/gongchang.png" alt="图片未显示"  @click=tanchuang(1,byneArry_one,produce_tc) >
       </div>
-      <div class="produce_tc" v-show="tc7"><ul>
-        <li>成品油企业</li>
-        <li>企业人数：1300人</li>
-        <li>上月汽油供应量：100万吨</li>
-        <li>上月柴油供应量：890万吨</li>
-        <li>上月航煤油供应量：899万吨</li>
+      <div class="produce_tc" v-show="produce_tc"><ul>
+        <li>{{page_c1}}</li>
+        <li>企业人数：<span>{{page_c2}}</span>人</li>
+        <li>9月汽油供应量：<span>{{page_c3}}</span>万吨</li>
+        <li>9月柴油供应量：<span>{{page_c4}}</span>万吨</li>
+        <li>9月航煤油供应量：<span>{{page_c5}}</span>万吨</li>
         </ul></div>
       <!-- <div class="produce_logo" :style="{ left: logoposionleft8,top: logoposiontop8 }">
       <img src="../../assets/img/YouqiGongying/gongchang.png" alt="图片未显示" >
       </div> -->
       <div class="chart">
-        <div
+        <!-- <div
           style="
             width: 100%;
             height: 8px;
             background-color: #dadbdb;
             margin-bottom: 10px;
           "
-        ></div>
+        ></div> -->
         <div class="tab_oil">
           <span
             v-for="(item, index) in tablist_three"
@@ -184,15 +274,28 @@
         src="../../assets/img/YouqiGongying/地图.png"
         alt="图片未显示"
       />
+      <div class="produce_logo" :style="{ left: (this.screenWidth * 0.49) + 'px',top: (314.5 *0.72) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/mzy.png" alt="图片未显示"  @click=tanchuang(2,byneArry_two,produce_tc) >
+      </div>
+      <div class="produce_logo" :style="{ left: (this.screenWidth * 0.51) + 'px',top: (314.5 *0.66) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/mzy.png" alt="图片未显示"  @click=tanchuang(3,byneArry_three,produce_tc) >
+      </div>
+      <div class="produce_tc" v-show="produce_tc"><ul>
+        <li>{{page_c1}}</li>
+        <li>企业人数：<span>{{page_c2}}</span>人</li>
+        <li>9月石脑油供应量：<span>{{page_c3}}</span>万吨</li>
+        <li>9月柴油供应量：<span>{{page_c4}}</span>万吨</li>
+        <li>9月液化气供应量：<span>{{page_c5}}</span>万吨</li>
+        </ul></div>
       <div class="chart">
-        <div
+        <!-- <div
           style="
             width: 100%;
             height: 8px;
             background-color: #dadbdb;
             margin-bottom: 10px;
           "
-        ></div>
+        ></div> -->
         <div class="tab_oil">
           <span
             v-for="(item, index) in tablist_six"
@@ -243,18 +346,29 @@
     <div id="confess_content" v-show="d" style="background-color: #dadbdb">
       <img
         class="map"
-        src="../../assets/img/YouqiGongying/mzq.png"
+        src="../../assets/img/YouqiGongying/地图.png"
         alt="图片未显示"
       />
+      <div class="produce_logo" :style="{ left: (this.screenWidth * 0.38) + 'px',top: (314.5 *0.78) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/mzq.png" alt="图片未显示"  @click=tanchuang(4,byneArry_four,produce_tc) >
+      </div>
+      <div class="produce_logo" :style="{ left: (this.screenWidth * 0.7) + 'px',top: (314.5 *0.58) + 'px' }">
+      <img src="../../assets/img/YouqiGongying/mzq.png" alt="图片未显示"  @click=tanchuang(5,byneArry_five,produce_tc) >
+      </div>
+      <div class="Gongying_mzq" v-show="produce_tc"><ul>
+        <li>{{page_c1}}</li>
+        <li>9月天然气供应量：<span>{{page_c2}}</span>万立方米</li>
+        <li>累计天然气供应量：<span>{{page_c3}}</span>万立方米</li>
+        </ul></div>
       <div class="chart">
-        <div
+        <!-- <div
           style="
             width: 100%;
             height: 8px;
             background-color: #dadbdb;
             margin-bottom: 10px;
           "
-        ></div>
+        ></div> -->
         <div class="tab_oil">
           <span
             v-for="(item, index) in tablist_eight"
@@ -316,101 +430,266 @@ export default {
     return {
       screenWidth: document.body.clientWidth, // 屏幕宽
       screenHeight: document.body.clientHeight,
-      // mapHeight: $refs.map.clientHeight,
       screenLeft: "",
-      logo_one:"",
-      logo_two:"",
-      logo_three:"",
-      logo_four:"",
-      logo_five:"",
-      logo_six:"",
-      logo_seven:"",
-      logo_eight:"",
-      logo_nine:"",
-      logo_ten:"",
-      logo_shiyi:"",
-      logo_shier:"",
-      logo_shisan:"",
-      logo_shisi:"",
-      logo_shiwu:"",
-      logo_shiliu:"",
       logoposionleft7: '',
       logoposiontop7: '',
       tc7:0,
       show: 0, //控制弹窗显示
       closeLeft: 0, //关闭按钮居中
+        Show:[],
       tableTh: [
         "名称",
-        "所属盟市",
-        "面积",
-        "经纬度",
-        "远景资源量",
-        "预测资源量",
-        "控制储量",
-        "探明储量",
+        "日供应量",
+        "企业性质",
+        "法人",
+        "科技人员",
+        "员工数",
+        "税收",
+        "价格",
+        "上月供应量"
       ],
-      listData: [
+      lll:[{
+          name: "乌里雅斯太油田",
+          rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
+        },],
+        listData_one: [
+        {
+          name: "吉祥油田",
+          rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
+        },
+        {
+          name: "达尔其油田",
+          rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
+        },
+        ],
+         listData_two: [
+            {
+              name: "包尔油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "赛汗油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+        ],
+      listData_three: [
         {
           name: "乌里雅斯太油田",
-          leaguerea: "锡林郭勒盟",
-          area: "5.5万平方公里",
-          latitude: "43°23′10″~45°24′27″",
-          vision: "3256",
-          prediction: "1456",
-          control: "1300",
-          proved: "1200",
+          rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
         },
         {
           name: "宝力格油田",
-          leaguerea: "锡林郭勒盟",
-          area: "4314.12平方公里",
-          latitude: "41°10′10″~43°24′10″",
-          vision: "2687",
-          prediction: "1856",
-          control: "1399",
-          proved: "780",
+          rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
         },
         {
           name: "新苏木油田",
-          leaguerea: "锡林郭勒盟",
-          area: "5万平方公里",
-          latitude: "46°16′10″~46°24′15″",
-          vision: "3100",
-          prediction: "2756",
-          control: "2678",
-          proved: "2670",
+          rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
         },
         {
           name: "哈达图油田",
-          leaguerea: "锡林郭勒盟",
-          area: "432平方公里",
-          latitude: "43°17′10″~45°24′15″",
-          vision: "2890",
-          prediction: "1956",
-          control: "1780",
-          proved: "870",
+         rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
         },
         {
           name: "锡林油田",
-          leaguerea: "锡林郭勒盟",
-          area: "234平方公里",
-          latitude: "44°17′10″~40°24′15″",
-          vision: "3200",
-          prediction: "2056",
-          control: "1890",
-          proved: "960",
+          rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
         },
         {
           name: "乌兰诺尔油田",
-          leaguerea: "锡林郭勒盟",
-          area: "5.5万平方公里",
-          latitude: "47°18′10″~46°24′15″",
-          vision: "3199",
-          prediction: "2099",
-          control: "2000",
-          proved: "677",
+          rigongying: "0.21万吨",
+          xingzhi: "国营",
+          faren: "佟天",
+          kejirenyuan: "175人",
+          yuangongshu: "2317人",
+          shuishou: "75亿元",
+          jiage: "1.76亿元",
+          gongying:"7.2万吨"
         },
       ],
+       listData_four: [
+            {
+              name: "科尔康油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "龙湾筒油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "交力格油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "科尔沁油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "广发油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+        ],
+        listData_five: [
+            {
+              name: "苏德尔特油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "把彦塔拉油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "苏仁诺尔油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "呼和诺仁油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+            {
+              name: "贝尔油田",
+              rigongying: "0.21万吨",
+              xingzhi: "国营",
+              faren: "佟天",
+              kejirenyuan: "175人",
+              yuangongshu: "2317人",
+              shuishou: "75亿元",
+              jiage: "1.76亿元",
+              gongying:"7.2万吨"
+            },
+        ],
+      listData: [],
       tablist: ["原油", "成品油", "煤制油", "煤制气"],
       tablist_one: ["原油供应量趋势分析", "区内区外供应对比分析"],
       tablist_two: ["原油月供应结构", "主要企业占比"],
@@ -421,6 +700,11 @@ export default {
       tablist_seven: ["煤制油供应企业分析", "产品结构分析"],
       tablist_eight: ["煤制气月供应量趋势分析", "产业用途占比"],
       tablist_nine: ["煤制气供应企业分析", "供应方式分析"],
+      byneArry_one:['中国石油石化公司','1300','100','890','899'],
+      byneArry_two:['神华煤制油','176','1000','895','769'],
+      byneArry_three:['伊泰煤制油','367','987','673','543'],
+      byneArry_four:['汇能煤制气','1000','800'],
+      byneArry_five:['大唐煤制气','978','675'],
       selected: "0",
       selected_one: "0",
       selected_two: "0",
@@ -431,6 +715,13 @@ export default {
       selected_seven: "0",
       selected_eight: "0",
       selected_nine: "0",
+      produce_tc:0,
+      page_c1:'',
+      page_c2:'',
+      page_c3:'',
+      page_c4:'',
+      page_c5:'',
+      xuan: 0,
       //三个页面是否显示的三个参数
       a: 1,
       b: 0,
@@ -588,21 +879,74 @@ export default {
     //this.drawLine_one('echartsThree')
   },
   methods: {
+    tanchuang(a,arry,newproduce){
+       if(newproduce){
+          this.page_c1 = arry[0];
+          this.page_c2 = arry[1];
+          this.page_c3 = arry[2];
+          this.page_c4 = arry[3];
+          this.page_c5 = arry[4];
+          if(this.xuan == a){
+            this.xuan = a
+            this.produce_tc=!newproduce
+          }
+          this.xuan = a
+        }else{
+          this.produce_tc=!newproduce
+          this.xuan = a
+          this.page_c1 = arry[0];
+          this.page_c2 = arry[1];
+          this.page_c3 = arry[2] ;
+          this.page_c4 = arry[3];
+          this.page_c5 = arry[4];
+        }
+    },
     tanchuang7() {
         // this.tc7 = 1;
         this.tc7=!this.tc7
       },
-      tanchuang(){},
-    //取消图片默认样式
-    // tanchuangShow() {
-    //   this.show = 1;
-    //   this.$nextTick(function () {
-    //     this.closeLeft = (this.screenWidth - 35) / 2 + "px";
-    //   });
-    // },
-    // tanchuangClose() {
-    //   this.show = 0;
-    // },
+    // 取消图片默认样式
+    tanchuangShow(a,b) {
+      if(a == 1)
+				{
+          this.listData = b,
+					this.show = 1
+					this.$nextTick(function() {
+						this.closeLeft = (this.screenWidth - 35) / 2 + 'px'
+					})
+				}else if(a == 2)
+				{
+					this.listData = b,
+					this.show = 1
+					this.$nextTick(function() {
+						this.closeLeft = (this.screenWidth - 35) / 2 + 'px'
+					})
+				}else if(a == 3)
+				{
+					this.listData = b,
+					this.show = 1
+					this.$nextTick(function() {
+						this.closeLeft = (this.screenWidth - 35) / 2 + 'px'
+					})
+				}else if(a == 4)
+				{
+					this.listData = b,
+					this.show = 1
+					this.$nextTick(function() {
+						this.closeLeft = (this.screenWidth - 35) / 2 + 'px'
+					})
+				}else if(a == 5)
+				{
+					this.listData = b,
+					this.show = 1
+					this.$nextTick(function() {
+						this.closeLeft = (this.screenWidth - 35) / 2 + 'px'
+					})
+				}
+    },
+    tanchuangClose() {
+      this.show = 0;
+    },
     // 储情分析环形图
     drawLine(name, arry) {
       var echarts = require("echarts");
@@ -1013,7 +1357,7 @@ export default {
             itemStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 { offset: 0, color: "#63edd4" },
-                { offset: 1, color: "rgba(14, 137, 238, 1)" },
+                { offset: 0.7, color: "#4569FF" },
               ]),
             },
             data: [4, 4, 7, 17, 8, 21, 23, 13, 8],
@@ -2342,10 +2686,36 @@ export default {
         this.b = 0;
         this.c = 0;
         this.d = 0;
-        
+       //第二个页面
+       this.selected_three = 0;
+       this.selected_four = 0;
+       this.selected_five = 0;
+        this.p_i1 = 1;
+        this.p_i2 = 0;
+        this.p_j1 = 1;
+        this.p_j2 = 0;
+        this.p_g1 = 1;
+        this.p_g2 = 0;
+        //第三个页面
+        this.selected_six = 0;
+       this.selected_seven = 0;
+       this.t_i1 = 1;
+        this.t_i2 = 0;
+        this.t_j1 = 1;
+        this.t_j2 = 0;
+        //第四个页面
+        this.selected_eight = 0;
+       this.selected_nine = 0;
+       this.f_i1 = 1;
+        this.f_i2 = 0;
+        this.f_j1 = 1;
+        this.f_j2 = 0;
         this.$nextTick(function () {
+           this.produce_tc =0 ;
           this.YuanYouGongYing_barandline("echartsOne");
           this.drawLine("echartsTwo", this.echarts.data_one);
+          this.logoleft_one = (this.screenWidth * 0.49) + 'px';
+          this.logotop_one = (314.5 *0.71) + 'px';
         });
       }
       if (1 == id) {
@@ -2353,15 +2723,37 @@ export default {
         this.b = 1;
         this.c = 0;
         this.d = 0;
+        
         this.TwoFont = 35;
         this.ThreeFont = 20;
-        
+        //第一个页面
+        this.selected_one = 0;
+       this.selected_two = 0;
+       this.p_i1 = 1;
+        this.p_i2 = 0;
+        this.p_j1 = 1;
+        this.p_j2 = 0;
+        //第三个页面
+        this.selected_six = 0;
+       this.selected_seven = 0;
+       this.t_i1 = 1;
+        this.t_i2 = 0;
+        this.t_j1 = 1;
+        this.t_j2 = 0;
+        //第四个页面
+        this.selected_eight = 0;
+       this.selected_nine = 0;
+       this.f_i1 = 1;
+        this.f_i2 = 0;
+        this.f_j1 = 1;
+        this.f_j2 = 0;
         this.$nextTick(function () {
+           this.produce_tc =0 ;
           this.ChengPinYouYueGongYing_threebar("echartsFive");
           this.GongYouDuiXiangJieGouFenXi_pie("echarsSeven");
           this.QiYouBiaoHaoJieGou_pie("echarsNine");
-          this.logoposionleft7 = (this.screenWidth * 0.49) + 'px';
-          this.logoposiontop7 = (314.5 *0.71) + 'px';
+          // this.logoposionleft7 = (this.screenWidth * 0.49) + 'px';
+          // this.logoposiontop7 = (314.5 *0.71) + 'px';
         });
       }
       if (2 == id) {
@@ -2369,7 +2761,32 @@ export default {
         this.b = 0;
         this.c = 1;
         this.d = 0;
+        //第一个页面
+        this.selected_one = 0;
+       this.selected_two = 0;
+       this.p_i1 = 1;
+        this.p_i2 = 0;
+        this.p_j1 = 1;
+        this.p_j2 = 0;
+         //第二个页面
+       this.selected_three = 0;
+       this.selected_four = 0;
+       this.selected_five = 0;
+        this.p_i1 = 1;
+        this.p_i2 = 0;
+        this.p_j1 = 1;
+        this.p_j2 = 0;
+        this.p_g1 = 1;
+        this.p_g2 = 0;
+         //第四个页面
+        this.selected_eight = 0;
+       this.selected_nine = 0;
+       this.f_i1 = 1;
+        this.f_i2 = 0;
+        this.f_j1 = 1;
+        this.f_j2 = 0;
         this.$nextTick(function () {
+           this.produce_tc =0 ;
           document.getElementsByClassName("fontSize_divc")[0].style.display =
           "none";
           this.MeiZhiYouGongYingLiangBianHuaQuShiFenXi_barandline("echartsEleven");
@@ -2381,7 +2798,32 @@ export default {
         this.b = 0;
         this.c = 0;
         this.d = 1;
+        //第一个页面
+        this.selected_one = 0;
+       this.selected_two = 0;
+       this.p_i1 = 1;
+        this.p_i2 = 0;
+        this.p_j1 = 1;
+        this.p_j2 = 0;
+         //第二个页面
+       this.selected_three = 0;
+       this.selected_four = 0;
+       this.selected_five = 0;
+        this.p_i1 = 1;
+        this.p_i2 = 0;
+        this.p_j1 = 1;
+        this.p_j2 = 0;
+        this.p_g1 = 1;
+        this.p_g2 = 0;
+        //第三个页面
+        this.selected_six = 0;
+       this.selected_seven = 0;
+       this.t_i1 = 1;
+        this.t_i2 = 0;
+        this.t_j1 = 1;
+        this.t_j2 = 0;
         this.$nextTick(function () {
+           this.produce_tc =0 ;
           document.getElementsByClassName("fontSize_divb")[0].style.display =
           "none";
           document.getElementsByClassName("fontSize_diva")[0].style.display =
@@ -2682,6 +3124,40 @@ export default {
   background-color: #dadbdb;
 } 
 
+.tuoyuan{
+  width: 100%;
+  height: 314.5px;
+}
+.Gongying_oil {
+  width: 153px;
+  height: 47px;
+  background-color:  rgba(37, 54, 104, 0.6);
+  /* background-image: url(../../assets/img/YouqiGongying/yuanyou.png) ; */
+  position: absolute;
+  left: 50px;
+  top: 100px;
+}
+
+.Gongying_oil ul li{
+  font-size: 10px;
+  color:#C9D6FD;
+  padding:6px;
+  height:18px;
+}
+
+.Gongying_oil ul :first-child{
+  font-weight: bold;
+  font-size: 15px;
+  padding:4px;
+  color:white;
+}
+
+.Gongying_oil ul span{
+  font-size: 13px;
+  padding:4px;
+  height:18px;
+}
+
 .produce_logo {
   width: 20px;
   position: absolute;
@@ -2689,21 +3165,65 @@ export default {
   top: 100px;
 }
 
-.produce_tc {
-  width: 170px;
-  height: 90px;
-  background-color:  rgba(0, 0, 0, 0.3);
-  background-image: url(../../assets/img/YouqiGongying/produce_tc.png) ;
+
+
+.Gongying_mzq {
+  width: 210px;
+  height: 70px;
+  background-color:  rgba(37, 54, 104, 0.6);
+  /* background-image: url(../../assets/img/YouqiGongying/produce_tc.png) ; */
   position: absolute;
-  left: 50px;
-  top: 100px;
+  left:40px;
+  top: 70px;
+}
+
+.Gongying_mzq ul li{
+   font-size: 10px;
+  color:#C9D6FD;
+  padding:6px;
+  height:18px;
+}
+.Gongying_mzq ul :first-child{
+  font-weight: bold;
+  font-size: 15px;
+  padding:4px;
+  color:white;
+}
+
+.Gongying_mzq ul span{
+  font-size: 13px;
+  padding:4px;
+  height:18px;
 }
 
 
+.produce_tc {
+  width: 180px;
+  height: 100px;
+  background-color:  rgba(37, 54, 104, 0.6);
+  /* background-image: url(../../assets/img/YouqiGongying/produce_tc.png) ; */
+  position: absolute;
+  left:40px;
+  top: 70px;
+}
+
 .produce_tc ul li{
-  font-size: 8px;
-  color: white;
-  height: 18px;
+   font-size: 10px;
+  color:#C9D6FD;
+  padding:6px;
+  height:18px;
+}
+.produce_tc ul :first-child{
+  font-weight: bold;
+  font-size: 15px;
+  padding:4px;
+  color:white;
+}
+
+.produce_tc ul span{
+  font-size: 13px;
+  padding:4px;
+  height:18px;
 }
 
 /* 储情分析内容 */
@@ -2711,7 +3231,7 @@ export default {
   width: 100%;
   height: 289px;
   background-color: white;
-  /* padding: 10px 0; */
+  padding: 10px 0;
   position: relative;
 }
 .chart_one {
@@ -2734,7 +3254,7 @@ export default {
 .echarts_two {
   width: 100%;
   height: 242px;
-  margin: 20px auto;
+  margin: 15px auto;
   background-image: url(../../assets/img/YouqiGongying/椭圆.png);
   background-repeat: no-repeat;
   background-position: 50% 37%;
@@ -2751,26 +3271,26 @@ export default {
 .fontSize_div {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 242px;
   text-align: center;
 }
 
 .fontSize_diva {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 242px;
   text-align: center;
 }
 .fontSize_divb {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 242px;
   text-align: center;
 }
 .fontSize_divc {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 242px;
   text-align: center;
 }
 .fontSize_div_one {

@@ -139,11 +139,6 @@ var routes = [{
 				component: KuCun
 			},
 			{
-				path: '/XSChengPinYou',
-				name: 'XSChengPinYou',
-				component: XSChengPinYou
-			},
-			{
 			    path: '/Youqigongyingguanli',
 			    name: 'Youqigongyingguanli',
 			    component: Youqigongyingguanli

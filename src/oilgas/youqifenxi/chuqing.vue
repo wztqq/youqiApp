@@ -506,7 +506,7 @@
 					{
 						"name": "包尔气田",
 						"area": "1.5万平方公里",
-						"city": "乌兰察布市",
+						"city": "锡林郭勒盟",
 						"prediction": "1000万立方米",
 						"proved": "560万立方米",
 						"economic": "264万立方米",
@@ -1303,7 +1303,7 @@
 			        data: [110, 60, 80],
 			        label: {
 			     show: true,
-			     formatter:'{c0}/{c1}% ',
+			     // formatter:'{c0',
 			     position: 'top'
 			    },
 			    },

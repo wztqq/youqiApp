@@ -38,16 +38,10 @@
 					router: 'Yunayou'
 				}, {
 					name: '油气供应管理',
-					router: 'energystructure'
+					router: 'Youqigongyingguanli'
 				}, {
-					name: '基础设施',
-					router: 'Infrastructure'
-				}, {
-					name: '现代能源经济',
-					router: 'EnergyEconomics'
-				}, {
-					name: '能流图',
-					router: 'energystream'
+					name: '油气储运管理',
+					router: 'KuCun'
 				}, {
 					name: '油气销售管理',
 					router: 'YouqixiaoShou'

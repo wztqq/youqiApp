@@ -5,6 +5,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+	publicPath: '/',
     lintOnSave:false,
     // proxy服务器代理
     devServer: {

@@ -153,7 +153,7 @@
         </div>
         <div class="fontSize_div">
           <div class="fontSize">0.66</div>
-          <div class="fontSize">立方米</div>
+          <div class="fontSize">亿立方米</div>
         </div>
         <div class="echarts_two" id="echartsTwo" v-show="j1">
           <!-- <img
@@ -164,9 +164,9 @@
         </div>
         <div class="echarts" id="echartsFour" v-show="j2"></div>
       </div>
-      
+
     </div>
- 
+
     <div id="produce_content" v-show="b">
       <img
         class="map"
@@ -335,7 +335,7 @@
         </div>
         <div class="fontSize_divc">
           <div class="fontSize">0.66</div>
-          <div class="fontSize">立方米</div>
+          <div class="fontSize">亿立方米</div>
         </div>
         <div class="echarts" id="echartsThirteen" v-show="t_j1"></div>
         <div class="echarts_two" id="echartsFourteen" v-show="t_j2">
@@ -383,7 +383,7 @@
         </div>
         <div class="fontSize_divb">
           <div class="fontSize">0.66</div>
-          <div class="fontSize">立方米</div>
+          <div class="fontSize">亿立方米</div>
         </div>
         <!-- <div class="echarts" id="echartsOne"></div> -->
         <div class="echarts" id="echartsFifteen" v-show="f_i1"></div>
@@ -412,7 +412,7 @@
         </div>
         <div class="fontSize_diva">
           <div class="fontSize">0.66</div>
-          <div class="fontSize">立方米</div>
+          <div class="fontSize">亿立方米</div>
         </div>
         <div class="echarts" id="echartsSeventeen" v-show="f_j1"></div>
         <div class="echarts_two" id="echartsEighteen" v-show="f_j2">
@@ -755,27 +755,27 @@ export default {
       echarts: {
         data_three: [
           {
-            value: 18,
+            value: 4.25,
             name: "兴安",
           },
           {
-            value: 12,
+            value: 2.83,
             name: "包头",
           },
           {
-            value: 20,
+            value: 4.71,
             name: "通辽",
           },
           {
-            value: 8,
+            value: 1.89,
             name: "呼和浩特",
           },
           {
-            value: 18,
+            value: 4.24,
             name: "鄂尔多斯",
           },
           {
-            value: 30,
+            value: 7.08,
             name: "乌海",
           },
         ],
@@ -807,27 +807,27 @@ export default {
         ],
         data_one: [
           {
-            value: 177,
+            value: 0.1,
             name: "吉祥油田",
           },
           {
-            value: 200,
+            value: 0.11,
             name: "宝力格油田",
           },
           {
-            value: 160,
+            value: 0.09,
             name: "贝尔油田",
           },
           {
-            value: 260,
+            value: 0.15,
             name: "赛汉油田",
           },
           {
-            value: 240,
+            value: 0.14,
             name: "乌兰诺尔油田",
           },
           {
-            value: 140,
+            value: 0.07,
             name: "科尔沁油田",
           },
         ],
@@ -954,7 +954,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)",
+          formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -977,7 +977,7 @@ export default {
         // },
         series: [
           {
-            name: "原油剩余技术储量",
+            name: "原油月供应结构",
             type: "pie",
             radius: ["40%", "55%"],
             center: ["50%", "40%"],
@@ -1051,7 +1051,7 @@ export default {
           },
           axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -1081,7 +1081,7 @@ export default {
           },
           axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -1274,12 +1274,11 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+            formatter(params) {
+                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
+                    params[1].seriesName + ':' +
+                    params[1].value + '%'
+            }
         },
         grid: {
           left: 50,
@@ -1292,10 +1291,6 @@ export default {
           top: 0,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["原油月产量", "同比变化"],
         },
         xAxis: [
@@ -1320,7 +1315,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1340,7 +1335,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1384,12 +1379,11 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+            formatter(params) {
+                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
+                    params[1].seriesName + ':' +
+                    params[1].value + '%'
+            }
         },
         grid: {
           height: 160,
@@ -1401,10 +1395,6 @@ export default {
           top: 0,
           right: "center",
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["区内供应量", "区外供应量"],
         },
         xAxis: [
@@ -1429,7 +1419,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1450,7 +1440,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1538,12 +1528,13 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+            formatter(params) {
+                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
+                    params[1].seriesName + ':' +
+                    params[1].value + '万吨'+ '</br>' +
+                    params[2].seriesName + ':' +
+                    params[2].value + '万吨'
+            }
         },
         grid: {
           height: 160,
@@ -1555,10 +1546,6 @@ export default {
           top: 0,
           right: "center",
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["汽油", "柴油", "航煤"],
         },
         xAxis: [
@@ -1583,7 +1570,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1603,7 +1590,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1659,12 +1646,11 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+            formatter(params) {
+                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
+                    params[1].seriesName + ':' +
+                    params[1].value + '万吨'
+            }
         },
         grid: {
           height: 160,
@@ -1676,10 +1662,6 @@ export default {
           top: 0,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["调入量", "调出量"],
         },
         xAxis: [
@@ -1704,7 +1686,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1724,7 +1706,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1768,7 +1750,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)",
+          formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -1779,8 +1761,7 @@ export default {
           itemWidth: 10,
           itemHeight: 5,
           textStyle: {
-            color: "#9FA0A5",
-            fontSize: 10,
+            color: "#9FA0A5"
           },
         },
         // grid: {
@@ -1808,19 +1789,19 @@ export default {
             },
             data: [
               {
-                value: 45,
+                value: 14.3,
                 name: "交通",
               },
               {
-                value: 15,
+                value: 4.7,
                 name: "工业",
               },
               {
-                value: 25,
+                value: 8,
                 name: "农业",
               },
               {
-                value: 25,
+                value: 8,
                 name: "商业",
               },
             ],
@@ -1836,7 +1817,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)",
+          formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -1845,8 +1826,7 @@ export default {
           itemGap: 5,
           data: ["兴安", "包头", "通辽", "呼和浩特", "鄂尔多斯", "乌海"],
           textStyle: {
-            color: "#9FA0A5",
-            fontSize: 8,
+            color: "#9FA0A5"
           },
           itemWidth: 12,
           itemHeight: 4,
@@ -1856,7 +1836,7 @@ export default {
         // },
         series: [
           {
-            name: "原油剩余技术储量",
+            name: "成品油供应地区分析",
             type: "pie",
             radius: ["30%", "50%"],
             center: ["50%", "35%"],
@@ -1898,7 +1878,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)",
+          formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -1934,15 +1914,15 @@ export default {
             },
             data: [
               {
-                value: 90,
+                value: 12,
                 name: "89#汽油",
               },
               {
-                value: 20,
+                value: 2.7,
                 name: "92#汽油",
               },
               {
-                value: 40,
+                value: 5.3,
                 name: "95#汽油",
               },
             ],
@@ -1958,7 +1938,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)",
+          formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -1994,15 +1974,15 @@ export default {
             },
             data: [
               {
-                value: 90,
+                value: 6,
                 name: "89#柴油",
               },
               {
-                value: 20,
+                value: 1.3,
                 name: "92#柴油",
               },
               {
-                value: 40,
+                value: 2.7,
                 name: "95#柴油",
               },
             ],
@@ -2018,12 +1998,11 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+            formatter(params) {
+                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
+                    params[1].seriesName + ':' +
+                    params[1].value + '%'
+            }
         },
         grid: {
           height: 160,
@@ -2035,10 +2014,6 @@ export default {
           top: 0,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["煤制油月供应量", "同比变化"],
         },
         xAxis: [
@@ -2066,7 +2041,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2086,7 +2061,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2096,18 +2071,7 @@ export default {
           },
         ],
         series: [
-          {
-            name: "同比变化",
-            type: "line",
-            showSymbol: false,
-            lineStyle: {
-              type: "dotted",
-              width: 2,
-            },
-            smooth: true,
-            color: "#F92D32",
-            data: [17, 19, 22, 21, 20.5, 20.1, 19.8, 20.1, 22.5, 24.5, 22, 17],
-          },
+
           {
             name: "煤制油月供应量",
             type: "bar",
@@ -2121,6 +2085,18 @@ export default {
             },
             data: [15.5, 21, 19, 8, 24, 22, 22.1, 17, 21, 19.5, 34, 13],
           },
+            {
+                name: "同比变化",
+                type: "line",
+                showSymbol: false,
+                lineStyle: {
+                    type: "dotted",
+                    width: 2,
+                },
+                smooth: true,
+                color: "#F92D32",
+                data: [17, 19, 22, 21, 20.5, 20.1, 19.8, 20.1, 22.5, 24.5, 22, 17],
+            },
         ],
       });
     },
@@ -2148,11 +2124,7 @@ export default {
           top: 0,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
-          data: ["工程车辆", "城市交通"],
+          data: ["汽运", "管输"],
         },
         xAxis: [
           {
@@ -2179,7 +2151,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2199,7 +2171,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2210,7 +2182,7 @@ export default {
         ],
         series: [
           {
-            name: "工程车辆",
+            name: "汽运",
             type: "bar",
             barWidth: 10,
             itemStyle: {
@@ -2220,7 +2192,7 @@ export default {
             data: [29, 19, 18, 14.5, 25.7, 22.5, 18, 22, 29, 19, 17, 12],
           },
           {
-            name: "城市交通",
+            name: "管输",
             type: "bar",
             barWidth: 10,
             itemStyle: {
@@ -2283,7 +2255,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)",
+          formatter: "{a} <br/>{b}: {c}亿立方米({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -2299,7 +2271,7 @@ export default {
         },
         series: [
           {
-            name: "汽油标号结构",
+            name: "产品结构分析",
             type: "pie",
             radius: ["40%", "55%"],
             center: ["50%", "40%"],
@@ -2319,15 +2291,15 @@ export default {
             },
             data: [
               {
-                value: 40,
+                value: 0.27,
                 name: "液化气",
               },
               {
-                value: 20,
+                value: 0.12,
                 name: "石油",
               },
               {
-                value: 40,
+                value: 0.27,
                 name: "柴油",
               },
             ],
@@ -2343,12 +2315,11 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+            formatter(params) {
+                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
+                    params[1].seriesName + ':' +
+                    params[1].value + '万吨'
+            }
         },
         grid: {
           height: 160,
@@ -2360,10 +2331,6 @@ export default {
           top: 0,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["煤制气月供应量", "同比变化"],
         },
         xAxis: [
@@ -2391,7 +2358,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2411,7 +2378,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2421,18 +2388,7 @@ export default {
           },
         ],
         series: [
-          {
-            name: "同比变化",
-            type: "line",
-            showSymbol: false,
-            lineStyle: {
-              type: "dotted",
-              width: 2,
-            },
-            smooth: true,
-            color: "#F92D32",
-            data: [17, 19, 22, 21, 20.5, 20.1, 19.8, 20.1, 22.5, 24.5, 22, 17],
-          },
+
           {
             name: "煤制气月供应量",
             type: "bar",
@@ -2446,6 +2402,18 @@ export default {
             },
             data: [15.5, 21, 19, 8, 24, 22, 22.1, 17, 21, 19.5, 34, 13],
           },
+            {
+                name: "同比变化",
+                type: "line",
+                showSymbol: false,
+                lineStyle: {
+                    type: "dotted",
+                    width: 2,
+                },
+                smooth: true,
+                color: "#F92D32",
+                data: [17, 19, 22, 21, 20.5, 20.1, 19.8, 20.1, 22.5, 24.5, 22, 17],
+            }
         ],
       });
     },
@@ -2473,11 +2441,7 @@ export default {
           top: 0,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
-          data: ["工程车辆", "城市交通"],
+          data: ["大唐", "汇能"],
         },
         xAxis: [
           {
@@ -2504,7 +2468,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2524,7 +2488,7 @@ export default {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2535,7 +2499,7 @@ export default {
         ],
         series: [
           {
-            name: "工程车辆",
+            name: "大唐",
             type: "bar",
             barWidth: 10,
             itemStyle: {
@@ -2545,7 +2509,7 @@ export default {
             data: [29, 19, 18, 14.5, 25.7, 22.5, 18, 22, 29, 19, 17, 12],
           },
           {
-            name: "城市交通",
+            name: "汇能",
             type: "bar",
             barWidth: 10,
             itemStyle: {
@@ -2564,7 +2528,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)",
+          formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -2600,15 +2564,15 @@ export default {
             },
             data: [
               {
-                value: 40,
+                value: 0.27,
                 name: "LNG",
               },
               {
-                value: 20,
+                value: 0.12,
                 name: "城市燃气",
               },
               {
-                value: 40,
+                value: 0.27,
                 name: "交通",
               },
             ],
@@ -2624,7 +2588,7 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)",
+          formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -2660,15 +2624,15 @@ export default {
             },
             data: [
               {
-                value: 40,
+                value: 0.27,
                 name: "LNG",
               },
               {
-                value: 20,
+                value: 0.12,
                 name: "CNG",
               },
               {
-                value: 40,
+                value: 0.27,
                 name: "管道气",
               },
             ],
@@ -2723,7 +2687,7 @@ export default {
         this.b = 1;
         this.c = 0;
         this.d = 0;
-        
+
         this.TwoFont = 35;
         this.ThreeFont = 20;
         //第一个页面
@@ -3122,7 +3086,7 @@ export default {
   width: 100%;
   height: 314.5px;
   background-color: #dadbdb;
-} 
+}
 
 .tuoyuan{
   width: 100%;

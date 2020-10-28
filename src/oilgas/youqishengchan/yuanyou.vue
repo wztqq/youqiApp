@@ -76,7 +76,7 @@
       <div class="produce_logo" :style="{ left: logoposionleft6,top: logoposiontop6 }">
       <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"  @click='tanchuang(produce_tc,arry6,6)'>
       </div>
-      <div class="chart">    
+      <div class="chart">
         <div class="tab_oil">
           <span v-for="(item, index) in tablist_two" :key="index" @click="tabButton_two(index)" v-bind:class="[{ tab_oil_two: index == selected_two},{ tab_oil_one: true },]" >{{ item }}</span>
         </div>
@@ -508,7 +508,7 @@ export default {
       c: 0,
       d: 0,
       //页面里三个按钮
-      i1: 1, 
+      i1: 1,
       i2: 0,
       a_1:0,//判断文字显隐
       //第二个页面的三个按钮
@@ -531,7 +531,7 @@ export default {
       m4: 0,
       m5: 1,
       m6: 0,
-    
+
       xuan: 0,
     };
   },
@@ -605,10 +605,6 @@ YuanYou_One(name, arry) {
           top: 5,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["原油月产量", "同比变化"],
         },
         xAxis: [
@@ -633,7 +629,7 @@ YuanYou_One(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -653,7 +649,7 @@ YuanYou_One(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -727,9 +723,9 @@ YuanYou_Two(name, arry) {
                       fontSize: 12,// 改变标示文字的颜色
         },
               }
-                
+
             },
-           
+
         data: [
               {value: 60, name: '中石油'},
               {value: 40, name: '中石化'},
@@ -859,7 +855,7 @@ ChenPinYou_One(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -879,7 +875,7 @@ ChenPinYou_One(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -903,7 +899,7 @@ ChenPinYou_One(name, arry) {
           }
         ],
       });
-  }, 
+  },
 ChenPinYou_Two(name, arry) {
       let echarts = require("echarts");
       let myChart = echarts.init(document.getElementById(name));
@@ -927,7 +923,7 @@ ChenPinYou_Two(name, arry) {
                 },
         axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -948,7 +944,7 @@ ChenPinYou_Two(name, arry) {
                 },
          axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -963,7 +959,7 @@ ChenPinYou_Two(name, arry) {
         name:'成品油产量',
         data: [0, 12, 18, 14, 10, 3, 12,8,0],
         type: 'line',
-        symbol: 'none', 
+        symbol: 'none',
         smooth: true,
         areaStyle : {
        normal : {
@@ -976,7 +972,7 @@ ChenPinYou_Two(name, arry) {
        {
        offset : 0.8,
        color : 'rgba(0, 136, 212, 0)'
-        } 
+        }
       ], false),
         shadowColor : 'rgba(0, 0, 0, 0.1)',
         shadowBlur : 10
@@ -989,7 +985,7 @@ ChenPinYou_Two(name, arry) {
     borderColor : 'rgba(0,136,212,0.2)',
     borderWidth : 3
    }
-  },       
+  },
     }]
       });
   },
@@ -1000,7 +996,7 @@ ChenPinYou_Three(name, arry) {
       myChart.setOption({
     tooltip: {
           trigger: "item",
-          formatter: "{b}: {c} ({d}%)",
+          formatter: "{b}: {c}万吨 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -1036,15 +1032,15 @@ ChenPinYou_Three(name, arry) {
             },
             data: [
               {
-                value: 15,
+                value: 0.6,
                 name: "92#汽油",
               },
               {
-                value: 45,
+                value: 1.8,
                 name: "89#汽油",
               },
               {
-                value: 40,
+                value: 1.6,
                 name: "95#汽油",
               }
             ],
@@ -1063,7 +1059,7 @@ ChenPinYou_Four(name, arry) {
       myChart.setOption({
     tooltip: {
           trigger: "item",
-          formatter: "{b}: {c} ({d}%)",
+          formatter: "{b}: {c}万吨 ({d}%)",
         },
         legend: {
           orient: "horizontal",
@@ -1099,15 +1095,15 @@ ChenPinYou_Four(name, arry) {
             },
             data: [
               {
-                value: 15,
+                value: 0.3,
                 name: "-20#柴油",
               },
               {
-                value: 45,
+                value: 0.9,
                 name: "-35#柴油",
               },
               {
-                value: 40,
+                value: 0.8,
                 name: "0#柴油",
               }
             ],
@@ -1127,13 +1123,7 @@ ChenPinYou_Five(name, arry) {
       myChart.setOption({
          tooltip: {
           trigger: "axis",
-          formatter: '{c}%',
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+          formatter: '{a} <br/>{b}: {c}%'
         },
         xAxis: {
         type: 'category',
@@ -1144,7 +1134,7 @@ ChenPinYou_Five(name, arry) {
                 },
         axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -1156,7 +1146,7 @@ ChenPinYou_Five(name, arry) {
          },
     },
     yAxis: {
-        name:'万吨/月',
+        // name:'万吨/月',
         type: 'value',
         max:'20',
         axisTick:{
@@ -1165,7 +1155,7 @@ ChenPinYou_Five(name, arry) {
                 },
          axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1177,9 +1167,10 @@ ChenPinYou_Five(name, arry) {
                     },
     },
     series: [{
+             name:'平均负荷率',
         data: [0, 12, 18, 14, 10, 3, 12,8,0],
         type: 'line',
-        symbol: 'none', 
+        symbol: 'none',
         smooth: true,
         areaStyle : {
        normal : {
@@ -1192,7 +1183,7 @@ ChenPinYou_Five(name, arry) {
        {
        offset : 0.8,
        color : 'rgba(241, 158, 194, 0)'
-        } 
+        }
       ], false),
         shadowColor : 'rgba(0, 0, 0, 0.1)',
         shadowBlur : 10
@@ -1205,7 +1196,7 @@ ChenPinYou_Five(name, arry) {
     borderColor : 'rgba(241,158,194,0.2)',
     borderWidth : 3
    }
-  },       
+  },
     }]
       });
   },
@@ -1240,7 +1231,7 @@ MeiZhiYou_One(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1260,7 +1251,7 @@ MeiZhiYou_One(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1308,7 +1299,7 @@ MeiZhiYou_Two(name, arry) {
                 },
         axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -1329,7 +1320,7 @@ MeiZhiYou_Two(name, arry) {
                 },
          axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1344,7 +1335,7 @@ MeiZhiYou_Two(name, arry) {
         name:'水资源用量',
         data: [0, 12, 18, 14, 10, 3, 12,8,0],
         type: 'line',
-        symbol: 'none', 
+        symbol: 'none',
         smooth: true,
         areaStyle : {
        normal : {
@@ -1357,7 +1348,7 @@ MeiZhiYou_Two(name, arry) {
        {
        offset : 0.8,
        color : 'rgba(0, 136, 212, 0)'
-        } 
+        }
       ], false),
         shadowColor : 'rgba(0, 0, 0, 0.1)',
         shadowBlur : 10
@@ -1370,7 +1361,7 @@ MeiZhiYou_Two(name, arry) {
     borderColor : 'rgba(0,136,212,0.2)',
     borderWidth : 3
    }
-  },       
+  },
     }]
       });
   },
@@ -1379,16 +1370,10 @@ MeiZhiYou_Three(name, arry) {
       let echarts = require("echarts");
       let myChart = echarts.init(document.getElementById(name));
       myChart.setOption({
-        tooltip: {
-          trigger: "axis",
-          formatter: '{c}%',
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
+          tooltip: {
+              trigger: "axis",
+              formatter: '{a} <br/>{b}: {c}%'
           },
-        },
      xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -1398,7 +1383,7 @@ MeiZhiYou_Three(name, arry) {
                 },
         axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -1419,7 +1404,7 @@ MeiZhiYou_Three(name, arry) {
                 },
          axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1431,9 +1416,10 @@ MeiZhiYou_Three(name, arry) {
                     },
     },
     series: [{
+              name:'油品产量变化趋势',
         data: [0, 12, 18, 14, 10, 3, 12,8,0],
         type: 'line',
-        symbol: 'none', 
+        symbol: 'none',
         smooth: true,
         areaStyle : {
        normal : {
@@ -1446,7 +1432,7 @@ MeiZhiYou_Three(name, arry) {
        {
        offset : 0.8,
        color : 'rgba(255, 0, 255, 0)'
-        } 
+        }
       ], false),
         shadowColor : 'rgba(0, 0, 0, 0.1)',
         shadowBlur : 10
@@ -1459,7 +1445,7 @@ MeiZhiYou_Three(name, arry) {
     borderColor : 'rgba(255, 0, 255,0.2)',
     borderWidth : 3
    }
-  },       
+  },
     }]
       });
   },
@@ -1505,15 +1491,15 @@ MeiZhiYou_Four(name, arry) {
             },
             data: [
               {
-                value: 15,
+                value: 3,
                 name: "柴油",
               },
               {
-                value: 45,
+                value: 9,
                 name: "液化气",
               },
               {
-                value: 40,
+                value: 8,
                 name: "石脑油",
               }
             ],
@@ -1531,6 +1517,10 @@ MeiZhiYou_Five(name, arry) {
       let echarts = require("echarts");
       let myChart = echarts.init(document.getElementById(name));
       myChart.setOption({
+          tooltip: {
+              trigger: "axis",
+              formatter: '{a} <br/>{b}: {c}%'
+          },
                     xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -1540,7 +1530,7 @@ MeiZhiYou_Five(name, arry) {
                 },
         axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -1561,7 +1551,7 @@ MeiZhiYou_Five(name, arry) {
                 },
          axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1573,9 +1563,10 @@ MeiZhiYou_Five(name, arry) {
                     },
     },
     series: [{
+              name:'煤粉月进量分析',
         data: [0, 12, 18, 14, 10, 3, 12,8,0],
         type: 'line',
-        symbol: 'none', 
+        symbol: 'none',
         smooth: true,
         areaStyle : {
        normal : {
@@ -1588,7 +1579,7 @@ MeiZhiYou_Five(name, arry) {
        {
        offset : 0.8,
        color : 'rgba(255, 192, 203, 0)'
-        } 
+        }
       ], false),
         shadowColor : 'rgba(0, 0, 0, 0.1)',
         shadowBlur : 10
@@ -1601,7 +1592,7 @@ MeiZhiYou_Five(name, arry) {
     borderColor : 'rgba(220,20,60,0.2)',
     borderWidth : 3
    }
-  },       
+  },
     }]
       });
   },
@@ -1629,10 +1620,6 @@ MeiZhiYou_Six(name, arry) {
           top: 5,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["单位产品综合能耗","基准值","先进值"],
         },
         xAxis: [
@@ -1647,7 +1634,7 @@ MeiZhiYou_Six(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1667,7 +1654,7 @@ MeiZhiYou_Six(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1688,30 +1675,36 @@ MeiZhiYou_Six(name, arry) {
               ]),
             },
             data: [4 , 4 , 7 , 17 , 8 , 21 , 23 , 13 , 8],
-         markLine: {
-           symbol:'none',
-            data: [
-            { yAxis : 2,
-              name:"基准值",
-              color:"#63edd4",
-              lineStyle: {
-                        color: 'red',
-                        },
-            },
-            {yAxis : 18,
-              name:"先进值",
-                lineStyle: {
-                        color: 'green',
-                        },
-            }
-      ],
-      silent: true
-    }
           },
+            {
+                name: "基准值",
+                type: "line",
+                data: [2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2],
+                color:"#F91B20",
+                lineStyle: {
+                    type: "dotted",
+                    width: 1,
+                },
+                smooth: true,
+                showSymbol: false
+            },
+            {
+                name: "先进值",
+                type: "line",
+                showSymbol: false,
+                lineStyle: {
+                    type: "dotted",
+                    width: 1,
+                },
+                smooth: true,
+                color: "#16D9C3",
+                data: [18 , 18 , 18 , 18 , 18 , 18 , 18 , 18, 18]
+
+            }
         ],
       });
   },
-//煤制气第一栏 
+//煤制气第一栏
 MeiZhiQi_One(name, arry) {
       let echarts = require("echarts");
       let myChart = echarts.init(document.getElementById(name));
@@ -1719,12 +1712,6 @@ MeiZhiQi_One(name, arry) {
          tooltip: {
           trigger: "axis",
           formatter: '{a0}{b0}: {c0}万吨',
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
         },
         // grid: {
         //   height: 160,
@@ -1742,7 +1729,7 @@ MeiZhiQi_One(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1762,7 +1749,7 @@ MeiZhiQi_One(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1773,7 +1760,7 @@ MeiZhiQi_One(name, arry) {
         ],
         series: [
           {
-            name: "粉煤月加工量",
+            name: "粉煤月进量",
             type: "bar",
             barWidth: 10,
             itemStyle: {
@@ -1794,12 +1781,6 @@ MeiZhiQi_Two(name, arry) {
         tooltip: {
           trigger: "axis",
           formatter: '{a}{b}: {c}万吨',
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
         },
         xAxis: {
         type: 'category',
@@ -1810,7 +1791,7 @@ MeiZhiQi_Two(name, arry) {
                 },
         axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -1831,7 +1812,7 @@ MeiZhiQi_Two(name, arry) {
                 },
          axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1843,10 +1824,10 @@ MeiZhiQi_Two(name, arry) {
                     },
     },
     series: [{
-        name:'粉煤月加工量',
+        name:'水资源用量',
         data: [0, 12, 18, 14, 10, 3, 12,8,0],
         type: 'line',
-        symbol: 'none', 
+        symbol: 'none',
         smooth: true,
         areaStyle : {
        normal : {
@@ -1859,7 +1840,7 @@ MeiZhiQi_Two(name, arry) {
        {
        offset : 0.8,
        color : 'rgba(0, 136, 212, 0)'
-        } 
+        }
       ], false),
         shadowColor : 'rgba(0, 0, 0, 0.1)',
         shadowBlur : 10
@@ -1872,7 +1853,7 @@ MeiZhiQi_Two(name, arry) {
     borderColor : 'rgba(0,136,212,0.2)',
     borderWidth : 3
    }
-  },       
+  },
     }]
       });
   },
@@ -1883,7 +1864,7 @@ MeiZhiQi_Three(name, arry) {
       myChart.setOption({
          tooltip: {
           trigger: "axis",
-          formatter: '{c}%',
+             formatter: '{a} <br/>{b}: {c}%',
           axisPointer: {
             type: "cross",
             crossStyle: {
@@ -1900,7 +1881,7 @@ MeiZhiQi_Three(name, arry) {
                 },
         axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -1921,7 +1902,7 @@ MeiZhiQi_Three(name, arry) {
                 },
          axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -1933,9 +1914,10 @@ MeiZhiQi_Three(name, arry) {
                     },
     },
     series: [{
+             name:'天然气产量',
         data: [0, 12, 18, 14, 10, 3, 12,8,0],
         type: 'line',
-        symbol: 'none', 
+        symbol: 'none',
         smooth: true,
         areaStyle : {
        normal : {
@@ -1948,7 +1930,7 @@ MeiZhiQi_Three(name, arry) {
        {
        offset : 0.8,
        color : 'rgba(241, 158, 194, 0)'
-        } 
+        }
       ], false),
         shadowColor : 'rgba(0, 0, 0, 0.1)',
         shadowBlur : 10
@@ -1961,7 +1943,7 @@ MeiZhiQi_Three(name, arry) {
     borderColor : 'rgba(241,158,194,0.2)',
     borderWidth : 3
    }
-  },       
+  },
     }]
       });
   },
@@ -1971,7 +1953,7 @@ MeiZhiQi_Four(name, arry) {
       myChart.setOption({
          tooltip: {
           trigger: "axis",
-          formatter: '{c}%',
+             formatter: '{a} <br/>{b}: {c}%',
         },
         xAxis: {
         type: 'category',
@@ -1982,7 +1964,7 @@ MeiZhiQi_Four(name, arry) {
                 },
         axisLine: {
             lineStyle: {
-              color: "#ddd", // 颜色
+              color: "#9B9DA1", // 颜色
               width: 1, // 粗细
             },
           },
@@ -2003,7 +1985,7 @@ MeiZhiQi_Four(name, arry) {
                 },
          axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2015,9 +1997,10 @@ MeiZhiQi_Four(name, arry) {
                     },
     },
     series: [{
+             name:'平均负荷率',
         data: [0, 12, 18, 14, 10, 3, 12,8,0],
         type: 'line',
-        symbol: 'none', 
+        symbol: 'none',
         smooth: true,
         areaStyle : {
        normal : {
@@ -2030,7 +2013,7 @@ MeiZhiQi_Four(name, arry) {
        {
        offset : 0.8,
        color : 'rgba(255, 0, 255, 0)'
-        } 
+        }
       ], false),
         shadowColor : 'rgba(0, 0, 0, 0.1)',
         shadowBlur : 10
@@ -2043,8 +2026,8 @@ MeiZhiQi_Four(name, arry) {
     borderColor : 'rgba(231,106,26,0.2)',
     borderWidth : 3
    }
-  },       
-    }]      
+  },
+    }]
       });
   },
 //煤制油第三栏
@@ -2066,10 +2049,6 @@ MeiZhiQi_Five(name, arry) {
           top: 5,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["单位产品综合能耗","基准值","先进值"],
         },
         xAxis: [
@@ -2094,7 +2073,7 @@ MeiZhiQi_Five(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2114,7 +2093,7 @@ MeiZhiQi_Five(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2135,27 +2114,33 @@ MeiZhiQi_Five(name, arry) {
               ]),
             },
             data: [4 , 4 , 7 , 17 , 8 , 21 , 23 , 13 , 8],
-         markLine: {
-           symbol:'none',
-            data: [
-            { yAxis : 2,
-              name:"基准值",
-              color:"#63edd4",
-              lineStyle: {
-                        color: 'red',
-                        },
-            },
-            {yAxis : 18,
-              name:"先进值",
-                lineStyle: {
-                        color: 'green',
-                        },
-            }
-      ],
-      silent: true
-    }
           },
-          
+            {
+                name: "基准值",
+                type: "line",
+                data: [2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2],
+                color:"#F91B20",
+                lineStyle: {
+                    type: "dotted",
+                    width: 1,
+                },
+                smooth: true,
+                showSymbol: false
+            },
+            {
+                name: "先进值",
+                type: "line",
+                showSymbol: false,
+                lineStyle: {
+                    type: "dotted",
+                    width: 1,
+                },
+                smooth: true,
+                color: "#16D9C3",
+                data: [18 , 18 , 18 , 18 , 18 , 18 , 18 , 18, 18]
+
+            },
+
         ],
       });
   },
@@ -2177,10 +2162,6 @@ MeiZhiQi_Six(name, arry) {
           top: 5,
           right: 30,
           itemGap: 20,
-          textStyle: {
-            color: "#e3e3e3",
-            fontSize: 10,
-          },
           data: ["单位产品原料能耗","基准值","先进值"],
         },
         xAxis: [
@@ -2205,7 +2186,7 @@ MeiZhiQi_Six(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2225,7 +2206,7 @@ MeiZhiQi_Six(name, arry) {
             },
             axisLine: {
               lineStyle: {
-                color: "#ddd", // 颜色
+                color: "#9B9DA1", // 颜色
                 width: 1, // 粗细
               },
             },
@@ -2246,27 +2227,33 @@ MeiZhiQi_Six(name, arry) {
               ]),
             },
             data: [4 , 4 , 7 , 17 , 8 , 21 , 23 , 13 , 8],
-         markLine: {
-           symbol:'none',
-            data: [
-            { yAxis : 2,
-              name:"基准值",
-              color:"#63edd4",
-              lineStyle: {
-                        color: 'red',
-                        },
-            },
-            {yAxis : 18,
-              name:"先进值",
-                lineStyle: {
-                        color: 'green',
-                        },
-            }
-      ],
-      silent: true
-    }
           },
-          
+            {
+                name: "基准值",
+                type: "line",
+                data: [2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2],
+                color:"#F91B20",
+                lineStyle: {
+                    type: "dotted",
+                    width: 1,
+                },
+                smooth: true,
+                showSymbol: false,
+            },
+            {
+                name: "先进值",
+                type: "line",
+                showSymbol: false,
+                lineStyle: {
+                    type: "dotted",
+                    width: 1,
+                },
+                smooth: true,
+                color: "#16D9C3",
+                data: [18 , 18 , 18 , 18 , 18 , 18 , 18 , 18, 18]
+
+            }
+
         ],
       });
   },
@@ -2364,7 +2351,7 @@ tabButton_one(id) {
         });
       }
     },
-/* 第二个页面的点击按钮 */ 
+/* 第二个页面的点击按钮 */
 tabButton_two(id) {
       this.selected_two = id;
       if (0 == id) {

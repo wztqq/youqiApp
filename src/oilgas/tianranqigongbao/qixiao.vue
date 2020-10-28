@@ -21,7 +21,7 @@
         <div class="chart-item" v-if="selected_one === 0">
           <div class="fontSize_div">
             <div class="fontSize">28453</div>
-            <div class="fontSize">吨</div>
+            <div class="fontSize">亿立方米</div>
           </div>
           <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
         </div>
@@ -125,15 +125,15 @@ export default {
           width: 300,
         },
         {
-          value: "日进气量",
+          value: "日进气量(亿立方米)",
           width: 100,
         },
         {
-          value: "日出气量",
+          value: "日出气量(亿立方米)",
           width: 100,
         },
         {
-          value: "管存量",
+          value: "管存量(亿立方米)",
           width: 90,
         },
       ],
@@ -166,6 +166,7 @@ export default {
       optionObjTFJGFX: {
         legendData: ["苏里格气田", "大牛地气田", "靖边气田", "胜利井气田", "乌审旗气田"],
         seriesName: "月产量分析",
+        unit: "亿立方米",
         seriesData: [
           { value: 335, name: "苏里格气田" },
           { value: 310, name: "大牛地气田" },
@@ -177,6 +178,7 @@ export default {
       optionObjXFJGFX: {
         legendData: ["居民用气", "民生用气", "商业", "甲醛化肥企业", "可中断企业", "不可中断企业", "LNG企业用户"],
         seriesName: "消费结构分析",
+        unit: "亿立方米",
         seriesData: [
           { value: 335, name: "居民用气" },
           { value: 310, name: "民生用气" },
@@ -218,6 +220,7 @@ export default {
       optionObjMS3T: {
         legendData: ["鄂尔多斯", "包头"],
         seriesName: "盟市地方3天储气能力",
+        unit: "亿立方米",
         seriesData: [
           { value: 34, name: "鄂尔多斯" },
           { value: 66, name: "包头" },
@@ -226,6 +229,7 @@ export default {
       optionObjMS5: {
         legendData: ["鄂尔多斯", "包头"],
         seriesName: "盟市地方3天储气能力",
+        unit: "亿立方米",
         seriesData: [
           { value: 70, name: "鄂尔多斯" },
           { value: 30, name: "包头" },

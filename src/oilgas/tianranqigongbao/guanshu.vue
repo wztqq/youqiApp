@@ -44,7 +44,7 @@
         <div class="chart-item" :key="timer" v-if="selected_one === 0">
           <div class="fontSize_div">
             <div class="fontSize">3000</div>
-            <div class="fontSize">万方</div>
+            <div class="fontSize">亿立方米</div>
           </div>
           <dount-chart class="echarts" :optionObj="optionObjLineQTGQ"></dount-chart>
         </div>
@@ -59,7 +59,7 @@
         <div class="chart-item">
           <div class="fontSize_div">
             <div class="fontSize">3000</div>
-            <div class="fontSize">万方</div>
+            <div class="fontSize">亿立方米</div>
           </div>
           <pie-chart class="echarts" :optionObj="optionObjJSD"></pie-chart>
         </div>
@@ -89,7 +89,7 @@ export default {
         },
         {
           label: "输送能力",
-          value: "250亿m³"
+          value: "250亿立方米"
         },
         {
           label: "起止年限",
@@ -109,23 +109,23 @@ export default {
           width: 300,
         },
         {
-          value: "总里程(km)",
+          value: "总里程(公里)",
           width: 120,
         },
         {
-          value: "区内里程(km)",
+          value: "区内里程(公里)",
           width: 120,
         },
         {
-          value: "运送能力",
+          value: "运送能力(亿立方米)",
           width: 120,
         },
         {
-          value: "昨日进气量",
+          value: "昨日进气量(亿立方米)",
           width: 120,
         },
         {
-          value: "昨日出气量",
+          value: "昨日出气量(亿立方米)",
           width: 120,
         }
       ],
@@ -134,7 +134,7 @@ export default {
           guanxian: "长庆气田·乌海·临河输气管道",
           totalkm: "426",
           partlm: "426",
-          nengli: "10万亿立方",
+          nengli: "100000",
           jinqi: "790",
           chuqi: "790",
         },
@@ -142,7 +142,7 @@ export default {
           guanxian: "苏·东·准输气管",
           totalkm: "147",
           partlm: "147",
-          nengli: "12万亿立方",
+          nengli: "120000",
           jinqi: "1500",
           chuqi: "1500",
         },
@@ -150,7 +150,7 @@ export default {
           guanxian: "长庆气田·呼和浩特天然气输气管道",
           totalkm: "561.2",
           partlm: "561.2",
-          nengli: "18万亿立方",
+          nengli: "180000",
           jinqi: "50",
           chuqi: "50",
         },
@@ -158,7 +158,7 @@ export default {
           guanxian: "长庆气田·呼和浩特天然气输气管道复线",
           totalkm: "468.2",
           partlm: "468.2",
-          nengli: "21万亿立方",
+          nengli: "210000",
           jinqi: "760",
           chuqi: "760",
         },
@@ -213,7 +213,8 @@ export default {
       ],
       optionObjLineQTGQ: {
         legendData: ["阿拉善盟", "呼和浩特", "锡林郭勒", "呼伦贝尔", "鄂尔多斯", "其他"],
-        seriesName: "盟市消费结构分析",
+        seriesName: "送气端主要气田供气占比",
+        unit: "亿立方米",
         seriesData: [
           { value: 335, name: "阿拉善盟" },
           { value: 310, name: "呼和浩特" },
@@ -226,6 +227,7 @@ export default {
       optionObjJSD: {
         legendData: ["化肥", "甲醇", "城市燃气"],
         seriesName: "接收端主要行业占比",
+        unit: "亿立方米",
         seriesData: [
           { value: 335, name: "化肥" },
           { value: 310, name: "甲醇" },
@@ -235,6 +237,7 @@ export default {
       optionObjGQQY: {
         legendData: ["中石油", "中石化"],
         seriesName: "送气端主要企业供气占比",
+        unit: "亿立方米",
         seriesData: [
           { value: 77, name: "中石油" },
           { value: 23, name: "中石化" },
@@ -292,11 +295,11 @@ export default {
         padding: 5px;
         margin: 5px;
         background: #6a7181;
-        opacity: .7;
+        background: rgba($color: #6a7181, $alpha: .7);
         p {
           color: #fff;
-          line-height: 1.2em;
-          font-size: 11;
+          line-height: 1.5em;
+          font-size: 12px;
           text-align: center;
           font-weight: bold;
           &.label {

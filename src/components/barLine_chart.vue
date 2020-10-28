@@ -60,29 +60,17 @@ export default {
         tooltip: {
           trigger: "axis",
           // formatter: "{a} <br/>{b}: {c} ({d}%)",
-          formatter: function (params) {
-            var str = "";
-            for (var i = 0; i < params.length; i++) {
-              if (params[i].seriesName === "天然气月产量") {
-                str +=
-                  "<p>" +
-                  params[i].seriesName +
-                  ":" +
-                  params[i].value +
-                  "亿立方米" +
-                  "</p >";
-              } else if (params[i].seriesName === "同比变化") {
-                str +=
-                  "<p>" +
-                  params[i].seriesName +
-                  ":" +
-                  params[i].value +
-                  "%" +
-                  "</p >";
-              }
+          formatter(params) {
+            if(params.length && params.length > 1) {
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                      params[1].seriesName + ':' +
+                      params[1].value + '%'
+            }else if(params.length === 1 && params[0].seriesName === "天然气月产量") {
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+            }else if(params.length === 1 && params[0].seriesName === "同比变化") {
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '%'
             }
-            return str;
-          },
+          }
         },
         legend: {
           itemWidth: 10,
@@ -90,7 +78,7 @@ export default {
           data: this.optionObj.legendData,
           x: "right",
           textStyle: {
-            color: "#9C9DA2",
+            color: "#383838",
             // fontSize: ""
           },
         },

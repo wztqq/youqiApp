@@ -59,30 +59,32 @@ export default {
       let option = {
         tooltip: {
           trigger: "axis",
-          // formatter: "{a} <br/>{b}: {c}亿立方米",
-          // formatter: function (params) {
-          //   var str = "";
-          //   for (var i = 0; i < params.length; i++) {
-          //     if (params[i].seriesName === "日供气量(亿)") {
-          //       str +=
-          //         "<p>" +
-          //         params[i].seriesName +
-          //         ":" +
-          //         params[i].value +
-          //         "亿立方米" +
-          //         "</p >";
-          //     } else if (params[i].seriesName === "基准值") {
-          //       str +=
-          //         "<p>" +
-          //         params[i].seriesName +
-          //         ":" +
-          //         params[i].value +
-          //         "亿立方米" +
-          //         "</p >";
-          //     }
-          //   }
-          //   return str;
-          // },
+          formatter(params) {
+            if (params.length && params.length > 1) {
+              return (
+                params[0].name +
+                "</br>" +
+                params[0].seriesName +
+                ":" +
+                params[0].value +
+                "亿立方米" +
+                "</br>" +
+                params[1].seriesName +
+                ":" +
+                params[1].value +
+                "亿立方米"
+              );
+            } else if (params.length === 1) {
+              return (
+                params[0].name +
+                "</br>" +
+                params[0].seriesName +
+                ":" +
+                params[0].value +
+                "亿立方米"
+              );
+            }
+          },
         },
         legend: {
           itemWidth: 10,
@@ -90,7 +92,7 @@ export default {
           data: this.optionObj.legendData,
           x: "right",
           textStyle: {
-            color: "#9C9DA2",
+            color: "#383838",
             // fontSize: ""
           },
         },

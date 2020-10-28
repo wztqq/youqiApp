@@ -9,8 +9,8 @@
           alt="图片未显示"/>
         <div class="banner">
           <h4>***盟市</h4>
-          <p>昨日天然气消费量：100</p>
-          <p>累计天然气消费量：1000</p>
+          <p>昨日天然气消费量：100亿立方米</p>
+          <p>累计天然气消费量：1000亿立方米</p>
         </div>
       </div>
 
@@ -57,7 +57,8 @@
         </div>
         <div class="chart-item" :key="timer" v-if="selected_two === 1">
           <div class="fontSize_div">
-            <div class="fontSize onlynum">3000</div>
+            <div class="fontSize">3000</div>
+            <div class="fontSize">万立方米</div>
           </div>
           <dount-chart class="echarts" :optionObj="optionObjXS"></dount-chart>
         </div>
@@ -124,6 +125,7 @@ export default {
       optionObjYQDW: {
         legendData: ["工业用户", "商业", "建筑业", "生活消费", "供暖"],
         seriesName: "用气单位结构分析",
+        unit: "亿立方米",
         seriesData: [
           { value: 335, name: "工业用户" },
           { value: 310, name: "商业" },
@@ -135,6 +137,7 @@ export default {
       optionObjMS: {
         legendData: ["阿拉善盟", "呼和浩特", "锡林郭勒", "呼伦贝尔", "鄂尔多斯", "其他"],
         seriesName: "盟市消费结构分析",
+        unit: "万立方米",
         seriesData: [
           { value: 335, name: "阿拉善盟" },
           { value: 310, name: "呼和浩特" },
@@ -159,6 +162,7 @@ export default {
       optionObjXS: {
         legendData: ["洁源燃气", "中燃燃气", "荣洁燃气", "兴胜燃气"],
         seriesName: "销售单位结构分析",
+        unit: "万立方米",
         seriesData: [
           { value: 335, name: "洁源燃气" },
           { value: 310, name: "中燃燃气" },
@@ -224,7 +228,7 @@ export default {
     overflow: hidden;
   }
   .banner {
-    width: 180px;
+    width: 220px;
     height: 80px;
     background: url("../../assets/img/gasmap/sale_banner.png");
     position: absolute;

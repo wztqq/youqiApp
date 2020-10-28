@@ -65,6 +65,32 @@ export default {
               backgroundColor: "#999",
             },
           },
+          formatter(params) {
+            if (params.length && params.length > 1) {
+              return (
+                params[0].name +
+                "</br>" +
+                params[0].seriesName +
+                ":" +
+                params[0].value +
+                "亿立方米" +
+                "</br>" +
+                params[1].seriesName +
+                ":" +
+                params[1].value +
+                "亿立方米"
+              );
+            } else if (params.length === 1) {
+              return (
+                params[0].name +
+                "</br>" +
+                params[0].seriesName +
+                ":" +
+                params[0].value +
+                "亿立方米"
+              );
+            }
+          },
         },
         legend: {
           data: this.optionObj.legendData,
@@ -74,7 +100,7 @@ export default {
           left: "3%",
           right: "4%",
           bottom: "3%",
-          width:"90%",
+          width: "90%",
           containLabel: true,
         },
         xAxis: {

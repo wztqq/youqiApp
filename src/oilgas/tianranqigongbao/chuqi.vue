@@ -15,7 +15,7 @@
 					<div class="modal-box">
 						<div class="modal-des-box">
 							<div class="modal-title">储气量：</div>
-							<div class="model-des">0.92</div>
+							<div class="model-des">0.92亿立方米</div>
 						</div>
 						<div class="modal-des-box">
 							<div class="modal-title">温度：</div>
@@ -26,7 +26,7 @@
 					<div class="modal-box">
 						<div class="modal-des-box">
 							<div class="modal-title">压力：</div>
-							<div class="model-des">0.92MP</div>
+							<div class="model-des">0.92MPa</div>
 						</div>
 						<div class="modal-des-box">
 							<div class="modal-title">地方3天：</div>
@@ -147,7 +147,7 @@
 			}
 		},
 		mounted() {
-			this.drawPie('gasPieTwo', this.gasPieTwoData);
+			this.drawPie('gasPieTwo', this.gasPieTwoData, "亿立方米", "地方政府3天");
 			this.drawGasPie()
 
 		},
@@ -158,6 +158,7 @@
 				let option = {
 					tooltip: {
 						trigger: "item",
+						position: "bottom",
 						formatter: "{a} <br/>{b}: {c}亿立方米({d}%)"
 					},
 					legend: {
@@ -169,28 +170,42 @@
 						itemWidth: 15,
 						itemHeight: 10,
 						// 使用回调函数
-						formatter: function(name) {
-							var data = option.series[0].data;
-							var total = 0;
-							var tarValue;
-							for (var i = 0, l = data.length; i < l; i++) {
-								total += data[i].value;
-								if (data[i].name == name) {
-									tarValue = data[i].value;
-								}
-							}
-							var p = ((tarValue / total) * 100).toFixed(1);
-							return name + " " + " " + p + "%";
-						},
+						// formatter: function(name) {
+						// 	var data = option.series[0].data;
+						// 	var total = 0;
+						// 	var tarValue;
+						// 	for (var i = 0, l = data.length; i < l; i++) {
+						// 		total += data[i].value;
+						// 		if (data[i].name == name) {
+						// 			tarValue = data[i].value;
+						// 		}
+						// 	}
+						// 	var p = ((tarValue / total) * 100).toFixed(1);
+						// 	return name + " " + " " + p + "%";
+						// },
 					},
 					series: [{
 						name: '本年度储气能力',
 						type: "pie",
 						radius: ["40%", "55%"],
 						center: ["50%", "40%"],
+						// label: {
+						// 	show: false
+						// },
 						label: {
-							show: false
-						},
+                                formatter: "{per|{b}:{d}%\n}",
+                                padding: [0, -120, 5],
+                                rich: {
+                                    per: {
+                                        fontSize: 12,
+                                        color: "#9B9DA1"
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                length: 15,
+                                length2: 120
+                            },
 						data: [{
 								value: 0.85,
 								name: "城燃企业5%"
@@ -220,12 +235,13 @@
 				myChart.setOption(option);
 			},
 			//地方政府3天
-			drawPie(id, seriesData) {
+			drawPie(id, seriesData, unit, name) {
 				let myChart = this.$echarts.init(document.getElementById(id));
 				let option = {
 					tooltip: {
 						trigger: "item",
-						formatter: "{b}: {c} ({d}%)"
+						position: "bottom",
+						formatter: "{a} <br/>{b}: {c}" + unit + "({d}%)",
 					},
 					legend: {
 						orient: "horizontal",
@@ -240,7 +256,7 @@
 						bottom: 40
 					},
 					series: [{
-
+						name: name,
 						type: "pie",
 						radius: ["40%", "55%"],
 						center: ["50%", "40%"],
@@ -283,7 +299,7 @@
 			handlePieClick(tab, event) {
 				if (tab.index == 1) {
 					this.$nextTick(() => {
-						this.drawPie('gasPieThree', this.gasPieThreeData);
+						this.drawPie('gasPieThree', this.gasPieThreeData, "亿立方米", "城燃企业5%");
 					})
 				}
 

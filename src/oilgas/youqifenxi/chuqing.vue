@@ -52,7 +52,7 @@
 				</div>
 				<div class="fontSize_div">
 					<div class="fontSize" v-model="pie_number_two">{{pie_number_two}}</div>
-					<div class="fontSizeOne">立亿方米</div>
+					<div class="fontSizeOne">亿立方米</div>
 				</div>
 				<div class="echarts" id="echartsTwo"></div>
 			</div>
@@ -114,7 +114,7 @@
 					<div class="ratio_div">
 						<!-- 上月完成 -->
 						<div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
-							<div style="width: 75px; height: 50px; float: left; position: relative; left: 5px;">
+							<div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
 								<div class="last_month"><span class="ratio_font" v-model="last_month">{{last_month}}</span><span class="ratio_font1" v-model="unit">{{unit}}</span></div>
 								<div class="last_month_font"><span class="ratio_font_div">上月完成</span></div>
 							</div>
@@ -129,7 +129,7 @@
 						</div>
 						<!-- 年度完成 -->
 						<div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
-							<div style="width: 75px; height: 50px; float: left; position: relative; left: 5px;">
+							<div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
 								<div class="last_month"><span class="ratio_font" v-model="last_year">{{last_year}}</span><span class="ratio_font1" v-model="unit">{{unit}}</span></div>
 								<div class="last_month_font"><span class="ratio_font_div">年度完成</span></div>
 							</div>
@@ -189,7 +189,7 @@
 					<div class="ratio_div">
 						<!-- 上月完成 -->
 						<div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
-							<div style="width: 75px; height: 50px; float: left; position: relative; left: 5px;">
+							<div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
 								<div class="last_month"><span class="ratio_font" v-model="last_month">{{last_month}}</span><span class="ratio_font1" v-model="unit">{{unit}}</span></div>
 								<div class="last_month_font"><span class="ratio_font_div">上月完成</span></div>
 							</div>
@@ -204,7 +204,7 @@
 						</div>
 						<!-- 年度完成 -->
 						<div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
-							<div style="width: 75px; height: 50px; float: left; position: relative; left: 5px;">
+							<div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
 								<div class="last_month"><span class="ratio_font" v-model="last_year">{{last_year}}</span><span class="ratio_font1" v-model="unit">{{unit}}</span></div>
 								<div class="last_month_font"><span class="ratio_font_div">年度完成</span></div>
 							</div>
@@ -239,7 +239,7 @@
 
 
 
-	</div>
+	<!-- </div> -->
 </template>
 <script>
 	export default {
@@ -278,7 +278,7 @@
 					},
 					{
 						"name": "达尔其油田",
-						"area": "4314.12平方公里",
+						"area": "4314.12万平方公里",
 						"city": "巴彦淖尔市",
 						"prediction": "300万吨",
 						"proved": "212万吨",
@@ -297,7 +297,7 @@
 					},
 					{
 					    "name": "汗塞油田",
-					    "area": "432平方公里",
+					    "area": "432万平方公里",
 					    "city": "乌兰察布市",
 					    "prediction": "500万吨",
 					    "proved": "300万吨",
@@ -326,7 +326,7 @@
 					    },
 					    {
 					        "name": "新苏木油田",
-					        "area": "357平方公里",
+					        "area": "357万平方公里",
 					        "city": "锡林郭勒盟",
 					        "prediction": "1870万吨",
 					        "proved": "1200万吨",
@@ -344,7 +344,7 @@
 					    },
 					    {
 					        "name": "锡林油田",
-					        "area": "452平方公里",
+					        "area": "452万平方公里",
 					        "city": "锡林郭勒盟",
 					        "prediction": "1810万吨",
 					        "proved": "1100万吨",
@@ -353,7 +353,7 @@
 					    },
 					    {
 					        "name": "乌兰诺尔油田",
-					        "area": "612平方公里",
+					        "area": "612万平方公里",
 					        "city": "锡林郭勒盟",
 					        "prediction": "1780万吨",
 					        "proved": "1100万吨",
@@ -373,7 +373,7 @@
 					},
 					{
 					    "name": "交力格油田",
-					    "area": "357平方公里",
+					    "area": "357万平方公里",
 					    "city": "通辽市",
 					    "prediction": "550万吨",
 					    "proved": "380万吨",
@@ -391,7 +391,7 @@
 					},
 					{
 					    "name": "龙筒湾油田",
-					    "area": "452平方公里",
+					    "area": "452万平方公里",
 					    "city": "通辽市",
 					    "prediction": "362.4万吨",
 					    "proved": "275万吨",
@@ -400,7 +400,7 @@
 					},
 					{
 					    "name": "科尔康油田",
-					    "area": "612平方公里",
+					    "area": "612万平方公里",
 					    "city": "通辽市",
 					    "prediction": "2000万吨",
 					    "proved": "100万吨",
@@ -420,7 +420,7 @@
 					   },
 					   {
 					       "name": "巴彦塔拉油田",
-					       "area": "657平方公里",
+					       "area": "657万平方公里",
 					       "city": "呼伦贝尔市",
 					       "prediction": "2531万吨",
 					       "proved": "1800万吨",
@@ -438,7 +438,7 @@
 					   },
 					   {
 					       "name": "呼和诺仁油田",
-					       "area": "752平方公里",
+					       "area": "752万平方公里",
 					       "city": "呼伦贝尔市",
 					       "prediction": "2531万吨",
 					       "proved": "1537万吨",
@@ -447,7 +447,7 @@
 					   },
 					   {
 					       "name": "贝尔油田",
-					       "area": "412平方公里",
+					       "area": "412万平方公里",
 					       "city": "呼伦贝尔市",
 					       "prediction": "2531万吨",
 					       "proved": "1500万吨",
@@ -458,7 +458,7 @@
 				listData6: [
 					{
 					    "name": "胜利井气田",
-					    "area": "3341平方公里",
+					    "area": "3341万平方公里",
 					    "city": "鄂尔多斯市",
 					    "prediction": "5950万立方米",
 					    "proved": "3332万立方米",
@@ -476,7 +476,7 @@
 					},
 					{
 					        "name": "靖边气田",
-					        "area": "2124.26平方公里",
+					        "area": "2124.26万平方公里",
 					        "city": "鄂尔多斯市",
 					        "prediction": "4250万立方米",
 					        "proved": "2380万立方米",
@@ -485,7 +485,7 @@
 					    },
 					    {
 					        "name": "乌审旗气田",
-					        "area": "4362平方公里",
+					        "area": "4362万平方公里",
 					        "city": "鄂尔多斯市",
 					        "prediction": "4250万立方米",
 					        "proved": "2380万立方米",
@@ -494,7 +494,7 @@
 					    },
 					    {
 					        "name": "大牛地气田",
-					        "area": "2134平方公里",
+					        "area": "2134万平方公里",
 					        "city": "鄂尔多斯市",
 					        "prediction": "2550万立方米",
 					        "proved": "1428万立方米",
@@ -516,7 +516,7 @@
 				listData8: [
 					{
 						"name": "哈达图气田",
-						"area": "357平方公里",
+						"area": "357万平方公里",
 						"city": "锡林郭勒盟",
 						"prediction": "750万立方米",
 						"proved": "500万立方米",
@@ -536,7 +536,7 @@
 				listData9: [
 					{
 						"name": "贝尔气田",
-						"area": "657平方公里",
+						"area": "657万平方公里",
 						"city": "呼伦贝尔市",
 						"prediction": "980万立方米",
 						"proved": "510万立方米",
@@ -545,7 +545,7 @@
 					},
 					{
 						"name": "苏仁诺尔气田",
-						"area": "747平方公里",
+						"area": "747万平方公里",
 						"city": "呼伦贝尔市",
 						"prediction": "520万立方米",
 						"proved": "330万立方米",
@@ -558,7 +558,7 @@
 				tablist_two: ['天然气剩余技术储量', '天然气剩余经济储量'],
 				pie_number: 1177,  //原油剩余技术数值
 				pie_number_two: 0.66,  //天然气剩余技术数值
-				tablist_three: ['油田采储比排名', '气田采储比排名'],
+				tablist_three: ['油田储采比排名', '气田储采比排名'],
 				tablist_four: ['原油产量分析', '天然气产量分析'],
 				tablist_five: ['本年度原油生产自给率', '本年度天然气生产自给率'],
 				tablist_six: ['本年度原油生产企业分布', '本年度天然气生产企业分布'],
@@ -723,9 +723,9 @@
 				unit: '万吨',
 				
 				// 采储排名
-				tableTh_name: '油田采储比排名',
+				tableTh_name: '油田储采比排名',
 				
-				tableTh_one: ['序号', '油田', '盟区', '采储比'],
+				tableTh_one: ['序号', '油田', '盟区', '储采比'],
 				listData_one: [{
 						oilfield: '吉祥油田',
 						leaguerea: '巴彦淖尔市',
@@ -752,7 +752,7 @@
 						ratio: '10.5'
 					},
 				],
-				tableTh_two: ['序号', '气田', '盟区', '采储比'],
+				tableTh_two: ['序号', '气田', '盟区', '储采比'],
 				listData_two: [{
 						oilfield: '苏格里气田',
 						leaguerea: '鄂尔多斯市',
@@ -820,8 +820,8 @@
 			}
 		},
 		mounted() {
-			this.drawLine('echartsOne', this.echarts.data_one);
-			this.drawLine('echartsTwo', this.echarts.data_two);
+			this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量");
+			this.drawLine('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量");
 			this.screenLeft = (this.screenWidth - 343) / 2 + 'px'
 		},
 		methods: {
@@ -849,13 +849,13 @@
 				this.show = 0
 			},
 			// 储情分析环形图
-			drawLine(name, arry) {
+			drawLine(id, arry, unit, name) {
 				var echarts = require('echarts');
-				var myChart = echarts.init(document.getElementById(name));
+				var myChart = echarts.init(document.getElementById(id));
 				myChart.setOption({
 					tooltip: {
 						trigger: 'item',
-						formatter: '{a} <br/>{b}: {c} ({d}%)'
+						formatter: '{a} <br/>{b}: {c}' + unit + '({d}%)'
 					},
 					legend: {
 						orient: 'horizontal',
@@ -870,7 +870,7 @@
 						bottom: 40
 					},
 					series: [{
-						name: '原油剩余技术储量',
+						name: name,
 						type: 'pie',
 						radius: ['40%', '55%'],
 						center: ['50%', '40%'],
@@ -1018,13 +1018,13 @@
 					]
 				});
 			},
-			drawPie(name, arry) {
+			drawPie(id, arry, unit, name) {
 				let echarts = require('echarts');
-				let myChart = echarts.init(document.getElementById(name));
+				let myChart = echarts.init(document.getElementById(id));
 				myChart.setOption({
 					tooltip: {
 						trigger: "item",
-						formatter: "{a} <br/>{b}: {c} ({d}%)",
+						formatter: "{a} <br/>{b}: {c}" + unit + "({d}%)",
 					},
 					legend: {
 						orient: "vertical",
@@ -1040,7 +1040,7 @@
 						}
 					},
 					series: [{
-						name: "原油剩余技术储量",
+						name: name,
 						type: "pie",
 						radius: ["40%", "55%"],
 						center: ["50%", "40%"],
@@ -1074,13 +1074,13 @@
 					}],
 				});
 			},
-			drawPie_one(name, arry) {
+			drawPie_one(id, arry, unit, name) {
 				let echarts = require('echarts');
-				let myChart = echarts.init(document.getElementById(name));
+				let myChart = echarts.init(document.getElementById(id));
 				myChart.setOption({
 					tooltip: {
 						trigger: "item",
-						formatter: "{a} <br/>{b}: {c} ({d}%)",
+						formatter: "{a} <br/>{b}: {c}" + unit + "({d}%)",
 					},
 					legend: {
 						orient: "vertical",
@@ -1092,7 +1092,7 @@
 						itemHeight: 10,
 					},
 					series: [{
-						name: "原油剩余技术储量",
+						name: name,
 						type: "pie",
 						radius: ["40%", "55%"],
 						center: ["50%", "50%"],
@@ -1179,13 +1179,13 @@
 					}],
 				});
 			},
-			drawPie_one(name, arry) {
+			drawPie_one(id, arry, unit, name) {
 				let echarts = require('echarts');
-				let myChart = echarts.init(document.getElementById(name));
+				let myChart = echarts.init(document.getElementById(id));
 				myChart.setOption({
 					tooltip: {
 						trigger: "item",
-						formatter: "{a} <br/>{b}: {c} ({d}%)",
+						formatter: "{a} <br/>{b}: {c}" + unit + "({d}%)",
 					},
 					legend: {
 						orient: "vertical",
@@ -1197,7 +1197,7 @@
 						itemHeight: 10,
 					},
 					series: [{
-						name: "原油剩余技术储量",
+						name: name,
 						type: "pie",
 						radius: ["40%", "55%"],
 						center: ["50%", "50%"],
@@ -1410,8 +1410,8 @@
 					this.selected_three = 0
 					this.pie_number = 1177
 					this.$nextTick(function() {
-						this.drawLine('echartsOne', this.echarts.data_one)
-						this.drawLine('echartsTwo', this.echarts.data_two);
+						this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量")
+						this.drawLine('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量");
 					})
 
 				}
@@ -1431,8 +1431,8 @@
 					this.bacolor = 1
 					this.$nextTick(function() {
 						this.drawLine_one('echartsThree', this.bardata_one)
-						this.drawPie('echartsFour',this.produce_pie_oil)
-						this.drawPie_one('echartsFive',this.produce_pieTwo_oil)
+						this.drawPie('echartsFour',this.produce_pie_oil, "亿立方米", "本年度原油生产自给率")
+						this.drawPie_one('echartsFive',this.produce_pieTwo_oil, "个", "本年度原油生产企业分布")
 					})
 				}
 			},
@@ -1442,12 +1442,12 @@
 			tabButton_one(id) {
 				this.selected_one = id
 				if (this.i == 0 && id == 1) {
-					this.drawLine('echartsOne', this.echarts.data_three);
+					this.drawLine('echartsOne', this.echarts.data_three, "万吨", "原油剩余经济储量");
 					this.pie_number = 460
 					this.i = 1
 				}
 				if (this.i == 1 && id == 0) {
-					this.drawLine('echartsOne', this.echarts.data_one);
+					this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量");
 					this.pie_number = 1177
 					this.i = 0
 				}
@@ -1456,12 +1456,12 @@
 			tabButton_two(id) {
 				this.selected_two = id
 				if (this.j == 0 && id == 1) {
-					this.drawLine('echartsTwo', this.echarts.data_four);
+					this.drawLine('echartsTwo', this.echarts.data_four, "亿立方米", "天然气剩余经济储量");
 					this.pie_number_two = 0.4
 					this.j = 1
 				}
 				if (this.j == 1 && id == 0) {
-					this.drawLine('echartsTwo', this.echarts.data_two);
+					this.drawLine('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量");
 					this.pie_number_two = 0.66
 					this.j = 0
 				}
@@ -1471,11 +1471,11 @@
 				this.selected_three = id
 				if (this.g == 0 && id == 1) {
 					this.g = 1
-					this.tableTh_name = '气田采储比排名'
+					this.tableTh_name = '气田储采比排名'
 				}
 				if (this.g == 1 && id == 0) {
 					this.g = 0
-					this.tableTh_name = '油田采储比排名'
+					this.tableTh_name = '油田储采比排名'
 				}
 			},
 
@@ -1503,8 +1503,8 @@
 					this.bacolor = 1
 					this.$nextTick(function() {
 						this.drawLine_one('echartsThree', this.bardata_one)
-						this.drawPie('echartsFour',this.produce_pie_oil)
-						this.drawPie_one('echartsFive',this.produce_pieTwo_oil)
+						this.drawPie('echartsFour',this.produce_pie_oil, "亿立方米", "本年度原油生产自给率")
+						this.drawPie_one('echartsFive',this.produce_pieTwo_oil, "个", "本年度原油生产企业分布")
 					})
 				}else{
 					this.btn_shenchan_num = 0
@@ -1526,7 +1526,8 @@
 				if (this.p_i == 0 && id == 1) {
 					this.drawLine_one('echartsThree', this.bardata_two)
 					this.p_i = 1
-					this.unit = '万m³'
+					// this.unit = '万m³'
+					this.unit = '万立方米'
 				}
 				if (this.p_i == 1 && id == 0) {
 					this.drawLine_one('echartsThree', this.bardata_one)
@@ -1538,13 +1539,13 @@
 			tabButton_five(id) {
 				this.selected_five = id
 				if (this.p_j == 0 && id == 1) {
-					this.drawPie('echartsFour', this.produce_pie_gas);
+					this.drawPie('echartsFour', this.produce_pie_gas, "亿立方米", "本年度天然气生产自给率");
 					this.pie_one_number = this.produce_pie_gas[2]
 					this.pie_one_unit = this.produce_pie_gas[3]
 					this.p_j = 1
 				}
 				if (this.p_j == 1 && id == 0) {
-					this.drawPie('echartsFour', this.produce_pie_oil);
+					this.drawPie('echartsFour', this.produce_pie_oil, "亿立方米", "本年度原油生产自给率");
 					this.pie_one_number = this.produce_pie_oil[2]
 					this.pie_one_unit = this.produce_pie_oil[3]
 					this.p_j = 0
@@ -1556,12 +1557,12 @@
 				if (this.p_g == 0 && id == 1) {
 					this.p_g = 1
 					this.bacolor = 0
-					this.drawPie_one('echartsFive',this.produce_pieTwo_gas)
+					this.drawPie_one('echartsFive',this.produce_pieTwo_gas, "个", "本年度天然气生产企业分布")
 				}
 				if (this.p_g == 1 && id == 0) {
 					this.p_g = 0
 					this.bacolor = 1
-					this.drawPie_one('echartsFive',this.produce_pieTwo_oil)
+					this.drawPie_one('echartsFive',this.produce_pieTwo_oil, "个", "本年度原油生产企业分布")
 				}
 			},
 			//炼化煤内容第一个按钮
@@ -1577,7 +1578,8 @@
 				}
 				if (id == 2) {
 					this.drawLine_one('echartsSix', this.bardata_five)
-					this.unit = '万m³'
+					// this.unit = '万m³'
+					this.unit = '万立方米'
 				}
 			},
 			//炼化煤内容第二个按钮

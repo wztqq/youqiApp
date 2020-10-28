@@ -204,6 +204,7 @@ export default {
       optionObjTFJGFX: {
         legendData: ["LNG", "甲醇化肥", "可中断工业", "不可中断工业", "商业"],
         seriesName: "调峰结构分析",
+        unit: "亿立方米",
         seriesData: [
           { value: 335, name: "LNG" },
           { value: 310, name: "甲醇化肥" },

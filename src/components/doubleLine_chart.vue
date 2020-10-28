@@ -65,11 +65,37 @@ export default {
               backgroundColor: "#6a7985",
             },
           },
+          formatter(params) {
+            if (params.length && params.length > 1) {
+              return (
+                params[0].name +
+                "</br>" +
+                params[0].seriesName +
+                ":" +
+                params[0].value +
+                "亿立方米" +
+                "</br>" +
+                params[1].seriesName +
+                ":" +
+                params[1].value +
+                "亿立方米"
+              );
+            } else if (params.length === 1) {
+              return (
+                params[0].name +
+                "</br>" +
+                params[0].seriesName +
+                ":" +
+                params[0].value +
+                "亿立方米"
+              );
+            }
+          },
         },
         legend: {
           right: 10,
           textStyle: {
-            color: "#9C9DA2",
+            color: "#383838",
             // fontSize: ""
           },
           // itemWidth: 10,

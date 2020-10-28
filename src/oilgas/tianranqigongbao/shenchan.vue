@@ -34,8 +34,8 @@
                 </el-tabs>
             </div>
             <div class="tabs-content">
-                <div id="barOne" style="width:100%;height:200px;" v-show="activeName==='1'"></div>
-                <div id="barTwo" style="width:100%;height:200px;" v-show="activeName==='2'" ref="second"></div>
+                <div id="barOne" style="width:100%;height:240px;" v-show="activeName==='1'"></div>
+                <div id="barTwo" style="width:100%;height:240px;" v-show="activeName==='2'" ref="second"></div>
             </div>
         </div>
         <!--饼图-->
@@ -86,10 +86,10 @@
                     "企业人数",
                     "面积",
                     "经纬度",
-                    "远景资源量",
-                    "预测资源量",
-                    "控制储量",
-                    "探明储量"
+                    "远景资源量(万立方米)",
+                    "预测资源量(万立方米)",
+                    "控制储量(万立方米)",
+                    "探明储量(万立方米)"
                 ],
                 listData: [
                     {
@@ -125,7 +125,7 @@
                     {
                         name: "胜利井气田",
                         leaguerea: "2100",
-                        area: "432平方公里",
+                        area: "432万平方公里",
                         latitude: "43°17′10″~45°24′15″",
                         vision: "2890",
                         prediction: "1956",
@@ -135,7 +135,7 @@
                     {
                         name: "乌审旗气田",
                         leaguerea: "1980",
-                        area: "234平方公里",
+                        area: "234万平方公里",
                         latitude: "44°17′10″~40°24′15″",
                         vision: "3200",
                         prediction: "2056",
@@ -171,9 +171,15 @@
                     tooltip: {
                         trigger: 'axis',
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                                params[1].seriesName + ':' +
-                                params[1].value + '%'
+                            if(params.length && params.length > 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                    params[1].seriesName + ':' +
+                                    params[1].value + '%'
+                            }else if(params.length === 1 && params[0].seriesName === "天然气月产量") {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+                            }else if(params.length === 1 && params[0].seriesName === "同比变化") {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '%'
+                            }
                         }
                     },
                     legend: {
@@ -199,7 +205,7 @@
                     yAxis: [
                         {
                             type: 'value',
-                            name: '亿立方',
+                            name: '亿立方米',
                             min: 0,
                             max: 25,
                             interval: 5,
@@ -299,7 +305,7 @@
                     yAxis: [
                         {
                             type: 'value',
-                            name: '亿立方',
+                            name: '亿立方米',
                             min: 0,
                             max: 25,
                             interval: 5,
@@ -376,7 +382,7 @@
                         bottom: 10,
                         left: "center",
                         itemGap: 10,
-                        data: ["苏里格气田", "靖边气田", "胜利井气田", "其他", "大牛地气田", "乌审旗气田"],
+                        data: ["苏里格气田", "靖边气田", "胜利井气田", "大牛地气田", "乌审旗气田", "其他"],
                         itemWidth: 15,
                         itemHeight: 10
                     },
@@ -545,9 +551,16 @@
                     tooltip: {
                         trigger: 'axis',
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                                params[1].seriesName + ':' +
-                                params[1].value + '亿立方米'
+                            // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                            //     params[1].seriesName + ':' +
+                            //     params[1].value + '亿立方米'
+                            if(params.length && params.length > 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                    params[1].seriesName + ':' +
+                                    params[1].value + '亿立方米'
+                            }else if(params.length === 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+                            }
                         }
                     },
                     legend: {
@@ -575,7 +588,7 @@
                     yAxis: [
                         {
                             type: 'value',
-                            name: '亿立方',
+                            name: '亿立方米',
                             axisLine: {
                                 lineStyle: {
                                     color: '#9B9DA1'
@@ -778,7 +791,7 @@
         .table_one_t {
             font-family: PingFang SC;
             border-collapse: collapse;
-            width: 800px;
+            width: 1100px;
 
         }
 
@@ -806,7 +819,7 @@
             color: #246BD7;
             font-size: 14px;
             padding: 10px;
-            width: 800px;
+            width: 1100px;
             background-color: #fff;
         }
 

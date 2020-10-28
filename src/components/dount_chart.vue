@@ -48,7 +48,8 @@ export default {
       let option = {
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)"
+          position: "bottom",
+          formatter: "{a} <br/>{b}: {c}" + this.optionObj.unit + "({d}%)"
         },
         // title: {
         //   zlevel: 0,
@@ -77,7 +78,7 @@ export default {
           itemWidth: 10,
           itemHeight: 6,
           textStyle: {
-            color: "#9C9DA2",
+            color: "#383838",
           },
           x: "center",
           top: '75%',

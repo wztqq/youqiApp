@@ -151,7 +151,7 @@ var routes = [{
 // 创建路由实例
 var router = new VueRouter({
 	routes,
-	mode: 'history'
+	// mode: 'history'
 });
 
 // 导出路由对象

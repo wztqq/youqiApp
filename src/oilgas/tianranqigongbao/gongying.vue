@@ -19,8 +19,8 @@
                 </el-tabs>
             </div>
             <div class="tabs-content">
-                <div id="supplyLine" style="width: 100%;height: 167px" v-show="supplyActiveName==='1'"></div>
-                <div id="supplyLineTwo" style="width: 100%;height: 167px" v-show="supplyActiveName==='2'"></div>
+                <div id="supplyLine" style="width: 100%;height: 240px" v-show="supplyActiveName==='1'"></div>
+                <div id="supplyLineTwo" style="width: 100%;height: 240px" v-show="supplyActiveName==='2'"></div>
             </div>
         </div>
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
@@ -114,7 +114,7 @@
                             },
                             labelLine: {
                                 length: 15,
-                                length2: 30
+                                length2: 60
                             },
                             data: [{
                                 value: 1035,
@@ -170,19 +170,19 @@
                         itemWidth: 15,
                         itemHeight: 10,
                         // 使用回调函数
-                        formatter: function (name) {
-                            var data = option.series[0].data;
-                            var total = 0;
-                            var tarValue;
-                            for (var i = 0, l = data.length; i < l; i++) {
-                                total += data[i].value;
-                                if (data[i].name == name) {
-                                    tarValue = data[i].value;
-                                }
-                            }
-                            var p = ((tarValue / total) * 100).toFixed(1);
-                            return name + " " + " " + p + "%";
-                        },
+                        // formatter: function (name) {
+                        //     var data = option.series[0].data;
+                        //     var total = 0;
+                        //     var tarValue;
+                        //     for (var i = 0, l = data.length; i < l; i++) {
+                        //         total += data[i].value;
+                        //         if (data[i].name == name) {
+                        //             tarValue = data[i].value;
+                        //         }
+                        //     }
+                        //     var p = ((tarValue / total) * 100).toFixed(1);
+                        //     return name + " " + " " + p + "%";
+                        // },
                     },
                     series: [
                         {
@@ -191,7 +191,18 @@
                             radius: ["40%", "55%"],
                             center: ["50%", "40%"],
                             label: {
-                                show: false
+                                formatter: "{per|{b}:{d}%\n}",
+                                padding: [0, -60, 5],
+                                rich: {
+                                    per: {
+                                        fontSize: 12,
+                                        color: "#9B9DA1"
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                length: 15,
+                                length2: 60
                             },
                             data: [{
                                 value: 2550,
@@ -258,9 +269,18 @@
                     tooltip: {
                         trigger: 'axis',
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                                params[1].seriesName + ':' +
-                                params[1].value + '%'
+                            // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                            //     params[1].seriesName + ':' +
+                            //     params[1].value + '%'
+                            if(params.length && params.length > 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                    params[1].seriesName + ':' +
+                                    params[1].value + '%'
+                            }else if(params.length === 1 && params[0].seriesName === "天然气日供气量") {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+                            }else if(params.length === 1 && params[0].seriesName === "同比变化") {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '%'
+                            }
                         }
                     },
                     legend: {
@@ -288,7 +308,7 @@
                     yAxis: [
                         {
                             type: 'value',
-                            name: '亿立方',
+                            name: '亿立方米',
                             axisLine: {
                                 lineStyle: {
                                     color: '#9B9DA1'
@@ -358,12 +378,21 @@
                     tooltip: {
                         trigger: 'axis',
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                                params[1].seriesName + ':' +
-                                params[1].value + '亿立方米'
+                            // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                            //     params[1].seriesName + ':' +
+                            //     params[1].value + '亿立方米'
+                            if(params.length && params.length > 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                    params[1].seriesName + ':' +
+                                    params[1].value + '亿立方米'
+                            }else if(params.length === 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+                            }
                         }
                     },
                     legend: {
+                        itemWidth: 10,
+                        itemHeight: 6,
                         data: ['天然气日供气量', '合同量'],
                         x: 'right',
                         right: '20%'
@@ -386,7 +415,7 @@
                     yAxis: [
                         {
                             type: 'value',
-                            name: '亿立方',
+                            name: '亿立方米',
                             min: 0,
                             max: 120,
                             interval: 20,
@@ -459,6 +488,9 @@
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
                             type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        },
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
                         }
                     },
                     legend: {
@@ -474,14 +506,24 @@
                     xAxis: [
                         {
                             type: 'value',
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#9B9DA1'
-                                }
-                            },
                             splitLine: {
-                                show: false
-                            }
+              show: false,
+            },
+            axisTick: {
+              show: false, // 去除坐标轴间隔
+            },
+            axisLine: {
+              // 坐标轴样式
+              lineStyle: {
+                color: "#9B9DA1",
+              },
+            },
+            axisLabel: {
+              // 坐标轴label样式
+              textStyle: {
+                color: "#9B9DA1",
+              },
+            },
                         }
                     ],
                     yAxis: [
@@ -509,6 +551,7 @@
                         {
                             name: '差值',
                             type: 'bar',
+                            barWidth: 10,
                             data: [320, -120, 341, -132, 390, -134, 420],
                             itemStyle: {
                                 normal: {
@@ -541,9 +584,16 @@
                     tooltip: {
                         trigger: 'axis',
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                                params[1].seriesName + ':' +
-                                params[1].value + '亿立方米'
+                            // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                            //     params[1].seriesName + ':' +
+                            //     params[1].value + '亿立方米'
+                            if(params.length && params.length > 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                    params[1].seriesName + ':' +
+                                    params[1].value + '亿立方米'
+                            }else if(params.length === 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+                            }
                         }
                     },
                     legend: {
@@ -570,7 +620,7 @@
                     ],
                     yAxis: [
                         {
-                            name: '亿立方',
+                            name: '亿立方米',
                             type: 'value',
                             axisLine: {
                                 lineStyle: {

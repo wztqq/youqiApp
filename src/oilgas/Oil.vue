@@ -7,19 +7,12 @@
 				</template>
 			</van-nav-bar>
 		</div>
-		<div class="title">
-			<van-tabs @click="onClick">
-				<van-tab v-for="(item,index) in tabList" :key="index" :title="item.name" />
+		<div class="title" >
+			<van-tabs @click="onClick" v-model="active">
+				<van-tab v-for="(item,index) in tabList" :name="item.router" :key="index" :title="item.name" />
 			</van-tabs>
 		</div>
 		<router-view></router-view>
-	</div>
-	<!-- <div>
-      <van-tabs @click="onClick">
-        <van-tab v-for="(item,index) in tabList" :key="index" :title="item.name" />
-      </van-tabs>
-    </div>
-    <router-view></router-view> -->
 	</div>
 </template>
 
@@ -27,6 +20,7 @@
 	export default {
 		data() {
 			return {
+				active: "ChuQing",
 				tabList: [{
 					name: '油气分析系统',
 					router: 'ChuQing'
@@ -48,13 +42,23 @@
 				}]
 			}
 		},
+		computed: {
+			curPath: function(){
+				return this.$route.name;
+			}
+		},
 		methods: {
-			onClick(name) {
-				console.log(name);
+			onClick(ind) {
+				console.log(ind);
 				this.$router.push({
-					name: this.tabList[name].router
-				})
+					name: ind
+				}).catch(err => err)
 
+			}
+		},
+		watch:{
+			curPath: function(newVal, oldVal){
+				this.active = newVal
 			}
 		}
 	}

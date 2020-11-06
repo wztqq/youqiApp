@@ -4,10 +4,13 @@ import App from './App.vue'
 import router from '../src/router'
 import Vant from 'vant';
 import 'vant/lib/index.css';
+// 引入公共样式
+import './assets/styles/style.scss'
 // 引入文件 取消默认样式
 import './assets/base.css'
 // 引入 rem
 import './assets/rem'
+
 // 引入字体图标库
 import './assets/font-awesome-4.7.0/css/font-awesome.min.css'
 // 引入 animate 动画

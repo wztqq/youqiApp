@@ -15,70 +15,52 @@
       </div>
 
       <!-- 天然气日消费量分析 && 用气单位结构分析 -->
-      <div class="chart">
-        <div class="tab_oil">
-          <span v-for="(item, index) in tablist_one"
-            :key="index"
-            @click="tabButton_one(index)"
-            v-bind:class="[
-              { tab_oil_two: index == selected_one },
-              { tab_oil_one: true },
-            ]">{{ item }}</span>
-        </div>
-        <div class="chart-item" v-if="selected_one === 0">
+      <div class="module">
+        <van-tabs type="card" class="subtabs" @click="onClick(1, $event)">
+          <van-tab v-for="item in tablist_one" :title="item"></van-tab>
+        </van-tabs>
+        <div class="chart-item" v-if="selectOne === 0">
           <barline-chart :optionObj="optionObjBarGasXF"></barline-chart>
         </div>
-        <div class="chart-item" v-if="selected_one === 1">
+        <div class="chart-item" v-if="selectOne === 1">
           <div class="fontSize_div">
             <div class="fontSize">0.508</div>
             <div class="fontSize">亿立方米</div>
           </div>
-          <dount-chart class="echarts" :optionObj="optionObjYQDW"></dount-chart>
+          <dount-chart class="has-text" :optionObj="optionObjYQDW"></dount-chart>
         </div>
       </div>
 
       <!-- 盟市消费结构分析 && 销售单位结构分析 -->
-      <div class="chart module">
-        <div class="tab_oil">
-          <span v-for="(item, index) in tablist_two"
-            :key="index"
-            @click="tabButton_two(index)"
-            v-bind:class="[
-              { tab_oil_two: index == selected_two },
-              { tab_oil_one: true },
-            ]">{{ item }}</span>
-        </div>
-        <div class="chart-item" :key="timer" v-if="selected_two === 0">
+      <div class="module">
+        <van-tabs type="card" class="subtabs" @click="onClick(2, $event)">
+          <van-tab v-for="item in tablist_two" :title="item"></van-tab>
+        </van-tabs>
+        <div class="chart-item" v-if="selectTwo === 0">
           <div class="fontSize_div">
             <div class="fontSize">3000</div>
             <div class="fontSize">万立方米</div>
           </div>
-          <dount-chart class="echarts" :optionObj="optionObjMS"></dount-chart>
+          <dount-chart class="has-text" :optionObj="optionObjMS"></dount-chart>
         </div>
-        <div class="chart-item" :key="timer" v-if="selected_two === 1">
+        <div class="chart-item" v-if="selectTwo === 1">
           <div class="fontSize_div">
             <div class="fontSize">3000</div>
             <div class="fontSize">万立方米</div>
           </div>
-          <dount-chart class="echarts" :optionObj="optionObjXS"></dount-chart>
+          <dount-chart class="has-text" :optionObj="optionObjXS"></dount-chart>
         </div>
       </div>
 
       <!-- 日消费量预测 && 日消费缺口预测 -->
-      <div class="chart module">
-        <div class="tab_oil">
-          <span v-for="(item, index) in tablist_three"
-            :key="index"
-            @click="tabButton_three(index)"
-            v-bind:class="[
-              { tab_oil_two: index == selected_three },
-              { tab_oil_one: true },
-            ]">{{ item }}</span>
-        </div>
-        <div class="chart-item" v-if="selected_three === 0">
+      <div class="module">
+        <van-tabs type="card" class="subtabs" @click="onClick(3, $event)">
+          <van-tab v-for="item in tablist_three" :title="item"></van-tab>
+        </van-tabs>
+        <div class="chart-item" v-if="selectThree === 0">
           <doublebar-chart :optionObj="optionObjXFYC"></doublebar-chart>
         </div>
-        <div class="chart-item" v-if="selected_three === 1">
+        <div class="chart-item" v-if="selectThree === 1">
           <bothway-chart :optionObj="optionObjXFQKYC"></bothway-chart>
         </div>
       </div>
@@ -98,16 +80,15 @@ export default {
   },
   data() {
     return {
-      timer: "",
-      selected_one: 0,
-      selected_two: 0,
-      selected_three: 0,
+      selectOne: 0,
+      selectTwo: 0,
+      selectThree: 0,
       tablist_one: ["天然气日消费量分析", "用气单位结构分析"],
       tablist_two: ["盟市消费结构分析", "销售单位结构分析"],
       tablist_three: ["日消费量预测", "日消费缺口预测"],
       optionObjBarGasXF: {
         legendData: ["天然气月产量", "同比变化"],
-        yLeftName: "亿立方",
+        yLeftName: "亿立方米",
         yRightName: "%",
         xData: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
         seriesLeftData: [6, 13, 18, 13, 13, 18, 13, 9, 13, 18, 13, 9],
@@ -189,26 +170,15 @@ export default {
       },
     };
   },
-  mounted() {
-
-  },
-  watch: {
-    selected_two() {
-      if(this.selected_one === 0) {
-        
-      } 
-    }
-  },
   methods: {
-    tabButton_one(index) {
-      this.selected_one = index;
-    },
-    tabButton_two(index) {
-      this.selected_two = index;
-      this.timer = new Date().getTime()
-    },
-    tabButton_three(index) {
-      this.selected_three = index;
+    onClick(type, value){
+      if(type === 1) {
+        this.selectOne = value;
+      }else if(type === 2){
+        this.selectTwo = value;
+      }else if(type === 3) {
+        this.selectThree = value;
+      }
     },
   },
 };
@@ -217,16 +187,11 @@ export default {
 <style lang="scss" scoped>
 #confess_content {
   width: 100%;
+
   #banner {
     position: relative;
   }
-  /* 关于地图内容的调整期 */
-  .map {
-    width: 100%;
-    margin-top: 93px;
-    background-color: #dadbdb;
-    overflow: hidden;
-  }
+
   .banner {
     width: 220px;
     height: 80px;
@@ -241,6 +206,7 @@ export default {
       padding-top: 15px;
       padding-left: 30px;
     }
+
     p {
       font: 500 12px MicrosoftYaHei;
       padding-top: 5px;
@@ -248,61 +214,8 @@ export default {
       color: #fff;
     }
   }
-  .chart {
-    width: 100%;
-    height: 289px;
-    background-color: white;
-    padding: 10px 0;
-    position: relative;
-    .chart-item {
-      height: calc(100% - 25px);
-      width: 100%;
-    }
-    &.module {
-      margin: 10px 0;
-      padding: 10px 0 15px;
-    }
-    h4 {
-      font: 500 13px 微软雅黑;
-      color: #394564;
-      line-height: 3em;
-    }
-  }
-  /* 按钮样式调整 */
-  .tab_oil {
-    width: 345px;
-    height: 31px;
-    background-color: white;
-    margin: 0px auto;
-    border: 1px solid #3a6dda;
-    border-radius: 5px;
-    .tab_oil_one {
-      width: 50%;
-      height: 29px;
-      font: 12px PingFangSC-Regular;
-      color: #3a6dda;
-      line-height: 29px;
-      float: left;
-      position: relative;
-      top: 0;
-      left: 0;
-      text-align: center;
-    }
-    .tab_oil_two {
-      width: 50%;
-      height: 29px;
-      background-color: #3a6dda;
-      font: 12px PingFangSC-Regular;
-      color: white;
-      line-height: 29px;
-      float: left;
-      position: relative;
-      top: 0;
-      left: 0;
-      text-align: center;
-      border-radius: 4px;
-    }
-  }
+
+
 }
 /* 表格 */
 #table {
@@ -326,29 +239,7 @@ export default {
     }
   }
 }
-/* 文字块 */
-.fontSize_div {
-  position: absolute;
-  width: 100%;
-  // height: 100%;
-  text-align: center;
-}
-.fontSize {
-  position: relative;
-  top: 75px;
-  font: 16px bolder microsoft-yahei;
-  &.onlynum {
-    top: 88px;
-  }
-}
-
-.echarts {
-  // width: 100%;
-  // height: 100%;
-  // margin: 20px auto;
+.has-text {
   background-image: url("../../assets/img/industryAnalysis/椭圆.png");
-  background-repeat: no-repeat;
-  background-position: 50% 37%;
-  background-size: 65px 65px;
 }
 </style>

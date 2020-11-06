@@ -1,0 +1,153 @@
+$themeColor: #3a6dda;
+
+// header
+.header {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  height: 0.92rem;
+  .van-nav-bar {
+    height: 100%;
+    line-height: 0.92rem;
+  }
+}
+// 主菜单tab样式 添加类名：tabs
+.menu {
+  position: fixed;
+  z-index: 2;
+  top: 0.92rem;
+  .tabs {
+    .van-tabs__wrap {
+      height: 0.6rem;
+      border-top: 1px solid #e3e3e3;
+      box-shadow: 0 5px 6px rgba(0, 0, 0, .2);
+      .van-tabs__nav {
+        background-color: #f2f2f2;
+        padding-bottom: 0;
+        .van-tab {
+          font-size: 0.24rem;
+          padding: 0;
+          .van-tab__text {
+            display: inline-block;
+            padding: 0 0.12rem;
+          }
+          &.van-tab--active {
+            color: $themeColor;
+          }
+        }
+        .van-tab:not(:last-child) {
+          .van-tab__text {
+            border-right: 1px solid #ebebeb;
+          }
+        }
+        .van-tabs__line {
+          height: 2px;
+          bottom: 0;
+          background-color: $themeColor;
+        }
+      }
+    }
+  }
+}
+
+// 二级菜单tab样式 添加类名：submenu
+.submenu {
+  .van-tabs__wrap {
+    position: fixed;
+    top: 1.7rem;
+    z-index: 4;
+    width: 90%;
+    left: 5%;
+    .van-tabs__nav {
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 0.05rem;
+      height: 0.6rem;
+      display: flex;
+      padding: 0;
+      align-items: center;
+      .van-tab {
+        color: #fff;
+        font-size: 0.24rem;
+        height: 0.48rem;
+        line-height: 0.48rem;
+        &.van-tab--active {
+          background-color: rgba(0, 0, 0, 0.3);
+          border-radius: 0.08rem;
+        }
+      }
+    }
+  }
+}
+// 页面内tab样式 添加类名: subtabs
+.subtabs {
+  .van-tabs__wrap {
+    position: static;
+    margin-left: 0;
+    height: 0.6rem;
+    width: 100%;
+    .van-tabs__nav--card {
+      border-color: $themeColor;
+      background-color: transparent;
+      border-radius: 0.06rem;
+      padding: 0;
+      margin: 0;
+      .van-tab {
+        border: 0;
+        height: 100%;
+        border-radius: 0;
+        color: $themeColor;
+        font-size: 0.24rem;
+        &.van-tab--active {
+          background-color: $themeColor;
+          color: #fff;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+/* 关于地图内容的调整期 */
+.map {
+  width: 100%;
+  margin-top: 1.52rem;
+  background-color: #dadbdb;
+  overflow: hidden;
+}
+
+// echarts 图表模块
+.module {
+  width: 100%;
+  height: 6.6rem;
+  margin: 0.2rem 0;
+  padding: 0.3rem 0.2rem;
+  background-color: #fff;
+  .chart-item {
+    width: 100%;
+    height: 5.2rem;
+    margin-top: 0.2rem;
+  }
+
+  // 环形图内背景
+  .has-text {
+    background-repeat: no-repeat;
+    background-position: 50% 37%;
+    background-size: 65px 65px;
+  }
+  // 环形图内文字块
+  .fontSize_div {
+    position: absolute;
+    width: 7.1rem;
+    text-align: center;
+  }
+  .fontSize {
+    position: relative;
+    top: 1.5rem;
+    font: 0.32rem microsoft-yahei;
+    line-height: 1.5em;
+    font-weight: bold;
+    &.onlynum {
+      top: 88px;
+    }
+  }
+}

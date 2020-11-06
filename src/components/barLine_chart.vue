@@ -54,27 +54,27 @@ export default {
   methods: {
     getBarOption() {
       this.chartBar = null;
-      // this.chartBar = echarts.init(document.getElementById(this.id));
       this.chartBar = echarts.init(this.$refs.chart);
+      let yLeftName = this.optionObj.yLeftName
+      let yRightName = this.optionObj.yRightName
       let option = {
         tooltip: {
           trigger: "axis",
-          // formatter: "{a} <br/>{b}: {c} ({d}%)",
           formatter(params) {
             if(params.length && params.length > 1) {
-              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yLeftName + '</br>' +
                       params[1].seriesName + ':' +
                       params[1].value + '%'
             }else if(params.length === 1 && params[0].seriesName === "天然气月产量") {
-              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yLeftName
             }else if(params.length === 1 && params[0].seriesName === "同比变化") {
-              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '%'
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yRightName
             }
           }
         },
         legend: {
-          itemWidth: 10,
-          itemHeight: 6,
+          itemWidth: 15,
+          itemHeight: 10,
           data: this.optionObj.legendData,
           x: "right",
           textStyle: {
@@ -90,13 +90,13 @@ export default {
           axisLine: {
             // 坐标轴样式
             lineStyle: {
-              color: "#DADADA",
+              color: "#383838",
             },
           },
           axisLabel: {
             // 坐标轴label样式
             textStyle: {
-              color: "#DADADA",
+              color: "#383838",
             },
           },
           data: this.optionObj.xData,
@@ -114,13 +114,13 @@ export default {
             axisLine: {
               // 坐标轴样式
               lineStyle: {
-                color: "#DADADA",
+                color: "#383838",
               },
             },
             axisLabel: {
               // 坐标轴label样式
               textStyle: {
-                color: "#DADADA",
+                color: "#383838",
               },
             },
           },
@@ -136,13 +136,13 @@ export default {
             axisLine: {
               // 坐标轴样式
               lineStyle: {
-                color: "#DADADA",
+                color: "#383838",
               },
             },
             axisLabel: {
               // 坐标轴label样式
               textStyle: {
-                color: "#DADADA",
+                color: "#383838",
                 // fontSize:'16'
               },
             },

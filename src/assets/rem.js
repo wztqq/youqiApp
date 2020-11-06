@@ -14,7 +14,7 @@
 		width>maxWidth && (width=maxWidth);
 		var rem = width * 100 / designWidth;
         remStyle.innerHTML = 'html{font-size:' + rem + 'px;}';
-        //console.log("rem font-size:", rem)
+        console.log("rem font-size:", rem)
 	}
 
 	if (docEl.firstElementChild) {

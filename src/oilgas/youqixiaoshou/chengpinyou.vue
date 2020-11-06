@@ -1673,6 +1673,9 @@
                 myChart.setOption({
                     tooltip: {
                         trigger: "axis",
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '标准煤'
+                        }
                     },
                     // legend: {
                     //   itemWidth: 10,
@@ -1692,7 +1695,20 @@
                     xAxis: {
                         type: "category",
                         boundaryGap: false,
-                        data: ["0", "50", "100", "150", "200", "250", "300", "350", "400", "450", "500", "550", "600", "650", "700", "750", "800"],
+                        data: [
+                            "1月",
+                            "2月",
+                            "3月",
+                            "4月",
+                            "5月",
+                            "6月",
+                            "7月",
+                            "8月",
+                            "9月",
+                            "10月",
+                            "11月",
+                            "12月",
+                        ],
                         axisLabel: {
                             fontSize: 12,
                         },
@@ -1707,7 +1723,7 @@
                         },
                     },
                     yAxis: {
-                        //name: "万吨/年",
+                        name: "吨/标准煤",
                         type: "value",
                         axisLabel: {
                             fontSize: 12,
@@ -1895,18 +1911,24 @@
                 var echarts = require("echarts");
                 var myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
-                    legend: {
-                        data: ['2011年', '2012年'],
-                        show: false
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        },
+                        formatter(params) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米'
+                        }
                     },
                     grid: {
                         top: '5%',
                         left: '3%',
-                        right: '4%',
+                        right: '20%',
                         bottom: '3%',
                         containLabel: true
                     },
                     xAxis: {
+                        name:'万立方米',
                         type: 'value',
                         min: 0,
                         max: 8,
@@ -1962,10 +1984,9 @@
                     },
                     series: [
                         {
-                            name: '2011年',
-                            type: 'pictorialBar',
-                            symbol: 'path://M 14.897 180.598 h 956.657 L 1009.1 1043.402 H 14.897 V 180.598 Z',
-                            barWidth: '20%',
+                            name: '调峰煤制气',
+                            type: 'bar',
+                            barWidth: 10,
                             data: [
                                 4.9,
                                 4.1,
@@ -1975,34 +1996,23 @@
                                 7.8,
                                 3.2
                             ],
-                            color: {
-                                type: 'linear',
-                                x: 0,
-                                y: 0,
-                                x2: 1,
-                                y2: 0,
-                                colorStops: [{
-                                    offset: 0, color: '#00E3FC' // 0% 处的颜色
-                                }, {
-                                    offset: 0.5, color: '#008BFF' // 0% 处的颜色
-                                }, {
-                                    offset: 1, color: '#00E3FC' // 100% 处的颜色
-                                }],
-                                global: false // 缺省为 false
-                            }
-                        },
-                        { // For shadow
-                            type: 'bar',
                             itemStyle: {
-                                color: 'rgba(0,0,0,0.05)'
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 1, 0,
+                                        [
+                                            {offset: 0, color: '#4572FF'},                   //柱图渐变色
+                                            {offset: 1, color: '#65FCFA'},                   //柱图渐变色
+                                        ]
+                                    )
+                                }
                             },
-                            barGap: '-100%',
-                            barCategoryGap: '0%',
-                            barWidth: "20%",
-                            data: [8, 8, 8, 8, 8, 8, 8],
-                            animation: false
-                        },
+                            showBackground: true,
+                            backgroundStyle: {
+                                color: '#f7f7f7'
 
+                            },
+                        }
                     ]
                 });
             },

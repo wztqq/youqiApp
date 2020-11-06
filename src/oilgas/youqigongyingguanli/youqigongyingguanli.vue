@@ -2107,12 +2107,11 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+            formatter(params) {
+                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
+                    params[1].seriesName + ':' +
+                    params[1].value + '万吨'
+            }
         },
         grid: {
           height: 160,
@@ -2162,7 +2161,7 @@ export default {
         ],
         yAxis: [
           {
-            //name:"万吨 / 月",
+            name:"万吨/月",
             type: "value",
             min: 0,
             interval: 5,
@@ -2424,12 +2423,11 @@ export default {
       myChart.setOption({
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            crossStyle: {
-              color: "#999",
-            },
-          },
+            formatter(params) {
+                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米' + '</br>' +
+                    params[1].seriesName + ':' +
+                    params[1].value + '万立方米'
+            }
         },
         grid: {
           height: 160,
@@ -2479,7 +2477,7 @@ export default {
         ],
         yAxis: [
           {
-            //name:"万吨 / 月",
+            name:"万立方米/ 月",
             type: "value",
             min: 0,
             interval: 5,

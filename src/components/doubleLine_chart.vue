@@ -59,12 +59,7 @@ export default {
       let option = {
         tooltip: {
           trigger: "axis",
-          axisPointer: {
-            type: "cross",
-            label: {
-              backgroundColor: "#6a7985",
-            },
-          },
+          position: "bottom",
           formatter(params) {
             if (params.length && params.length > 1) {
               return (
@@ -93,31 +88,36 @@ export default {
           },
         },
         legend: {
-          right: 10,
+          x: "right",
           textStyle: {
             color: "#383838",
-            // fontSize: ""
           },
-          // itemWidth: 10,
-          // itemHeight: 10,
+          itemWidth: 15,
+          itemHeight: 10,
           data: this.optionObj.legendData,
+        },
+        grid: {
+          left: '2%',
+          right: '2%',
+          bottom: '3%',
+          containLabel: true
         },
         xAxis: [
           {
             type: "category",
-            axisTick: {
-              show: false, // 去除坐标轴间隔
-            },
+            // axisTick: {
+            //   show: false, // 去除坐标轴间隔
+            // },
             axisLine: {
               // 坐标轴样式
               lineStyle: {
-                color: "#DADADA",
+                color: "#383838",
               },
             },
             axisLabel: {
               // 坐标轴label样式
               textStyle: {
-                color: "#DADADA",
+                color: "#383838",
               },
               rotate: 30
             },
@@ -135,13 +135,13 @@ export default {
             axisLine: {
               // 坐标轴样式
               lineStyle: {
-                color: "#DADADA",
+                color: "#383838",
               },
             },
             axisLabel: {
               // 坐标轴label样式
               textStyle: {
-                color: "#DADADA",
+                color: "#383838",
               },
             },
           },
@@ -150,30 +150,8 @@ export default {
           {
             name: this.optionObj.seriesName1,
             type: "line",
-            stack: "总量",
             symbol: "circle",
             smooth: true,
-            symbolSize: 6,
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                
-                { offset: 0, color: "rgba(41,145,244, 0.7" },
-                { offset: 1, color: "rgba(41,145,244, 0.1)" },
-              ]),
-            },
-            lineStyle: {
-              color: "#2991f4",
-              width: 2,
-            },
-            color: "#2991f4",
-            data: this.optionObj.seriesData2,
-          },
-          {
-            name: this.optionObj.seriesName2,
-            type: "line",
-            stack: "总量",
-            smooth: true,
-            symbol: "circle",
             symbolSize: 6,
             areaStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -187,6 +165,26 @@ export default {
             },
             color: "#f8c94b",
             data: this.optionObj.seriesData1,
+          },
+          {
+            name: this.optionObj.seriesName2,
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 6,
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+
+                { offset: 0, color: "rgba(41,145,244, 0.7" },
+                { offset: 1, color: "rgba(41,145,244, 0.1)" },
+              ]),
+            },
+            lineStyle: {
+              color: "#2991f4",
+              width: 2,
+            },
+            color: "#2991f4",
+            data: this.optionObj.seriesData2,
           },
           
         ],

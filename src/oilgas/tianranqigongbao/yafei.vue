@@ -39,7 +39,7 @@
       </div>
 
       <!-- 月调峰同比分析 -->
-      <div class="chart module">
+      <div class="module">
         <h4>月调峰同比分析</h4>
         <barline-chart :optionObj="optionObjYTF"></barline-chart>
       </div>
@@ -215,8 +215,8 @@ export default {
       },
       optionObjYTF: {
         legendData: ["天然气月产量", "同比变化"],
-        yLeftName: "亿立方米",
-        yRightName: "%",
+        yLeftUnit: "亿立方米",
+        yRightUnit: "%",
         xData: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
         seriesLeftData: [6, 13, 18, 13, 13, 18, 13, 9, 13, 18, 13, 9],
         seriesRightData: [-0.5, 1, 2, 0.9, 0.9, 1.9, 0.9, 0.85, 1, 2.2, 1.4, 0.3],

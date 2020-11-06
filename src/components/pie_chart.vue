@@ -74,8 +74,8 @@ export default {
         //   },
         // },
         legend: {
-          itemWidth: 10,
-          itemHeight: 6,
+          itemWidth: 15,
+          itemHeight: 10,
           textStyle: {
             color: "#383838",
           },

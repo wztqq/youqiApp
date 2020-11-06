@@ -9,27 +9,24 @@ export default {
     optionObj: {
       type: Object,
       default: () => {},
+      // optionObj: {
+      //   legendData: ["天然气月产量", "同比变化"],
+      //   yLeftUnit: "亿立方米",
+      //   yRightUnit: "%",
+      //   xData: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+      //   seriesLeftData: [6, 13, 18, 13, 13, 18, 13, 9, 13, 18, 13, 9],
+      //   seriesRightData: [-0.5, 1, 2, 0.9, 0.9, 1.9, 0.9, 0.85, 1, 2.2, 1.4, 0.3],
+      //   barWidth: 10,
+      //   lineWidth: 2,
+      //   symbolSize: 8,
+      //   leftMin: 0,
+      //   leftMax: 25,
+      //   leftInterval: 5,
+      //   rightMin: -2,
+      //   rightMax: 3,
+      //   rightInterval: 1
+      // },
     },
-    /*
-      optionObj:{
-        title:'',
-        legendData:['总面积'], //legend.data以及series.name
-        yLeftName:'单位：个',//y轴单位名称
-        yRightName:'单位：个',//y轴单位名称
-        xData:[], //x轴
-        seriesLeftData:[],//series数据
-        seriesRightData:[],//series数据
-        barWidth:10,//柱子宽度
-        lineWidth:2,//折线宽度
-        symbolSize:2,//折线折点大小,
-        leftMin: 0,
-        leftMax: 25,
-        leftInterval: 5,
-        rightMin: 0,
-        rightMax: 250,
-        rightInterval: 50
-      }
-    */
   },
   data() {
     return {
@@ -55,20 +52,22 @@ export default {
     getBarOption() {
       this.chartBar = null;
       this.chartBar = echarts.init(this.$refs.chart);
-      let yLeftName = this.optionObj.yLeftName
-      let yRightName = this.optionObj.yRightName
+      let yLeftName = this.optionObj.legendData[0]
+      let yRightName = this.optionObj.legendData[1]
+      let yLeftUnit = this.optionObj.yLeftUnit
+      let yRightUnit = this.optionObj.yRightUnit
       let option = {
         tooltip: {
           trigger: "axis",
           formatter(params) {
             if(params.length && params.length > 1) {
-              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yLeftName + '</br>' +
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yLeftUnit + '</br>' +
                       params[1].seriesName + ':' +
-                      params[1].value + '%'
-            }else if(params.length === 1 && params[0].seriesName === "天然气月产量") {
-              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yLeftName
-            }else if(params.length === 1 && params[0].seriesName === "同比变化") {
-              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yRightName
+                      params[1].value + yRightUnit
+            }else if(params.length === 1 && params[0].seriesName === yLeftName) {
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yLeftUnit
+            }else if(params.length === 1 && params[0].seriesName === yRightName) {
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + yRightUnit
             }
           }
         },
@@ -104,7 +103,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: this.optionObj.yLeftName,
+            name: this.optionObj.yLeftUnit,
             min: this.optionObj.leftMin,
             max: this.optionObj.leftMax,
             interval: this.optionObj.leftInterval,
@@ -126,7 +125,7 @@ export default {
           },
           {
             type: "value",
-            name: this.optionObj.yRightName,
+            name: this.optionObj.yRightUnit,
             min: this.optionObj.rightMin,
             max: this.optionObj.rightMax,
             interval: this.optionObj.rightInterval,

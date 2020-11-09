@@ -45,6 +45,17 @@
 
 			<img class="map" src="../../assets/img/oilgas/chuqi.png" />
 		</div>
+
+		<!-- 本年度储气能力 -->
+		<div class="module">
+			<h4>本年度储气能力</h4>
+			<div class="fontSize_div">
+				<div class="fontSize">1.36</div>
+				<div class="fontSize" style="font-size: 14px">亿立方米</div>
+			</div>
+			<pieChart class="has-text" :optionObj="optionObjYearCQ"></pieChart>
+		</div>
+
 		<div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
 			<div class="title">
 				本年度储气能力
@@ -90,11 +101,25 @@
 <script>
 	export default {
 		name: 'child3',
+		components: {
+			pieChart: () => import("@/components/pie_chart"),
+		},
 		data() {
 			return {
+				// optionObjYearCQ
+				optionObjYearCQ: {
+					legendData: ["城燃企业5%", "地方政府3天"],
+					seriesName: "本年度储气能力",
+					unit: "亿立方米",
+					seriesData: [
+						{ value: 0.51, name: "城燃企业5%" },
+						{ value: 0.85, name: "地方政府3天" },
+					],
+				},
 				activeNamePie: '1',
 				tabPosition: 'left',
-				gasPieTwoData: [{
+				gasPieTwoData: [
+					{
 						value: 0.127,
 						name: "阿拉善盟"
 					},
@@ -119,7 +144,8 @@
 						name: "其他"
 					}
 				],
-				gasPieThreeData: [{
+				gasPieThreeData: [
+					{
 						value: 0.2135,
 						name: "阿拉善盟"
 					},
@@ -386,7 +412,7 @@
 			height: 31px;
 		}
 
-		#gasPieTwo,
+		.has-text,
 		#gasPieThree {
 			background-image: url(../../assets/img/industryAnalysis/椭圆.png);
 			background-repeat: no-repeat;

@@ -31,12 +31,24 @@ export default {
   data() {
     return {
       chartBar: null,
+      // fontSize: "",
+      nowClientWidth: document.documentElement.clientWidth
     };
   },
   mounted: function () {
     this.$nextTick(function () {
       this.getBarOption();
     });
+    //当前视口宽度
+    // let nowClientWidth = document.documentElement.clientWidth;
+
+
+    // function nowSize(val,initWidth=750){
+    //   return val * (nowClientWidth/initWidth);
+    // }
+    // this.fontSize = this.nowSize(12)
+    // console.log(this.fontSize, "###")
+    // console.log(this.nowClientWidth, "&&&")
   },
   watch: {
     optionObj: {
@@ -49,6 +61,9 @@ export default {
     },
   },
   methods: {
+    nowSize(val,initWidth=375){
+      return val * (this.nowClientWidth/initWidth);
+    },
     getBarOption() {
       this.chartBar = null;
       this.chartBar = echarts.init(this.$refs.chart);
@@ -81,6 +96,12 @@ export default {
             // fontSize: ""
           },
         },
+        grid: {
+          left: '2%',
+          right: '2%',
+          bottom: '3%',
+          containLabel: true
+        },
         xAxis: {
           type: "category",
           axisTick: {
@@ -96,6 +117,7 @@ export default {
             // 坐标轴label样式
             textStyle: {
               color: "#383838",
+              // fontSize: this.fontSize
             },
           },
           data: this.optionObj.xData,

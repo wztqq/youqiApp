@@ -170,6 +170,7 @@ export default {
       },
     };
   },
+
   methods: {
     onClick(type, value){
       if(type === 1) {

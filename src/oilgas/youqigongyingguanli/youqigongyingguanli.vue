@@ -31,7 +31,7 @@
     <div id="confess_content" v-show="a" style="background-color: #dadbdb">
       <img
         class="map"
-        src="../../assets/img/YouqiGongying/地图.png"
+        src="../../assets/img/gasmap/yafei_map.png"
         alt="图片未显示"
       />
       <div class="Gongying_oil" v-show="produce_tc"><ul>
@@ -170,7 +170,7 @@
     <div id="produce_content" v-show="b">
       <img
         class="map"
-        src="../../assets/img/YouqiGongying/地图.png"
+        src="../../assets/img/gasmap/yafei_map.png"
         alt="图片未显示"
       />
        <div class="produce_logo" :style="{ left: (this.screenWidth * 0.49) + 'px',top: (314.5 *0.71) + 'px' }">
@@ -271,7 +271,7 @@
     <div id="confess_content" v-show="c" style="background-color: #dadbdb">
       <img
         class="map"
-        src="../../assets/img/YouqiGongying/地图.png"
+        src="../../assets/img/gasmap/yafei_map.png"
         alt="图片未显示"
       />
       <div class="produce_logo" :style="{ left: (this.screenWidth * 0.49) + 'px',top: (314.5 *0.72) + 'px' }">
@@ -346,7 +346,7 @@
     <div id="confess_content" v-show="d" style="background-color: #dadbdb">
       <img
         class="map"
-        src="../../assets/img/YouqiGongying/地图.png"
+        src="../../assets/img/gasmap/yafei_map.png"
         alt="图片未显示"
       />
       <div class="produce_logo" :style="{ left: (this.screenWidth * 0.38) + 'px',top: (314.5 *0.78) + 'px' }">

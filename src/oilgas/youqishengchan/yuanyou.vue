@@ -105,7 +105,7 @@
  <div id="produce_content" v-show="c">
       <img class="map" src="../../assets/img/produce-fx/producemap.png" alt="图片未显示"/>
       <div class="produce_logo" :style="{ left: logoposionleft7,top: logoposiontop7 }">
-      <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"  @click='tanchuang(produce_tc,arry7,7)'>
+      <img src="../../assets/img/YouqiGongying/mzy.png" alt="图片未显示"  @click='tanchuang(produce_tc,arry7,7)'>
       </div>
       <div class="pagethree_tc" v-show="produce_tc"><ul>
         <li>{{page_c1}}</li>
@@ -115,7 +115,7 @@
         <li>上月液化气供应量：<span>{{page_c5}}</span>万吨</li>
         </ul></div>
       <div class="produce_logo" :style="{ left: logoposionleft8,top: logoposiontop8 }">
-      <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"  @click='tanchuang(produce_tc,arry8,8)'>
+      <img src="../../assets/img/YouqiGongying/mzy.png" alt="图片未显示"  @click='tanchuang(produce_tc,arry8,8)'>
       </div>
          <div class="chart">
         <div class="tab_oil">
@@ -149,7 +149,7 @@
 <div id="produce_content" v-show="d">
       <img class="map" src="../../assets/img/produce-fx/producemap.png" alt="图片未显示"/>
       <div class="produce_logo" :style="{ left: logoposionleft9,top: logoposiontop9 }">
-      <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示" @click='tanchuang(produce_tc,arry9,9)'>
+      <img src="../../assets/img/YouqiGongying/mzq.png" alt="图片未显示" @click='tanchuang(produce_tc,arry9,9)'>
       </div>
       <div class="pagefour_tc" v-show="produce_tc"><ul>
         <li>{{page_c1}}</li>
@@ -158,7 +158,7 @@
         <li>上月天然气产量：<span>{{page_c4}}</span>万立方米</li>
       </ul></div>
       <div class="produce_logo" :style="{ left: logoposionleft10,top: logoposiontop10 }">
-      <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"  @click='tanchuang(produce_tc,arry10,10)'>
+      <img src="../../assets/img/YouqiGongying/mzq.png" alt="图片未显示"  @click='tanchuang(produce_tc,arry10,10)'>
       </div>
         <div class="chart">
         <div class="tab_oil">

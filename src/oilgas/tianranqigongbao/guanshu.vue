@@ -17,8 +17,10 @@
       </div>
       <!-- 日调峰记录查询 && 调峰结构分析 -->
       <div class="chart table">
+        <h4>区内主要管线运行情况</h4>
         <div id="table">
-          <table class="table_one" style="width: 950px">
+          <p class="unit">单位: 亿立方米</p>
+          <table class="table_one">
             <tr>
               <th :width="th.width" v-for="(th,index) in tableTh_one" :key="index">{{th.value}}</th>
             </tr>
@@ -49,7 +51,11 @@
           <dount-chart class="echarts" :optionObj="optionObjLineQTGQ"></dount-chart>
         </div>
         <div class="chart-item" :key="timer" id="table" v-if="selected_one === 1">
-          <pie-chart :optionObj="optionObjGQQY"></pie-chart>
+          <div class="fontSize_div">
+            <div class="fontSize">100</div>
+            <div class="fontSize">亿立方米</div>
+          </div>
+          <pie-chart class="echarts" :optionObj="optionObjGQQY"></pie-chart>
         </div>
       </div>
 
@@ -102,63 +108,49 @@ export default {
       tableTh_one: [
         {
           value: "序号",
-          width: 50,
         },
         {
           value: "管线",
-          width: 300,
         },
         {
-          value: "总里程(公里)",
-          width: 120,
+          value: "管存量",
         },
         {
-          value: "区内里程(公里)",
-          width: 120,
+          value: "实际负荷率",
         },
         {
-          value: "运送能力(亿立方米)",
-          width: 120,
+          value: "昨日进气量",
         },
         {
-          value: "昨日进气量(亿立方米)",
-          width: 120,
-        },
-        {
-          value: "昨日出气量(亿立方米)",
-          width: 120,
+          value: "昨日出气量",
         }
       ],
       listData_one: [
         {
-          guanxian: "长庆气田·乌海·临河输气管道",
-          totalkm: "426",
-          partlm: "426",
-          nengli: "100000",
+          guanxian: "长乌临输气管道",
+          totalkm: "355",
+          partlm: "55%",
           jinqi: "790",
           chuqi: "790",
         },
         {
-          guanxian: "苏·东·准输气管",
+          guanxian: "苏东准输气管",
           totalkm: "147",
-          partlm: "147",
-          nengli: "120000",
+          partlm: "60%",
           jinqi: "1500",
           chuqi: "1500",
         },
         {
-          guanxian: "长庆气田·呼和浩特天然气输气管道",
+          guanxian: "长呼输气管道",
           totalkm: "561.2",
-          partlm: "561.2",
-          nengli: "180000",
+          partlm: "55%",
           jinqi: "50",
           chuqi: "50",
         },
         {
-          guanxian: "长庆气田·呼和浩特天然气输气管道复线",
+          guanxian: "长呼复输气管道复",
           totalkm: "468.2",
-          partlm: "468.2",
-          nengli: "210000",
+          partlm: "80%",
           jinqi: "760",
           chuqi: "760",
         },
@@ -376,11 +368,16 @@ export default {
   background: #fff;
   overflow-x: auto;
   margin: 0 15px;
+  .unit {
+    text-align: right;
+    font-size: 10px;
+    padding-top: 10px;
+  }
   .table_one {
     font-family: PingFang SC;
     width: 100%;
     border-collapse: collapse;
-    margin: 10px auto;
+    margin: 5px auto 20px;
     th, td {
       font-size: 14px;
       border: 1px solid #b9bec9;
@@ -396,7 +393,7 @@ export default {
 /* 文字块 */
 .fontSize_div {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 30px);
   // height: 100%;
   text-align: center;
 }

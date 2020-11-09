@@ -72,6 +72,10 @@ export default {
                 params[1].seriesName +
                 ":" +
                 params[1].value +
+                "亿立方米" +
+                "</br>" +
+                "差值: " +
+                (params[0].value - params[1].value).toFixed(3) +
                 "亿立方米"
               );
             } else if (params.length === 1) {
@@ -153,39 +157,39 @@ export default {
                 { offset: 1, color: "#45BBFF" },
               ]),
             },
-            markLine: {
-              symbol:"none",
-              name: "基准值",
-              silent: true,
-              lineStyle: {
-                normal: {
-                  color: "#01fef9", // 这儿设置安全基线颜色
-                },
-              },
-              data: [
-                {
-                  
-                  silent:false,
-                  lineStyle:{               //警戒线的样式  ，虚实  颜色
-                      type:"solid",
-                      color:"#f9ae64"
-                  },
-                  yAxis: this.optionObj.warnData,
-                },
-              ],
-              label: {
-                normal: {
-                  formatter: ''           // 这儿设置安全基线
-                }
-              },
-            },
+            // markLine: {
+            //   symbol:"none",
+            //   name: "基准值",
+            //   silent: true,
+            //   lineStyle: {
+            //     normal: {
+            //       color: "#01fef9", // 这儿设置安全基线颜色
+            //     },
+            //   },
+            //   data: [
+            //     {
+            //
+            //       silent:false,
+            //       lineStyle:{               //警戒线的样式  ，虚实  颜色
+            //           type:"solid",
+            //           color:"#f9ae64"
+            //       },
+            //       yAxis: this.optionObj.warnData,
+            //     },
+            //   ],
+            //   label: {
+            //     normal: {
+            //       formatter: ''           // 这儿设置安全基线
+            //     }
+            //   },
+            // },
           },
           {
             name: this.optionObj.legendData[1],
+            data: this.optionObj.warnData,
             type: "line",
             smooth: true,
             symbolSize: this.optionObj.symbolSize,
-            data: "",
             lineStyle: {
               color: "#FBAF5D",
               width: this.optionObj.lineWidth,

@@ -106,12 +106,12 @@ export default {
       tablist_two: ["盟市消费结构分析", "销售单位结构分析"],
       tablist_three: ["日消费量预测", "日消费缺口预测"],
       optionObjBarGasXF: {
-        legendData: ["天然气月产量", "同比变化"],
+        legendData: ["天然气日消费量", "同比变化"],
         yLeftName: "亿立方",
         yRightName: "%",
-        xData: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
-        seriesLeftData: [6, 13, 18, 13, 13, 18, 13, 9, 13, 18, 13, 9],
-        seriesRightData: [-0.5, 1, 2, 0.9, 0.9, 1.9, 0.9, 0.85, 1, 2.2, 1.4, 0.3],
+        xData: ["1月1日", "1月2日", "1月3日", "1月4日", "1月5日", "1月6日", "1月7日"],
+        seriesLeftData: [6, 13, 18, 9, 18, 13, 9],
+        seriesRightData: [-0.5, 1, 2, 0.9, 1.9, 0.85, 0.3],
         barWidth: 10,
         lineWidth: 2,
         symbolSize: 8,
@@ -175,8 +175,8 @@ export default {
         xData: ["1月1日", "1月2日", "1月3日", "1月4日", "1月5日", "1月6日", "1月7日"],
         yLeftName: "亿立方",
         yRightName: "%",
-        seriesLeftData: [120, 132, 101, 134, 90, 230, 210],
-        seriesRightData:[220, 182, 191, 234, 290, 330, 310]
+        seriesLeftData: [160, 177, 163, 169, 159, 179, 168],
+        seriesRightData:[180, 175, 179, 184, 187, 183, 189]
       },
       optionObjXFQKYC: {
         legendData: ["差值"],

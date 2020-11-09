@@ -26,7 +26,8 @@
           <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
         </div>
         <div class="chart-item" id="table" v-if="selected_one === 1">
-          <table class="table_one" style="width: 650px">
+          <p class="unit">单位： 万立方米</p>
+          <table class="table_one">
             <tr>
               <th :width="th.width" v-for="(th,index) in tableTh_one" :key="index">{{th.value}}</th>
             </tr>
@@ -79,18 +80,18 @@
             ]">{{ item }}</span>
         </div>
         <div class="chart-item" v-if="selected_three === 0">
-          <!-- <div class="fontSize_div">
-            <div class="fontSize">28453</div>
-            <div class="fontSize">吨</div>
-          </div> -->
-          <pie-chart :optionObj="optionObjMS3T"></pie-chart>
+          <div class="fontSize_div">
+            <div class="fontSize">0.508</div>
+            <div class="fontSize">亿立方米</div>
+          </div>
+          <dount-chart class="echarts" :optionObj="optionObjMS3T"></dount-chart>
         </div>
         <div class="chart-item" v-if="selected_three === 1">
-          <!-- <div class="fontSize_div">
-            <div class="fontSize">28453</div>
-            <div class="fontSize">吨</div>
-          </div> -->
-          <pie-chart :optionObj="optionObjMS5"></pie-chart>
+          <div class="fontSize_div">
+            <div class="fontSize">0.8543</div>
+            <div class="fontSize">亿立方米</div>
+          </div>
+          <dount-chart class="echarts" :optionObj="optionObjMS5"></dount-chart>
         </div>
       </div>
     </div>
@@ -113,7 +114,7 @@ export default {
       selected_two: 0,
       selected_three: 0,
       tablist_one: ["月产量分析", "管线明细"],
-      tablist_two: ["盟市日供应分析", "消费结构分析"],
+      tablist_two: ["日供气量和合同量对比分析", "消费结构分析"],
       tablist_three: ["盟市地方3天储气能力", "盟市城燃5%储气能力"],
       tableTh_one: [
         {
@@ -125,39 +126,39 @@ export default {
           width: 300,
         },
         {
-          value: "日进气量(亿立方米)",
+          value: "日进气量",
           width: 100,
         },
         {
-          value: "日出气量(亿立方米)",
+          value: "日出气量",
           width: 100,
         },
         {
-          value: "管存量(亿立方米)",
+          value: "管存量",
           width: 90,
         },
       ],
       listData_one: [
         {
-          guanxian: "长庆气田·乌海·临河输气管道",
+          guanxian: "长乌临输气管道",
           jinqi: "790",
           chuqi: "790",
           cunliang: "1600"
         },
         {
-          guanxian: "苏·东·准输气管",
+          guanxian: "苏东准输气管",
           jinqi: "1500",
           chuqi: "1500",
           cunliang: "1200"
         },
         {
-          guanxian: "长庆气田·呼和浩特天然气输气管道",
+          guanxian: "长呼输气管道",
           jinqi: "50",
           chuqi: "50",
           cunliang: "150"
         },
         {
-          guanxian: "长庆气田·呼和浩特天然气输气管道复线",
+          guanxian: "长呼复输气管道",
           jinqi: "50",
           chuqi: "50",
           cunliang: "400"
@@ -190,15 +191,15 @@ export default {
         ],
       },
       optionObjRJGFX: {
-        legendData: ["日供气量(亿)", "基准值"],
+        legendData: ["日供气量(亿)", "合同量"],
         yLeftName: "",
         yRightName: "",
-        xData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
-        seriesLeftData: [0.05, 0.05, 0.07, 0.03, 0.04, 0.05],
+        xData: ["11月1日", "11月2日", "11月3日", "11月4日", "11月5日", "11月6日", "11月7日"],
+        seriesLeftData: [0.05, 0.05, 0.07, 0.03, 0.04, 0.05, 0.05],
         barWidth: 10,
         lineWidth: 2,
         symbolSize: 0,
-        warnData: 0.06
+        warnData: [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, ]
       },
       optionObjYTF: {
         legendData: ["天然气月产量", "同比变化"],
@@ -218,21 +219,29 @@ export default {
         rightInterval: 1
       },
       optionObjMS3T: {
-        legendData: ["鄂尔多斯", "包头"],
+        legendData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
         seriesName: "盟市地方3天储气能力",
         unit: "亿立方米",
         seriesData: [
-          { value: 34, name: "鄂尔多斯" },
-          { value: 66, name: "包头" },
+          { value: 0.095, name: "巴彦淖尔" },
+          { value: 0.064, name: "包头" },
+          { value: 0.031, name: "呼和浩特" },
+          { value: 0.064, name: "鄂尔多斯" },
+          { value: 0.127, name: "乌海" },
+          { value: 0.127, name: "通辽" },
         ],
       },
       optionObjMS5: {
-        legendData: ["鄂尔多斯", "包头"],
+        legendData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
         seriesName: "盟市地方3天储气能力",
         unit: "亿立方米",
         seriesData: [
-          { value: 70, name: "鄂尔多斯" },
-          { value: 30, name: "包头" },
+          { value: 0.095, name: "巴彦淖尔" },
+          { value: 0.064, name: "包头" },
+          { value: 0.031, name: "呼和浩特" },
+          { value: 0.064, name: "鄂尔多斯" },
+          { value: 0.127, name: "乌海" },
+          { value: 0.127, name: "通辽" },
         ],
       },
     };
@@ -325,11 +334,16 @@ export default {
   width: calc(100% - 30px);
   margin: 0 15px;
   overflow-x: auto;
+  .unit {
+    text-align: right;
+    font-size: 10px;
+    padding-top: 10px;
+  }
   .table_one {
     font-family: PingFang SC;
     width: 100%;
     border-collapse: collapse;
-    margin: 20px auto;
+    margin: 5px auto 20px;
     th, td {
       font-size: 14px;
       border: 1px solid #b9bec9;

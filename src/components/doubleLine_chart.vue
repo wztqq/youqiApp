@@ -150,7 +150,6 @@ export default {
           {
             name: this.optionObj.seriesName1,
             type: "line",
-            stack: "总量",
             symbol: "circle",
             smooth: true,
             symbolSize: 6,
@@ -166,12 +165,11 @@ export default {
               width: 2,
             },
             color: "#2991f4",
-            data: this.optionObj.seriesData2,
+            data: this.optionObj.seriesData1,
           },
           {
             name: this.optionObj.seriesName2,
             type: "line",
-            stack: "总量",
             smooth: true,
             symbol: "circle",
             symbolSize: 6,
@@ -186,7 +184,7 @@ export default {
               width: 2,
             },
             color: "#f8c94b",
-            data: this.optionObj.seriesData1,
+            data: this.optionObj.seriesData2,
           },
           
         ],

@@ -7,7 +7,7 @@
         src="../../assets/img/gasmap/yafei_map.png"
         alt="图片未显示"/>
 
-      <!-- 日调峰记录查询 && 调峰结构分析 -->
+      <!-- 月调峰气量盟市占比 && 月调峰气量企业占比 -->
       <div class="chart">
         <div class="tab_oil">
           <span v-for="(item, index) in tablist_one"
@@ -19,15 +19,20 @@
             ]">{{ item }}</span>
         </div>
         <div class="chart-item" id="table" v-if="selected_one === 0">
-          <table class="table_one" style="width: 800px">
-            <tr>
-              <th :width="th.width" v-for="(th,index) in tableTh_one" :key="index">{{th.value}}</th>
-            </tr>
-            <tr v-for="(tr,index) in listData_one" :key="index">
-              <td>{{index+1}}</td>
-              <td v-for="(td,index) in tr" :key="index">{{td}}</td>
-            </tr>
-          </table>
+<!--          <table class="table_one" style="width: 800px">-->
+<!--            <tr>-->
+<!--              <th :width="th.width" v-for="(th,index) in tableTh_one" :key="index">{{th.value}}</th>-->
+<!--            </tr>-->
+<!--            <tr v-for="(tr,index) in listData_one" :key="index">-->
+<!--              <td>{{index+1}}</td>-->
+<!--              <td v-for="(td,index) in tr" :key="index">{{td}}</td>-->
+<!--            </tr>-->
+<!--          </table>-->
+          <div class="fontSize_div">
+            <div class="fontSize">0.508</div>
+            <div class="fontSize">亿立方米</div>
+          </div>
+          <dount-chart class="echarts" :optionObj="optionObjTFMS"></dount-chart>
         </div>
         <div class="chart-item" v-if="selected_one === 1">
           <div class="fontSize_div">
@@ -87,7 +92,7 @@ export default {
       selected_one: 0,
       selected_two: 0,
       selected_three: "0",
-      tablist_one: ["日调峰记录查询", "调峰结构分析"],
+      tablist_one: ["月调峰气量盟市占比", "月调峰气量企业占比"],
       tablist_two: ["天然气日消费缺口预测", "调峰计划建议"],
       tableTh_one: [
         {
@@ -201,6 +206,19 @@ export default {
           date: "2020.9.20",
         },
       ],
+      optionObjTFMS: {
+        legendData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
+        seriesName: "调峰结构分析",
+        unit: "亿立方米",
+        seriesData: [
+          { value: 335, name: "巴彦淖尔" },
+          { value: 310, name: "包头" },
+          { value: 234, name: "呼和浩特" },
+          { value: 135, name: "鄂尔多斯" },
+          { value: 127, name: "乌海" },
+          { value: 338, name: "通辽" },
+        ],
+      },
       optionObjTFJGFX: {
         legendData: ["LNG", "甲醇化肥", "可中断工业", "不可中断工业", "商业"],
         seriesName: "调峰结构分析",
@@ -214,12 +232,12 @@ export default {
         ],
       },
       optionObjYTF: {
-        legendData: ["天然气月产量", "同比变化"],
+        legendData: ["月调峰量", "同比变化"],
         yLeftName: "亿立方米",
         yRightName: "%",
-        xData: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
-        seriesLeftData: [6, 13, 18, 13, 13, 18, 13, 9, 13, 18, 13, 9],
-        seriesRightData: [-0.5, 1, 2, 0.9, 0.9, 1.9, 0.9, 0.85, 1, 2.2, 1.4, 0.3],
+        xData: [ "10月", "11月", "12月", "1月", "2月", "3月",],
+        seriesLeftData: [6, 13, 18, 13, 13, 18],
+        seriesRightData: [-0.5, 1, 1, 0.9, 0.5, 1.9],
         barWidth: 10,
         lineWidth: 2,
         symbolSize: 8,
@@ -233,8 +251,8 @@ export default {
       optionObjLineQKYC: {
         yName: "亿立方米",
         legendData: ["日需求量", "日供应量"],
-        seriesName1: "日供应量",
-        seriesName2: "日需求量",
+        seriesName1: "日需求量",
+        seriesName2: "日供应量",
         xData: ["1月1日", "1月3日", "1月5日", "1月7日", "1月9日", "1月11日", "1月13日", "1月15日", "1月17日", "1月19日"],
         seriesData1: [6, 13, 18, 13, 13, 18, 13, 9, 13, 9],
         seriesData2: [4, 8, 15, 9, 7, 11, 9, 11, 6, 5],
@@ -346,7 +364,7 @@ export default {
 /* 文字块 */
 .fontSize_div {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 30px);
   // height: 100%;
   text-align: center;
 }

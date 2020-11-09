@@ -479,7 +479,7 @@ export default {
       arry5: ['成品油企业','1300','1000','895','769'],
       arry6: ['成品油企业','1300','1000','895','769'],
       arry7: ['伊泰煤制油','1300','1000','895','600'],
-      arry8: ['伊泰煤制油','1200','800','695','500'],
+      arry8: ['神华煤制油','1200','800','695','500'],
       arry9: ['大唐煤制气','1300','100','900',''],
       arry10: ['汇能煤制气','1200','80','1200',''],
       tablist: ["原油", "成品油", "煤制油","煤制气"],
@@ -2307,10 +2307,10 @@ tabButton(id) {
           this.MeiZhiYou_Three("echartsSeventeen");
           this.MeiZhiYou_Five("echartsNinteenth");
           this.produce_tc=0;
-          this.logoposionleft7 = (this.screenWidth * 0.51) + 'px';
-          this.logoposiontop7 = (314.5 * 0.71) + 'px';
-          this.logoposionleft8 = (this.screenWidth * 0.46) + 'px';
-          this.logoposiontop8 = (314.5 * 0.73) + 'px';
+          this.logoposionleft7 = (this.screenWidth * 0.40) + 'px';
+          this.logoposiontop7 = (314.5 * 0.76) + 'px';
+          this.logoposionleft8 = (this.screenWidth * 0.37) + 'px';
+          this.logoposiontop8 = (314.5 * 0.83) + 'px';
         });
       }
       if (3 == id) {

@@ -104,7 +104,7 @@
                  @click="tanchuangShow(listData9,tableTh2)"></div>
 
             <img class="map" src="../../assets/img/industryAnalysis/原油生产地图.png" alt="图片未显示">
-            <div class="chart">
+            <div class="chuqing_chart">
                 <div class="tab_oil">
                     <span v-for="(item,index) in tablist_one" :key='index' @click="tabButton_one(index)"
                           v-bind:class="[{tab_oil_two:index == selected_one},{tab_oil_one:true}]">{{item}}</span>
@@ -188,51 +188,51 @@
                         <span v-for="(item,index) in tablist_four" :key='index' @click="tabButton_four(index)"
                               v-bind:class="[{tab_oil_two:index == selected_four},{tab_oil_one:true}]">{{item}}</span>
                     </div>
-                    <div class="ratio_div">
-                        <!-- 上月完成 -->
-                        <div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
-                            <div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
-                                <div class="last_month"><span class="ratio_font"
-                                                              v-model="last_month">{{last_month}}</span><span
-                                        class="ratio_font1" v-model="unit">{{unit}}</span></div>
-                                <div class="last_month_font"><span class="ratio_font_div">上月完成</span></div>
-                            </div>
-                            <div class="ratio_position">
-                                <div class="ratio">
-                                    <span v-model="YoY">同比:<img class="imgStyle"
-                                                                src="../../assets/img/Indicatorsmonitoring/003-2.png"
-                                                                alt="图片未显示">{{YoY}}</span>
-                                </div>
-                                <div class="ratio">
-                                    <span v-model="Cratio">环比:<img class="imgStyle"
-                                                                   src="../../assets/img/Indicatorsmonitoring/003-3.png"
-                                                                   alt="图片未显示">{{Cratio}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 年度完成 -->
-                        <div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
-                            <div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
-                                <div class="last_month"><span class="ratio_font"
-                                                              v-model="last_year">{{last_year}}</span><span
-                                        class="ratio_font1" v-model="unit">{{unit}}</span></div>
-                                <div class="last_month_font"><span class="ratio_font_div">年度完成</span></div>
-                            </div>
-                            <div class="ratio_position">
-                                <div class="ratio">
-                                    <span v-model="YoY">同比:<img class="imgStyle"
-                                                                src="../../assets/img/Indicatorsmonitoring/003-2.png"
-                                                                alt="图片未显示">{{YoY1}}</span>
-                                </div>
-                                <div class="ratio">
-                                    <span v-model="Cratio">环比:<img class="imgStyle"
-                                                                   src="../../assets/img/Indicatorsmonitoring/003-3.png"
-                                                                   alt="图片未显示">{{Cratio1}}</span>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- <div class="ratio_div">
+                         &lt;!&ndash; 上月完成 &ndash;&gt;
+                         <div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
+                             <div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
+                                 <div class="last_month"><span class="ratio_font"
+                                                               v-model="last_month">{{last_month}}</span><span
+                                         class="ratio_font1" v-model="unit">{{unit}}</span></div>
+                                 <div class="last_month_font"><span class="ratio_font_div">上月完成</span></div>
+                             </div>
+                             <div class="ratio_position">
+                                 <div class="ratio">
+                                     <span v-model="YoY">同比:<img class="imgStyle"
+                                                                 src="../../assets/img/Indicatorsmonitoring/003-2.png"
+                                                                 alt="图片未显示">{{YoY}}</span>
+                                 </div>
+                                 <div class="ratio">
+                                     <span v-model="Cratio">环比:<img class="imgStyle"
+                                                                    src="../../assets/img/Indicatorsmonitoring/003-3.png"
+                                                                    alt="图片未显示">{{Cratio}}</span>
+                                 </div>
+                             </div>
+                         </div>
+                         &lt;!&ndash; 年度完成 &ndash;&gt;
+                         <div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
+                             <div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
+                                 <div class="last_month"><span class="ratio_font"
+                                                               v-model="last_year">{{last_year}}</span><span
+                                         class="ratio_font1" v-model="unit">{{unit}}</span></div>
+                                 <div class="last_month_font"><span class="ratio_font_div">年度完成</span></div>
+                             </div>
+                             <div class="ratio_position">
+                                 <div class="ratio">
+                                     <span v-model="YoY">同比:<img class="imgStyle"
+                                                                 src="../../assets/img/Indicatorsmonitoring/003-2.png"
+                                                                 alt="图片未显示">{{YoY1}}</span>
+                                 </div>
+                                 <div class="ratio">
+                                     <span v-model="Cratio">环比:<img class="imgStyle"
+                                                                    src="../../assets/img/Indicatorsmonitoring/003-3.png"
+                                                                    alt="图片未显示">{{Cratio1}}</span>
+                                 </div>
+                             </div>
+                         </div>
 
-                    </div>
+                     </div>-->
                     <div class="echarts_two" id="echartsThree"></div>
                 </div>
                 <div class="chart">
@@ -241,11 +241,23 @@
                         <span v-for="(item,index) in tablist_five" :key='index' @click="tabButton_five(index)"
                               v-bind:class="[{tab_oil_two:index == selected_five},{tab_oil_one:true}]">{{item}}</span>
                     </div>
-                    <div class="fontSize_div">
+                    <div class="fontSize_div" v-show="value1 === 0">
                         <div class="fontSize" v-model="pie_one_number">{{pie_one_number}}</div>
                         <div class="fontSizeOne" v-model="pie_one_unit">{{pie_one_unit}}</div>
                     </div>
-                    <div class="echarts_one" id="echartsFour"></div>
+                    <!--下拉列表-->
+                    <van-dropdown-menu>
+                        <van-dropdown-item v-model="value1" :options="option1" @change="changeChart"/>
+                    </van-dropdown-menu>
+
+                    <!--原油生产自给率年度环形图-->
+                    <div class="echarts_one" v-show="value1 === 0">
+                        <div id="echartsFour" style="width: 100%;height:100%"></div>
+                    </div>
+                    <div class="echarts_one" v-show="value1 !== 0">
+                        <div  id="echartsBar" style="width: 100%;height:100%"></div>
+                    </div>
+
                 </div>
                 <div class="chart">
                     <div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
@@ -285,51 +297,51 @@
                     <span v-for="(item,index) in tablist_seven" :key='index' @click="tabButton_seven(index)"
                           v-bind:class="[{tab_oil_four:index == selected_seven},{tab_oil_three:true}]">{{item}}</span>
                     </div>
-                 <!--   <div class="ratio_div">
-                        &lt;!&ndash; 上月完成 &ndash;&gt;
-                        <div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
-                            <div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
-                                <div class="last_month"><span class="ratio_font"
-                                                              v-model="last_month">{{last_month}}</span><span
-                                        class="ratio_font1" v-model="unit">{{unit}}</span></div>
-                                <div class="last_month_font"><span class="ratio_font_div">上月完成</span></div>
-                            </div>
-                            <div class="ratio_position">
-                                <div class="ratio">
-                                <span v-model="YoY">同比:<img class="imgStyle"
-                                                            src="../../assets/img/Indicatorsmonitoring/003-2.png"
-                                                            alt="图片未显示">{{YoY}}</span>
-                                </div>
-                                <div class="ratio">
-                                <span v-model="Cratio">环比:<img class="imgStyle"
-                                                               src="../../assets/img/Indicatorsmonitoring/003-3.png"
-                                                               alt="图片未显示">{{Cratio}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        &lt;!&ndash; 年度完成 &ndash;&gt;
-                        <div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
-                            <div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
-                                <div class="last_month"><span class="ratio_font"
-                                                              v-model="last_year">{{last_year}}</span><span
-                                        class="ratio_font1" v-model="unit">{{unit}}</span></div>
-                                <div class="last_month_font"><span class="ratio_font_div">年度完成</span></div>
-                            </div>
-                            <div class="ratio_position">
-                                <div class="ratio">
-                                <span v-model="YoY">同比:<img class="imgStyle"
-                                                            src="../../assets/img/Indicatorsmonitoring/003-2.png"
-                                                            alt="图片未显示">{{YoY1}}</span>
-                                </div>
-                                <div class="ratio">
-                                <span v-model="Cratio">环比:<img class="imgStyle"
-                                                               src="../../assets/img/Indicatorsmonitoring/003-3.png"
-                                                               alt="图片未显示">{{Cratio1}}</span>
-                                </div>
-                            </div>
-                        </div>
+                    <!--   <div class="ratio_div">
+                           &lt;!&ndash; 上月完成 &ndash;&gt;
+                           <div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
+                               <div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
+                                   <div class="last_month"><span class="ratio_font"
+                                                                 v-model="last_month">{{last_month}}</span><span
+                                           class="ratio_font1" v-model="unit">{{unit}}</span></div>
+                                   <div class="last_month_font"><span class="ratio_font_div">上月完成</span></div>
+                               </div>
+                               <div class="ratio_position">
+                                   <div class="ratio">
+                                   <span v-model="YoY">同比:<img class="imgStyle"
+                                                               src="../../assets/img/Indicatorsmonitoring/003-2.png"
+                                                               alt="图片未显示">{{YoY}}</span>
+                                   </div>
+                                   <div class="ratio">
+                                   <span v-model="Cratio">环比:<img class="imgStyle"
+                                                                  src="../../assets/img/Indicatorsmonitoring/003-3.png"
+                                                                  alt="图片未显示">{{Cratio}}</span>
+                                   </div>
+                               </div>
+                           </div>
+                           &lt;!&ndash; 年度完成 &ndash;&gt;
+                           <div style="width: 172px;height: 50px;float: left;position: relative;top: 10px;">
+                               <div style="width: 85px; height: 50px; float: left; position: relative; left: 5px;">
+                                   <div class="last_month"><span class="ratio_font"
+                                                                 v-model="last_year">{{last_year}}</span><span
+                                           class="ratio_font1" v-model="unit">{{unit}}</span></div>
+                                   <div class="last_month_font"><span class="ratio_font_div">年度完成</span></div>
+                               </div>
+                               <div class="ratio_position">
+                                   <div class="ratio">
+                                   <span v-model="YoY">同比:<img class="imgStyle"
+                                                               src="../../assets/img/Indicatorsmonitoring/003-2.png"
+                                                               alt="图片未显示">{{YoY1}}</span>
+                                   </div>
+                                   <div class="ratio">
+                                   <span v-model="Cratio">环比:<img class="imgStyle"
+                                                                  src="../../assets/img/Indicatorsmonitoring/003-3.png"
+                                                                  alt="图片未显示">{{Cratio1}}</span>
+                                   </div>
+                               </div>
+                           </div>
 
-                    </div>-->
+                       </div>-->
                     <div class="echarts_two" id="echartsSix"></div>
                 </div>
                 <div class="chart">
@@ -352,6 +364,35 @@
         name: 'FuncFormsBase',
         data() {
             return {
+                value1: 0,
+                option1: [
+                    {text: '年度', value: 0},
+                    {text: '季度', value: 1},
+                    {text: '月度', value: 2},
+                ],
+                // 自给率柱图数据
+                barOneMonth:[
+                    //原油生产自给率月度（总产量）数据
+                    [8,8,6,7,7,9,6,7,7,10,7,7],
+                    //原油生产自给率月度（区内供应）数据
+                    [4,6,3,6,5,4,5,5,4,5,5,3],
+                   //月度自给率
+                    [20,25,18,9,11,21,40,20,12,21,30,40],
+                    ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                    '万吨'
+
+
+                ],
+                barOneQuarter:[
+                    //原油生产自给率季度（总产量）数据
+                    [22,24,23,21],
+                    //原油生产自给率季度（区内供应）数据
+                    [12,14,13,16],
+                    //季度自给率
+                    [20,25,21,30],
+                    ['1-3月','4-6月','7-9月','10-12月'],
+                    '万立方米'
+                ],
                 // 炼化煤页面弹窗
                 page_c: [],
                 page_c1: ['大唐煤制气', 1200, 100, 1000],
@@ -712,8 +753,8 @@
                 k1: 0,
                 //第一个页面的图表数据
                 echarts: {
-                    lengdata_bottom_one:'50',
-                    lengdata_bottom_two:100,
+                    lengdata_bottom_one: '50',
+                    lengdata_bottom_two: 100,
                     lengend_data_one: ['苏仁诺尔油田', '巴彦塔拉油田', '苏德尔特油田', '呼和诺仁油田', '贝尔油田',
                         '乌里雅斯太油田', '宝力格油田', '新苏木油田', '哈达图油田', '锡林油田', '乌兰诺尔油田', '其他'],
                     lengend_data_three: ['苏里格气田', '大牛地气田', '胜利井气田', '靖边气田', '乌审旗气田', '其他'],
@@ -868,16 +909,16 @@
                 },
                 //第二个页面的柱状图数据
                 bardata_one: [
-                    [50, 50, 251, 400, 300, 250, 375, 500, 375, 250, 275, 520],
-                    [250, 200, 374, '-', 375, '-', 175, 200, 175, '-', 260, 230],
-                    ['-', '-', '-', 100, '-', 125, '-', '-', '-', 150, '-', '-'],
-                    '万吨'
+                    [4, 4, 7, 17, 8, 21, 23, 13, 8, 12, 21, 18],
+                    [-18, -16, -14, -2, 10, 21, 24, 20, 14, 20, 10, 12],
+                    '万吨',
+                    ['原油月产量', '同比变化'],
                 ],
                 bardata_two: [
-                    [40, 60, 234, 300, 300, 230, 375, 460, 385, 230, 275, 420],
-                    [230, 220, 354, '-', 375, '-', 175, 210, 175, '-', 260, 230],
-                    ['-', '-', '-', 120, '-', 145, '-', '-', '-', 160, '-', '-'],
-                    '万立方米'
+                    [23, 21, 35, 17, 12, 21, 23, 13, 8, 12, 31, 22],
+                    [-23, -17, -14, -8, 2, 10, 14, 20, 14, 8, 15, 24],
+                    '万立方米',
+                    ['天然气月产量', '同比变化'],
                 ],
                 /* 第二个页面同比环比单位 */
                 unit: '万吨',
@@ -981,9 +1022,9 @@
         },
         mounted() {
             this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量",
-                this.echarts.lengend_data_one,this.echarts.lengdata_bottom_one);
+                this.echarts.lengend_data_one, this.echarts.lengdata_bottom_one);
             this.drawLine('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
-                this.echarts.lengend_data_three,this.echarts.lengdata_bottom_two);
+                this.echarts.lengend_data_three, this.echarts.lengdata_bottom_two);
             this.screenLeft = (this.screenWidth - 343) / 2 + 'px'
         },
         methods: {
@@ -1009,7 +1050,7 @@
                 this.show = 0
             },
             // 储情分析环形图
-            drawLine(id, arry, unit, name, lengedData,lengdataBottom) {
+            drawLine(id, arry, unit, name, lengedData, lengdataBottom) {
                 var echarts = require('echarts');
                 var myChart = echarts.init(document.getElementById(id));
                 myChart.setOption({
@@ -1064,15 +1105,26 @@
                         axisPointer: { // 坐标轴指示器，坐标轴触发有效
                             type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                         },
-                       /* formatter: function (params) {
-                            var tar;
-                            if (params[1].value !== '-') {
-                                tar = params[1];
-                            } else {
-                                tar = params[0];
+                        formatter: function (params) {
+                            //获得当前每月原油产量
+                            let tar = arry[0];
+                            let sum = 0;
+                            for (let i = 0; i < params[0].axisValue.substring(0, params[0].axisValue.length - 1); i++) {
+                                sum = sum + tar[i]
                             }
-                            return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
-                        }*/
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + arry[2] +
+                                '</br>' +
+                                params[1].seriesName + ':' +
+                                params[1].value + '%' + '</br>' +
+                                '累计月产量' + ':' +
+                                sum + arry[2]
+                        }
+                    },
+                    legend: {
+                        data: arry[3],
+                        x: 'right',
+                        right: '20%',
+                        top: '5%'
                     },
                     grid: {
                         top: '25%',
@@ -1091,24 +1143,24 @@
                         },
                         axisLine: {
                             lineStyle: {
-                                color: "#ddd", // 颜色
+                                color: "#9B9DA1", // 颜色
                                 width: 1, // 粗细
                             },
                         },
                         data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
                     },
-                    yAxis: {
-                        name: arry[3],
+                    yAxis: [{
+                        name: arry[2],
                         min: 0,
-                        max: 1000,
-                        interval: 250,
+                        max: 25,
+                        interval: 5,
                         type: 'value',
                         axisLabel: {
                             fontSize: 12,
                         },
                         axisLine: {
                             lineStyle: {
-                                color: "#ddd", // 颜色
+                                color: "#9B9DA1", // 颜色
                                 width: 1, // 粗细
                             },
                         },
@@ -1116,60 +1168,43 @@
                             show: false,
                         },
                     },
+                        {
+                            type: 'value',
+                            show: false,
+                            min: -30,
+                            max: 40,
+                            name: '同比变化',
+                            axisLabel: {
+                                formatter: '{value} %'
+                            }
+                        }
+                    ],
                     series: [{
-                        name: '当月产量',
+                        name: arry[3][0],
                         type: 'bar',
                         barWidth: 10,
+                        data: arry[0],
                         itemStyle: {
-                            barBorderColor: 'rgba(0,0,0,0)',
-                            color: 'rgba(0,0,0,0)'
-                        },
-                        emphasis: {
-                            itemStyle: {
-                                barBorderColor: 'rgba(0,0,0,0)',
-                                color: 'rgba(0,0,0,0)'
+                            normal: {
+                                color: new this.$echarts.graphic.LinearGradient(
+                                    0, 0, 0, 1,
+                                    [
+                                        {offset: 0, color: '#38F8FF'},                   //柱图渐变色
+                                        {offset: 1, color: '#45BBFF'},                   //柱图渐变色
+                                    ]
+                                )
                             }
-                        },
-                        data: arry[0]
+                        }
                     },
                         {
-                            name: '收入',
+                            name: '同比变化',
                             type: 'line',
                             barWidth: 10,
                             itemStyle: {
-                                barBorderRadius: 30,
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 0, 1,
-                                    [{
-                                        offset: 0,
-                                        color: '#7497FF'
-                                    },
-                                        {
-                                            offset: 0,
-                                            color: '#74B2FF'
-                                        }
-                                    ]
-                                )
+                                color: '#FBAF5D'
                             },
-                            label: {
-                                show: true,
-                                position: 'top'
-                            },
-                            data: arry[1]
-                        },
-                        {
-                            name: '支出',
-                            type: 'bar',
-                            barWidth: 10,
-                            itemStyle: {
-                                barBorderRadius: 30,
-                                color: '#FF5140',
-                            },
-                            label: {
-                                show: true,
-                                position: 'bottom'
-                            },
-                            data: arry[2]
+                            data: arry[1],
+                            yAxisIndex: 1
                         }
                     ]
                 });
@@ -1414,7 +1449,7 @@
                             },
                             axisLine: {
                                 lineStyle: {
-                                    color: "#ddd", // 颜色
+                                    color: "#9B9DA1", // 颜色
                                     width: 1, // 粗细
                                 },
                             },
@@ -1435,7 +1470,7 @@
                             },
                             axisLine: {
                                 lineStyle: {
-                                    color: "#ddd", // 颜色
+                                    color: "#9B9DA1", // 颜色
                                     width: 1, // 粗细
                                 },
                             },
@@ -1449,7 +1484,7 @@
                         type: 'bar',
                         itemStyle: {
                             normal: {
-                                color: '#ddd',
+                                color: '#9B9DA1',
                                 barBorderRadius: [20, 20, 20, 20]
                             }
                         },
@@ -1552,7 +1587,6 @@
 
             //主要按钮
             tabButton(id) {
-                console.log(id)
                 this.selected = id
                 //this.tabButton_one_t(id)
                 if (0 == id) {
@@ -1568,9 +1602,9 @@
                     this.pie_number = 1030
                     this.$nextTick(function () {
                         this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量",
-                            this.echarts.lengend_data_one,this.echarts.lengdata_bottom_one);
+                            this.echarts.lengend_data_one, this.echarts.lengdata_bottom_one);
                         this.drawLine('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
-                            this.echarts.lengend_data_three,this.echarts.lengdata_bottom_two);
+                            this.echarts.lengend_data_three, this.echarts.lengdata_bottom_two);
                     })
 
                 }
@@ -1590,7 +1624,8 @@
                     this.bacolor = 1
                     this.$nextTick(function () {
                         this.drawLine_one('echartsThree', this.bardata_one)
-                        this.drawPie('echartsFour', this.produce_pie_oil, "亿立方米", "本年度原油生产自给率")
+                        this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率")
+                        // this.drawBarOne()
                         this.drawPie_one('echartsFive', this.produce_pieTwo_oil, "个", "本年度原油生产企业分布")
                     })
                 }
@@ -1602,13 +1637,13 @@
                 this.selected_one = id
                 if (this.i == 0 && id == 1) {
                     this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量",
-                        this.echarts.lengend_data_one,this.echarts.lengdata_bottom_one);
+                        this.echarts.lengend_data_one, this.echarts.lengdata_bottom_one);
                     this.pie_number = 402
                     this.i = 1
                 }
                 if (this.i == 1 && id == 0) {
                     this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量",
-                        this.echarts.lengend_data_one,this.echarts.lengdata_bottom_one);
+                        this.echarts.lengend_data_one, this.echarts.lengdata_bottom_one);
                     this.pie_number = 1030
                     this.i = 0
                 }
@@ -1618,13 +1653,13 @@
                 this.selected_two = id
                 if (this.j == 0 && id == 1) {
                     this.drawLine('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
-                        this.echarts.lengend_data_three,this.echarts.lengdata_bottom_two);
+                        this.echarts.lengend_data_three, this.echarts.lengdata_bottom_two);
                     this.pie_number_two = 0.37
                     this.j = 1
                 }
                 if (this.j == 1 && id == 0) {
                     this.drawLine('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
-                        this.echarts.lengend_data_three,this.echarts.lengdata_bottom_two);
+                        this.echarts.lengend_data_three, this.echarts.lengdata_bottom_two);
                     this.pie_number_two = 0.61
                     this.j = 0
                 }
@@ -1666,7 +1701,7 @@
                     this.bacolor = 1
                     this.$nextTick(function () {
                         this.drawLine_one('echartsThree', this.bardata_one)
-                        this.drawPie('echartsFour', this.produce_pie_oil, "亿立方米", "本年度原油生产自给率")
+                        this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率")
                         this.drawPie_one('echartsFive', this.produce_pieTwo_oil, "个", "本年度原油生产企业分布")
                     })
                 } else {
@@ -1702,13 +1737,15 @@
             tabButton_five(id) {
                 this.selected_five = id
                 if (this.p_j == 0 && id == 1) {
+                    this.value1=0
                     this.drawPie('echartsFour', this.produce_pie_gas, "亿立方米", "本年度天然气生产自给率");
                     this.pie_one_number = this.produce_pie_gas[2]
                     this.pie_one_unit = this.produce_pie_gas[3]
                     this.p_j = 1
                 }
                 if (this.p_j == 1 && id == 0) {
-                    this.drawPie('echartsFour', this.produce_pie_oil, "亿立方米", "本年度原油生产自给率");
+                    this.value1=0
+                    this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率");
                     this.pie_one_number = this.produce_pie_oil[2]
                     this.pie_one_unit = this.produce_pie_oil[3]
                     this.p_j = 0
@@ -1781,14 +1818,127 @@
             //取消图片点击默认事件
             default_t() {
                 console.log("点我干什么")
-            }
+            },
+            //原油生产自给率柱状图
+            drawBarOne(arry) {
+                let echarts = require('echarts');
+                let myChart = echarts.init(document.getElementById('echartsBar'));
+                myChart.setOption({
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                        },
+                        /* formatter: function (params) {
+                             //获得当前每月原油产量
+                             let tar = arry[0];
+                             let sum = 0;
+                             for (let i = 0; i < params[0].axisValue.substring(0, params[0].axisValue.length - 1); i++) {
+                                 sum = sum + tar[i]
+                             }
+                             return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + arry[2] +
+                                 '</br>' +
+                                 params[1].seriesName + ':' +
+                                 params[1].value + '%' + '</br>' +
+                                 '累计月产量' + ':' +
+                                 sum + arry[2]
+                         }*/
+                    },
+                    legend: {
+                        data: ['自给率'],
+                        x: 'right',
+                        right: '20%',
+                        top: '5%'
+                    },
+                   /* grid: {
+                        top: '25%',
+                        left: '3%',
+                        right: '5%',
+                        bottom: '3%',
+                        containLabel: true
+                    },*/
+                    xAxis: {
+                        type: 'category',
+                        splitLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: "#9B9DA1", // 颜色
+                                width: 1, // 粗细
+                            },
+                        },
+                        data: arry[3]
+                    },
+                    yAxis: [{
+                        name: '%',
+                        min: 0,
+                        max: 25,
+                        interval: 5,
+                        type: 'value',
+                        axisLabel: {
+                            fontSize: 12,
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: "#9B9DA1", // 颜色
+                                width: 1, // 粗细
+                            },
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                    }
+                    ],
+                    series: [{
+                        name: '自给率',
+                        type: 'bar',
+                        barWidth: 10,
+                        data: arry[2],
+                        itemStyle: {
+                            normal: {
+                                color: new this.$echarts.graphic.LinearGradient(
+                                    0, 0, 0, 1,
+                                    [
+                                        {offset: 0, color: '#38F8FF'},                   //柱图渐变色
+                                        {offset: 1, color: '#45BBFF'},                   //柱图渐变色
+                                    ]
+                                )
+                            }
+                        }
+                    }
+                    ]
+                });
+            },
+            //本年度原油生产自给率下拉切换
+            changeChart() {
+                console.log(this.selected_five)
+                if (this.value1 === 0) {
+                    this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率");
+                    this.pie_one_number = this.produce_pie_oil[2]
+                    this.pie_one_unit = this.produce_pie_oil[3]
+                } else {
+                    this.$nextTick(function () {
+                        if(this.value1===1){
+                            this.drawBarOne(this.barOneQuarter)
+                        }else{
+                            this.drawBarOne(this.barOneMonth)
+                        }
 
+                    });
+                }
+            }
 
         }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
+
     /* 弹出框 */
     .tanchuang {
         position: absolute;
@@ -1999,6 +2149,26 @@
         position: relative;
     }
 
+    .chuqing_chart {
+        width: 100%;
+        height: 330px;
+        background-color: white;
+        padding: 10px 0;
+        position: relative;
+    }
+
+    .chuqing_chart .fontSize, .chart_t .fontSize {
+        position: relative;
+        top: 90px;
+        font: 23px bolder microsoft-yahei;
+    }
+
+    .chuqing_chart .fontSizeOne, .chart_t .fontSizeOne {
+        position: relative;
+        top: 90px;
+        font: 15px bolder microsoft-yahei;
+    }
+
     .chart_t {
         width: 100%;
         height: 305px;
@@ -2020,7 +2190,7 @@
 
     .echartsOne {
         width: 100%;
-        height: 242px;
+        height: 320px;
         margin: 20px auto;
         background-image: url(../../assets/img/industryAnalysis/石油标志.png);
         background-repeat: no-repeat;
@@ -2031,7 +2201,7 @@
     /* 第二个页面带背景的样式 */
     .echartsTwo {
         width: 100%;
-        height: 242px;
+        height: 320px;
         margin: 20px auto;
         background-image: url(../../assets/img/industryAnalysis/天然气标志.png);
         background-repeat: no-repeat;
@@ -2049,7 +2219,7 @@
     /* 给第一个柱图一个样式方便设置同比环比块的样式 */
     .echarts_two {
         width: 100%;
-        height: 182px;
+        height: 242px;
         margin: 0px auto;
     }
 
@@ -2126,13 +2296,13 @@
 
     .fontSize {
         position: relative;
-        top: 90px;
+        top: 122px;
         font: 23px bolder microsoft-yahei;
     }
 
     .fontSizeOne {
         position: relative;
-        top: 90px;
+        top: 124px;
         font: 15px bolder microsoft-yahei;
     }
 
@@ -2241,5 +2411,22 @@
     /* 主要内容隐藏 */
     .content {
         display: none;
+    }
+</style>
+<style lang="scss">
+    .chart {
+        .van-dropdown-menu__bar {
+            height: 32px;
+        }
+        .van-dropdown-menu__title {
+            font-size: 12px;
+        }
+        .van-cell, .van-dropdown-menu__title--active {
+            font-size: 12px;
+            color: #3A6DDA;
+        }
+        .van-dropdown-item__option--active .van-dropdown-item__icon {
+            color: #3A6DDA;
+        }
     }
 </style>

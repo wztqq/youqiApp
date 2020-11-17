@@ -19,7 +19,6 @@
       <div class="chart table">
         <h4>区内主要管线运行情况</h4>
         <div id="table">
-          <p class="unit">单位: 亿立方米</p>
           <table class="table_one">
             <tr>
               <th :width="th.width" v-for="(th,index) in tableTh_one" :key="index">{{th.value}}</th>
@@ -50,7 +49,7 @@
           </div>
           <dount-chart class="echarts" :optionObj="optionObjLineQTGQ"></dount-chart>
         </div>
-        <div class="chart-item" :key="timer" id="table" v-if="selected_one === 1">
+        <div class="chart-item" :key="timer"  v-if="selected_one === 1">
           <div class="fontSize_div">
             <div class="fontSize">100</div>
             <div class="fontSize">亿立方米</div>
@@ -113,16 +112,16 @@ export default {
           value: "管线",
         },
         {
-          value: "管存量",
+          value: "管存量（万立方米）",
         },
         {
           value: "实际负荷率",
         },
         {
-          value: "昨日进气量",
+          value: "昨日进气量（万立方米）",
         },
         {
-          value: "昨日出气量",
+          value: "昨日出气量（万立方米）",
         }
       ],
       listData_one: [
@@ -208,12 +207,12 @@ export default {
         seriesName: "送气端主要气田供气占比",
         unit: "亿立方米",
         seriesData: [
-          { value: 335, name: "阿拉善盟" },
-          { value: 310, name: "呼和浩特" },
-          { value: 234, name: "锡林郭勒" },
-          { value: 135, name: "呼伦贝尔" },
-          { value: 738, name: "鄂尔多斯" },
-          { value: 738, name: "其他" },
+          { value: 400.5, name: "阿拉善盟" },
+          { value: 373.5, name: "呼和浩特" },
+          { value: 282.0, name: "锡林郭勒" },
+          { value: 162.6, name: "呼伦贝尔" },
+          { value: 889.2, name: "鄂尔多斯" },
+          { value: 889.2, name: "其他" },
         ],
       },
       optionObjJSD: {
@@ -221,9 +220,9 @@ export default {
         seriesName: "接收端主要行业占比",
         unit: "亿立方米",
         seriesData: [
-          { value: 335, name: "化肥" },
-          { value: 310, name: "甲醇" },
-          { value: 234, name: "城市燃气" },
+          { value: 1143.3, name: "化肥" },
+          { value: 1058.1, name: "甲醇" },
+          { value: 798.6, name: "城市燃气" },
         ],
       },
       optionObjGQQY: {
@@ -393,7 +392,7 @@ export default {
 /* 文字块 */
 .fontSize_div {
   position: absolute;
-  width: calc(100% - 30px);
+  width: 100%;
   // height: 100%;
   text-align: center;
 }

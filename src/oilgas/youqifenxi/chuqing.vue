@@ -135,7 +135,8 @@
                           v-bind:class="[{tab_oil_two:index == selected_three},{tab_oil_one:true}]">{{item}}</span>
                     <div id="table">
                         <div style="font: bold 13px '微软雅黑';color: #3A6DDA;position: relative;top: 30px;"
-                             v-model="tableTh_name">{{tableTh_name}}<span style="color: #FF9311 ;font-style: italic;">Top</span>
+                             v-model="tableTh_name">{{tableTh_name}}<span
+                                style="color: #FF9311 ;font-style: italic;">Top5</span>
                         </div>
                         <table :class="[{table_one:!g},{table_two:g}]">
                             <tr>
@@ -245,18 +246,21 @@
                         <div class="fontSize" v-model="pie_one_number">{{pie_one_number}}</div>
                         <div class="fontSizeOne" v-model="pie_one_unit">{{pie_one_unit}}</div>
                     </div>
+                    <div class="echarts_one" v-show="value1 === 0">
+                        <div id="echartsFour" style="width: 100%;height:100%"></div>
+                    </div>
                     <!--下拉列表-->
-                    <van-dropdown-menu>
+                   <!-- <van-dropdown-menu>
                         <van-dropdown-item v-model="value1" :options="option1" @change="changeChart"/>
                     </van-dropdown-menu>
 
-                    <!--原油生产自给率年度环形图-->
+                    &lt;!&ndash;原油生产自给率年度环形图&ndash;&gt;
                     <div class="echarts_one" v-show="value1 === 0">
                         <div id="echartsFour" style="width: 100%;height:100%"></div>
                     </div>
                     <div class="echarts_one" v-show="value1 !== 0">
                         <div  id="echartsBar" style="width: 100%;height:100%"></div>
-                    </div>
+                    </div>-->
 
                 </div>
                 <div class="chart">
@@ -917,7 +921,7 @@
                 bardata_two: [
                     [23, 21, 35, 17, 12, 21, 23, 13, 8, 12, 31, 22],
                     [-23, -17, -14, -8, 2, 10, 14, 20, 14, 8, 15, 24],
-                    '万立方米',
+                    '亿立方米',
                     ['天然气月产量', '同比变化'],
                 ],
                 /* 第二个页面同比环比单位 */
@@ -926,7 +930,7 @@
                 // 采储排名
                 tableTh_name: '油田储采比排名',
 
-                tableTh_one: ['序号', '油田', '盟区', '储采比'],
+                tableTh_one: ['序号', '油田', '盟区', '储采比（年）'],
                 listData_one: [{
                     oilfield: '吉祥油田',
                     leaguerea: '巴彦淖尔市',
@@ -953,7 +957,7 @@
                         ratio: '10.5'
                     },
                 ],
-                tableTh_two: ['序号', '气田', '盟区', '储采比'],
+                tableTh_two: ['序号', '气田', '盟区', '储采比（年）'],
                 listData_two: [{
                     oilfield: '苏格里气田',
                     leaguerea: '鄂尔多斯市',
@@ -983,8 +987,8 @@
                 //双向绑定的数据
                 pie_one_number: 90,
                 pie_one_unit: '万吨',
-                produce_pie_oil: [55, 45, 90, '万吨'],
-                produce_pie_gas: [60, 40, 0.15, '亿立方米'],
+                produce_pie_oil: [49.5, 40.5, 90, '万吨'],
+                produce_pie_gas: [0.09, 0.06, 0.15, '亿立方米'],
                 bacolor: 1,
                 produce_pieTwo_oil: [77, 23],
                 produce_pieTwo_gas: [68, 32],
@@ -1056,7 +1060,13 @@
                 myChart.setOption({
                     tooltip: {
                         trigger: 'item',
-                        formatter: '{a} <br/>{b}: {c}' + unit + '({d}%)'
+                        formatter: '{a} <br/>{b}: {c}' + unit + '({d}%)',
+                        position: function (pos, params, dom, rect, size) {
+                            // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+                            var obj = {top: 60};
+                            obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+                            return obj;
+                        }
                     },
                     legend: {
                         orient: 'horizontal',
@@ -2296,13 +2306,13 @@
 
     .fontSize {
         position: relative;
-        top: 122px;
+        top: 94px;
         font: 23px bolder microsoft-yahei;
     }
 
     .fontSizeOne {
         position: relative;
-        top: 124px;
+        top: 96px;
         font: 15px bolder microsoft-yahei;
     }
 

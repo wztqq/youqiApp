@@ -107,20 +107,20 @@ export default {
       tablist_three: ["日消费量预测", "日消费缺口预测"],
       optionObjBarGasXF: {
         legendData: ["天然气日消费量", "同比变化"],
-        yLeftName: "亿立方",
+        yLeftName: "万立方米",
         yRightName: "%",
         xData: ["1月1日", "1月2日", "1月3日", "1月4日", "1月5日", "1月6日", "1月7日"],
-        seriesLeftData: [6, 13, 18, 9, 18, 13, 9],
-        seriesRightData: [-0.5, 1, 2, 0.9, 1.9, 0.85, 0.3],
+        seriesLeftData: [160,177,163,169,159,179,169],
+        seriesRightData: [9,3,-6,12,9,3,0],
         barWidth: 10,
         lineWidth: 2,
         symbolSize: 8,
-        leftMin: 0,
+      /*  leftMin: 0,
         leftMax: 25,
         leftInterval: 5,
         rightMin: -2,
         rightMax: 3,
-        rightInterval: 1
+        rightInterval: 1*/
       },
       optionObjYQDW: {
         legendData: ["工业用户", "商业", "建筑业", "生活消费", "供暖"],
@@ -195,8 +195,8 @@ export default {
   watch: {
     selected_two() {
       if(this.selected_one === 0) {
-        
-      } 
+
+      }
     }
   },
   methods: {

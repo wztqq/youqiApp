@@ -62,7 +62,7 @@ export default {
           // formatter: "{a} <br/>{b}: {c} ({d}%)",
           formatter(params) {
             if(params.length && params.length > 1) {
-              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+              return  params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米' + '</br>' +
                       params[1].seriesName + ':' +
                       params[1].value + '%'
             }else if(params.length === 1 && params[0].seriesName === "天然气月产量") {

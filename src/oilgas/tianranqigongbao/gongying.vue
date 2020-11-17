@@ -269,10 +269,14 @@
                     tooltip: {
                         trigger: 'axis',
                         formatter(params) {
-                            // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                            //     params[1].seriesName + ':' +
-                            //     params[1].value + '%'
-                            if(params.length && params.length > 1) {
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米' +
+                                '</br>' +
+                                params[1].seriesName + ':' +
+                                params[1].value + '万立方米'+
+                                '</br>' +
+                                params[2].seriesName + ':' +
+                                params[2].value + '%'
+                           /* if(params.length && params.length > 1) {
                                 return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
                                     params[1].seriesName + ':' +
                                     params[1].value + '%'
@@ -280,24 +284,23 @@
                                 return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
                             }else if(params.length === 1 && params[0].seriesName === "同比变化") {
                                 return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '%'
-                            }
+                            }*/
                         }
                     },
                     legend: {
-                        data: ['天然气日供气量', '同比变化'],
+                        data: ['天然气日供气量','计划日供气量', '环比变化'],
                         x: 'right'
                     },
-                    grid: {
+                  /*  grid: {
                         left: '3%',
-                        right: '4%',
+                        // right: '4%',
                         bottom: '3%',
                         containLabel: true
-                    },
+                    },*/
                     xAxis: [
                         {
                             type: 'category',
-                            boundaryGap: false,
-                            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                            data: ['11月1日', '11月2日', '11月3日', '11月4日', '11月5日', '11月6日', '11月7日'],
                             axisLine: {
                                 lineStyle: {
                                     color: '#9B9DA1'
@@ -308,7 +311,7 @@
                     yAxis: [
                         {
                             type: 'value',
-                            name: '亿立方米',
+                            name: '万立方米',
                             axisLine: {
                                 lineStyle: {
                                     color: '#9B9DA1'
@@ -316,7 +319,7 @@
                             }
 
                         },
-                        {
+                        /*{
                             type: 'value',
                             name: '%',
                             axisLine: {
@@ -324,36 +327,40 @@
                                     color: '#9B9DA1'
                                 }
                             }
-                        }
+                        }*/
                     ],
                     series: [
                         {
                             name: '天然气日供气量',
-                            type: 'line',
-                            symbol: 'circle',
-                            smooth: true,
-                            symbolSize: 6,
+                            type: 'bar',
+                            barWidth: 10,
                             itemStyle: {
-                                normal: {
-                                    color: '#12DFBD',
-                                    lineStyle: {        // 系列级个性化折线样式
-                                        type: 'solid',
-                                        color: '#12DFBD'
-                                    }
-                                }
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    { offset: 0, color: "#44c2fd" },
+                                    { offset: 1, color: "#5f59f7" },
+                                ]),
                             },
-                            areaStyle: {
-                                color: 'rgba(27,202,201,0.1)'
-                            },
-                            data: [55, 61, 56, 66, 59, 70, 68, 66, 59, 64, 62, 56]
+                            data: [4,4,7,16,8,21,23]
                         },
                         {
-                            name: '同比变化',
+                            name: '计划日供气量',
+                            type: 'bar',
+                            barWidth: 10,
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    { offset: 0, color: "#ffc700" },
+                                    { offset: 1, color: "#ff9200" },
+                                ]),
+                            },
+                            data: [3,5,8,16,8,20,22]
+                        },
+                        {
+                            name: '环比变化',
                             type: 'line',
                             smooth: true,
                             symbol: 'circle',
                             symbolSize: 6,
-                            yAxisIndex: 1,
+                            // yAxisIndex: 1,
                             itemStyle: {
                                 normal: {
                                     color: '#FBAF5D',
@@ -363,7 +370,7 @@
                                     }
                                 }
                             },
-                            data: [40, 50, 60, 60, 40, 50, 70, 40, 50, 60, 40, 50]
+                            data:[4,4,7,16,8,21,23]
                         }
                     ]
                 };
@@ -382,11 +389,12 @@
                             //     params[1].seriesName + ':' +
                             //     params[1].value + '亿立方米'
                             if(params.length && params.length > 1) {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value +
+                                    '万立方米' + '</br>' +
                                     params[1].seriesName + ':' +
-                                    params[1].value + '亿立方米'
+                                    params[1].value + '万立方米'
                             }else if(params.length === 1) {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米'
                             }
                         }
                     },
@@ -400,7 +408,7 @@
                     xAxis: [
                         {
                             type: 'category',
-                            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                            data: ['11月1日', '11月2日', '11月3日', '11月4日', '11月5日', '11月6日', '11月7日'],
                             axisPointer: {
                                 type: 'shadow'
                             },
@@ -415,7 +423,7 @@
                     yAxis: [
                         {
                             type: 'value',
-                            name: '亿立方米',
+                            name: '万立方米',
                             min: 0,
                             max: 120,
                             interval: 20,
@@ -428,7 +436,7 @@
                                 }
                             }
                         },
-                        {
+                       /* {
                             type: 'value',
                             min: 0,
                             max: 120,
@@ -441,33 +449,34 @@
                                     color: '#9B9DA1'
                                 }
                             }
-                        }
+                        }*/
                     ],
                     series: [
                         {
                             name: '天然气日供气量',
                             type: 'bar',
                             barWidth: 20,
-                            data: [55, 61, 56, 66, 59, 70, 68, 66, 59, 64, 62, 56],
+                            data: [35,20,50,65,80,90,85],
                             itemStyle: {
                                 normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#38F8FF'},                   //柱图渐变色
-                                            {offset: 1, color: '#45BBFF'},                   //柱图渐变色
-                                        ]
-                                    )
+                                    color:function(params){
+                                        if(params.value <60){
+                                            return "#FE8463";
+                                        }else{
+                                            return "#9BCA63";
+                                        }
+
+                                    }
                                 }
                             }
                         },
                         {
                             name: '合同量',
                             type: 'line',
-                            smooth: true,
+                      /*      smooth: true,
                             symbolSize: 0,
-                            yAxisIndex: 1,
-                            data: [60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+                            yAxisIndex: 1,*/
+                            data: [60, 60, 60, 60, 60, 60, 60],
                             itemStyle: {
                                 color: '#FBAF5D'
                             }
@@ -490,7 +499,7 @@
                             type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         },
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米'
                         }
                     },
                     legend: {
@@ -588,11 +597,12 @@
                             //     params[1].seriesName + ':' +
                             //     params[1].value + '亿立方米'
                             if(params.length && params.length > 1) {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value +
+                                    '万立方米' + '</br>' +
                                     params[1].seriesName + ':' +
-                                    params[1].value + '亿立方米'
+                                    params[1].value + '万立方米'
                             }else if(params.length === 1) {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米'
                             }
                         }
                     },
@@ -620,7 +630,7 @@
                     ],
                     yAxis: [
                         {
-                            name: '亿立方米',
+                            name: '万立方米',
                             type: 'value',
                             axisLine: {
                                 lineStyle: {
@@ -657,7 +667,7 @@
                             areaStyle: {
                                 color: 'rgba(27,202,201,0.1)'
                             },
-                            data: [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90]
+                            data: [80,90,85,81,92,78,85]
                         },
                         {
                             name: '天然气日产量预测值',
@@ -674,7 +684,7 @@
                                     }
                                 }
                             },
-                            data: [220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290]
+                            data: [82,85,75,67,71,76,67]
                         }
                     ]
                 };

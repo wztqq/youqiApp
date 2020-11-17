@@ -169,11 +169,11 @@ export default {
         seriesName: "月产量分析",
         unit: "亿立方米",
         seriesData: [
-          { value: 335, name: "苏里格气田" },
-          { value: 310, name: "大牛地气田" },
-          { value: 234, name: "靖边气田" },
-          { value: 135, name: "胜利井气田" },
-          { value: 738, name: "乌审旗气田" },
+          { value: 5440, name: "苏里格气田" },
+          { value: 5033, name: "大牛地气田" },
+          { value: 3801, name: "靖边气田" },
+          { value: 2193, name: "胜利井气田" },
+          { value: 11986, name: "乌审旗气田" },
         ],
       },
       optionObjXFJGFX: {
@@ -181,18 +181,18 @@ export default {
         seriesName: "消费结构分析",
         unit: "亿立方米",
         seriesData: [
-          { value: 335, name: "居民用气" },
-          { value: 310, name: "民生用气" },
-          { value: 234, name: "商业" },
-          { value: 135, name: "甲醛化肥企业" },
-          { value: 738, name: "可中断企业" },
-          { value: 738, name: "不可中断企业" },
-          { value: 738, name: "LNG企业用户" },
+          { value: 0.9, name: "居民用气" },
+          { value: 0.9, name: "民生用气" },
+          { value: 0.7, name: "商业" },
+          { value: 0.4, name: "甲醛化肥企业" },
+          { value: 2.2, name: "可中断企业" },
+          { value: 2.2, name: "不可中断企业" },
+          { value: 2.2, name: "LNG企业用户" },
         ],
       },
       optionObjRJGFX: {
-        legendData: ["日供气量(亿)", "合同量"],
-        yLeftName: "",
+        legendData: ["日供气量", "合同量"],
+        yLeftName: "亿立方米",
         yRightName: "",
         xData: ["11月1日", "11月2日", "11月3日", "11月4日", "11月5日", "11月6日", "11月7日"],
         seriesLeftData: [0.05, 0.05, 0.07, 0.03, 0.04, 0.05, 0.05],
@@ -233,21 +233,21 @@ export default {
       },
       optionObjMS5: {
         legendData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
-        seriesName: "盟市地方3天储气能力",
+        seriesName: "盟市城燃5%储气能力",
         unit: "亿立方米",
         seriesData: [
-          { value: 0.095, name: "巴彦淖尔" },
-          { value: 0.064, name: "包头" },
-          { value: 0.031, name: "呼和浩特" },
-          { value: 0.064, name: "鄂尔多斯" },
-          { value: 0.127, name: "乌海" },
-          { value: 0.127, name: "通辽" },
+          { value: 0.1598, name: "巴彦淖尔" },
+          { value: 0.1076, name: "包头" },
+          { value: 0.052, name: "呼和浩特" },
+          { value: 0.1077, name: "鄂尔多斯" },
+          { value: 0.2136, name: "乌海" },
+          { value: 0.2136, name: "通辽" },
         ],
       },
     };
   },
   mounted() {
-    
+
   },
   methods: {
     tabButton_one(index) {

@@ -75,7 +75,7 @@ export default {
                 "亿立方米" +
                 "</br>" +
                 "差值: " +
-                (params[0].value - params[1].value).toFixed(3) +
+                (params[0].value - params[1].value).toFixed(2) +
                 "亿立方米"
               );
             } else if (params.length === 1) {

@@ -30,7 +30,7 @@
             <div>
                 <!--石油宏观显示-->
                 <div v-show="oilShow?true:false">
-                    <div class="lay-content" :style="{'left':be_click_left(0.108),'top':be_click_top(0.662)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.058),'top':be_click_top(0.562)}">
                         <div>吉祥油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：562万吨</div>
@@ -50,25 +50,45 @@
                         <div>油田个数：5个</div>
                         <div>探明储量：8437万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.708),'top':be_click_top(0.508)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.708),'top':be_click_top(0.368)}">
                         <div>科尔沁油田区域</div>
                         <div>油田个数：3个</div>
                         <div>探明储量：1125万吨</div>
                     </div>
+                    <div class="lay-content" :style="{'left':be_click_left(0.708),'top':be_click_top(0.608)}">
+                        <div>科尔康油田区域</div>
+                        <div>油田个数：2个</div>
+                        <div>探明储量：375万吨</div>
+                    </div>
+                    <!--原油地图弹窗定位-->
+                    <div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.344),'top':be_click_top(0.638)}"
+                             @click="tanchuangShow(listData1,tableTh1)"></div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.538),'top':be_click_top(0.602)}"
+                             @click="tanchuangShow(listData2,tableTh1)"></div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
+                             @click="tanchuangShow(listData3,tableTh)"></div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
+                             @click="tanchuangShow(listData5,tableTh1)"></div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.515)}"
+                             @click="tanchuangShow(listData4,tableTh1)"></div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.820),'top':be_click_top(0.595)}"
+                             @click="tanchuangShow(listData10,tableTh1)"></div>
+                    </div>
                 </div>
                 <!--天然气宏观显示-->
                 <div v-show="oilShow?false:true">
-                    <div class="lay-content" :style="{'left':be_click_left(0.108),'top':be_click_top(0.662)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.158),'top':be_click_top(0.762)}">
                         <div>苏里格气田区域</div>
                         <div>气田个数：5个</div>
                         <div>探明储量：11900万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.258),'top':be_click_top(0.389)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.258),'top':be_click_top(0.429)}">
                         <div>包尔气田区域</div>
                         <div>气田个数：1个</div>
                         <div>探明储量：560万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.578),'top':be_click_top(0.368)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.608),'top':be_click_top(0.388)}">
                         <div>二连气田区域</div>
                         <div>气田个数：2个</div>
                         <div>探明储量：700万立方米</div>
@@ -78,32 +98,29 @@
                         <div>油田个数：2个</div>
                         <div>探明储量：840万立方米</div>
                     </div>
+                    //天然气弹窗定位
+                    <div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.444),'top':be_click_top(0.848)}"
+                             @click="tanchuangShow(listData6,tableTh2)"></div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.500),'top':be_click_top(0.632)}"
+                             @click="tanchuangShow(listData7,tableTh2)"></div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.565)}"
+                             @click="tanchuangShow(listData8,tableTh2)"></div>
+                        <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.325)}"
+                             @click="tanchuangShow(listData9,tableTh2)"></div>
+                    </div>
                 </div>
-                <div class="click-change" :style="{'left':be_click_left(0.754),'top':be_click_top(0.808)}"
+                <div class="click-change"
+                     :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.230)}:{'left':be_click_left(0.060),'top':be_click_top(0.310)}"
                      @click="oilShow=true"></div>
-                <div class="click-change" :style="{'left':be_click_left(0.754),'top':be_click_top(0.868)}"
+                <div class="click-change"
+                     :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.310)}:{'left':be_click_left(0.060),'top':be_click_top(0.390)}"
                      @click="oilShow=false"></div>
             </div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.324),'top':be_click_top(0.728)}"
-                 @click="tanchuangShow(listData1,tableTh1)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.385),'top':be_click_top(0.779)}"
-                 @click="tanchuangShow(listData6,tableTh2)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.478),'top':be_click_top(0.662)}"
-                 @click="tanchuangShow(listData2,tableTh1)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.505),'top':be_click_top(0.615)}"
-                 @click="tanchuangShow(listData7,tableTh2)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.626),'top':be_click_top(0.535)}"
-                 @click="tanchuangShow(listData3,tableTh)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.680),'top':be_click_top(0.498)}"
-                 @click="tanchuangShow(listData8,tableTh2)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.773),'top':be_click_top(0.565)}"
-                 @click="tanchuangShow(listData4,tableTh1)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.693),'top':be_click_top(0.335)}"
-                 @click="tanchuangShow(listData5,tableTh1)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.715),'top':be_click_top(0.285)}"
-                 @click="tanchuangShow(listData9,tableTh2)"></div>
 
-            <img class="map" src="../../assets/img/industryAnalysis/原油生产地图.png" alt="图片未显示">
+
+
+            <img class="map" :src="oilShow?src:src1" alt="图片未显示">
             <div class="chuqing_chart">
                 <div class="tab_oil">
                     <span v-for="(item,index) in tablist_one" :key='index' @click="tabButton_one(index)"
@@ -369,6 +386,8 @@
         data() {
             return {
                 value1: 0,
+                src:require('../../assets/img/原油.png'),
+                src1:require('../../assets/img/天然气.png'),
                 option1: [
                     {text: '年度', value: 0},
                     {text: '季度', value: 1},
@@ -540,7 +559,9 @@
                         "proved": "325万吨",
                         "economic": "7万吨",
                         "technology": "17万吨"
-                    },
+                    }
+                ],
+                listData10: [
                     {
                         "name": "龙筒湾油田",
                         "area": "452万平方公里",
@@ -2031,13 +2052,12 @@
     .clickbtn {
         width: 13px;
         height: 13px;
-        /* background-color: #000000; */
         position: absolute;
     }
 
     .click-change {
-        width: 40px;
-        height: 13px;
+        width: 90px;
+        height: 18px;
         position: absolute;
     }
 

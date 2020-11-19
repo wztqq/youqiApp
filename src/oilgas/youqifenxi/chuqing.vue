@@ -35,7 +35,7 @@
                         <div>油田个数：2个</div>
                         <div>探明储量：562万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.398),'top':be_click_top(0.589)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.398),'top':be_click_top(0.649)}">
                         <div>包尔油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：750万吨</div>
@@ -45,17 +45,17 @@
                         <div>油田个数：6个</div>
                         <div>探明储量：7500万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.668),'top':be_click_top(0.158)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.698),'top':be_click_top(0.108)}">
                         <div>海拉尔油田区域</div>
                         <div>油田个数：5个</div>
                         <div>探明储量：8437万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.708),'top':be_click_top(0.368)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.698),'top':be_click_top(0.348)}">
                         <div>科尔沁油田区域</div>
                         <div>油田个数：3个</div>
                         <div>探明储量：1125万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.708),'top':be_click_top(0.608)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.708),'top':be_click_top(0.638)}">
                         <div>科尔康油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：375万吨</div>
@@ -78,22 +78,22 @@
                 </div>
                 <!--天然气宏观显示-->
                 <div v-show="oilShow?false:true">
-                    <div class="lay-content" :style="{'left':be_click_left(0.162),'top':be_click_top(0.722)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.148),'top':be_click_top(0.712)}">
                         <div>苏里格气田区域</div>
                         <div>气田个数：5个</div>
                         <div>探明储量：11900万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.258),'top':be_click_top(0.429)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.198),'top':be_click_top(0.429)}">
                         <div>包尔气田区域</div>
                         <div>气田个数：1个</div>
                         <div>探明储量：560万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.608),'top':be_click_top(0.428)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.608),'top':be_click_top(0.538)}">
                         <div>二连气田区域</div>
                         <div>气田个数：2个</div>
                         <div>探明储量：700万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.668),'top':be_click_top(0.128)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.448),'top':be_click_top(0.148)}">
                         <div>海拉尔气田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：840万立方米</div>
@@ -117,7 +117,6 @@
                      :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.310)}:{'left':be_click_left(0.060),'top':be_click_top(0.310)}"
                      @click="oilShow=false"></div>
             </div>
-
 
 
             <img class="map" :src="oilShow?src:src1" alt="图片未显示">
@@ -182,7 +181,7 @@
             </div>
         </div>
 
-
+        <!--生产分析-->
         <div id="produce_content" v-show="b">
             <div class="btn_shenchan">
                 <div class="btn_shenchan_div">
@@ -198,9 +197,104 @@
                     </div>
                 </div>
             </div>
-
+            <div>
+                <div class="click-change"
+                     :style="{'left':be_click_left(0.740),'top':be_click_top(0.801)}"
+                     @click="proShow=true"></div>
+                <div class="click-change"
+                     :style="{'left':be_click_left(0.740),'top':be_click_top(0.880)}"
+                     @click="proShow=false"></div>
+            </div>
             <div id="produce" v-show="d">
-                <img class="map" src="../../assets/img/industryAnalysis/原油生产地图.png" alt="图片未显示">
+                <div v-show="proShow">
+                    <!--生产分析地图原油显示-->
+                    <div>
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.043),'top':be_click_top(0.712)}">
+                            <div>吉祥油田区域</div>
+                            <div>上月产量：1.4万吨</div>
+                            <div>累计产量：4.2万吨</div>
+                        </div>
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.178),'top':be_click_top(0.512)}">
+                            <div>包尔油田区域</div>
+                            <div>上月产量：2.4万吨</div>
+                            <div>累计产量：5.4万吨</div>
+                        </div>
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.408),'top':be_click_top(0.382)}">
+                            <div>二连油田区域</div>
+                            <div>上月产量：2.4万吨</div>
+                            <div>累计产量：38.7万吨</div>
+                        </div>
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.688),'top':be_click_top(0.152)}">
+                            <div>海拉尔油田区域</div>
+                            <div>上月产量：5万吨</div>
+                            <div>累计产量：21万吨</div>
+                        </div>
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.7),'top':be_click_top(0.362)}">
+                            <div>科尔沁油田区域</div>
+                            <div>上月产量：3万吨</div>
+                            <div>累计产量：12.6万吨</div>
+                        </div>
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.7),'top':be_click_top(0.642)}">
+                            <div>科尔康油田区域</div>
+                            <div>上月产量：1.4万吨</div>
+                            <div>累计产量：3.36万吨</div>
+                        </div>
+                    </div>
+                    <!--生产分析原油地图弹窗-->
+                    <div>
+                        <div class="clickbtn1" :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
+                             @click="tanchuangShow(listData_pro1,tableTh1_pro)"></div>
+                        <div class="clickbtn1" :style="{'left':be_click_left(0.463),'top':be_click_top(0.64)}"
+                             @click="tanchuangShow(listData_pro2,tableTh1_pro)"></div>
+                        <div class="clickbtn2" :style="{'left':be_click_left(0.559),'top':be_click_top(0.55)}"
+                             @click="tanchuangShow(listData_pro3,tableTh1_pro)"></div>
+                        <div class="clickbtn1" :style="{'left':be_click_left(0.649),'top':be_click_top(0.297)}"
+                             @click="tanchuangShow(listData_pro4,tableTh1_pro)"></div>
+                        <div class="clickbtn1" :style="{'left':be_click_left(0.759),'top':be_click_top(0.55)}"
+                             @click="tanchuangShow(listData_pro5,tableTh1_pro)"></div>
+                        <div class="clickbtn1" :style="{'left':be_click_left(0.789),'top':be_click_top(0.62)}"
+                             @click="tanchuangShow(listData_pro6,tableTh1_pro)"></div>
+                    </div>
+                </div>
+                <div v-show="proShow?false:true">
+                    <!--生产分析地图气田显示-->
+                    <div>
+                        <div class="lay-content-gas" :style="{'left':be_click_left(0.013),'top':be_click_top(0.712)}">
+                            <div>苏里格气田区域</div>
+                            <div>上月产量：12亿立方米</div>
+                            <div>累计产量：176亿立方米</div>
+                        </div>
+                        <div class="lay-content-gas" :style="{'left':be_click_left(0.128),'top':be_click_top(0.462)}">
+                            <div>包尔气田区域</div>
+                            <div>上月产量：0.52亿立方米</div>
+                            <div>累计产量：3.92亿立方米</div>
+                        </div>
+                        <div class="lay-content-gas" :style="{'left':be_click_left(0.608),'top':be_click_top(0.562)}">
+                            <div>二连气田区域</div>
+                            <div>上月产量：0.68亿立方米</div>
+                            <div>累计产量：6.88亿立方米</div>
+                        </div>
+                        <div class="lay-content-gas" :style="{'left':be_click_left(0.388),'top':be_click_top(0.092)}">
+                            <div>海拉尔气田区域</div>
+                            <div>上月产量：0.8亿立方米</div>
+                            <div>累计产量：9.8亿立方米</div>
+                        </div>
+                    </div>
+                    <!--生产分析气田地图弹窗-->
+                    <div>
+                        <div class="clickbtn2" :style="{'left':be_click_left(0.359),'top':be_click_top(0.768)}"
+                             @click="tanchuangShow(listData_gas1,tableTh1_gas)"></div>
+                        <div class="clickbtn1" :style="{'left':be_click_left(0.489),'top':be_click_top(0.585)}"
+                             @click="tanchuangShow(listData_gas2,tableTh1_gas)"></div>
+                        <div class="clickbtn1" :style="{'left':be_click_left(0.639),'top':be_click_top(0.501)}"
+                             @click="tanchuangShow(listData_gas3,tableTh1_gas)"></div>
+                        <div class="clickbtn2" :style="{'left':be_click_left(0.679),'top':be_click_top(0.237)}"
+                             @click="tanchuangShow(listData_gas4,tableTh1_gas)"></div>
+                    </div>
+                </div>
+
+
+                <img class="map" :src="proShow?srcpro:srcpro1" alt="图片未显示">
                 <div class="chart">
                     <div class="tab_oil">
                         <span v-for="(item,index) in tablist_four" :key='index' @click="tabButton_four(index)"
@@ -253,7 +347,7 @@
                      </div>-->
                     <div class="echarts_two" id="echartsThree"></div>
                 </div>
-                <div class="chart">
+                <div class="chart pie_chart">
                     <div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
                     <div class="tab_oil">
                         <span v-for="(item,index) in tablist_five" :key='index' @click="tabButton_five(index)"
@@ -263,21 +357,18 @@
                         <div class="fontSize" v-model="pie_one_number">{{pie_one_number}}</div>
                         <div class="fontSizeOne" v-model="pie_one_unit">{{pie_one_unit}}</div>
                     </div>
-                    <div class="echarts_one" v-show="value1 === 0">
-                        <div id="echartsFour" style="width: 100%;height:100%"></div>
-                    </div>
                     <!--下拉列表-->
-                   <!-- <van-dropdown-menu>
+                    <van-dropdown-menu>
                         <van-dropdown-item v-model="value1" :options="option1" @change="changeChart"/>
                     </van-dropdown-menu>
 
-                    &lt;!&ndash;原油生产自给率年度环形图&ndash;&gt;
-                    <div class="echarts_one" v-show="value1 === 0">
+                    <!--原油生产自给率年度环形图-->
+                    <div class="echarts_one echart_bg" v-show="value1 === 0">
                         <div id="echartsFour" style="width: 100%;height:100%"></div>
                     </div>
                     <div class="echarts_one" v-show="value1 !== 0">
-                        <div  id="echartsBar" style="width: 100%;height:100%"></div>
-                    </div>-->
+                        <div id="echartsBar" style="width: 100%;height:100%"></div>
+                    </div>
 
                 </div>
                 <div class="chart">
@@ -386,35 +477,58 @@
         data() {
             return {
                 value1: 0,
-                src:require('../../assets/img/原油.png'),
-                src1:require('../../assets/img/天然气.png'),
+                src: require('../../assets/img/原油.png'),
+                src1: require('../../assets/img/天然气.png'),
+                srcpro: require('../../assets/img/industryAnalysis/shengchanfenxi-youtian.png'),
+                srcpro1: require('../../assets/img/industryAnalysis/shengchanfenxi-qitian.png'),
                 option1: [
                     {text: '年度', value: 0},
                     {text: '季度', value: 1},
-                    {text: '月度', value: 2},
+                    {text: '月', value: 2},
                 ],
-                // 自给率柱图数据
-                barOneMonth:[
+                // 原油自给率柱图数据
+                barOneMonth: [
                     //原油生产自给率月度（总产量）数据
-                    [8,8,6,7,7,9,6,7,7,10,7,7],
+                    [8, 8, 6, 7, 7, 9, 6, 7, 7, 10, 7, 7],
                     //原油生产自给率月度（区内供应）数据
-                    [4,6,3,6,5,4,5,5,4,5,5,3],
-                   //月度自给率
-                    [20,25,18,9,11,21,40,20,12,21,30,40],
-                    ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                    [4, 6, 3, 6, 5, 4, 5, 5, 4, 5, 5, 3],
+                    //月度自给率
+                    [20, 25, 18, 9, 11, 21, 40, 20, 12, 21, 30, 40],
+                    ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
                     '万吨'
 
 
                 ],
-                barOneQuarter:[
+                barOneQuarter: [
                     //原油生产自给率季度（总产量）数据
-                    [22,24,23,21],
+                    [22, 24, 23, 21],
                     //原油生产自给率季度（区内供应）数据
-                    [12,14,13,16],
+                    [12, 14, 13, 16],
                     //季度自给率
-                    [20,25,21,30],
-                    ['1-3月','4-6月','7-9月','10-12月'],
-                    '万立方米'
+                    [20, 25, 21, 30],
+                    ['1-3月', '4-6月', '7-9月', '10-12月'],
+                    '万吨'
+                ],
+                // 天然气自给率柱图数据
+                barOneMonthGas: [
+                    //原油生产自给率月度（总产量）数据
+                    [0.0126, 0.0124, 0.0127, 0.0123, 0.0125, 0.0125, 0.0123, 0.0127, 0.0126, 0.0124, 0.0125, 0.0125],
+                    //原油生产自给率月度（区内供应）数据
+                    [0.0076, 0.0074, 0.0077, 0.0073, 0.0075, 0.0075, 0.0072, 0.0078, 0.0075, 0.0075, 0.0072, 0.0078],
+                    //月度自给率
+                    [20, 25, 18, 9, 11, 21, 40, 20, 12, 21, 30, 40],
+                    ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    '亿立方米'
+                ],
+                barOneQuarterGas: [
+                    //原油生产自给率季度（总产量）数据
+                    [0.03, 0.04, 0.03, 0.05],
+                    //原油生产自给率季度（区内供应）数据
+                    [0.02, 0.03, 0.02, 0.02],
+                    //季度自给率
+                    [20, 25, 21, 30],
+                    ['1-3月', '4-6月', '7-9月', '10-12月'],
+                    '亿立方米'
                 ],
                 // 炼化煤页面弹窗
                 page_c: [],
@@ -433,45 +547,30 @@
                 screenTop: '',
                 show: 0, //控制弹窗显示
                 oilShow: true,//地图原油展示
+                proShow: true,//生产分析原油天然气切换
                 closeLeft: 0, //关闭按钮居中
                 tableTh: [],
-                tableTh1: ['油田', '面积', '所属盟市', '预测资源量', '探明储量', '剩余经济可采储量', '剩余技术可采储量'],
-                tableTh2: ['气田', '面积', '所属盟市', '预测资源量', '探明储量', '剩余经济可采储量', '剩余技术可采储量'],
+                tableTh1: ['油田', '剩余经济可采储量', '剩余技术可采储量'],
+                tableTh2: ['气田', '剩余经济可采储量', '剩余技术可采储量'],
                 listData: [],
                 listData1: [{
                     "name": "吉祥油田",
-                    "area": "5.5万平方公里",
-                    "city": "巴彦淖尔市",
-                    "prediction": "543.7万吨",
-                    "proved": "350万吨",
                     "economic": "9万吨",
                     "technology": "21万吨"
                 },
                     {
                         "name": "达尔其油田",
-                        "area": "4314.12万平方公里",
-                        "city": "巴彦淖尔市",
-                        "prediction": "300万吨",
-                        "proved": "212万吨",
                         "economic": "5万吨",
                         "technology": "14万吨"
                     }],
                 listData2: [
                     {
                         "name": "包尔油田",
-                        "area": "5万平方公里",
-                        "city": "乌兰察布市",
-                        "prediction": "624.9万吨",
-                        "proved": "450万吨",
                         "economic": "11万吨",
                         "technology": "27万吨"
                     },
                     {
                         "name": "汗塞油田",
-                        "area": "432万平方公里",
-                        "city": "乌兰察布市",
-                        "prediction": "500万吨",
-                        "proved": "300万吨",
                         "economic": "7万吨",
                         "technology": "20万吨"
                     }
@@ -479,55 +578,31 @@
                 listData3: [
                     {
                         "name": "乌利雅斯太油田",
-                        "area": "234万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "2049万吨",
-                        "proved": "1500万吨",
                         "economic": "45万吨",
                         "technology": "130万吨"
                     },
                     {
                         "name": "宝力格油田",
-                        "area": "5.5万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "1900万吨",
-                        "proved": "1300万吨",
                         "economic": "40万吨",
                         "technology": "80万吨"
                     },
                     {
                         "name": "新苏木油田",
-                        "area": "357万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "1870万吨",
-                        "proved": "1200万吨",
                         "economic": "35万吨",
                         "technology": "75万吨"
                     },
                     {
                         "name": "哈达图油田",
-                        "area": "1.3万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "1840万吨",
-                        "proved": "1200万吨",
                         "economic": "25万吨",
                         "technology": "70万吨"
                     },
                     {
                         "name": "锡林油田",
-                        "area": "452万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "1810万吨",
-                        "proved": "1100万吨",
                         "economic": "20万吨",
                         "technology": "65万吨"
                     },
                     {
                         "name": "乌兰诺尔油田",
-                        "area": "612万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "1780万吨",
-                        "proved": "1100万吨",
                         "economic": "15万吨",
                         "technology": "60万吨"
                     },
@@ -535,28 +610,16 @@
                 listData4: [
                     {
                         "name": "科尔沁油田",
-                        "area": "3.5万平方公里",
-                        "city": "通辽市",
-                        "prediction": "600万吨",
-                        "proved": "420万吨",
                         "economic": "13万吨",
                         "technology": "28万吨"
                     },
                     {
                         "name": "交力格油田",
-                        "area": "357万平方公里",
-                        "city": "通辽市",
-                        "prediction": "550万吨",
-                        "proved": "380万吨",
                         "economic": "8万吨",
                         "technology": "26万吨"
                     },
                     {
                         "name": "广发油田",
-                        "area": "2.5万平方公里",
-                        "city": "通辽市",
-                        "prediction": "537万吨",
-                        "proved": "325万吨",
                         "economic": "7万吨",
                         "technology": "17万吨"
                     }
@@ -564,19 +627,11 @@
                 listData10: [
                     {
                         "name": "龙筒湾油田",
-                        "area": "452万平方公里",
-                        "city": "通辽市",
-                        "prediction": "362.4万吨",
-                        "proved": "275万吨",
                         "economic": "6万吨",
                         "technology": "12万吨"
                     },
                     {
                         "name": "科尔康油田",
-                        "area": "612万平方公里",
-                        "city": "通辽市",
-                        "prediction": "2000万吨",
-                        "proved": "100万吨",
                         "economic": "3万吨",
                         "technology": "12万吨"
                     }
@@ -584,46 +639,26 @@
                 listData5: [
                     {
                         "name": "苏仁诺尔油田",
-                        "area": "4.3万平方公里",
-                        "city": "呼伦贝尔市",
-                        "prediction": "2531万吨",
-                        "proved": "2000万吨",
                         "economic": "50万吨",
                         "technology": "106万吨"
                     },
                     {
                         "name": "巴彦塔拉油田",
-                        "area": "657万平方公里",
-                        "city": "呼伦贝尔市",
-                        "prediction": "2531万吨",
-                        "proved": "1800万吨",
                         "economic": "45万吨",
                         "technology": "106万吨"
                     },
                     {
                         "name": "苏德尔特油田",
-                        "area": "2.1万平方公里",
-                        "city": "呼伦贝尔市",
-                        "prediction": "2531万吨",
-                        "proved": "1600万吨",
                         "economic": "40万吨",
                         "technology": "106万吨"
                     },
                     {
                         "name": "呼和诺仁油田",
-                        "area": "752万平方公里",
-                        "city": "呼伦贝尔市",
-                        "prediction": "2531万吨",
-                        "proved": "1537万吨",
                         "economic": "37万吨",
                         "technology": "106万吨"
                     },
                     {
                         "name": "贝尔油田",
-                        "area": "412万平方公里",
-                        "city": "呼伦贝尔市",
-                        "prediction": "2531万吨",
-                        "proved": "1500万吨",
                         "economic": "35万吨",
                         "technology": "106万吨"
                     }
@@ -631,46 +666,26 @@
                 listData6: [
                     {
                         "name": "胜利井气田",
-                        "area": "3341万平方公里",
-                        "city": "鄂尔多斯市",
-                        "prediction": "5950万立方米",
-                        "proved": "3332万立方米",
                         "economic": "1571万立方米",
                         "technology": "952万立方米"
                     },
                     {
                         "name": "苏里格气田",
-                        "area": "1.1万平方公里",
-                        "city": "鄂尔多斯市",
-                        "prediction": "4250万立方米",
-                        "proved": "2380万立方米",
                         "economic": "1122万立方米",
                         "technology": "680万立方米"
                     },
                     {
                         "name": "靖边气田",
-                        "area": "2124.26万平方公里",
-                        "city": "鄂尔多斯市",
-                        "prediction": "4250万立方米",
-                        "proved": "2380万立方米",
                         "economic": "1122万立方米",
                         "technology": "680万立方米"
                     },
                     {
                         "name": "乌审旗气田",
-                        "area": "4362万平方公里",
-                        "city": "鄂尔多斯市",
-                        "prediction": "4250万立方米",
-                        "proved": "2380万立方米",
                         "economic": "1122万立方米",
                         "technology": "680万立方米"
                     },
                     {
                         "name": "大牛地气田",
-                        "area": "2134万平方公里",
-                        "city": "鄂尔多斯市",
-                        "prediction": "2550万立方米",
-                        "proved": "1428万立方米",
                         "economic": "673万立方米",
                         "technology": "408万立方米"
                     },
@@ -678,10 +693,6 @@
                 listData7: [
                     {
                         "name": "包尔气田",
-                        "area": "1.5万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "1000万立方米",
-                        "proved": "560万立方米",
                         "economic": "264万立方米",
                         "technology": "160万立方米"
                     },
@@ -689,19 +700,11 @@
                 listData8: [
                     {
                         "name": "哈达图气田",
-                        "area": "357万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "750万立方米",
-                        "proved": "500万立方米",
                         "economic": "230万立方米",
                         "technology": "110万立方米"
                     },
                     {
                         "name": "宝力格气田",
-                        "area": "2.2万平方公里",
-                        "city": "锡林郭勒盟",
-                        "prediction": "500万立方米",
-                        "proved": "200万立方米",
                         "economic": "100万立方米",
                         "technology": "90万立方米"
                     },
@@ -718,15 +721,183 @@
                     },
                     {
                         "name": "苏仁诺尔气田",
-                        "area": "747万平方公里",
-                        "city": "呼伦贝尔市",
-                        "prediction": "520万立方米",
-                        "proved": "330万立方米",
                         "economic": "183万立方米",
                         "technology": "118万立方米"
                     }
                 ],
                 tablist: ['储情分析', '生产分析'],
+                tableTh1_pro: ['名称', '日产能(万吨)', '日产量(万吨)'],
+                tableTh1_gas: ['名称', '日产能(亿立方米)', '日产量(亿立方米)'],
+                listData_pro1: [
+                    {
+                        "name": "吉祥油田",
+                        "capacity": "0.21",
+                        "yield": "0.24"
+                    },
+                    {
+                        "name": "达尔其油田",
+                        "capacity": "0.2",
+                        "yield": "0.21"
+                    }
+                ],
+                listData_pro2: [
+                    {
+                        "name": "包尔油田",
+                        "capacity": "0.31",
+                        "yield": "0.34"
+                    },
+                    {
+                        "name": "赛汗油田",
+                        "capacity": "0.24",
+                        "yield": "0.21"
+                    }
+                ],
+                listData_pro3: [
+                    {
+                        "name": "乌里雅斯太油田",
+                        "capacity": "0.21",
+                        "yield": "0.24"
+                    },
+                    {
+                        "name": "新苏木油田",
+                        "capacity": "0.2",
+                        "yield": "0.21"
+                    },
+                    {
+                        "name": "哈达图油田",
+                        "capacity": "0.3",
+                        "yield": "0.31"
+                    },
+                    {
+                        "name": "锡林油田",
+                        "capacity": "0.1",
+                        "yield": "0.11"
+                    },
+                    {
+                        "name": "乌兰诺尔油田",
+                        "capacity": "0.09",
+                        "yield": "0.11"
+                    },
+                    {
+                        "name": "宝力油田",
+                        "capacity": "0.1",
+                        "yield": "0.11"
+                    }
+                ],
+                listData_pro4: [
+                    {
+                        "name": "苏仁诺尔油田",
+                        "capacity": "0.21",
+                        "yield": "0.24"
+                    },
+                    {
+                        "name": "苏德尔特油田",
+                        "capacity": "0.2",
+                        "yield": "0.21"
+                    },
+                    {
+                        "name": "巴彦塔拉油田",
+                        "capacity": "0.21",
+                        "yield": "0.24"
+                    },
+                    {
+                        "name": "呼和诺仁油田",
+                        "capacity": "0.2",
+                        "yield": "0.21"
+                    },
+                    {
+                        "name": "贝尔油田",
+                        "capacity": "0.1",
+                        "yield": "0.11"
+                    }
+                ],
+                listData_pro5: [
+                    {
+                        "name": "科尔沁油田",
+                        "capacity": "0.21",
+                        "yield": "0.24"
+                    },
+                    {
+                        "name": "广发油田",
+                        "capacity": "0.2",
+                        "yield": "0.21"
+                    },
+                    {
+                        "name": "交利格油田",
+                        "capacity": "0.1",
+                        "yield": "0.11"
+                    }
+                ],
+                listData_pro6: [
+                    {
+                        "name": "龙湾筒油田",
+                        "capacity": "0.21",
+                        "yield": "0.24"
+                    },
+                    {
+                        "name": "科尔康油田",
+                        "capacity": "0.2",
+                        "yield": "0.21"
+                    }
+                ],
+                listData_gas1: [
+                    {
+                        "name": "苏里格气田",
+                        "capacity": "0.9",
+                        "yield": "1.4"
+                    },
+                    {
+                        "name": "大牛地气田",
+                        "capacity": "0.8",
+                        "yield": "1.28"
+                    },
+                    {
+                        "name": "靖边气田",
+                        "capacity": "0.9",
+                        "yield": "1.27"
+                    },
+                    {
+                        "name": "胜利井气田",
+                        "capacity": "0.8",
+                        "yield": "1.2"
+                    },
+                    {
+                        "name": "乌审旗气田",
+                        "capacity": "0.9",
+                        "yield": "1.5"
+                    }
+                ],
+                listData_gas2: [
+                    {
+                        "name": "包尔气田",
+                        "capacity": "0.9",
+                        "yield": "1.4"
+                    }
+                ],
+                listData_gas3: [
+                    {
+                        "name": "哈达图气田",
+                        "capacity": "0.9",
+                        "yield": "1.4"
+                    },
+                    {
+                        "name": "宝力格气田",
+                        "capacity": "0.8",
+                        "yield": "1.28"
+                    }
+                ],
+                listData_gas4: [
+                    {
+                        "name": "贝尔气田",
+                        "capacity": "0.9",
+                        "yield": "1.4"
+                    },
+                    {
+                        "name": "苏仁诺尔气田",
+                        "capacity": "0.8",
+                        "yield": "1.28"
+                    }
+                ],
                 tablist_one: ['原油剩余技术储量', '原油剩余经济储量'],
                 tablist_two: ['天然气剩余技术储量', '天然气剩余经济储量'],
                 pie_number: 1030,  //原油剩余技术数值
@@ -1768,14 +1939,14 @@
             tabButton_five(id) {
                 this.selected_five = id
                 if (this.p_j == 0 && id == 1) {
-                    this.value1=0
+                    this.value1 = 0
                     this.drawPie('echartsFour', this.produce_pie_gas, "亿立方米", "本年度天然气生产自给率");
                     this.pie_one_number = this.produce_pie_gas[2]
                     this.pie_one_unit = this.produce_pie_gas[3]
                     this.p_j = 1
                 }
                 if (this.p_j == 1 && id == 0) {
-                    this.value1=0
+                    this.value1 = 0
                     this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率");
                     this.pie_one_number = this.produce_pie_oil[2]
                     this.pie_one_unit = this.produce_pie_oil[3]
@@ -1860,20 +2031,12 @@
                         axisPointer: { // 坐标轴指示器，坐标轴触发有效
                             type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                         },
-                        /* formatter: function (params) {
-                             //获得当前每月原油产量
-                             let tar = arry[0];
-                             let sum = 0;
-                             for (let i = 0; i < params[0].axisValue.substring(0, params[0].axisValue.length - 1); i++) {
-                                 sum = sum + tar[i]
-                             }
-                             return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + arry[2] +
-                                 '</br>' +
-                                 params[1].seriesName + ':' +
-                                 params[1].value + '%' + '</br>' +
-                                 '累计月产量' + ':' +
-                                 sum + arry[2]
-                         }*/
+                        formatter: function (params) {
+                            return params[0].name + '</br>' + '总产量' + ':' + arry[0][arry[3].indexOf(params[0].name)] + arry[4] + '</br>' + '区内供应' + ':' +
+                                arry[1][arry[3].indexOf(params[0].name)] + arry[4] +
+                                '</br>' + '自给率' + ':' + params[0].value + '%'
+
+                        }
                     },
                     legend: {
                         data: ['自给率'],
@@ -1881,13 +2044,13 @@
                         right: '20%',
                         top: '5%'
                     },
-                   /* grid: {
-                        top: '25%',
-                        left: '3%',
-                        right: '5%',
-                        bottom: '3%',
-                        containLabel: true
-                    },*/
+                    /* grid: {
+                         top: '25%',
+                         left: '3%',
+                         right: '5%',
+                         bottom: '3%',
+                         containLabel: true
+                     },*/
                     xAxis: {
                         type: 'category',
                         splitLine: {
@@ -1946,17 +2109,32 @@
             },
             //本年度原油生产自给率下拉切换
             changeChart() {
-                console.log(this.selected_five)
                 if (this.value1 === 0) {
-                    this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率");
-                    this.pie_one_number = this.produce_pie_oil[2]
-                    this.pie_one_unit = this.produce_pie_oil[3]
+                    if (this.selected_five === 0) {
+                        this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率");
+                        this.pie_one_number = this.produce_pie_oil[2]
+                        this.pie_one_unit = this.produce_pie_oil[3]
+                    } else {
+                        this.drawPie_one('echartsFive', this.produce_pieTwo_oil, "个", "本年度原油生产企业分布")
+                        this.pie_one_number = this.produce_pie_gas[2]
+                        this.pie_one_unit = this.produce_pie_gas[3]
+                    }
+
                 } else {
                     this.$nextTick(function () {
-                        if(this.value1===1){
-                            this.drawBarOne(this.barOneQuarter)
-                        }else{
-                            this.drawBarOne(this.barOneMonth)
+                        if (this.value1 === 1) {
+                            if (this.selected_five === 0) {
+                                this.drawBarOne(this.barOneQuarter)
+                            } else {
+                                this.drawBarOne(this.barOneQuarterGas)
+                            }
+
+                        } else {
+                            if (this.selected_five === 0) {
+                                this.drawBarOne(this.barOneMonth)
+                            } else {
+                                this.drawBarOne(this.barOneMonthGas)
+                            }
                         }
 
                     });
@@ -2025,7 +2203,7 @@
     .table_one_t {
         font-family: PingFang SC;
         border-collapse: collapse;
-        width: 800px;
+        width: 100%;
         margin: 50px auto;
     }
 
@@ -2055,6 +2233,18 @@
         position: absolute;
     }
 
+    .clickbtn1 {
+        width: 15px;
+        height: 15px;
+        position: absolute;
+    }
+
+    .clickbtn2 {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+    }
+
     .click-change {
         width: 90px;
         height: 18px;
@@ -2066,10 +2256,29 @@
         position: absolute;
         font-size: 12px;
         border-radius: 5px;
-        padding: 5px 2px;
         background-color: rgba(106, 113, 129, 0.5);
         color: #fff;
-        width: 120px;
+        width: 113px;
+    }
+
+    .lay-content-pro {
+        border: 1px solid rgba(106, 113, 129, 0.5);
+        position: absolute;
+        font-size: 12px;
+        border-radius: 5px;
+        background-color: rgba(106, 113, 129, 0.5);
+        color: #fff;
+        width: 110px;
+    }
+
+    .lay-content-gas {
+        border: 1px solid rgba(106, 113, 129, 0.5);
+        position: absolute;
+        font-size: 12px;
+        border-radius: 5px;
+        background-color: rgba(106, 113, 129, 0.5);
+        color: #fff;
+        width: 135px;
     }
 
     #tab_button {
@@ -2138,8 +2347,9 @@
         height: 60px;
         background-color: #FFFFFF;
         position: absolute;
-        top: 60px;
-        left: 40px;
+        top: 69px;
+        left: 35px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);;
     }
 
     /* 按钮的图标 */
@@ -2193,10 +2403,16 @@
         font: 23px bolder microsoft-yahei;
     }
 
-    .chuqing_chart .fontSizeOne, .chart_t .fontSizeOne {
+    .pie_chart .fontSizeOne {
         position: relative;
-        top: 90px;
+        top: 120px;
         font: 15px bolder microsoft-yahei;
+    }
+
+    .pie_chart .fontSize {
+        position: relative;
+        top: 120px;
+        font: 23px bolder microsoft-yahei;
     }
 
     .chart_t {
@@ -2244,6 +2460,14 @@
         width: 100%;
         height: 242px;
         margin: 20px auto;
+
+    }
+
+    .echart_bg {
+        background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+        background-repeat: no-repeat;
+        background-position: 50% 38%;
+        background-size: 65px 65px;
     }
 
     /* 给第一个柱图一个样式方便设置同比环比块的样式 */

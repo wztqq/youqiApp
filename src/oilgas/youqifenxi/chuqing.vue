@@ -78,7 +78,7 @@
                 </div>
                 <!--天然气宏观显示-->
                 <div v-show="oilShow?false:true">
-                    <div class="lay-content" :style="{'left':be_click_left(0.158),'top':be_click_top(0.762)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.162),'top':be_click_top(0.722)}">
                         <div>苏里格气田区域</div>
                         <div>气田个数：5个</div>
                         <div>探明储量：11900万立方米</div>
@@ -88,33 +88,33 @@
                         <div>气田个数：1个</div>
                         <div>探明储量：560万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.608),'top':be_click_top(0.388)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.608),'top':be_click_top(0.428)}">
                         <div>二连气田区域</div>
                         <div>气田个数：2个</div>
                         <div>探明储量：700万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.668),'top':be_click_top(0.108)}">
+                    <div class="lay-content" :style="{'left':be_click_left(0.668),'top':be_click_top(0.128)}">
                         <div>海拉尔气田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：840万立方米</div>
                     </div>
-                    //天然气弹窗定位
+                    <!--//天然气弹窗定位-->
                     <div>
-                        <div class="clickbtn" :style="{'left':be_click_left(0.444),'top':be_click_top(0.848)}"
+                        <div class="clickbtn" :style="{'left':be_click_left(0.444),'top':be_click_top(0.768)}"
                              @click="tanchuangShow(listData6,tableTh2)"></div>
-                        <div class="clickbtn" :style="{'left':be_click_left(0.500),'top':be_click_top(0.632)}"
+                        <div class="clickbtn" :style="{'left':be_click_left(0.500),'top':be_click_top(0.552)}"
                              @click="tanchuangShow(listData7,tableTh2)"></div>
-                        <div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.565)}"
+                        <div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
                              @click="tanchuangShow(listData8,tableTh2)"></div>
-                        <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.325)}"
+                        <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.245)}"
                              @click="tanchuangShow(listData9,tableTh2)"></div>
                     </div>
                 </div>
                 <div class="click-change"
-                     :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.230)}:{'left':be_click_left(0.060),'top':be_click_top(0.310)}"
+                     :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.230)}:{'left':be_click_left(0.060),'top':be_click_top(0.230)}"
                      @click="oilShow=true"></div>
                 <div class="click-change"
-                     :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.310)}:{'left':be_click_left(0.060),'top':be_click_top(0.390)}"
+                     :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.310)}:{'left':be_click_left(0.060),'top':be_click_top(0.310)}"
                      @click="oilShow=false"></div>
             </div>
 

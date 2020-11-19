@@ -712,10 +712,6 @@
                 listData9: [
                     {
                         "name": "贝尔气田",
-                        "area": "657万平方公里",
-                        "city": "呼伦贝尔市",
-                        "prediction": "980万立方米",
-                        "proved": "510万立方米",
                         "economic": "213万立方米",
                         "technology": "122万立方米"
                     },

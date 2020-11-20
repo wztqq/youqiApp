@@ -345,7 +345,7 @@
                          </div>
 
                      </div>-->
-                    <div class="echarts_two" id="echartsThree"></div>
+                    <div class="echarts_new" id="echartsThree"></div>
                 </div>
                 <div class="chart pie_chart">
                     <div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
@@ -384,12 +384,14 @@
 
             <div id="produce_refine" v-show="!d">
                 <div
-                         class="produce_tc"  v-show="produce_tc">
+                         class="produce_tc"  v-show="produce_tc"
+                        :style="{'left':be_click_left(page_c[5]),'top':be_click_top(page_c[6])}">
                     <ul>
                         <li>{{page_c[0]}}</li>
                         <li>企业人数：<span>{{page_c[1]}}</span>人</li>
                         <li>上月粉煤加工量：<span>{{page_c[2]}}</span>万吨</li>
-                        <li>上月天然气产量：<span>{{page_c[3]}}</span>万吨</li>
+                        <li>上月天然气产量：<span>{{page_c[3]}}</span>万立方米</li>
+                        <li>上月销量：<span>{{page_c[4]}}</span>万吨</li>
                     </ul>
                 </div>
                 <div class="clickbtn" :style="{'left':be_click_left(0.345),'top':be_click_top(0.778)}"
@@ -454,16 +456,48 @@
                            </div>
 
                        </div>-->
-                    <div class="echarts_two" id="echartsSix"></div>
+                    <div class="echarts_new" id="echartsSix"></div>
                 </div>
-                <div class="chart">
+                <div class="chart pie_chart">
                     <div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
                     <div class="tab_oil">
                     <span v-for="(item,index) in tablist_eight" :key='index' @click="tabButton_eight(index)"
                           v-bind:class="[{tab_oil_two:index == selected_eight},{tab_oil_one:true}]">{{item}}</span>
                     </div>
-                    <div class="echarts_one" id="echartsEight" v-show='k1'></div>
-                    <div class="echarts_one" id="echartsNine" v-show='!k1'></div>
+                    <div v-show='k1'>
+                        <!--下拉列表-->
+                        <van-dropdown-menu>
+                            <van-dropdown-item v-model="selStrc" :options="option1" @change="selStrcHandel"/>
+                        </van-dropdown-menu>
+                        <div v-show="selStrc===0">
+                            <div class="fontDiv">
+                                <div class="font_num">280</div>
+                                <div class="font_unit">万吨</div>
+                            </div>
+                            <div class="echarts_one echart_bgnew" id="echartsEight"></div>
+                        </div>
+                        <div class="echarts_one" v-show="selStrc !== 0">
+                            <div id="echartsEle" style="width: 100%;height:100%"></div>
+                        </div>
+                    </div>
+                    <div v-show='!k1'>
+                        <!--下拉列表-->
+                        <van-dropdown-menu>
+                            <van-dropdown-item v-model="time" :options="option1" @change="selChart"/>
+                        </van-dropdown-menu>
+                        <div v-show="time===0">
+                            <div class="fontDiv">
+                                <div class="font_num">180</div>
+                                <div class="font_unit">万吨</div>
+                            </div>
+                            <div class="echarts_one echart_bgnew" id="echartsNine"></div>
+                        </div>
+
+                        <div class="echarts_one" v-show="time !== 0">
+                            <div id="echartsTen" style="width: 100%;height:100%"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -486,6 +520,8 @@
                     {text: '季度', value: 1},
                     {text: '月', value: 2},
                 ],
+                time: 0,
+                selStrc: 0,
                 // 原油自给率柱图数据
                 barOneMonth: [
                     //原油生产自给率月度（总产量）数据
@@ -532,11 +568,11 @@
                 ],
                 // 炼化煤页面弹窗
                 page_c: [],
-                page_c1: ['大唐煤制气', 1200, 100, 1000],
-                page_c2: ['神华煤制油', 1250, 100, 1000],
-                page_c3: ['新蒙能源煤制气', 2000, 100, 1000],
-                page_c4: ['伊泰煤制油', 1600, 100, 1000],
-                page_c5: ['成品油企业', 1700, 100, 1000],
+                page_c1: ['大唐煤制气', 1200, 100, 1000, 500, '0.505', '0.183'],
+                page_c2: ['神华煤制油', 1250, 100, 1000, 500, '0.375', '0.433'],
+                page_c3: ['汇能煤制气', 2000, 100, 1000, 400, '0.405', '0.393'],
+                page_c4: ['伊泰煤制油', 1600, 100, 1000, 600, '0.425', '0.423'],
+                page_c5: ['呼和浩特石化公司', 1700, 100, 1000, 500, '0.505', '0.383'],
                 produce_tc: false,
                 xuan: 0,
 
@@ -1193,23 +1229,53 @@
                 //第二个页面的第二个子页面
                 //第二个页面的柱状图数据
                 bardata_three: [
-                    [50, 50, 251, 400, 300, 250, 375, 500, 375, 250, 275, 520],
-                    [250, 200, 374, '-', 375, '-', 175, 200, 175, '-', 260, 230],
-                    ['-', '-', '-', 100, '-', 125, '-', '-', '-', 150, '-', '-'],
-                    '万吨'
-                ],
-                bardata_four: [
-                    [40, 60, 234, 300, 300, 230, 375, 260, 345, 230, 275, 420],
-                    [230, 220, 354, '-', 375, '-', 175, 220, 275, '-', 260, 230],
-                    ['-', '-', '-', 120, '-', 145, '-', '-', '-', 160, '-', '-'],
-                    '万吨'
+                    [4, 4, 7, 17, 8, 21, 23, 13, 8, 12, 21, 18],
+                    [-18, -16, -14, -2, 10, 21, 24, 20, 14, 20, 10, 12],
+                    '万吨',
+                    ['煤制油产量', '同比变化'],
                 ],
                 bardata_five: [
-                    [40, 60, 230, 320, 300, 230, 385, 360, 285, 230, 275, 420],
-                    [230, 220, 304, '-', 375, '-', 185, 210, 275, '-', 260, 230],
-                    ['-', '-', '-', 120, '-', 145, '-', '-', '-', 160, '-', '-'],
-                    '万立方米'
+                    [23, 21, 35, 17, 12, 21, 23, 13, 8, 12, 31, 22],
+                    [-23, -17, -14, -8, 2, 10, 14, 20, 14, 8, 15, 24],
+                    '亿立方米',
+                    ['煤制气产量', '同比变化'],
                 ],
+                bardata_four: [
+                    [4, 4, 7, 17, 8, 21, 23, 13, 8, 12, 21, 18],
+                    [-18, -16, -14, -2, 10, 21, 24, 20, 14, 20, 10, 12],
+                    '万吨',
+                    ['成品油产量', '同比变化'],
+                ],
+                line_quar: [
+                    ['1-3月', '4-6月', '7-9月', '10-12月'],
+                    [12, 9, 12, 10],
+                    [12, 7, 3, 6],
+                    [10, 7, 7, 9],
+                    ['汽油自给率', '柴油自给率', '煤油自给率']
+                ],
+                line_month: [
+                    ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    [12, 9, 12, 10, 2, 16, 10, 8, 9, 12, 8, 12],
+                    [12, 7, 3, 6, 12, 5, 4, 10, 15, 11, 10, 11],
+                    [10, 7, 7, 9, 11, 14, 10, 4, 12, 3, 4, 3],
+                    ['汽油自给率', '柴油自给率', '煤油自给率']
+
+                ],
+                lineEle_quar: [
+                    ['1-3月', '4-6月', '7-9月', '10-12月'],
+                    [12, 9, 12, 10],
+                    [12, 7, 3, 6],
+                    [10, 7, 7, 9],
+                    ['汽油', '柴油', '煤油']
+                ],
+                lineEle_month: [
+                    ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    [12, 9, 12, 10, 2, 16, 10, 8, 9, 12, 8, 12],
+                    [12, 7, 3, 6, 12, 5, 4, 10, 15, 11, 10, 11],
+                    [10, 7, 7, 9, 11, 14, 10, 4, 12, 3, 4, 3],
+                    ['汽油', '柴油', '煤油']
+
+                ]
             }
         },
         mounted() {
@@ -1324,13 +1390,12 @@
                         right: '20%',
                         top: '5%'
                     },
-                    grid: {
+                    /*grid: {
                         top: '25%',
                         left: '3%',
-                        right: '5%',
                         bottom: '3%',
                         containLabel: true
-                    },
+                    },*/
                     xAxis: {
                         type: 'category',
                         splitLine: {
@@ -1476,7 +1541,6 @@
                         bottom: 30,
                         right: 10,
                         itemGap: 10,
-                        itemGap: 10,
                         itemWidth: 15,
                         itemHeight: 10,
                     },
@@ -1529,7 +1593,6 @@
                         bottom: 30,
                         right: 10,
                         itemGap: 10,
-                        itemGap: 10,
                         itemWidth: 15,
                         itemHeight: 10,
                     },
@@ -1568,146 +1631,145 @@
                     }],
                 });
             },
-            drawPie_one(id, arry, unit, name) {
-                let echarts = require('echarts');
-                let myChart = echarts.init(document.getElementById(id));
-                myChart.setOption({
-                    tooltip: {
-                        trigger: "item",
-                        formatter: "{a} <br/>{b}: {c}" + unit + "({d}%)",
-                    },
-                    legend: {
-                        orient: "vertical",
-                        bottom: 30,
-                        right: 10,
-                        itemGap: 10,
-                        itemGap: 10,
-                        itemWidth: 15,
-                        itemHeight: 10,
-                    },
-                    series: [{
-                        name: name,
-                        type: "pie",
-                        radius: ["40%", "55%"],
-                        center: ["50%", "50%"],
-                        label: {
-                            formatter: "{b|{b}} \n\n\n {per|{d}%\n}",
-                            padding: [0, -40, -15],
-                            rich: {
-                                per: {
-                                    fontSize: 12,
-                                    color: "#9FA0A5",
-                                },
-                                b: {
-                                    fontSize: 12,
-                                },
-                            },
-                        },
-                        labelLine: {
-                            length: 15,
-                            length2: 30,
-                        },
-                        data: [{
-                            value: arry[0],
-                            name: "中石化"
-                        },
-                            {
-                                value: arry[1],
-                                name: "中石油"
-                            },
-                        ],
-                        color: ["#96F0F2", "#97C5FF"],
-                    }],
-                });
-            },
 
 //最后页面俩个图
-            drawPie_five(name, arry) {
-                let echarts = require('echarts');
+            drawPie_five(name, arry, unit) {
+                let echarts = require("echarts");
                 let myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
                     tooltip: {
                         trigger: "axis",
-                        axisPointer: {
-                            type: "cross",
-                            crossStyle: {
-                                color: "#999",
+                        formatter: '{a0}{b0}: {c0}' + unit + '</br>{a1}{b1}: {c1}' + unit + '</br>{a2}{b2}: {c2}' + unit
+                    },
+                    legend: {
+                        orient: "horizontal",
+                        x: 'right',
+                        right: '20%',
+                        top: '5%',
+                        data: arry[4]
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: arry[0],
+                        axisTick: {
+                            show: true,
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: "#9B9DA1", // 颜色
+                                width: 1, // 粗细
                             },
+                        },
+                        axisLabel: {
+                            show: true,
+                            interval: 0,//设置间隔
+                            fontSize: 12,
+                            padding: [0, 0, 0, 0],
                         },
                     },
-                    xAxis: [
-                        {
-                            type: "category",
-                            data: ["汽油", "柴油", "煤油"],
-                            axisPointer: {
-                                type: "shadow",
-                            },
-                            axisLabel: {
-                                fontSize: 12,
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: "#9B9DA1", // 颜色
-                                    width: 1, // 粗细
-                                },
-                            },
-                            axisTick: {
-                                show: false,
+                    yAxis: [{
+                        name: unit,
+                        type: 'value',
+                        min: '0',
+                        axisTick: {
+                            show: true,
+                            interval: 1,
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: "#9B9DA1", // 颜色
+                                width: 1, // 粗细
                             },
                         },
-                    ],
-                    yAxis: [
-                        {
-                            name: "万吨",
-                            type: "value",
-                            min: 0,
-                            max: 125,
-                            interval: 25,
-                            axisLabel: {
-                                fontSize: 12,
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: "#9B9DA1", // 颜色
-                                    width: 1, // 粗细
-                                },
-                            },
-                            axisTick: {
-                                show: false,
-                            },
+                        axisLabel: {
+                            show: true,
+                            interval: 0,//设置间隔
+                            fontSize: 12,
+                            padding: [0, 0, 0, 0],
                         },
+                    }
                     ],
-
                     series: [{
-                        type: 'bar',
-                        itemStyle: {
+                        name: arry[4][0],
+                        data: arry[1],
+                        type: 'line',
+                        symbol: 'none',
+                        smooth: true,
+                        areaStyle: {
                             normal: {
-                                color: '#9B9DA1',
-                                barBorderRadius: [20, 20, 20, 20]
+                                color: new echarts.graphic.LinearGradient
+                                (0, 0, 0, 1, [
+                                    {
+                                        offset: 0,
+                                        color: 'rgba(241, 158, 194, 0.3)'
+                                    },
+                                    {
+                                        offset: 0.8,
+                                        color: 'rgba(241, 158, 194, 0)'
+                                    }
+                                ], false),
+                                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                                shadowBlur: 10
                             }
                         },
-                        silent: true,
-                        barWidth: 20,
-                        barGap: '-1',
-                        data: [110, 60, 80],
-                        label: {
-                            show: true,
-                            // formatter:'{c0',
-                            position: 'top'
+                        //控制线条的颜色
+                        itemStyle: {
+                            normal: {
+                                color: '#BB5FF0',
+                                borderColor: '#BB5FF0',
+                                borderWidth: 3
+                            }
                         },
                     },
                         {
-                            type: 'bar',
+                            name: arry[4][1],
+                            data: arry[2],
+                            type: 'line',
+                            symbol: 'none',
+                            smooth: true,
+                            //控制线条的颜色
                             itemStyle: {
-                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                    {offset: 0, color: "#63edd4"},
-                                    {offset: 1, color: "rgba(14, 137, 238, 1)"},
-                                ]),
-                                barBorderRadius: [20, 20, 20, 20]
+                                normal: {
+                                    color: '#F0765F',
+                                    borderColor: '#F0765F',
+                                    borderWidth: 3
+                                }
                             },
-                            barWidth: 20,
-                            data: [50, 30, 55]
-                        }]
+                        },
+                        {
+                            name: arry[4][2],
+                            data: arry[3],
+                            type: 'line',
+                            symbol: 'none',
+                            smooth: true,
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient
+                                    (0, 0, 0, 1, [
+                                        {
+                                            offset: 0,
+                                            color: 'rgba(241, 158, 194, 0.3)'
+                                        },
+                                        {
+                                            offset: 0.8,
+                                            color: 'rgba(241, 158, 194, 0)'
+                                        }
+                                    ], false),
+                                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                                    shadowBlur: 10
+                                }
+                            },
+                            //控制线条的颜色
+                            itemStyle: {
+                                normal: {
+                                    color: 'rgb(241,158,194)',
+                                    borderColor: 'rgba(241,158,194,0.2)',
+                                    borderWidth: 3
+                                }
+                            },
+                        }
+                    ]
                 });
             },
 
@@ -1717,34 +1779,16 @@
                 let option = {
                     tooltip: {
                         trigger: "item",
-                        formatter: "{b}: {c} ({d}%)",
+                        formatter: "{b}: {c}万吨 ({d}%)",
                     },
                     legend: {
                         orient: "vertical",
-                        right: 0,
-                        top: 'center',
-                        textStyle: {
-                            color: '#9FA0A5',
-                            padding: [15, 30, 2, 10],
-                            fontSize: 12,
-                        },
-                        itemGap: 30,
-                        data: ["柴油", "煤油", "汽油"],
+                        bottom: 30,
+                        right: 10,
+                        itemGap: 10,
                         itemWidth: 15,
                         itemHeight: 10,
-                        formatter: function (name) {
-                            var data = option.series[0].data;//获取series中的data
-                            var total = 0;
-                            var tarValue;
-                            for (var i = 0, l = data.length; i < l; i++) {
-                                total += data[i].value;
-                                if (data[i].name == name) {
-                                    tarValue = data[i].value;
-                                }
-                            }
-                            var p = ((tarValue / total) * 100);
-                            return name + "\n" + p.toFixed() + "%";
-                        },
+                        data: ["柴油", "煤油", "汽油"],
                     },
                     grid: {
                         bottom: 40,
@@ -1756,19 +1800,33 @@
                             radius: ["40%", "55%"],
                             center: ["50%", "50%"],
                             label: {
-                                show: false
+                                formatter: "{b|{b}} \n\n\n {per|{d}%\n}",
+                                padding: [0, -40, -15],
+                                rich: {
+                                    per: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                    b: {
+                                        fontSize: 12,
+                                    },
+                                },
+                            },
+                            labelLine: {
+                                length: 15,
+                                length2: 30,
                             },
                             data: [
                                 {
-                                    value: 40,
+                                    value: 112,
                                     name: "柴油",
                                 },
                                 {
-                                    value: 20,
+                                    value: 56,
                                     name: "煤油",
                                 },
                                 {
-                                    value: 40,
+                                    value: 112,
                                     name: "汽油",
                                 }
                             ],
@@ -1911,7 +1969,7 @@
                     this.selected_eight = 0
                     this.k1 = 1
                     this.$nextTick(function () {
-                        this.drawLine_one('echartsSix', this.bardata_two)
+                        this.drawLine_one('echartsSix', this.bardata_four)
                         this.drawPie_four('echartsEight');
                     })
                 }
@@ -1984,6 +2042,7 @@
             tabButton_eight(id) {
                 this.selected_eight = id;
                 if (0 == id) {
+                    this.selStrc = 0
                     this.k1 = 1;
                     this.$nextTick(function () {
                         this.drawPie_four('echartsEight');
@@ -1992,8 +2051,9 @@
                 ;
                 if (1 == id) {
                     this.k1 = 0;
+                    this.time = 0
                     this.$nextTick(function () {
-                        this.drawPie_five('echartsNine');
+                        this.drawPie_year('echartsNine');
                     });
                 }
             },
@@ -2135,7 +2195,106 @@
 
                     });
                 }
-            }
+            },
+            //成品油自给率下拉切换
+            selChart() {
+                if (this.time === 0) {
+                    this.drawPie_year('echartsNine');
+                } else {
+                    this.$nextTick(function () {
+                        if (this.time === 1) {
+                            this.drawPie_five('echartsTen', this.line_quar, '%')
+
+                        } else {
+                            this.drawPie_five('echartsTen', this.line_month, '%')
+                        }
+
+                    });
+                }
+            },
+            selStrcHandel() {
+                if (this.selStrc === 0) {
+                    this.drawPie_four('echartsNine');
+                } else {
+                    this.$nextTick(function () {
+                        if (this.selStrc === 1) {
+                            this.drawPie_five('echartsEle', this.lineEle_quar, '万吨')
+
+                        } else {
+                            this.drawPie_five('echartsEle', this.lineEle_month, '万吨')
+                        }
+
+                    });
+                }
+            },
+            drawPie_year(name, arry) {
+                let echarts = require('echarts');
+                let myChart = echarts.init(document.getElementById(name));
+                let option = {
+                    tooltip: {
+                        trigger: "item",
+                        formatter: "{b}: {c}万吨 ({d}%)",
+                    },
+                    legend: {
+                        orient: "vertical",
+                        bottom: 30,
+                        right: 10,
+                        itemGap: 10,
+                        itemWidth: 15,
+                        itemHeight: 10,
+                        data: ["柴油", "煤油", "汽油"],
+                    },
+                    grid: {
+                        bottom: 40,
+                    },
+                    series: [
+                        {
+                            name: "成品油生产",
+                            type: "pie",
+                            radius: ["40%", "55%"],
+                            center: ["50%", "50%"],
+                            label: {
+                                formatter: "{b|{b}} \n\n\n {per|{d}%\n}",
+                                padding: [0, -40, -15],
+                                rich: {
+                                    per: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                    b: {
+                                        fontSize: 12,
+                                    },
+                                },
+                            },
+                            labelLine: {
+                                length: 15,
+                                length2: 30,
+                            },
+                            data: [
+                                {
+                                    value: 72,
+                                    name: "柴油",
+                                },
+                                {
+                                    value: 36,
+                                    name: "煤油",
+                                },
+                                {
+                                    value: 72,
+                                    name: "汽油",
+                                }
+                            ],
+                            color: [
+                                "#15E9EC",
+                                "#FFD350",
+                                "#01A6FF",
+                            ],
+                        },
+                    ],
+                }
+                myChart.setOption(option);
+            },
+
 
         }
     }
@@ -2157,10 +2316,10 @@
     /* 炼化煤弹窗样式 */
     .produce_tc {
         width: 180px;
-        height: 100px;
+        height: 120px;
         background-color: rgba(37, 54, 104, 0.6);
-        left: 190px;
-        top: 60px;
+        /*left: 190px;
+        top: 60px;*/
         position: absolute;
         padding-top: 8px;
     }
@@ -2466,11 +2625,22 @@
         background-size: 65px 65px;
     }
 
+    .echart_bgnew {
+        background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 65px 65px;
+    }
+
     /* 给第一个柱图一个样式方便设置同比环比块的样式 */
     .echarts_two {
         width: 100%;
         height: 242px;
         margin: 0px auto;
+    }
+
+    .echarts_new {
+        height: 300px;
     }
 
     /* 同比环比块最大div的样式 */
@@ -2662,6 +2832,22 @@
     .content {
         display: none;
     }
+
+    .fontDiv {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 210px;
+        .font_num {
+            font: 23px bolder microsoft-yahei;
+        }
+
+        .font_unit {
+            font: 15px bolder microsoft-yahei;
+        }
+    }
+
+
 </style>
 <style lang="scss">
     .chart {

@@ -30,114 +30,155 @@
             <div>
                 <!--石油宏观显示-->
                 <div v-show="oilShow?true:false">
-                    <div class="lay-content" :style="{'left':be_click_left(0.058),'top':be_click_top(0.562)}">
+                    <div
+                            class="lay-content"
+                            v-show="flag=='1'||showAll"
+                            :style="{'left':be_click_left(0.058),'top':be_click_top(0.562)}">
                         <div>吉祥油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：562万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.398),'top':be_click_top(0.649)}">
+                    <div class="lay-content"
+                         v-show="flag=='2'||showAll"
+                         :style="{'left':be_click_left(0.398),'top':be_click_top(0.649)}">
                         <div>包尔油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：750万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.358),'top':be_click_top(0.358)}">
+                    <div class="lay-content"
+                         v-show="flag=='3'||showAll"
+                         :style="{'left':be_click_left(0.358),'top':be_click_top(0.358)}">
                         <div>二连油田区域</div>
                         <div>油田个数：6个</div>
                         <div>探明储量：7500万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.698),'top':be_click_top(0.108)}">
+                    <div class="lay-content"
+                         v-show="flag=='5'||showAll"
+                         :style="{'left':be_click_left(0.698),'top':be_click_top(0.108)}">
                         <div>海拉尔油田区域</div>
                         <div>油田个数：5个</div>
                         <div>探明储量：8437万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.698),'top':be_click_top(0.348)}">
+                    <div class="lay-content"
+                         v-show="flag=='4'||showAll"
+                         :style="{'left':be_click_left(0.698),'top':be_click_top(0.348)}">
                         <div>科尔沁油田区域</div>
                         <div>油田个数：3个</div>
                         <div>探明储量：1125万吨</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.708),'top':be_click_top(0.638)}">
+                    <div class="lay-content"
+                         v-show="flag=='6'||showAll"
+                         :style="{'left':be_click_left(0.708),'top':be_click_top(0.638)}">
                         <div>科尔康油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：375万吨</div>
                     </div>
                     <!--原油地图弹窗定位-->
                     <div>
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.344),'top':be_click_top(0.638)}"
+                              @click="selected_one==0?drawLine('echartsOne', echarts.data_one_jishu, '万吨',
+                              '原油剩余技术储量',echarts.lengend_data_jishu_one,'35','1'):drawLine('echartsOne',
+                              echarts.data_one_jingji, '万吨',
+                              '原油剩余经济储量',echarts.lengend_data_jishu_one,'14','1')"></div>-->
                         <div class="clickbtn" :style="{'left':be_click_left(0.344),'top':be_click_top(0.638)}"
-                             @click="selected_one==0?drawLine('echartsOne', echarts.data_one_jishu, '万吨',
-                             '原油剩余技术储量',echarts.lengend_data_jishu_one,'35','1'):drawLine('echartsOne',
-                             echarts.data_one_jingji, '万吨',
-                             '原油剩余经济储量',echarts.lengend_data_jishu_one,'14','1')"></div>
+                             @click="oilHandel(echarts.data_one_jishu,echarts.lengend_data_jishu_one,'35',echarts.data_one_jingji,'14','1',$event)"></div>
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.538),'top':be_click_top(0.602)}"
+                              @click="selected_one==0?drawLine('echartsOne', echarts.data_two_jishu, '万吨',
+                              '原油剩余技术储量',echarts.lengend_data_jishu_two,'47','2'):drawLine('echartsOne',
+                              echarts.data_two_jingji, '万吨',
+                              '原油剩余经济储量',echarts.lengend_data_jishu_two,'18','2')"></div>-->
                         <div class="clickbtn" :style="{'left':be_click_left(0.538),'top':be_click_top(0.602)}"
-                             @click="selected_one==0?drawLine('echartsOne', echarts.data_two_jishu, '万吨',
-                             '原油剩余技术储量',echarts.lengend_data_jishu_two,'47','2'):drawLine('echartsOne',
-                             echarts.data_two_jingji, '万吨',
-                             '原油剩余经济储量',echarts.lengend_data_jishu_two,'18','2')"></div>
+                             @click="oilHandel(echarts.data_two_jishu,echarts.lengend_data_jishu_two,'47',echarts.data_two_jingji,'18','2')"></div>
+                        <!--   <div class="clickbtn" :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
+                                @click="selected_one==0?drawLine('echartsOne', echarts.data_three_jishu, '万吨',
+                                '原油剩余技术储量',echarts.lengend_data_jishu_three,'480','3'):drawLine('echartsOne',
+                                echarts.data_three_jingji, '万吨',
+                                '原油剩余经济储量',echarts.lengend_data_jishu_three,'180','3')"></div>-->
                         <div class="clickbtn" :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
-                             @click="selected_one==0?drawLine('echartsOne', echarts.data_three_jishu, '万吨',
-                             '原油剩余技术储量',echarts.lengend_data_jishu_three,'480','3'):drawLine('echartsOne',
-                             echarts.data_three_jingji, '万吨',
-                             '原油剩余经济储量',echarts.lengend_data_jishu_three,'180','3')"></div>
-                        <div class="clickbtn" :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
+                             @click="oilHandel(echarts.data_three_jishu,echarts.lengend_data_jishu_three,'480',echarts.data_three_jingji,'180','3')"></div>
+                        <!--<div class="clickbtn" :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
                              @click="selected_one==0?drawLine('echartsOne', echarts.data_five_jishu, '万吨',
                              '原油剩余技术储量',echarts.lengend_data_jishu_five,'636','5'):drawLine('echartsOne',
                              echarts.data_five_jingji, '万吨',
-                             '原油剩余经济储量',echarts.lengend_data_jishu_five,'278','5')"></div>
+                             '原油剩余经济储量',echarts.lengend_data_jishu_five,'278','5')"></div>-->
+                        <div class="clickbtn" :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
+                             @click="oilHandel(echarts.data_five_jishu,echarts.lengend_data_jishu_five,'636',echarts.data_five_jingji,'278','5')"></div>
+                        <!--  <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.515)}"
+                               @click="selected_one==0?drawLine('echartsOne', echarts.data_four_jishu, '万吨',
+                               '原油剩余技术储量',echarts.lengend_data_jishu_four,'71','4'):drawLine('echartsOne',
+                               echarts.data_four_jingji, '万吨',
+                               '原油剩余经济储量',echarts.lengend_data_jishu_four,'28','4')"></div>-->
                         <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.515)}"
-                             @click="selected_one==0?drawLine('echartsOne', echarts.data_four_jishu, '万吨',
-                             '原油剩余技术储量',echarts.lengend_data_jishu_four,'71','4'):drawLine('echartsOne',
-                             echarts.data_four_jingji, '万吨',
-                             '原油剩余经济储量',echarts.lengend_data_jishu_four,'28','4')"></div>
+                             @click="oilHandel(echarts.data_four_jishu,echarts.lengend_data_jishu_four,'71',echarts.data_four_jingji,'28','4')"></div>
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.820),'top':be_click_top(0.595)}"
+                              @click="selected_one==0?drawLine('echartsOne', echarts.data_six_jishu, '万吨',
+                              '原油剩余技术储量',echarts.lengend_data_jishu_six,'24','6'):drawLine('echartsOne',
+                              echarts.data_six_jingji, '万吨',
+                              '原油剩余经济储量',echarts.lengend_data_jishu_six,'9','6')"></div>-->
                         <div class="clickbtn" :style="{'left':be_click_left(0.820),'top':be_click_top(0.595)}"
-                             @click="selected_one==0?drawLine('echartsOne', echarts.data_six_jishu, '万吨',
-                             '原油剩余技术储量',echarts.lengend_data_jishu_six,'24','6'):drawLine('echartsOne',
-                             echarts.data_six_jingji, '万吨',
-                             '原油剩余经济储量',echarts.lengend_data_jishu_six,'9','6')"></div>
+                             @click="oilHandel(echarts.data_six_jishu,echarts.lengend_data_jishu_six,'24',echarts.data_six_jingji,'9','6')"></div>
                     </div>
                 </div>
                 <!--天然气宏观显示-->
                 <div v-show="oilShow?false:true">
-                    <div class="lay-content" :style="{'left':be_click_left(0.148),'top':be_click_top(0.712)}">
+                    <div class="lay-content" v-show="flagGas=='1'||showAllGas"
+                         :style="{'left':be_click_left(0.148),'top':be_click_top(0.712)}">
                         <div>苏里格气田区域</div>
                         <div>气田个数：5个</div>
                         <div>探明储量：11900万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.198),'top':be_click_top(0.429)}">
+                    <div class="lay-content"
+                         v-show="flagGas=='2'||showAllGas"
+                         :style="{'left':be_click_left(0.198),'top':be_click_top(0.429)}">
                         <div>包尔气田区域</div>
                         <div>气田个数：1个</div>
                         <div>探明储量：560万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.608),'top':be_click_top(0.538)}">
+                    <div class="lay-content"
+                         v-show="flagGas=='3'||showAllGas"
+                         :style="{'left':be_click_left(0.608),'top':be_click_top(0.538)}">
                         <div>二连气田区域</div>
                         <div>气田个数：2个</div>
                         <div>探明储量：700万立方米</div>
                     </div>
-                    <div class="lay-content" :style="{'left':be_click_left(0.448),'top':be_click_top(0.148)}">
+                    <div class="lay-content"
+                         v-show="flagGas=='4'||showAllGas"
+                         :style="{'left':be_click_left(0.448),'top':be_click_top(0.148)}">
                         <div>海拉尔气田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：840万立方米</div>
                     </div>
                     <!--//天然气弹窗定位-->
                     <div>
+                        <!--  <div class="clickbtn" :style="{'left':be_click_left(0.444),'top':be_click_top(0.768)}"
+                               @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_one_jishu, '万立方米',
+                               '天然气剩余技术储量',echarts.lengendGas_data_one,'0.34','1'):drawLine_Gas('echartsTwo',
+                               echarts.dataGas_one_jingji, '万立方米',
+                               '天然气剩余经济储量',echarts.lengendGas_data_one,'0.56','1')"></div>-->
                         <div class="clickbtn" :style="{'left':be_click_left(0.444),'top':be_click_top(0.768)}"
-                             @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_one_jishu, '万立方米',
-                             '天然气剩余技术储量',echarts.lengendGas_data_one,'0.34','1'):drawLine_Gas('echartsTwo',
-                             echarts.dataGas_one_jingji, '万立方米',
-                             '天然气剩余经济储量',echarts.lengendGas_data_one,'0.56','1')"></div>
+                             @click="gasHandel(echarts.dataGas_one_jishu,echarts.lengendGas_data_one,'0.34',echarts.dataGas_one_jingji,'0.56','1')"></div>
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.500),'top':be_click_top(0.552)}"
+                              @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_two_jishu, '万立方米',
+                              '天然气剩余技术储量',echarts.lengendGas_data_two,'0.02','2'):drawLine_Gas('echartsTwo',
+                              echarts.dataGas_two_jingji, '万立方米',
+                              '天然气剩余经济储量',echarts.lengendGas_data_two,'0.03','2')"></div>-->
                         <div class="clickbtn" :style="{'left':be_click_left(0.500),'top':be_click_top(0.552)}"
-                             @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_two_jishu, '万立方米',
-                             '天然气剩余技术储量',echarts.lengendGas_data_two,'0.02','2'):drawLine_Gas('echartsTwo',
-                             echarts.dataGas_two_jingji, '万立方米',
-                             '天然气剩余经济储量',echarts.lengendGas_data_two,'0.03','2')"></div>
-                        <div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
+                             @click="gasHandel(echarts.dataGas_two_jishu,echarts.lengendGas_data_two,'0.02',echarts.dataGas_two_jingji,'0.03','2')"></div>
+                        <!--<div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
                              @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_three_jishu, '万立方米',
                              '天然气剩余技术储量',echarts.lengendGas_data_three,'0.02','3'):drawLine_Gas('echartsTwo',
                              echarts.dataGas_three_jingji, '万立方米',
-                             '天然气剩余经济储量',echarts.lengendGas_data_three,'0.03','3')"></div>
-                        <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.245)}"
+                             '天然气剩余经济储量',echarts.lengendGas_data_three,'0.03','3')"></div>-->
+                        <div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
+                             @click="gasHandel(echarts.dataGas_three_jishu,echarts.lengendGas_data_three,'0.02',echarts.dataGas_three_jingji,'0.03','3')"></div>
+                        <!--<div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.245)}"
                              @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_four_jishu, '万立方米',
                              '天然气剩余技术储量',echarts.lengendGas_data_four,'0.02','4'):drawLine_Gas('echartsTwo',
                              echarts.dataGas_four_jingji, '万立方米',
-                             '天然气剩余经济储量',echarts.lengendGas_data_four,'0.03','4')"></div>
+                             '天然气剩余经济储量',echarts.lengendGas_data_four,'0.03','4')"></div>-->
+                        <div class="clickbtn"
+                             :style="{'left':be_click_left(0.760),'top':be_click_top(0.245)}"
+                             @click="gasHandel(echarts.dataGas_four_jishu,echarts.lengendGas_data_four,'0.02',echarts.dataGas_four_jingji,'0.03','4')"></div>
                     </div>
                 </div>
                 <div class="click-change"
@@ -408,14 +449,14 @@
                               v-bind:class="[{tab_oil_two:index == selected_six},{tab_oil_one:true}]">{{item}}</span>
                     </div>
                     <div class="fontDiv2" v-show="bacolor==1">
-                        <div class="font_num" >7065</div>
+                        <div class="font_num">7065</div>
                         <div class="font_unit">万吨</div>
                     </div>
                     <div class="fontDiv2" v-show="bacolor==0">
-                        <div class="font_num" >7665</div>
+                        <div class="font_num">7665</div>
                         <div class="font_unit">万立方米</div>
                     </div>
-                    <div :class="[{echartsOne:bacolor},{echartsTwo:!bacolor}]"  id="echartsFive"></div>
+                    <div :class="[{echartsOne:bacolor},{echartsTwo:!bacolor}]" id="echartsFive"></div>
                 </div>
             </div>
 
@@ -432,15 +473,15 @@
                         <li>上月销量：<span>{{page_c[4]}}</span>{{page_c[7]}}</li>
                     </ul>
                 </div>
-                <div class="clickbtn" :style="{'left':be_click_left(0.345),'top':be_click_top(0.778)}"
+                <div class="clickbtn" :style="{'left':be_click_left(0.415),'top':be_click_top(0.818)}"
                      @click="tanchuang(produce_tc,page_c2,1)"></div>
-                <div class="clickbtn" :style="{'left':be_click_left(0.375),'top':be_click_top(0.75)}"
+                <div class="clickbtn" :style="{'left':be_click_left(0.375),'top':be_click_top(0.785)}"
                      @click="tanchuang(produce_tc,page_c3,2)"></div>
-                <div class="clickbtn" :style="{'left':be_click_left(0.395),'top':be_click_top(0.778)}"
+                <div class="clickbtn" :style="{'left':be_click_left(0.435),'top':be_click_top(0.758)}"
                      @click="tanchuang(produce_tc,page_c4,3)"></div>
-                <div class="clickbtn" :style="{'left':be_click_left(0.473),'top':be_click_top(0.721)}"
+                <div class="clickbtn" :style="{'left':be_click_left(0.493),'top':be_click_top(0.711)}"
                      @click="tanchuang(produce_tc,page_c5,4)"></div>
-                <div class="clickbtn" :style="{'left':be_click_left(0.717),'top':be_click_top(0.566)}"
+                <div class="clickbtn" :style="{'left':be_click_left(0.717),'top':be_click_top(0.586)}"
                      @click="tanchuang(produce_tc,page_c1,5)"></div>
                 <img class="map" src="../../assets/img/industryAnalysis/炼化煤地图2.png" alt="图片未显示"
                      @click.prevent="default_t">
@@ -548,6 +589,8 @@
         name: 'FuncFormsBase',
         data() {
             return {
+                showAll: true,
+                showAllGas: true,
                 value1: 0,
                 src: require('../../assets/img/原油.png'),
                 src1: require('../../assets/img/天然气.png'),
@@ -606,11 +649,11 @@
                 ],
                 // 炼化煤页面弹窗
                 page_c: [],
-                page_c1: ['大唐煤制气', 1200, 100, 1000, 500, '0.465', '0.153','万立方米'],
-                page_c2: ['神华煤制油', 1250, 100, 1000, 500, '0.375', '0.433','万吨'],
-                page_c3: ['汇能煤制气', 2000, 100, 1000, 400, '0.405', '0.393','万立方米'],
-                page_c4: ['伊泰煤制油', 1600, 100, 1000, 600, '0.425', '0.423','万吨'],
-                page_c5: ['呼和浩特石化公司', 1700, 100, 1000, 500, '0.455', '0.303','万吨'],
+                page_c1: ['大唐煤制气', 1200, 100, 1000, 500, '0.465', '0.153', '万立方米'],
+                page_c2: ['神华煤制油', 1250, 100, 1000, 500, '0.445', '0.433', '万吨'],
+                page_c3: ['汇能煤制气', 2000, 100, 1000, 400, '0.405', '0.393', '万立方米'],
+                page_c4: ['伊泰煤制油', 1600, 100, 1000, 600, '0.445', '0.373', '万吨'],
+                page_c5: ['呼和浩特石化公司', 1700, 100, 1000, 500, '0.455', '0.303', '万吨'],
                 produce_tc: false,
                 xuan: 0,
 
@@ -1538,7 +1581,7 @@
                 produce_pie_gas: [0.09, 0.06, 0.15, '亿立方米'],
                 bacolor: 1,
                 produce_pieTwo_oil: [149, 6916],
-                produce_pieTwo_gas: [1149,6516],
+                produce_pieTwo_gas: [1149, 6516],
 
                 //第二个页面按钮图标
                 imgUrl: require('../../assets/img/industryAnalysis/原油黄.png'),
@@ -2356,14 +2399,14 @@
                             break;
                         case '3':
                             this.drawLine_Gas('echartsTwo', this.echarts.dataGas_three_jingji, '万立方米',
-                                '天然气剩余经济储量', this.echarts.lengendGas_data_one, '0.03', '3');
+                                '天然气剩余经济储量', this.echarts.lengendGas_data_three, '0.03', '3');
                             break;
                         case '4':
                             this.drawLine_Gas('echartsTwo', this.echarts.dataGas_four_jingji, '万立方米',
-                                '天然气剩余经济储量', this.echarts.lengendGas_data_one, '0.03', '4');
+                                '天然气剩余经济储量', this.echarts.lengendGas_data_four, '0.03', '4');
                             break;
                         default :
-                            this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
+                            this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余经济储量",
                                 this.echarts.lengend_data_three, '1.3', null);
                             break;
                     }
@@ -2381,11 +2424,11 @@
                             break;
                         case '3':
                             this.drawLine_Gas('echartsTwo', this.echarts.dataGas_three_jishu, '万立方米',
-                                '天然气剩余经济储量', this.echarts.lengendGas_data_one, '0.02', '3');
+                                '天然气剩余经济储量', this.echarts.lengendGas_data_three, '0.02', '3');
                             break;
                         case '4':
                             this.drawLine_Gas('echartsTwo', this.echarts.dataGas_four_jishu, '万立方米',
-                                '天然气剩余经济储量', this.echarts.lengendGas_data_one, '0.02', '4');
+                                '天然气剩余经济储量', this.echarts.lengendGas_data_four, '0.02', '4');
                             break;
                         default :
                             this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
@@ -2773,6 +2816,7 @@
             btnOil() {
                 this.selected_one = 0;
                 this.oilShow = true;
+                this.showAllGas = true;
                 this.i = 0;
                 this.$nextTick(function () {
                     this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量",
@@ -2783,11 +2827,74 @@
             btnGas() {
                 this.selected_two = 0;
                 this.oilShow = false;
+                this.showAll = true;
                 this.j = 0;
                 this.$nextTick(function () {
                     this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
                         this.echarts.lengend_data_three, 0.78, null);
                 })
+
+            },
+            //原油地图点击
+            oilHandel(data_one_jishu, lengend_data_jishu_one, jishuNum, data_jingji_one, jingliNum, flag) {
+                if (this.flag == flag) {
+                    this.showAll = true
+                    this.flag = null
+                } else {
+                    this.showAll = false
+                }
+                if (this.selected_one == 0) {
+                    if (this.showAll) {
+                        this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量",
+                            this.echarts.lengend_data_one, 1177, null);
+                    } else {
+                        this.drawLine('echartsOne', data_one_jishu, '万吨',
+                            '原油剩余技术储量', lengend_data_jishu_one, jishuNum, flag)
+                    }
+
+                } else {
+                    if (this.showAll) {
+                        this.drawLine('echartsOne', this.echarts.data_jingji, "万吨", "原油剩余经济储量",
+                            this.echarts.lengend_data_one, 456, null);
+                    } else {
+                        this.drawLine('echartsOne',
+                            data_jingji_one, '万吨',
+                            '原油剩余经济储量', lengend_data_jishu_one, jingliNum, flag)
+                    }
+
+                }
+
+
+            },
+            //天然气地图点击
+            gasHandel(data_one_jishu, lengend_data_jishu_one, jishuNum, data_jingji_one, jingliNum, flagGas) {
+                if (this.flagGas == flagGas) {
+                    this.showAllGas = true
+                    this.flagGas=null
+                } else {
+                    this.showAllGas = false
+                }
+                if (this.selected_two == 0) {
+                    if(this.showAllGas){
+                        this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
+                            this.echarts.lengend_data_three, 0.78, null);
+                    }else{
+                        this.drawLine_Gas('echartsTwo', data_one_jishu, '万立方米',
+                            '天然气剩余技术储量', lengend_data_jishu_one, jishuNum, flagGas)
+                    }
+
+                } else {
+                    if(this.showAllGas){
+                        this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余经济储量",
+                            this.echarts.lengend_data_three, '1.3', null);
+                    }else{
+                        this.drawLine_Gas('echartsTwo',
+                            data_jingji_one, '万立方米',
+                            '天然气剩余经济储量', lengend_data_jishu_one, jingliNum, flagGas)
+                    }
+
+                }
+
 
             }
 
@@ -3092,7 +3199,8 @@
         background-position: 50% 50%;
         background-size: 65px 65px;
     }
-    .echartsTwo{
+
+    .echartsTwo {
         width: 100%;
         height: 242px;
         margin: 20px auto;
@@ -3101,7 +3209,7 @@
         background-position: 50% 50%;
         background-size: 65px 65px;
     }
-    
+
     /* 第二个页面的图表样式 */
     .echarts_one {
         width: 100%;
@@ -3278,7 +3386,7 @@
         background-color: #3A6DDA;
         font: 12px PingFangSC-Regular;
         color: white;
-        line-height: 25px;
+        line-height: 25px !important;
         float: left;
         position: relative;
         top: 2px;
@@ -3338,6 +3446,7 @@
             font: 15px bolder microsoft-yahei;
         }
     }
+
     .fontDiv2 {
         position: absolute;
         width: 100%;
@@ -3351,7 +3460,6 @@
             font: 15px bolder microsoft-yahei;
         }
     }
-
 
 
 </style>

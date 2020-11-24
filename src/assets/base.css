@@ -14,7 +14,7 @@ b, i,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
+article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
     margin:0;
@@ -27,7 +27,7 @@ time, mark, audio, video {
     box-sizing:border-box;
 }
 body {
-    line-height:1;
+    line-height:1.5;
 }
 
 :focus {
@@ -35,7 +35,7 @@ body {
 }
 
 article,aside,canvas,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section,summary { 
+footer,header,hgroup,menu,nav,section,summary {
     display:block;
 }
 
@@ -65,7 +65,7 @@ ins {
 
 mark {
     background-color:#ff9;
-    color:#000; 
+    color:#000;
     font-style:italic;
     font-weight:bold;
 }
@@ -87,7 +87,7 @@ table {
 hr {
     display:block;
     height:1px;
-    border:0;   
+    border:0;
     border-top:1px solid #cccccc;
     margin:1em 0;
     padding:0;

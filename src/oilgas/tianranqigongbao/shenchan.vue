@@ -1,30 +1,53 @@
 <template>
     <div class="child1" style="background-color: #E6E8EC;">
-        <div :class="[{tanchuang:true},{tanchuang_one: show}]">
-            <div style="width: 100%;height: 100%;overflow: auto;margin: 50px auto">
-                <div class="table-title">鄂尔多斯</div>
-                <table class="table_one_t">
-                    <tr>
-                        <th v-for="(th,index) in tableTh" :key="index">{{th}}</th>
-                    </tr>
-                    <tr v-for="(tr,index) in listData" :key="index">
-                        <td v-for="(td,index) in tr" :key="index">{{td}}</td>
-                    </tr>
-                </table>
-            </div>
-            <img
-                    id="close"
-                    :style="{'left':closeLeft}"
-                    src="../../assets/img/industryAnalysis/关闭.png"
-                    alt="图片未显示"
-                    @click="tanchuangClose()"
-            />
-        </div>
         <img
-                @click.prevent="tanchuangShow()"
                 class="map"
                 src="../../assets/img/oilgas/shenchan.png"
         />
+        <!--地图定位-->
+        <div>
+            <div class="clickbtn" v-for="(item,index) in posList"
+                 :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+                 @click="changePie(index)"
+            ></div>
+        </div>
+        <!--地图上展示信息-->
+        <div class="lay-content"
+             v-for="(item,index) in desList"
+             v-show="showAll||index==desIndex"
+             :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
+            <div>{{item.name}}</div>
+            <div>气田个数：{{item.num}}</div>
+            <div>上月产量：{{item.pro}}万立方米</div>
+        </div>
+
+        <!--饼图-->
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+            <div class="scFristqh">
+                <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
+                    <el-tab-pane label="天然气月产量气田分布" name="1"></el-tab-pane>
+                    <el-tab-pane label="天然气月产量企业分布" name="2" :laze="true"></el-tab-pane>
+                </el-tabs>
+            </div>
+            <div class="tabs-content">
+
+                <div v-show="activeNamePie==='1'">
+                    <div class="fontSize_div">
+                        <div class="fontSize">{{pie}}</div>
+                        <div class="fontSize" style="font-size: 14px">亿立方米</div>
+                    </div>
+                    <div id="PieOne" style="width:100%;height:240px;" ></div>
+                </div>
+                <div v-show="activeNamePie==='2'">
+                    <div class="fontSize_div">
+                        <div class="fontSize">20</div>
+                        <div class="fontSize" style="font-size: 14px">亿立方米</div>
+                    </div>
+                    <div id="PieTwo" style="width:100%;height:240px;" ref="second"></div>
+
+                </div>
+            </div>
+        </div>
         <!--柱状图-->
         <div style="background-color: #fff;padding-top: 18px">
             <div class="scFristqh">
@@ -36,27 +59,6 @@
             <div class="tabs-content">
                 <div id="barOne" style="width:100%;height:240px;" v-show="activeName==='1'"></div>
                 <div id="barTwo" style="width:100%;height:240px;" v-show="activeName==='2'" ref="second"></div>
-            </div>
-        </div>
-        <!--饼图-->
-        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
-            <div class="scFristqh">
-                <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
-                    <el-tab-pane label="天然气月产量气田分布" name="1"></el-tab-pane>
-                    <el-tab-pane label="天然气月产量企业分布" name="2" :laze="true"></el-tab-pane>
-                </el-tabs>
-            </div>
-            <div class="tabs-content">
-
-                <div>
-                    <div class="fontSize_div">
-                        <div class="fontSize">20</div>
-                        <div class="fontSize" style="font-size: 14px">亿立方米</div>
-                    </div>
-                    <div id="PieOne" style="width:100%;height:240px;" v-show="activeNamePie==='1'"></div>
-                </div>
-
-                <div id="PieTwo" style="width:100%;height:240px;" v-show="activeNamePie==='2'" ref="second"></div>
             </div>
         </div>
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
@@ -75,199 +77,293 @@
         name: 'child1',
         data() {
             return {
+                posList: [
+                    //苏里格气田区域
+                    {
+                        left: '0.444',
+                        top: '1.021'
+                    },
+                    {
+                        left: '0.496',
+                        top: '0.810'
+                    },
+                    {
+                        left: '0.664',
+                        top: '0.751'
+                    },
+                    {
+                        left: '0.764',
+                        top: '0.515'
+                    }
+                ],//地图弹窗位置
+                desList: [
+                    {
+                        left: '0.143',
+                        top: '0.882',
+                        name: '苏里格气田区域',
+                        num: '5',
+                        pro: '11900'
+                    },
+                    {
+                        left: '0.198',
+                        top: '0.629',
+                        name: '包尔气田区域',
+                        num: '1',
+                        pro: '560'
+                    },
+                    {
+                        left: '0.588',
+                        top: '0.798',
+                        name: '二连气田区域',
+                        num: '2',
+                        pro: '700'
+                    },
+                    {
+                        left: '0.458',
+                        top: '0.418',
+                        name: '海拉尔气田区域',
+                        num: '2',
+                        pro: '840'
+                    }
+                ],//地图上方信息展示
                 activeName: '1',
                 activeNamePie: '1',
                 screenWidth: document.body.clientWidth, // 屏幕宽
                 screenLeft: "",
                 show: 0, //控制弹窗显示
                 closeLeft: 0, //关闭按钮居中
-                tableTh: [
-                    "名称",
-                    "企业人数",
-                    "面积",
-                    "经纬度",
-                    "远景资源量(万立方米)",
-                    "预测资源量(万立方米)",
-                    "控制储量(万立方米)",
-                    "探明储量(万立方米)"
+                //气田图例
+                lengendGas: [
+                    ['苏里格气区', '包尔气区', '二连气区', '海拉尔气区'],
+                    ['苏格里气田', '大牛地气田', '胜利井气田', '靖边气田', '乌审旗气田'],
+                    ['包尔气田'],
+                    ['哈达图气田', '宝力格气田'],
+                    ['贝尔气田', '苏仁诺尔气田']
                 ],
-                listData: [
-                    {
-                        name: "苏里格气田",
-                        leaguerea: "2000",
-                        area: "5.5万平方公里",
-                        latitude: "43°23′10″~45°24′27″",
-                        vision: "3256",
-                        prediction: "1456",
-                        control: "1300",
-                        proved: "1200"
-                    },
-                    {
-                        name: "大牛地气田",
-                        leaguerea: "1300",
-                        area: "4314.12平方公里",
-                        latitude: "41°10′10″~43°24′10″",
-                        vision: "2687",
-                        prediction: "1856",
-                        control: "1399",
-                        proved: "780"
-                    },
-                    {
-                        name: "靖边气田",
-                        leaguerea: "1300",
-                        area: "5万平方公里",
-                        latitude: "46°16′10″~46°24′15″",
-                        vision: "3100",
-                        prediction: "2756",
-                        control: "2678",
-                        proved: "2670"
-                    },
-                    {
-                        name: "胜利井气田",
-                        leaguerea: "2100",
-                        area: "432万平方公里",
-                        latitude: "43°17′10″~45°24′15″",
-                        vision: "2890",
-                        prediction: "1956",
-                        control: "1780",
-                        proved: "870"
-                    },
-                    {
-                        name: "乌审旗气田",
-                        leaguerea: "1980",
-                        area: "234万平方公里",
-                        latitude: "44°17′10″~40°24′15″",
-                        vision: "3200",
-                        prediction: "2056",
-                        control: "1890",
-                        proved: "960"
-                    }
-                ]
+                dataGas: [
+                    [
+                        {
+                            value: 0.34,
+                            name: '苏里格气区'
+                        },
+                        {
+                            value: 0.02,
+                            name: '包尔气区'
+                        },
+                        {
+                            value: 0.02,
+                            name: '二连气区'
+                        },
+                        {
+                            value: 0.4,
+                            name: '海拉尔气区'
+                        }
+                    ],
+                    [
+                        {
+                            value: 1122,
+                            name: '苏格里气田'
+                        },
+                        {
+                            value: 673,
+                            name: '大牛地'
+                        },
+                        {
+                            value: 1571,
+                            name: '胜利井气田'
+                        },
+                        {
+                            value: 1122,
+                            name: '靖边气田'
+                        },
+
+                        {
+                            value: 1122,
+                            name: '乌审旗气田'
+                        },
+
+                    ],
+                    [
+                        {
+                            value: 264,
+                            name: '包尔气田'
+                        }
+
+                    ],
+                    [
+                        {
+                            value: 230,
+                            name: '哈达图气田'
+                        },
+                        {
+                            value: 100,
+                            name: '宝力格气田'
+                        }
+
+                    ],
+                    [
+                        {
+                            value: 213,
+                            name: '贝尔气田'
+                        },
+                        {
+                            value: 183,
+                            name: '苏仁诺尔气田'
+                        }
+
+                    ]
+                ],
+                pie_num: [1.3, 0.56, 0.03, 0.03, 0.03],
+                pie: 1.3,
+                showAll:true,
+                desIndex:null
             };
         },
         mounted() {
             //天然气月产量分析
             this.drawBarOne();
-            this.drawPie();
+            this.drawPie(this.lengendGas[0], '万立方米', this.dataGas[0], this.pie_num[0]);
             this.drawLine()
 
         },
         methods: {
-            //取消图片默认样式
-            tanchuangShow() {
-                this.show = 1;
-                this.$nextTick(function () {
-                    this.closeLeft = (this.screenWidth - 35) / 2 + "px";
-                });
+            // 用于点击的div块绑定函数
+            be_click_left(a) {
+                return this.screenWidth * a + 'px'
             },
-            tanchuangClose() {
-                this.show = 0;
+            be_click_top(a) {
+                return 314.5 * a + 'px'
             },
             //天然气月产量分析柱状图
             drawBarOne() {
                 let myChart = this.$echarts.init(document.getElementById('barOne'));
                 // 指定图表的配置项和数据
-                let option = {
+                myChart.setOption({
                     tooltip: {
-                        trigger: 'axis',
-                        formatter(params) {
-                            if(params.length && params.length > 1) {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                                    params[1].seriesName + ':' +
-                                    params[1].value + '%'
-                            }else if(params.length === 1 && params[0].seriesName === "天然气月产量") {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
-                            }else if(params.length === 1 && params[0].seriesName === "同比变化") {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '%'
-                            }
-                        }
+                        trigger: "axis",
+                        formatter: '{a0}{b0}: {c0}亿立方米<br /> {a1}{b1}: {c1}亿立方米<br /> {a2}{b2}: {c2}%',
+                        axisPointer: {
+                            type: "cross",
+                            crossStyle: {
+                                color: "#999",
+                            },
+                        },
                     },
                     legend: {
-                        data: ['天然气月产量', '同比变化'],
-                        x: 'right',
-                        right: '20%'
+                        data: ['计划月产量', '实际月产量', '同比变化']
                     },
                     xAxis: [
                         {
-                            type: 'category',
-                            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                            type: "category",
+                            data: [
+                                "1月",
+                                "2月",
+                                "3月",
+                                "4月",
+                                "5月",
+                                "6月",
+                                "7月",
+                                "8月",
+                                "9月",
+                                "10月",
+                                "11月",
+                                "12月",
+                            ],
                             axisPointer: {
-                                type: 'shadow'
+                                type: "shadow",
+                            },
+                            axisLabel: {
+                                fontSize: 12,
                             },
                             axisLine: {
                                 lineStyle: {
-                                    color: '#9B9DA1'
-                                }
-                            }
-
-                        }
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
                     ],
                     yAxis: [
                         {
-                            type: 'value',
-                            name: '亿立方米',
+                            name: "亿立方米",
+                            type: "value",
                             min: 0,
-                            max: 25,
                             interval: 5,
                             axisLabel: {
-                                formatter: '{value}'
+                                fontSize: 12,
                             },
                             axisLine: {
                                 lineStyle: {
-                                    color: '#9B9DA1'
-                                }
-                            }
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
                         },
                         {
-                            type: 'value',
-                            name: '%',
-                            min: -2,
-                            max: 3,
-                            interval: 1,
+                            show: false,
+                            name: "%",
+                            type: "value",
+                            max: 30,
+                            interval: 10,
                             axisLabel: {
-                                formatter: '{value}'
+                                fontSize: 12,
                             },
                             axisLine: {
                                 lineStyle: {
-                                    color: '#9B9DA1'
-                                }
-                            }
-                        }
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
                     ],
                     series: [
                         {
-                            name: '天然气月产量',
-                            type: 'bar',
-                            barWidth: 20,
-                            data: [2.0, 4.9, 7.0, 23.2, 10, 2, 6, 9, 15, 12, 5, 2],
+                            name: "计划月产量",
+                            type: "bar",
+                            barWidth: 6,
                             itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#38F8FF'},                   //柱图渐变色
-                                            {offset: 1, color: '#45BBFF'},                   //柱图渐变色
-                                        ]
-                                    )
-                                }
-                            }
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#63edd4"},
+                                    {offset: 1, color: "rgba(14, 137, 238, 1)"},
+                                ]),
+                            },
+                            data: [3, 4, 6, 7, 8, 7, 5, 6, 4, 7, 8, 7],
                         },
                         {
-                            name: '同比变化',
-                            type: 'line',
-                            yAxisIndex: 1,
-                            smooth: true,
-                            data: [-2, 0, 1, 2, -1.5, -2.5, 2.5, 2.3, 2, 3, -3, 3],
+                            name: "实际月产量",
+                            type: "bar",
+                            barWidth: 6,
                             itemStyle: {
-                                color: '#FBAF5D'
-                            }
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#FFE6A3"},
+                                    {offset: 1, color: "#FF8B2E"},
+                                ]),
+                            },
+                            data: [8, 10, 14, 11, 13, 17, 8, 11, 13, 12, 13, 12],
+                        },
+                        {
+                            name: "同比变化",
+                            type: "line",
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#BB5FF0"},
+                                    {offset: 1, color: "#BB5FF0"},
+                                ]),
+                            },
+                            yAxisIndex: 1,
+                            data: [20, 15, -13, -12, -11, -4, 5, 8, 12, -1, 6, 8],
                         }
-                    ]
-                };
-
-
-                // 使用刚指定的配置项和数据显示图表。
-                myChart.setOption(option);
+                    ],
+                });
             },
             //天然气产量与储量关联分析
             drawBarTwo() {
@@ -276,11 +372,7 @@
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                                params[1].seriesName + ':' +
-                                params[1].value + '亿立方米'
-                        }
+                        formatter: '{a0}{b0}: {c0}亿立方米<br /> {a1}{b1}: {c1}亿立方米',
                     },
                     legend: {
                         data: ['天然气月产量', '储量'],
@@ -307,8 +399,7 @@
                             type: 'value',
                             name: '亿立方米',
                             min: 0,
-                            max: 25,
-                            interval: 5,
+                            interval: 20,
                             axisLabel: {
                                 formatter: '{value}'
                             },
@@ -318,28 +409,13 @@
                                 }
                             }
                         },
-                        {
-                            type: 'value',
-                            name: '',
-                            min: 0,
-                            max: 250,
-                            interval: 50,
-                            axisLabel: {
-                                formatter: '{value}'
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#9B9DA1'
-                                }
-                            }
-                        }
                     ],
                     series: [
                         {
                             name: '天然气月产量',
                             type: 'bar',
-                            barWidth: 20,
-                            data: [2.0, 4.9, 7.0, 23.2, 10, 2, 6, 9, 15, 12, 5, 2],
+                            barWidth: 10,
+                            data: [10, 20, 30, 80, 60, 70, 60, 50, 40, 30, 35, 40],
                             itemStyle: {
                                 normal: {
                                     color: new this.$echarts.graphic.LinearGradient(
@@ -356,8 +432,7 @@
                             name: '储量',
                             type: 'line',
                             smooth: true,
-                            yAxisIndex: 1,
-                            data: [20.0, 40.9, 70.0, 230.2, 100, 200, 60, 90, 150, 120, 50, 20],
+                            data: [60, 55, 62, 64, 68, 72, 66, 64, 68, 71, 73, 71],
                             itemStyle: {
                                 color: '#FBAF5D'
                             }
@@ -370,19 +445,19 @@
                 myChart.setOption(option);
             },
             //天然气月产量气田分布
-            drawPie() {
+            drawPie(lengendData, unit, seriesData, pie_num) {
                 let myChart = this.$echarts.init(document.getElementById('PieOne'));
                 let option = {
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)"
+                        formatter: "{a} <br/>{b}: {c}" + unit + " ({d}%)"
                     },
                     legend: {
                         orient: "horizontal",
                         bottom: 10,
                         left: "center",
                         itemGap: 10,
-                        data: ["苏里格气田", "靖边气田", "胜利井气田", "大牛地气田", "乌审旗气田", "其他"],
+                        data: lengendData,
                         itemWidth: 15,
                         itemHeight: 10
                     },
@@ -409,30 +484,7 @@
                                 length: 15,
                                 length2: 30
                             },
-                            data: [{
-                                value: 5.7,
-                                name: "苏里格气田"
-                            },
-                                {
-                                    value: 2.5,
-                                    name: "靖边气田"
-                                },
-                                {
-                                    value: 4.4,
-                                    name: "胜利井气田"
-                                },
-                                {
-                                    value: 2.2,
-                                    name: "其他"
-                                },
-                                {
-                                    value: 4.8,
-                                    name: "大牛地气田"
-                                },
-                                {
-                                    value: 0.4,
-                                    name: "乌审旗气田"
-                                }],
+                            data: seriesData,
                             itemStyle: {
                                 normal: {
                                     color: function (params) {
@@ -452,6 +504,7 @@
                 };
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
+                this.pie = pie_num
 
             },
             //天然气月产量企业分布
@@ -463,28 +516,13 @@
                         formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)"
                     },
                     legend: {
-                        orient: 'vertical',
-                        right: 10,
-                        top: 70,
-                        bottom: 20,
+                        orient: "horizontal",
+                        bottom: 10,
+                        left: "center",
                         itemGap: 10,
                         data: ["中石油", "中石化"],
                         itemWidth: 15,
-                        itemHeight: 10,
-                        // 使用回调函数
-                        formatter: function (name) {
-                            var data = option.series[0].data;
-                            var total = 0;
-                            var tarValue;
-                            for (var i = 0, l = data.length; i < l; i++) {
-                                total += data[i].value;
-                                if (data[i].name == name) {
-                                    tarValue = data[i].value;
-                                }
-                            }
-                            var p = ((tarValue / total) * 100).toFixed(1);
-                            return name + " " + " " + p + "%";
-                        },
+                        itemHeight: 10
                     },
                     series: [
                         {
@@ -493,7 +531,18 @@
                             radius: ["40%", "55%"],
                             center: ["50%", "40%"],
                             label: {
-                                show: false
+                                formatter: "{per|{d}%\n}",
+                                padding: [0, -40, 5],
+                                rich: {
+                                    per: {
+                                        fontSize: 12,
+                                        color: "#9B9DA1"
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                length: 15,
+                                length2: 30
                             },
                             data: [{
                                 value: 17,
@@ -554,11 +603,11 @@
                             // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
                             //     params[1].seriesName + ':' +
                             //     params[1].value + '亿立方米'
-                            if(params.length && params.length > 1) {
+                            if (params.length && params.length > 1) {
                                 return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
                                     params[1].seriesName + ':' +
                                     params[1].value + '亿立方米'
-                            }else if(params.length === 1) {
+                            } else if (params.length === 1) {
                                 return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
                             }
                         }
@@ -653,6 +702,19 @@
                 };
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
+            },
+            //点击地图上的点进行切换
+            changePie(index) {
+                if(this.desIndex ==index ){
+                    this.showAll=true;
+                    this.desIndex=null;
+                    this.drawPie(this.lengendGas[0], '万立方米', this.dataGas[0], this.pie_num[0]);
+                }else{
+                    this.desIndex=index;
+                    this.showAll=false;
+                    this.drawPie(this.lengendGas[index + 1], '万立方米', this.dataGas[index + 1], this.pie_num[index + 1]);
+                }
+
             }
         }
     }
@@ -660,7 +722,15 @@
 
 <style scoped lang="scss">
     .child1 {
-
+        .lay-content {
+            border: 1px solid rgba(37, 54, 104, 0.6);
+            position: absolute;
+            font-size: 0.12rem;
+            border-radius: 0.04rem;
+            background-color: rgba(37, 54, 104, 0.5);;
+            color: #fff;
+            width: 113px;
+        }
         .map {
             margin-top: 93px;
             /*height: 309px;*/
@@ -775,7 +845,7 @@
             background-color: #4c4c4c;
             z-index: 5;
             display: none;
-           top: 93px;
+            top: 93px;
         }
 
         .tanchuang_one {
@@ -821,6 +891,12 @@
             padding: 10px;
             width: 1100px;
             background-color: #fff;
+        }
+        .clickbtn {
+            width: 13px;
+            height: 13px;
+            position: absolute;
+            z-index: 2;
         }
 
     }

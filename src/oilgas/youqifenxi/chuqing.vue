@@ -2876,21 +2876,29 @@
                 }
                 if (this.selected_two == 0) {
                     if(this.showAllGas){
+                        this.$nextTick(function () {
                         this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
                             this.echarts.lengend_data_three, 0.78, null);
+                        })
                     }else{
+                        this.$nextTick(function () {
                         this.drawLine_Gas('echartsTwo', data_one_jishu, '万立方米',
                             '天然气剩余技术储量', lengend_data_jishu_one, jishuNum, flagGas)
+                        })
                     }
 
                 } else {
                     if(this.showAllGas){
+                        this.$nextTick(function () {
                         this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余经济储量",
                             this.echarts.lengend_data_three, '1.3', null);
+                        })
                     }else{
+                        this.$nextTick(function () {
                         this.drawLine_Gas('echartsTwo',
                             data_jingji_one, '万立方米',
                             '天然气剩余经济储量', lengend_data_jishu_one, jingliNum, flagGas)
+                        })
                     }
 
                 }

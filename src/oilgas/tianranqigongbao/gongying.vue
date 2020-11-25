@@ -4,9 +4,23 @@
             <img class="map"
                  src="../../assets/img/oilgas/gongying.png"
                  alt="图片未显示"/>
-            <div class="banner">
-                <h4>***气田</h4>
-                <p>日供气量：1000万方</p>
+        </div>
+        <!--地图定位-->
+        <div>
+            <div class="clickbtn" v-for="(item,index) in posList"
+                 :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+                 @click="showDes(index)"
+            ></div>
+        </div>
+        <div>
+            <div v-for="(item,index) in desList"
+                 :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+                 class="des_list"
+                :ref="`list${index}`"
+                 v-show="desIndex==index&&showFlag"
+            >
+                <div>{{item.name}}</div>
+                <div>日供气量：{{item.num}}万立方米</div>
             </div>
         </div>
 
@@ -63,19 +77,236 @@
         name: 'child2',
         data() {
             return {
+                posList:[
+                    //苏里格气田
+                    {
+                        left:'0.354',
+                        top:'1.0'
+                    },
+                    //靖边气田
+                    {
+                        left:'0.4',
+                        top:'1.0'
+                    },
+                    //乌审旗气田
+                    {
+                        left:'0.444',
+                        top:'1.015'
+                    },
+                    //大牛地气田
+                    {
+                        left:'0.404',
+                        top:'1.060'
+                    },
+                    //胜利井气田
+                    {
+                        left:'0.384',
+                        top:'1.110'
+                    },
+                    //包尔气田
+                    {
+                        left:'0.50',
+                        top:'0.851'
+                    },
+                    //宝力格气田
+                    {
+                        left:'0.68',
+                        top:'0.751'
+                    },
+                    //哈达图气田
+                    {
+                        left:'0.72',
+                        top:'0.708'
+                    },
+                    //贝尔气田
+                    {
+                        left:'0.74',
+                        top:'0.589'
+                    },
+                    //苏仁诺尔气田
+                    {
+                        left:'0.68',
+                        top:'0.559'
+                    }
+                ],//地图弹窗位置
+                desList:[
+                    {
+                        name:'苏里格气田',
+                        num:'22',
+                        left:'0.244',
+                        top:'0.845'
+                    },
+                    {
+                        name:'靖边气田',
+                        num:'22',
+                        left:'0.244',
+                        top:'0.845'
+                    }
+                    ,
+                    {
+                        name:'乌审旗气田',
+                        num:'22',
+                        left:'0.244',
+                        top:'0.845'
+                    }
+                    ,
+                    {
+                        name:'大牛地气田',
+                        num:'22',
+                        left:'0.244',
+                        top:'0.845'
+                    },
+                    {
+                        name:'胜利井气田',
+                        num:'22',
+                        left:'0.244',
+                        top:'0.845'
+                    },
+                    {
+                        name:'包尔气田',
+                        num:'22',
+                        left:'0.40',
+                        top:'0.711'
+                    },
+                    {
+                        name:'宝力格气田',
+                        num:'22',
+                        left:'0.61',
+                        top:'0.601'
+                    },
+                    {
+                        name:'哈达图气田',
+                        num:'22',
+                        left:'0.61',
+                        top:'0.561'
+                    },
+                    {
+                        name:'贝尔气田',
+                        num:'22',
+                        left:'0.61',
+                        top:'0.441'
+                    },
+                    {
+                        name:'苏仁诺尔气田',
+                        num:'22',
+                        left:'0.56',
+                        top:'0.411'
+                    }
+                ],//弹窗内容
+                screenWidth: document.body.clientWidth, // 屏幕宽
                 supplyActiveName: '1',
                 activeNamePie: '1',
                 activeNameBar: '1',
-                show: false
+                show: false,
+                desIndex:null,
+                isShow:false,
+                drawLineTotal:[
+                    {
+                        actual:[17,18,16,25,23,25,24],
+                        plan:[13,15,18,26,18,30,22],
+                        chain:[7,8,6,15,13,15,14]
+                    },
+                ],
+                drawLineData:[
+                    //苏里格气田
+                    {
+                        actual:[7,8,6,15,13,15,14],
+                        plan:[3,5,8,16,8,20,22],
+                        chain:[7,8,6,15,13,15,14]
+                    },
+                    //靖边气田
+                    {
+                        actual:[9,7,7,7,7,15,15],
+                        plan:[3,5,8,5,8,8,22],
+                        chain:[9,7,7,7,7,15,15]
+                    },
+                    //乌审旗气田
+                    {
+                        actual:[5,5,5,12,6,21,16],
+                        plan:[3,5,8,16,8,20,22],
+                        chain:[5,5,5,12,6,21,16]
+                    },
+                    //大牛地气田
+                    {
+                        actual:[3,8,7,4,11,20,11],
+                        plan:[3,5,8,16,18,20,22],
+                        chain:[3,9,7,4,11,20,11]
+                    },
+                    //胜利井气田
+                    {
+                        actual:[5,6,4,8,10,23,17],
+                        plan:[3,5,8,16,8,20,22],
+                        chain:[5,6,4,8,10,23,17]
+                    },
+                    //包尔气田
+                    {
+                        actual:[6,9,4,17,12,10,11],
+                        plan:[3,5,8,16,8,20,22],
+                        chain:[6,9,9,17,12,17,11]
+                    },
+                    //宝力格气田
+                    {
+                        actual:[2,2,8,14,7,19,13],
+                        plan:[3,5,8,16,8,20,22],
+                        chain:[2,2,8,14,7,19,13]
+                    },
+                    //哈达图气田
+                    {
+                        actual:[3,4,7,11,20,9,12],
+                        plan:[3,5,8,16,8,20,22],
+                        chain:[3,4,7,11,20,9,12]
+                    },
+                    //贝尔气田
+                    {
+                        actual:[2,2,8,14,7,19,13],
+                        plan:[3,5,8,16,8,20,22],
+                        chain:[2,2,8,14,7,19,13]
+                    },
+                    //苏仁诺尔气田
+                    {
+                        actual:[5,6,4,8,10,23,17],
+                        plan:[3,5,8,16,8,20,22],
+                        chain:[5,6,4,8,10,23,17]
+                    }
+                ],
+                showFlag:false
             };
         },
         mounted() {
-            this.drawLine();
+            this.drawLine(this.drawLineTotal,0);
             this.drawPie();
             this.drawSupplyBar()
 
         },
         methods: {
+            // 用于点击的div块绑定函数
+            be_click_left(a) {
+                return this.screenWidth * a + 'px'
+            },
+            be_click_top(a) {
+                return 314.5 * a + 'px'
+            },
+            // 点击地图的点联动
+            showDes(index){
+                if(this.desIndex==index){
+                    if(this.$refs[`list${index}`][0].style.display=='none'){
+                        this.showFlag=true
+                        this.desIndex=index;
+                        this.drawLine(this.drawLineData,index);
+                    }else{
+                        this.drawLine(this.drawLineTotal,0);
+                        this.showFlag=false;
+                        this.desIndex=null;
+
+                    }
+                }else{
+                    this.desIndex=index;
+                    this.showFlag=true;
+                    this.drawLine(this.drawLineData,index);
+                }
+
+
+            },
             //供气对象性质分析
             drawPie() {
                 let myChart = this.$echarts.init(document.getElementById('supplyPieOne'));
@@ -263,7 +494,7 @@
                 }
             },
             // 天然气日供气量趋势分析
-            drawLine() {
+            drawLine(serData,index) {
                 let myChart = this.$echarts.init(document.getElementById('supplyLine'));
                 let option = {
                     tooltip: {
@@ -276,15 +507,6 @@
                                 '</br>' +
                                 params[2].seriesName + ':' +
                                 params[2].value + '%'
-                           /* if(params.length && params.length > 1) {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                                    params[1].seriesName + ':' +
-                                    params[1].value + '%'
-                            }else if(params.length === 1 && params[0].seriesName === "天然气日供气量") {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米'
-                            }else if(params.length === 1 && params[0].seriesName === "同比变化") {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '%'
-                            }*/
                         }
                     },
                     legend: {
@@ -340,7 +562,7 @@
                                     { offset: 1, color: "#5f59f7" },
                                 ]),
                             },
-                            data: [4,4,7,16,8,21,23]
+                            data: serData[index].actual
                         },
                         {
                             name: '计划日供气量',
@@ -352,7 +574,7 @@
                                     { offset: 1, color: "#ff9200" },
                                 ]),
                             },
-                            data: [3,5,8,16,8,20,22]
+                            data: serData[index].plan
                         },
                         {
                             name: '环比变化',
@@ -370,7 +592,7 @@
                                     }
                                 }
                             },
-                            data:[4,4,7,16,8,21,23]
+                            data:serData[index].chain
                         }
                     ]
                 };
@@ -701,6 +923,15 @@
 
 <style scoped lang="scss">
     .child2 {
+        .des_list{
+            background-color: rgba(37, 54, 104, 0.5);
+            position: absolute;
+            padding: 0.08rem;
+            font-size: 0.12rem;
+            width: 2.6rem;
+            color: #fff;
+            border-radius: 0.04rem;
+        }
         #banner {
             position: relative;
         }
@@ -718,6 +949,7 @@
             position: absolute;
             top: 150px;
             left: 15px;
+            display: none;
             // z-index: 1;
             h4 {
                 color: #fff;
@@ -889,6 +1121,12 @@
             padding: 10px;
             width: 800px;
             background-color: #fff;
+        }
+        .clickbtn {
+            width: 13px;
+            height: 13px;
+            position: absolute;
+            z-index:2;
         }
 
     }

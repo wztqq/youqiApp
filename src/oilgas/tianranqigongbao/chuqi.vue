@@ -1,49 +1,29 @@
 <template>
 	<div class="child3" style="background-color: #E6E8EC;">
 		<div class="map-box">
-			<div class="map-content">
-				<el-tabs :tab-position="tabPosition">
-					<el-tab-pane label="设施建设情况" class="des"></el-tab-pane>
-					<el-tab-pane label="本年度租赁情况" class="des"></el-tab-pane>
-				</el-tabs>
-
+			<img class="map" src="../../assets/img/oilgas/chuqi.png" />
+			<!--地图定位-->
+			<div>
+				<div class="clickbtn" v-for="(item,index) in posList"
+					 :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+					 @click="showDes(index)"
+				></div>
 			</div>
-
-			<div class="modal">
-				<div class="modal-city">呼和浩特燃气调峰设备</div>
-				<div>
-					<div class="modal-box">
-						<div class="modal-des-box">
-							<div class="modal-title">储气量：</div>
-							<div class="model-des">0.92亿立方米</div>
-						</div>
-						<div class="modal-des-box">
-							<div class="modal-title">温度：</div>
-							<div class="model-des">27&#176;</div>
-						</div>
-					</div>
-
-					<div class="modal-box">
-						<div class="modal-des-box">
-							<div class="modal-title">压力：</div>
-							<div class="model-des">0.92MPa</div>
-						</div>
-						<div class="modal-des-box">
-							<div class="modal-title">地方3天：</div>
-							<!--<div class="model-des">0.03亿m<sup>3</sup></div>-->
-							<div class="model-des">0.127亿立方米</div>
-
-						</div>
-					</div>
-					<div>
-						<div class="modal-des-box" style="width: 180px;height: 30px;line-height: 30px">
-							<span class="modal-title">城燃企业5%：</span><span class="model-des">0.2135万立方米</span>
-						</div>
-					</div>
+			<div>
+				<div v-for="(item,index) in desList"
+					 :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+					 class="des_list"
+					 :ref="`list${index}`"
+					 v-show="index==desIndex&&showFlag"
+				>
+					<div>{{item.name}}</div>
+					<div>租赁储罐数量：{{item.num1}}个</div>
+					<div>自建储罐数量：{{item.num2}}个</div>
+					<div>储气设施总容积：{{item.total}}亿立方米</div>
+					<div>城燃企业5%储气量：{{item.cpy}}亿立方米</div>
+					<div>地方政府3天储气量：{{item.city}}亿立方米</div>
 				</div>
 			</div>
-
-			<img class="map" src="../../assets/img/oilgas/chuqi.png" />
 		</div>
 		<div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
 			<div class="title">
@@ -51,7 +31,7 @@
 			</div>
 			<div class="content">
 				<div class="fontSize_div">
-					<div class="fontSize">1.36</div>
+					<div class="fontSize">{{pie_num}}</div>
 					<div class="fontSize" style="font-size: 14px">亿立方米</div>
 				</div>
 				<div id="gasPie" style="width: 100%;height: 240px"></div>
@@ -92,9 +72,105 @@
 		name: 'child3',
 		data() {
 			return {
+                posList:[
+                    //乌海市储气
+                    {
+                        left:'0.284',
+                        top:'1.05'
+                    },
+                    //鄂尔多斯市储气
+                    {
+                        left:'0.358',
+                        top:'1.07'
+                    },
+                    //巴彦淖尔储气
+                    {
+                        left:'0.378',
+                        top:'0.947'
+                    },
+                    //包头市储气
+                    {
+                        left:'0.428',
+                        top:'0.944'
+                    },
+                    //呼和浩特市储气
+                    {
+                        left:'0.478',
+                        top:'0.964'
+                    },
+                    //通辽市储气
+                    {
+                        left:'0.786',
+                        top:'0.864'
+                    }
+                ],//地图弹窗位置
+                desList:[
+                    {
+                        name:'乌海市储气情况',
+                        num1:'1',
+                        num2:'2',
+						total:'0.42',
+						cpy:'0.16',
+						city:'0.26',
+                        left:'0.194',
+                        top:'0.615'
+                    },
+                    {
+                        name:'鄂尔多斯市储气情况',
+                        num1:'1',
+                        num2:'2',
+                        total:'0.46',
+                        cpy:'0.2',
+                        city:'0.26',
+                        left:'0.274',
+                        top:'0.641'
+                    },
+                    {
+                        name:'巴彦淖尔市储气情况',
+                        num1:'1',
+                        num2:'2',
+                        total:'0.44',
+                        cpy:'0.18',
+                        city:'0.26',
+                        left:'0.244',
+                        top:'0.515'
+                    },
+                    {
+                        name:'包头市储气情况',
+                        num1:'1',
+                        num2:'2',
+                        total:'0.45',
+                        cpy:'0.19',
+                        city:'0.26',
+                         left:'0.244',
+                        top:'0.515'
+                    },
+                    {
+                        name:'呼和浩特市储气情况',
+                        num1:'1',
+                        num2:'2',
+                        total:'0.44',
+                        cpy:'0.17',
+                        city:'0.26',
+                        left:'0.244',
+                        top:'0.525'
+                    },
+                    {
+                        name:'通辽市储气情况',
+                        num1:'1',
+                        num2:'2',
+                        total:'0.47',
+                        cpy:'0.21',
+                        city:'0.26',
+                        left:'0.444',
+                        top:'0.435'
+                    }
+                ],//弹窗内容
+                screenWidth: document.body.clientWidth, // 屏幕宽
 				activeNamePie: '1',
 				tabPosition: 'left',
-				gasPieTwoData: [{
+				gasPieTwoData: [
+				    {
 						value: 0.127,
 						name: "阿拉善盟"
 					},
@@ -119,7 +195,8 @@
 						name: "其他"
 					}
 				],
-				gasPieThreeData: [{
+				gasPieThreeData: [
+				    {
 						value: 0.2135,
 						name: "阿拉善盟"
 					},
@@ -143,17 +220,104 @@
 						value: 0.0524,
 						name: "其他"
 					}
-				]
+				],
+                desIndex:null,
+                drawGasPieData:[
+                    // 合计
+                    [
+                        {
+                            name:'城燃企业5%',
+                            value:'1.11'
+                        },
+                        {
+                            name:'地方政府3天',
+                            value:'1.56'
+                        }
+                    ],
+					// 各市
+                    [
+                        {
+                            name:'城燃企业5%',
+                            value:'0.16'
+                        },
+                        {
+                            name:'地方政府3天',
+                            value:'0.26'
+                        }
+					],
+                    [
+                        {
+                            name:'城燃企业5%',
+                            value:'0.2'
+                        },
+                        {
+                            name:'地方政府3天',
+                            value:'0.26'
+                        }
+                    ],
+                    [
+                        {
+                            name:'城燃企业5%',
+                            value:'0.18'
+                        },
+                        {
+                            name:'地方政府3天',
+                            value:'0.26'
+                        }
+                    ],
+                    [
+                        {
+                            name:'城燃企业5%',
+                            value:'0.19'
+                        },
+                        {
+                            name:'地方政府3天',
+                            value:'0.26'
+                        }
+                    ],
+                    [
+                        {
+                            name:'城燃企业5%',
+                            value:'0.17'
+                        },
+                        {
+                            name:'地方政府3天',
+                            value:'0.26'
+                        }
+                    ],
+                    [
+                        {
+                            name:'城燃企业5%',
+                            value:'0.21'
+                        },
+                        {
+                            name:'地方政府3天',
+                            value:'0.26'
+                        }
+                    ]
+
+				],
+                pie_num:2.67,
+                pie:[2.67,0.42,0.46,0.44,0.45,0.43,0.47],
+                showFlag:false
 			}
 		},
 		mounted() {
 			this.drawPie('gasPieTwo', this.gasPieTwoData, "亿立方米", "地方政府3天");
-			this.drawGasPie()
-
+			this.$nextTick(function () {
+                this.drawGasPie(this.drawGasPieData[0],this.pie[0]);
+            });
 		},
 		methods: {
+            // 用于点击的div块绑定函数
+            be_click_left(a) {
+                return this.screenWidth * a + 'px'
+            },
+            be_click_top(a) {
+                return 314.5 * a + 'px'
+            },
 			//本年度储气能力
-			drawGasPie() {
+			drawGasPie(seriesData,pie_num) {
 				let myChart = this.$echarts.init(document.getElementById('gasPie'));
 				let option = {
 					tooltip: {
@@ -169,52 +333,27 @@
 						data: ["城燃企业5%", "地方政府3天"],
 						itemWidth: 15,
 						itemHeight: 10,
-						// 使用回调函数
-						// formatter: function(name) {
-						// 	var data = option.series[0].data;
-						// 	var total = 0;
-						// 	var tarValue;
-						// 	for (var i = 0, l = data.length; i < l; i++) {
-						// 		total += data[i].value;
-						// 		if (data[i].name == name) {
-						// 			tarValue = data[i].value;
-						// 		}
-						// 	}
-						// 	var p = ((tarValue / total) * 100).toFixed(1);
-						// 	return name + " " + " " + p + "%";
-						// },
 					},
 					series: [{
 						name: '本年度储气能力',
 						type: "pie",
 						radius: ["40%", "55%"],
 						center: ["50%", "40%"],
-						// label: {
-						// 	show: false
-						// },
-						label: {
-                                formatter: "{per|{b}:{d}%\n}",
-                                padding: [0, -120, 5],
-                                rich: {
-                                    per: {
-                                        fontSize: 12,
-                                        color: "#9B9DA1"
-                                    }
+                        label: {
+                            formatter: "{per|{d}%\n}",
+                            padding: [0, -40, 5],
+                            rich: {
+                                per: {
+                                    fontSize: 12,
+                                    color: "#9B9DA1"
                                 }
-                            },
+                            }
+                        },
                             labelLine: {
                                 length: 15,
-                                length2: 120
+                                length2: 30
                             },
-						data: [{
-								value: 0.85,
-								name: "城燃企业5%"
-							},
-							{
-								value: 0.51,
-								name: "地方政府3天"
-							},
-						],
+						data: seriesData,
 						itemStyle: {
 							normal: {
 								color: function(params) {
@@ -233,6 +372,8 @@
 				};
 				// 使用刚指定的配置项和数据显示图表。
 				myChart.setOption(option);
+                this.pie_num=pie_num
+
 			},
 			//地方政府3天
 			drawPie(id, seriesData, unit, name) {
@@ -304,12 +445,47 @@
 				}
 
 			},
+            showDes(index){
+
+                if(this.desIndex==index){
+                    if(this.$refs[`list${index}`][0].style.display=='none'){
+                        this.showFlag=true
+                        this.desIndex=index;
+                        this.drawGasPie(this.drawGasPieData[index+1],this.pie[index+1])
+                    }else{
+                        this.drawGasPie(this.drawGasPieData[0],this.pie[0]);
+                        this.showFlag=false;
+                        this.desIndex=null;
+
+                    }
+                }else{
+                    this.desIndex=index;
+                    this.showFlag=true;
+                    this.drawGasPie(this.drawGasPieData[index+1],this.pie[index+1])
+                }
+
+			}
 		}
 	}
 </script>
 
 <style scoped lang="scss">
 	.child3 {
+		.des_list{
+			background-color: rgba(37, 54, 104, 0.5);
+			position: absolute;
+			padding: 0.08rem;
+			font-size: 0.12rem;
+			width: 4rem;
+			color: #fff;
+			border-radius: 0.04rem;
+		}
+		.clickbtn {
+			width: 13px;
+			height: 13px;
+			position: absolute;
+			z-index:2;
+		}
 		.map {
 			margin-top: 93px;
 			width: 100%;

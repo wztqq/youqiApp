@@ -10,26 +10,6 @@ export default {
       type: Object,
       default: () => {},
     },
-    /*
-      optionObj:{
-        title:'',
-        legendData:['总面积'], //legend.data以及series.name
-        yLeftName:'单位：个',//y轴单位名称
-        yRightName:'单位：个',//y轴单位名称
-        xData:[], //x轴
-        seriesLeftData:[],//series数据
-        seriesRightData:[],//series数据
-        barWidth:10,//柱子宽度
-        lineWidth:2,//折线宽度
-        symbolSize:2,//折线折点大小,
-        leftMin: 0,
-        leftMax: 25,
-        leftInterval: 5,
-        rightMin: 0,
-        rightMax: 250,
-        rightInterval: 50
-      }
-    */
   },
   data() {
     return {
@@ -126,6 +106,7 @@ export default {
           },
           {
             type: "value",
+            show:false,
             name: this.optionObj.yRightName,
             min: this.optionObj.rightMin,
             max: this.optionObj.rightMax,

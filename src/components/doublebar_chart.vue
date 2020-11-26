@@ -73,12 +73,12 @@ export default {
                 params[0].seriesName +
                 ":" +
                 params[0].value +
-                "亿立方米" +
+                "万立方米" +
                 "</br>" +
                 params[1].seriesName +
                 ":" +
                 params[1].value +
-                "亿立方米"
+                "万立方米"
               );
             } else if (params.length === 1) {
               return (
@@ -87,7 +87,7 @@ export default {
                 params[0].seriesName +
                 ":" +
                 params[0].value +
-                "亿立方米"
+                "万立方米"
               );
             }
           },
@@ -113,13 +113,13 @@ export default {
           axisLine: {
             // 坐标轴样式
             lineStyle: {
-              color: "#DADADA",
+              color: "#9B9DA1",
             },
           },
           axisLabel: {
             // 坐标轴label样式
             textStyle: {
-              color: "#DADADA",
+              color: "#9B9DA1",
             },
           },
         },
@@ -133,13 +133,13 @@ export default {
             axisLine: {
               // 坐标轴样式
               lineStyle: {
-                color: "#DADADA",
+                color: "#9B9DA1",
               },
             },
             axisLabel: {
               // 坐标轴label样式
               textStyle: {
-                color: "#DADADA",
+                color: "#9B9DA1",
                 // fontSize:'16'
               },
             },

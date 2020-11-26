@@ -1,7 +1,7 @@
 <template>
 	<div id="main">
 		<div class="top">
-			<van-nav-bar title="标题" left-text="返回" left-arrow>
+			<van-nav-bar title="标题" left-text="返回" left-arrow  @click-left="onClickLeft">
 				<template #right>
 					<van-icon name="search" size="18" />
 				</template>
@@ -48,6 +48,10 @@
 			}
 		},
 		methods: {
+		    // 返回
+            onClickLeft(){
+                window.location.href = 'http://140.210.91.91:8080/mengenergy-appvue/#/index'
+			},
 			onClick(ind) {
 				console.log(ind);
 				this.$router.push({

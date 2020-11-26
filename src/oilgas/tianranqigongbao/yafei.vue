@@ -1,386 +1,502 @@
 <template>
-  <div>
-    <div id="confess_content" style="background-color: #dadbdb">
+    <div>
+        <div id="confess_content" style="background-color: #dadbdb">
 
-      <!-- banner -->
-      <img class="map"
-        src="../../assets/img/gasmap/yafei_map.png"
-        alt="图片未显示"/>
-
-      <!-- 月调峰气量盟市占比 && 月调峰气量企业占比 -->
-      <div class="chart">
-        <div class="tab_oil">
+            <!-- banner -->
+            <img class="map"
+                 src="../../assets/img/oilgas/yafeibaomin.png"
+                 alt="图片未显示"/>
+            <!--地图定位-->
+            <div>
+                <div :class="item.class" v-for="(item,index) in posList"
+                     :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+                     @click="showDes(index)"
+                ></div>
+            </div>
+            <!-- 天然气日消费缺口预测 && 调峰计划建议 -->
+            <div class="chart" style="height: 100%;">
+                <div class="chart-item" id="table">
+                    <table class="table_one">
+                        <tr>
+                            <th :width="th.width" v-for="(th,index) in tableTh_two" :key="index">{{th.value}}</th>
+                        </tr>
+                        <tr v-for="(tr,index) in listData_two" :key="index">
+                            <td>{{index+1}}</td>
+                            <td v-for="(td,index) in tr" :key="index" v-html="td"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- 月调峰气量盟市占比 && 月调峰气量企业占比 -->
+            <div class="chart">
+                <div class="tab_oil">
           <span v-for="(item, index) in tablist_one"
-            :key="index"
-            @click="tabButton_one(index)"
-            v-bind:class="[
+                :key="index"
+                @click="tabButton_one(index)"
+                v-bind:class="[
               { tab_oil_two: index == selected_one },
               { tab_oil_one: true },
             ]">{{ item }}</span>
-        </div>
-        <div class="chart-item" id="table" v-if="selected_one === 0">
-<!--          <table class="table_one" style="width: 800px">-->
-<!--            <tr>-->
-<!--              <th :width="th.width" v-for="(th,index) in tableTh_one" :key="index">{{th.value}}</th>-->
-<!--            </tr>-->
-<!--            <tr v-for="(tr,index) in listData_one" :key="index">-->
-<!--              <td>{{index+1}}</td>-->
-<!--              <td v-for="(td,index) in tr" :key="index">{{td}}</td>-->
-<!--            </tr>-->
-<!--          </table>-->
-          <div class="fontSize_div">
-            <div class="fontSize">0.508</div>
-            <div class="fontSize">亿立方米</div>
-          </div>
-          <dount-chart class="echarts" :optionObj="optionObjTFMS"></dount-chart>
-        </div>
-        <div class="chart-item" v-if="selected_one === 1">
-          <div class="fontSize_div">
-            <div class="fontSize">0.508</div>
-            <div class="fontSize">亿立方米</div>
-          </div>
-          <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
-        </div>
-      </div>
+                </div>
+                <div class="chart-item" v-if="selected_one === 0">
+                    <div class="fontSize_div">
+                        <div class="fontSize">{{pie_num}}</div>
+                        <div class="fontSize">亿立方米</div>
+                    </div>
+                    <dount-chart class="echarts" :optionObj="optionObjTFMS"></dount-chart>
+                </div>
+                <div class="chart-item" v-if="selected_one === 1">
+                    <div class="fontSize_div">
+                        <div class="fontSize">{{pie_num}}</div>
+                        <div class="fontSize">亿立方米</div>
+                    </div>
+                    <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
+                </div>
+            </div>
 
-      <!-- 月调峰同比分析 -->
-      <div class="chart module">
-        <h4>月调峰同比分析</h4>
-        <barline-chart :optionObj="optionObjYTF"></barline-chart>
-      </div>
+            <!-- 月调峰同比分析 -->
+            <div class="chart module">
+                <h4>{{title}}</h4>
+                <barline-two-chart :optionObj="optionObjYTF" @showBar="showBar"></barline-two-chart>
+            </div>
+            <div v-for="(item,index) in desList"
+                 class="des_list"
+                 :ref="`list${index}`"
+                 v-show="desIndex==index&&showFlag"
+            >
+            </div>
 
-      <!-- 天然气日消费缺口预测 && 调峰计划建议 -->
-      <div class="chart">
-        <div class="tab_oil">
-          <span v-for="(item, index) in tablist_two"
-            :key="index"
-            @click="tabButton_two(index)"
-            v-bind:class="[
-              { tab_oil_two: index == selected_two },
-              { tab_oil_one: true },
-            ]">{{ item }}</span>
         </div>
-        <div class="chart-item" v-if="selected_two === 0">
-          <doubleline-chart :optionObj="optionObjLineQKYC"></doubleline-chart>
-        </div>
-        <div class="chart-item" id="table" v-if="selected_two === 1">
-          <table class="table_one">
-            <tr>
-              <th :width="th.width" v-for="(th,index) in tableTh_two" :key="index">{{th.value}}</th>
-            </tr>
-            <tr v-for="(tr,index) in listData_two" :key="index">
-              <td>{{index+1}}</td>
-              <td v-for="(td,index) in tr" :key="index">{{td}}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
-export default {
-  name: "qixiao",
-  components: {
-    dountChart: () => import("@/components/dount_chart"),
-    barlineChart: () => import("@/components/barLine_chart"),
-    doublelineChart: () => import("@/components/doubleLine_chart"),
-  },
-  data() {
-    return {
-      selected_one: 0,
-      selected_two: 0,
-      selected_three: "0",
-      tablist_one: ["月调峰气量盟市占比", "月调峰气量企业占比"],
-      tablist_two: ["天然气日消费缺口预测", "调峰计划建议"],
-      tableTh_one: [
-        {
-          value: "序号",
-          width: 60,
+    export default {
+        name: "qixiao",
+        components: {
+            dountChart: () => import("@/components/dount_chart"),
+            barlineChart: () => import("@/components/barLine_chart"),
+            doublelineChart: () => import("@/components/doubleLine_chart"),
+            barlineTwoChart: () => import("@/components/barLineTwo_chart"),
         },
-        {
-          value: "地区",
-          width: 150,
+        data() {
+            return {
+                desList: ['', '', '', '', ''],
+                posList: [
+                    //呼和浩特
+                    {
+                        left: '0.484',
+                        top: '0.98',
+                        class: 'clickbtn1'
+                    },
+                    //鄂尔多斯
+                    {
+                        left: '0.359',
+                        top: '1.02',
+                        class: 'clickbtn2'
+                    },
+                    //包头
+                    {
+                        left: '0.434',
+                        top: '0.93',
+                        class: 'clickbtn1'
+                    },
+                    //巴彦淖尔
+                    {
+                        left: '0.334',
+                        top: '0.934',
+                        class: 'clickbtn'
+                    },
+                    //通辽
+                    {
+                        left: '0.79',
+                        top: '0.84',
+                        class: 'clickbtn'
+                    },
+
+
+                ],//地图弹窗位置
+                selected_one: 0,
+                selected_two: 0,
+                selected_three: "0",
+                tablist_one: ["月调峰气量盟市占比", "月调峰气量企业占比"],
+                tablist_two: ["天然气日消费缺口预测", "调峰计划建议"],
+                tableTh_two: [
+                    {
+                        value: "序号",
+                        width: 60,
+                    },
+                    {
+                        value: "地区",
+                        width: 150,
+                    },
+                    {
+                        value: "未来3日日均缺口量",
+                        width: 330,
+                    },
+                    {
+                        value: "日均气化率",
+                        width: 100,
+                    },
+                    {
+                        value: "调峰建议",
+                        width: 100,
+                    }
+                ],
+                listData_two: [
+                    {
+                        area: "呼和浩特市",
+                        pitchPlan: "1月1日:9万立方米<br/>1月2日:7万立方米<br/>1月3日:14万立方米",
+                        level: "17%",
+                        date: "减少日用气量4%",
+                    },
+                    {
+                        area: "鄂尔多斯市",
+                        pitchPlan: "1月1日:21万立方米<br/>1月2日:17万立方米<br/>1月3日:24万立方米",
+                        level: "12%",
+                        date: "停止供气",
+                    },
+                    {
+                        area: "包头市",
+                        pitchPlan: "1月1日:14万立方米<br/>1月2日:27万立方米<br/>1月3日:23万立方米",
+                        level: "18%",
+                        date: "停止供气",
+                    },
+                    {
+                        area: "巴彦淖尔市",
+                        pitchPlan: "1月1日:11万立方米<br/>1月2日:12万立方米<br/>1月3日:15万立方米",
+                        level: "18%",
+                        date: "减小日用气量12%",
+                    },
+                ],
+                listData_copy:  [
+                    {
+                        area: "呼和浩特市",
+                        pitchPlan: "1月1日:9万立方米<br/>1月2日:7万立方米<br/>1月3日:14万立方米",
+                        level: "17%",
+                        date: "减少日用气量4%",
+                    },
+                    {
+                        area: "鄂尔多斯市",
+                        pitchPlan: "1月1日:21万立方米<br/>1月2日:17万立方米<br/>1月3日:24万立方米",
+                        level: "12%",
+                        date: "停止供气",
+                    },
+                    {
+                        area: "包头市",
+                        pitchPlan: "1月1日:14万立方米<br/>1月2日:27万立方米<br/>1月3日:23万立方米",
+                        level: "18%",
+                        date: "停止供气",
+                    },
+                    {
+                        area: "巴彦淖尔市",
+                        pitchPlan: "1月1日:11万立方米<br/>1月2日:12万立方米<br/>1月3日:15万立方米",
+                        level: "18%",
+                        date: "减小日用气量12%",
+                    },
+                ],
+                optionObjTFMS: {
+                    legendData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
+                    seriesName: "调峰结构分析",
+                    unit: "亿立方米",
+                    seriesData: []
+                },
+                optionObjTFJGFX: {
+                    legendData: ["LNG", "甲醇化肥", "可中断工业", "不可中断工业", "商业"],
+                    seriesName: "调峰结构分析",
+                    unit: "亿立方米",
+                    seriesData: [],
+                },
+                optionObjYTF: {
+                    legendData: ["月调峰量", "同比变化"],
+                    yLeftName: "亿立方米",
+                    yRightName: "%",
+                    xData: ["10月", "11月", "12月", "1月", "2月", "3月",],
+                    seriesLeftData: [],
+                    seriesRightData: [],
+                    barWidth: 10,
+                    lineWidth: 2,
+                    symbolSize: 8,
+                    /*  leftMin: 0,
+                      leftMax: 25,
+                      leftInterval: 5,*/
+                    // rightMin: -20,
+                    // rightMax: 80,
+                    // rightInterval: 1
+                },
+                optionObjYTFLeftData: [
+                    [71, 62, 74, 88, 75, 62],
+                    //呼和浩特
+                    [40, 41, 42, 43, 48, 51],
+                    //鄂尔多斯
+                    [53, 52, 42, 41, 47, 56],
+                    //包头市
+                    [47, 46, 49, 52, 51, 56],
+                    //巴彦淖尔
+                    [50, 43, 52, 46, 54, 46],
+                    //通辽
+                    [54, 52, 53, 49, 47, 46],
+                ],
+                optionObjYTFRightData: [
+                    [45, 50, 41, 47, 49, 53],
+                    //呼和浩特
+                    [23, 21, 24, 25, 27, 31],
+                    //鄂尔多斯
+                    [35, 29, 30, 25, 27, 31],
+                    //包头市
+                    [33, 27, 28, 35, 29, 30],
+                    //巴彦淖尔
+                    [25, 27, 31, 23, 21, 24],
+                    //通辽
+                    [28, 26, 32, 35, 34, 33],
+                ],
+                optionObjLineQKYC: {
+                    yName: "亿立方米",
+                    legendData: ["日需求量", "日供应量"],
+                    seriesName1: "日需求量",
+                    seriesName2: "日供应量",
+                    xData: ["1月1日", "1月3日", "1月5日", "1月7日", "1月9日", "1月11日", "1月13日", "1月15日", "1月17日", "1月19日"],
+                    seriesData1: [6, 13, 18, 13, 13, 18, 13, 9, 13, 9],
+                    seriesData2: [4, 8, 15, 9, 7, 11, 9, 11, 6, 5],
+                },
+                pie_num: 75,
+                screenWidth: document.body.clientWidth, // 屏幕宽
+                desIndex: null,
+                title: '月调峰同比分析',
+                titleArry: ['月调峰同比分析', '呼和浩特月调峰同比分析', '鄂尔多斯月调峰同比分析', '包头月调峰同比分析', '巴彦淖尔月调峰同比分析', '通辽月调峰同比分析'],
+                showFlag: false
+            };
         },
-        {
-          value: "调峰策略",
-          width: 150,
+        mounted() {
+            this.optionObjYTF.seriesLeftData = this.optionObjYTFLeftData[0]
+            this.optionObjYTF.seriesRightData = this.optionObjYTFRightData[0]
+            this.optionObjTFMS.seriesData =
+                [
+                    {value: (this.pie_num * 0.2265).toFixed(2), name: "巴彦淖尔"},
+                    {value: (this.pie_num * 0.2096).toFixed(2), name: "包头"},
+                    {value: (this.pie_num * 0.1582).toFixed(2), name: "呼和浩特"},
+                    {value: (this.pie_num * 0.0913).toFixed(2), name: "鄂尔多斯"},
+                    {value: (this.pie_num * 0.0859).toFixed(2), name: "乌海"},
+                    {value: (this.pie_num * 0.2285).toFixed(2), name: "通辽"},
+                ];
+            this.optionObjTFJGFX.seriesData =
+                [
+                    {value: (this.pie_num * 0.1912).toFixed(2), name: "LNG"},
+                    {value: (this.pie_num * 0.1769).toFixed(2), name: "甲醇化肥"},
+                    {value: (this.pie_num * 0.1336).toFixed(2), name: "可中断工业"},
+                    {value: (this.pie_num * 0.0771).toFixed(2), name: "不可中断工业"},
+                    {value: (this.pie_num * 0.4212).toFixed(2), name: "商业"},
+                ]
+
         },
-        {
-          value: "响应等级",
-          width: 150,
+        methods: {
+            // 用于点击的div块绑定函数
+            be_click_left(a) {
+                return this.screenWidth * a + 'px'
+            },
+            be_click_top(a) {
+                return 314.5 * a + 'px'
+            },
+            tabButton_one(index) {
+                this.selected_one = index;
+            },
+            tabButton_two(index) {
+                this.selected_two = index;
+            },
+            //柱状图点击事件
+            showBar(params) {
+                this.pie_num = params.value;
+                this.optionObjTFMS.seriesData =
+                    [
+                        {value: (this.pie_num * 0.2265).toFixed(2), name: "巴彦淖尔"},
+                        {value: (this.pie_num * 0.2096).toFixed(2), name: "包头"},
+                        {value: (this.pie_num * 0.1582).toFixed(2), name: "呼和浩特"},
+                        {value: (this.pie_num * 0.0913).toFixed(2), name: "鄂尔多斯"},
+                        {value: (this.pie_num * 0.0859).toFixed(2), name: "乌海"},
+                        {value: (this.pie_num * 0.2285).toFixed(2), name: "通辽"},
+                    ];
+                this.optionObjTFJGFX.seriesData =
+                    [
+                        {value: (this.pie_num * 0.1912).toFixed(2), name: "LNG"},
+                        {value: (this.pie_num * 0.1769).toFixed(2), name: "甲醇化肥"},
+                        {value: (this.pie_num * 0.1336).toFixed(2), name: "可中断工业"},
+                        {value: (this.pie_num * 0.0771).toFixed(2), name: "不可中断工业"},
+                        {value: (this.pie_num * 0.4212).toFixed(2), name: "商业"},
+                    ]
+            },
+            // 点击地图的点联动
+            showDes(index) {
+                if (this.desIndex == index) {
+                    if (this.$refs[`list${index}`][0].style.display == 'none') {
+                        this.showFlag = true;
+                        this.desIndex = index;
+                        this.optionObjYTF.seriesLeftData = this.optionObjYTFLeftData[index + 1];
+                        this.optionObjYTF.seriesRightData = this.optionObjYTFRightData[index + 1];
+                        this.title = this.titleArry[index + 1]
+                        if(index==4){
+                            this.listData_two=this.listData_copy;
+                        }else{
+                            this.listData_two=[this.listData_copy[index]]
+                        }
+
+                    } else {
+                        this.optionObjYTF.seriesLeftData = this.optionObjYTFLeftData[0];
+                        this.optionObjYTF.seriesRightData = this.optionObjYTFRightData[0];
+                        this.title = this.titleArry[0];
+                        this.listData_two=this.listData_copy;
+                        this.showFlag = false;
+                        this.desIndex = null;
+                    }
+
+                } else {
+                    this.desIndex = index;
+                    this.showFlag = true;
+                    this.optionObjYTF.seriesLeftData = this.optionObjYTFLeftData[index + 1];
+                    this.optionObjYTF.seriesRightData = this.optionObjYTFRightData[index + 1];
+                    this.title = this.titleArry[index + 1];
+                    if(index==4){
+                        this.listData_two=this.listData_copy;
+                    }else{
+                        this.listData_two=[this.listData_copy[index]]
+                    }
+                }
+
+
+            },
         },
-        {
-          value: "调峰对象",
-          width: 300,
-        },
-        {
-          value: "具体措施",
-          width: 210,
-        },
-        {
-          value: "时间",
-          width: 120,
-        },
-      ],
-      listData_one: [
-        {
-          area: "鄂尔多斯",
-          pitchPlan: "优先策略",
-          level: "红色",
-          pitchObj: "LNG用户用气、可中断工业",
-          measure: "停止供气",
-          date: "2020.9.15",
-        },
-        {
-          area: "包头",
-          pitchPlan: "优先策略",
-          level: "橙色",
-          pitchObj: "可中断工业",
-          measure: "停止供气",
-          date: "2020.9.12",
-        },
-        {
-          area: "巴彦淖尔",
-          pitchPlan: "优先策略",
-          level: "黄色",
-          pitchObj: "LNG用户用气",
-          measure: "减少供气量12%",
-          date: "2020.9.15",
-        },
-        {
-          area: "呼和浩特",
-          pitchPlan: "优先策略",
-          level: "蓝色",
-          pitchObj: "可中断工业",
-          measure: "减少供气量4%",
-          date: "2020.9.20",
-        },
-      ],
-      tableTh_two: [
-        {
-          value: "序号",
-          width: 60,
-        },
-        {
-          value: "地区",
-          width: 120,
-        },
-        {
-          value: "调峰策略",
-          width: 120,
-        },
-        {
-          value: "响应等级",
-          width: 120,
-        },
-        {
-          value: "时间",
-          // width: 120,
-        },
-      ],
-      listData_two: [
-        {
-          area: "鄂尔多斯",
-          pitchPlan: "优先策略",
-          level: "红色",
-          date: "2020.9.15",
-        },
-        {
-          area: "包头",
-          pitchPlan: "优先策略",
-          level: "橙色",
-          date: "2020.9.12",
-        },
-        {
-          area: "巴彦淖尔",
-          pitchPlan: "优先策略",
-          level: "黄色",
-          date: "2020.9.15",
-        },
-        {
-          area: "呼和浩特",
-          pitchPlan: "优先策略",
-          level: "蓝色",
-          date: "2020.9.20",
-        },
-      ],
-      optionObjTFMS: {
-        legendData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
-        seriesName: "调峰结构分析",
-        unit: "亿立方米",
-        seriesData: [
-          { value: 335, name: "巴彦淖尔" },
-          { value: 310, name: "包头" },
-          { value: 234, name: "呼和浩特" },
-          { value: 135, name: "鄂尔多斯" },
-          { value: 127, name: "乌海" },
-          { value: 338, name: "通辽" },
-        ],
-      },
-      optionObjTFJGFX: {
-        legendData: ["LNG", "甲醇化肥", "可中断工业", "不可中断工业", "商业"],
-        seriesName: "调峰结构分析",
-        unit: "亿立方米",
-        seriesData: [
-          { value: 335, name: "LNG" },
-          { value: 310, name: "甲醇化肥" },
-          { value: 234, name: "可中断工业" },
-          { value: 135, name: "不可中断工业" },
-          { value: 738, name: "商业" },
-        ],
-      },
-      optionObjYTF: {
-        legendData: ["月调峰量", "同比变化"],
-        yLeftName: "亿立方米",
-        yRightName: "%",
-        xData: [ "10月", "11月", "12月", "1月", "2月", "3月",],
-        seriesLeftData: [6, 13, 18, 13, 13, 18],
-        seriesRightData: [-0.5, 1, 1, 0.9, 0.5, 1.9],
-        barWidth: 10,
-        lineWidth: 2,
-        symbolSize: 8,
-        leftMin: 0,
-        leftMax: 25,
-        leftInterval: 5,
-        rightMin: -2,
-        rightMax: 3,
-        rightInterval: 1
-      },
-      optionObjLineQKYC: {
-        yName: "亿立方米",
-        legendData: ["日需求量", "日供应量"],
-        seriesName1: "日需求量",
-        seriesName2: "日供应量",
-        xData: ["1月1日", "1月3日", "1月5日", "1月7日", "1月9日", "1月11日", "1月13日", "1月15日", "1月17日", "1月19日"],
-        seriesData1: [6, 13, 18, 13, 13, 18, 13, 9, 13, 9],
-        seriesData2: [4, 8, 15, 9, 7, 11, 9, 11, 6, 5],
-      }
     };
-  },
-  mounted() {
-    
-  },
-  methods: {
-    tabButton_one(index) {
-      this.selected_one = index;
-    },
-    tabButton_two(index) {
-      this.selected_two = index;
-    },
-  },
-};
 </script>
 
 <style lang="scss" scoped>
-#confess_content {
-  width: 100%;
-  /* 关于地图内容的调整期 */
-  .map {
-    width: 100%;
-    margin-top: 93px;
-    background-color: #dadbdb;
-    overflow: hidden;
-  }
-  .chart {
-    width: 100%;
-    height: 289px;
-    background-color: white;
-    padding: 10px 0;
-    position: relative;
-    .chart-item {
-      height: calc(100% - 25px);
-      // width: 100%;
-    }
-    &.module {
-      margin: 10px 0;
-      padding: 0 15px 15px;
-    }
-    h4 {
-      font: 500 13px 微软雅黑;
-      color: #394564;
-      line-height: 3em;
-    }
-  }
-  /* 按钮样式调整 */
-  .tab_oil {
-    width: 345px;
-    height: 31px;
-    background-color: white;
-    margin: 0px auto;
-    border: 1px solid #3a6dda;
-    border-radius: 5px;
-    .tab_oil_one {
-      width: 50%;
-      height: 29px;
-      font: 12px PingFangSC-Regular;
-      color: #3a6dda;
-      line-height: 29px;
-      float: left;
-      position: relative;
-      top: 0;
-      left: 0;
-      text-align: center;
-    }
-    .tab_oil_two {
-      width: 50%;
-      height: 29px;
-      background-color: #3a6dda;
-      font: 12px PingFangSC-Regular;
-      color: white;
-      line-height: 29px;
-      float: left;
-      position: relative;
-      top: 0;
-      left: 0;
-      text-align: center;
-      border-radius: 4px;
-    }
-  }
-}
-/* 表格 */
-#table {
-  width: calc(100% - 30px);
-  margin: 0 15px;
-  overflow-x: auto;
-  .table_one {
-    font-family: PingFang SC;
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px auto;
-    th, td {
-      font-size: 14px;
-      border: 1px solid #b9bec9;
-      padding: 3px 7px 2px 7px;
-      text-align: center;
+    #confess_content {
+        .clickbtn {
+            width: 0.5rem;
+            height: 0.32rem;
+            position: absolute;
+            z-index: 2;
+        }
+        .clickbtn1 {
+            width: 0.3rem;
+            height: 0.28rem;
+            position: absolute;
+            z-index: 2;
+        }
+        .clickbtn2 {
+            width: 0.6rem;
+            height: 0.4rem;
+            position: absolute;
+            z-index: 2;
+        }
+        width: 100%;
+        /* 关于地图内容的调整期 */
+        .map {
+            width: 100%;
+            margin-top: 93px;
+            background-color: #dadbdb;
+            overflow: hidden;
+        }
+        .chart {
+            width: 100%;
+            height: 289px;
+            background-color: white;
+            padding: 10px 0;
+            position: relative;
+            .chart-item {
+                height: calc(100% - 25px);
+                // width: 100%;
+            }
+            &.module {
+                margin: 10px 0;
+                padding: 0 15px 15px;
+            }
+            h4 {
+                font: 500 13px 微软雅黑;
+                color: #394564;
+                line-height: 3em;
+            }
+        }
+        /* 按钮样式调整 */
+        .tab_oil {
+            width: 345px;
+            height: 31px;
+            background-color: white;
+            margin: 0px auto;
+            border: 1px solid #3a6dda;
+            border-radius: 5px;
+            .tab_oil_one {
+                width: 50%;
+                height: 29px;
+                font: 12px PingFangSC-Regular;
+                color: #3a6dda;
+                line-height: 29px;
+                float: left;
+                position: relative;
+                top: 0;
+                left: 0;
+                text-align: center;
+            }
+            .tab_oil_two {
+                width: 50%;
+                height: 29px;
+                background-color: #3a6dda;
+                font: 12px PingFangSC-Regular;
+                color: white;
+                line-height: 29px;
+                float: left;
+                position: relative;
+                top: 0;
+                left: 0;
+                text-align: center;
+                border-radius: 4px;
+            }
+        }
     }
 
-    th {
-      background-color: #d8dbde;
-    }
-  }
-}
-/* 文字块 */
-.fontSize_div {
-  position: absolute;
-  width: calc(100% - 30px);
-  // height: 100%;
-  text-align: center;
-}
-.fontSize {
-  position: relative;
-  top: 75px;
-  font: 16px bolder microsoft-yahei;
-}
+    /* 表格 */
+    #table {
+        width: calc(100% - 30px);
+        margin: 0 15px;
+        overflow-x: auto;
+        .table_one {
+            font-family: PingFang SC;
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            th, td {
+                font-size: 0.12rem;
+                border: 1px solid #b9bec9;
+                padding: 0.02rem;
+                text-align: center;
+                vertical-align: middle;
+            }
 
-.echarts {
-  // width: 100%;
-  // height: 100%;
-  // margin: 20px auto;
-  background-image: url(../../assets/img/industryAnalysis/椭圆.png);
-  background-repeat: no-repeat;
-  background-position: 50% 37%;
-  background-size: 65px 65px;
-}
+            th {
+                background-color: #d8dbde;
+            }
+        }
+    }
+
+    /* 文字块 */
+    .fontSize_div {
+        position: absolute;
+        width: 100%;
+        // height: 100%;
+        text-align: center;
+    }
+
+    .fontSize {
+        position: relative;
+        top: 75px;
+        font: 16px bolder microsoft-yahei;
+    }
+
+    .echarts {
+        // width: 100%;
+        // height: 100%;
+        // margin: 20px auto;
+        background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+        background-repeat: no-repeat;
+        background-position: 50% 37%;
+        background-size: 65px 65px;
+    }
 </style>

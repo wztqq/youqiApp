@@ -427,7 +427,8 @@
                         this.desIndex = index;
                         this.optionObjBarGasXF.seriesLeftData=this.optionObjBarGasXFLeftData[index+1];
                         this.optionObjBarGasXF.seriesRightData=this.optionObjBarGasXFRightData[index+1];
-                        this.tablist_one[0]=this.tablist_city[index+1]
+                        this.tablist_one[0]=this.tablist_city[index+1];
+
                     } else {
                         this.optionObjBarGasXF.seriesLeftData=this.optionObjBarGasXFLeftData[0];
                         this.optionObjBarGasXF.seriesRightData=this.optionObjBarGasXFRightData[0];
@@ -441,7 +442,7 @@
                     this.showFlag = true;
                     this.optionObjBarGasXF.seriesLeftData=this.optionObjBarGasXFLeftData[index+1];
                     this.optionObjBarGasXF.seriesRightData=this.optionObjBarGasXFRightData[index+1];
-                    this.tablist_one[0]=this.tablist_city[index+1]
+                    this.tablist_one[0]=this.tablist_city[index+1];
                 }
 
 

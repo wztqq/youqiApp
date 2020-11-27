@@ -108,13 +108,13 @@ export default {
           axisLine: {
             // 坐标轴样式
             lineStyle: {
-              color: "#DADADA",
+              color: "#9B9DA1",
             },
           },
           axisLabel: {
             // 坐标轴label样式
             textStyle: {
-              color: "#DADADA",
+              color: "#9B9DA1",
             },
             rotate: 30,
           },
@@ -134,13 +134,13 @@ export default {
             axisLine: {
               // 坐标轴样式
               lineStyle: {
-                color: "#DADADA",
+                color: "#9B9DA1",
               },
             },
             axisLabel: {
               // 坐标轴label样式
               textStyle: {
-                color: "#DADADA",
+                color: "#9B9DA1",
               },
             },
           },

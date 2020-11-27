@@ -19,7 +19,7 @@
                 <van-tab title="压非保民" name="sixth" :key="'sixth'">
                     <child6></child6>
                 </van-tab>
-                <van-tab title="气销总览" name="seventh" :key="'seventh'">
+                <van-tab title="天然气产运销总览" name="seventh" :key="'seventh'">
                     <child7></child7>
                 </van-tab>
             </van-tabs>

@@ -36,11 +36,11 @@
                         <div class="fontSize">{{pie}}</div>
                         <div class="fontSize" style="font-size: 14px">亿立方米</div>
                     </div>
-                    <div id="PieOne" style="width:100%;height:240px;" ></div>
+                    <div id="PieOne" style="width:100%;height:240px;"></div>
                 </div>
                 <div v-show="activeNamePie==='2'">
                     <div class="fontSize_div">
-                        <div class="fontSize">20</div>
+                        <div class="fontSize">{{pie_PieTwo}}</div>
                         <div class="fontSize" style="font-size: 14px">亿立方米</div>
                     </div>
                     <div id="PieTwo" style="width:100%;height:240px;" ref="second"></div>
@@ -215,15 +215,163 @@
                 ],
                 pie_num: [1.3, 0.56, 0.03, 0.03, 0.03],
                 pie: 1.3,
-                showAll:true,
-                desIndex:null
+                showAll: true,
+                desIndex: null,
+                pie_PieTwo: 196,
+                pieTwo: [196, 176.4, 3.92, 5.88, 9.8],
+                drawPieTwoData: [
+                    [
+                        {
+                            value: 182,
+                            name: '中石油'
+                        },
+                        {
+                            value: 14,
+                            name: '中石化'
+                        }
+                    ],
+                    [
+                        {
+                            value: 96,
+                            name: '中石油'
+                        },
+                        {
+                            value: 80.4,
+                            name: '中石化'
+                        }
+                    ],
+                    [
+                        {
+                            value: 1.62,
+                            name: '中石油'
+                        },
+                        {
+                            value: 2.3,
+                            name: '中石化'
+                        }
+                    ],
+                    [
+                        {
+                            value: 2.94,
+                            name: '中石油'
+                        },
+                        {
+                            value: 2.94,
+                            name: '中石化'
+                        }
+                    ],
+                    [
+                        {
+                            value: 4.9,
+                            name: '中石油'
+                        },
+                        {
+                            value: 4.9,
+                            name: '中石化'
+                        }
+                    ]
+                ],//天然气月产量企业分布数据
+                // 天然气月产量趋势分析数据
+                drawBarOneData: [
+                    [
+                        {
+                            plan: [3, 4, 6, 7, 8, 7, 5, 6, 4, 7, 8, 7],
+                            actur: [8, 10, 14, 11, 13, 17, 8, 11, 13, 12, 13, 12],
+                            compare: [20, 15, -13, -12, -11, -4, 5, 8, 12, -1, 6, 8],
+                        }
+                    ],
+                    [
+                        {
+                            plan: [23, 20, 19, 21, 23, 23, 21, 19, 14, 13, 19, 14],
+                            actur: [21, 18, 17, 19, 21, 20, 19, 17, 13, 12, 17, 17],
+                            compare: [15, 14, 12, 11, 12, 21, 18, 17, 19, 16, 12, 17],
+                        }
+                    ],
+                    [
+                        {
+                            plan: [0.6, 0.3, 0.4, 0.5, 0.3, 0.3, 0.5, 0.6, 0.6, 0.6, 0.5, 0.3],
+                            actur: [0.4, 0.2, 0.3, 0.4, 0.3, 0.2, 0.4, 0.5, 0.7, 0.5, 0.2, 0.2],
+                            compare: [4, 9, 12, 21, 2, 14, -18, 10, 17, 12, 9, 4],
+                        }
+                    ],
+                    [
+                        {
+                            plan: [0.3, 0.5, 0.5, 0.6, 0.8, 0.5, 0.3, 0.5, 0.6, 1, 0.7, 0.4],
+                            actur: [0.2, 0.4, 0.6, 0.5, 0.7, 0.4, 0.2, 0.4, 0.7, 1, 0.68, 0.3],
+                            compare: [-4, 4, -2, 11, 3, 5, 7, -4, 4, -2, -9, 6],
+                        }
+                    ],
+                    [
+                        {
+                            plan: [2, 0.7, 2.3, 2, 2, 1, 2, 0.5, 0.7, 0.9, 2, 0.7],
+                            actur: [1, 0.5, 2, 1, 2, 0.5, 1, 0.4, 0.6, 0.8, 1, 0.5],
+                            compare: [-2, -2, 2, 5, 16, 11, 14, 12, 16, 10, -2, -3],
+                        }
+                    ]
+                ],
+                //天然气产量与储量关联分析
+                drawBarTwoData: [
+                    [
+                        {
+                            yield: [19, 18, 17, 22, 23, 18, 17, 22, 19, 21, 18, 19],
+                            reserves: [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4]
+                        }
+                    ],
+                    [
+                        {
+                            yield: [21, 18, 17, 19, 21, 20, 19, 17, 12, 15, 19, 18],
+                            reserves: [1.19, 1.19, 1.19, 1.19, 1.19, 1.19, 1.19, 1.19, 1.19, 1.19, 1.19, 1.19]
+                        }
+                    ],
+                    [
+                        {
+                            yield: [0.4, 0.2, 0.3, 0.4, 0.2, 0.5, 0.7, 0.4, 0.52, 0.6, 0.45, 0.34],
+                            reserves: [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]
+                        }
+                    ],
+                    [
+                        {
+                            yield: [0.4, 0.2, 0.3, 0.4, 0.2, 0.5, 0.7, 0.4, 0.52, 0.6, 0.45, 0.34],
+                            reserves: [0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07]
+                        }
+                    ],
+                    [
+                        {
+                            yield: [1, 0.5, 2, 0.5, 1, 0.5, 0.7, 0.4, 0.52, 0.6, 0.45, 0.34],
+                            reserves: [0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07]
+                        }
+                    ]
+                ],
+                // 天然气月产量预测分析
+                drawLineData: [
+                    [{
+                        actur: [19, 18, 17, 23, 22, 18, 17, 22, 19, 21, 18, 22],
+                        plan: [23, 20, 18, 24, 23, 19, 18, 23, 21, 22, 20, 23]
+                    }],
+                    [{
+                        actur: [21, 18, 17, 19, 21, 20, 19, 17, 13, 12, 15, 13],
+                        plan: [22, 20, 18, 20, 22, 21, 20, 18, 14, 13, 16, 14]
+                    }],
+                    [{
+                        actur: [0.4, 0.2, 0.3, 0.4, 0.3, 0.2, 0.4, 0.6, 0.4, 0.2, 0.5, 0.3],
+                        plan: [0.5, 0.3, 0.4, 0.5, 0.4, 0.3, 0.5, 0.7, 0.5, 0.3, 0.6, 0.4]
+                    }],
+                    [{
+                        actur: [0.2, 0.4, 0.6, 0.5, 0.7, 0.5, 0.4, 0.6, 0.4, 0.2, 0.5, 0.3],
+                        plan: [0.3, 0.5, 0.7, 0.6, 0.8, 0.6, 0.5, 0.7, 0.5, 0.3, 0.6, 0.4]
+                    }],
+                    [{
+                        actur: [1, 0.4, 2, 0.5, 1, 2, 0.4, 1, 0.4, 0.2, 0.5, 0.3],
+                        plan: [1.2, 0.5, 1.8, 1.1, 2.2, 0.6, 1, 0.7, 0.5, 0.3, 0.6, 0.4]
+                    }]
+                ]
             };
         },
         mounted() {
             //天然气月产量分析
-            this.drawBarOne();
+            this.drawBarOne(this.drawBarOneData[0]);
             this.drawPie(this.lengendGas[0], '万立方米', this.dataGas[0], this.pie_num[0]);
-            this.drawLine()
+            this.drawLine(this.drawLineData[0])
 
         },
         methods: {
@@ -235,7 +383,7 @@
                 return 314.5 * a + 'px'
             },
             //天然气月产量分析柱状图
-            drawBarOne() {
+            drawBarOne(seriesData) {
                 let myChart = this.$echarts.init(document.getElementById('barOne'));
                 // 指定图表的配置项和数据
                 myChart.setOption({
@@ -336,7 +484,7 @@
                                     {offset: 1, color: "rgba(14, 137, 238, 1)"},
                                 ]),
                             },
-                            data: [3, 4, 6, 7, 8, 7, 5, 6, 4, 7, 8, 7],
+                            data: seriesData[0].plan
                         },
                         {
                             name: "实际月产量",
@@ -348,7 +496,7 @@
                                     {offset: 1, color: "#FF8B2E"},
                                 ]),
                             },
-                            data: [8, 10, 14, 11, 13, 17, 8, 11, 13, 12, 13, 12],
+                            data: seriesData[0].actur
                         },
                         {
                             name: "同比变化",
@@ -360,13 +508,13 @@
                                 ]),
                             },
                             yAxisIndex: 1,
-                            data: [20, 15, -13, -12, -11, -4, 5, 8, 12, -1, 6, 8],
+                            data: seriesData[0].compare
                         }
                     ],
                 });
             },
             //天然气产量与储量关联分析
-            drawBarTwo() {
+            drawBarTwo(seriesData) {
                 let myChart = this.$echarts.init(document.getElementById('barTwo'));
                 // 指定图表的配置项和数据
                 let option = {
@@ -398,8 +546,6 @@
                         {
                             type: 'value',
                             name: '亿立方米',
-                            min: 0,
-                            interval: 20,
                             axisLabel: {
                                 formatter: '{value}'
                             },
@@ -415,7 +561,7 @@
                             name: '天然气月产量',
                             type: 'bar',
                             barWidth: 10,
-                            data: [10, 20, 30, 80, 60, 70, 60, 50, 40, 30, 35, 40],
+                            data: seriesData[0].yield,
                             itemStyle: {
                                 normal: {
                                     color: new this.$echarts.graphic.LinearGradient(
@@ -432,7 +578,7 @@
                             name: '储量',
                             type: 'line',
                             smooth: true,
-                            data: [60, 55, 62, 64, 68, 72, 66, 64, 68, 71, 73, 71],
+                            data: seriesData[0].reserves,
                             itemStyle: {
                                 color: '#FBAF5D'
                             }
@@ -508,7 +654,7 @@
 
             },
             //天然气月产量企业分布
-            drawPieTwo() {
+            drawPieTwo(seriesData, pie_drawPieTwo) {
                 let myChart = this.$echarts.init(document.getElementById('PieTwo'));
                 let option = {
                     tooltip: {
@@ -544,15 +690,7 @@
                                 length: 15,
                                 length2: 30
                             },
-                            data: [{
-                                value: 17,
-                                name: "中石油"
-                            },
-                                {
-                                    value: 3,
-                                    name: "中石化"
-                                },
-                            ],
+                            data: seriesData,
                             itemStyle: {
                                 normal: {
                                     color: function (params) {
@@ -572,13 +710,20 @@
                 };
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
+                this.pie_PieTwo = pie_drawPieTwo
             },
             // 天然气月产量柱状图切换
             handleClick(tab, event) {
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         // 天然气产量与储量关联分析
-                        this.drawBarTwo()
+                        if (this.desIndex == null) {
+                            this.drawBarTwo(this.drawBarTwoData[this.desIndex + 1])
+                        } else {
+                            this.drawBarTwo(this.drawBarTwoData[0])
+                        }
+
+
                     })
                 }
 
@@ -588,21 +733,22 @@
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         // 天然气月产量企业分布
-                        this.drawPieTwo()
+                        if (this.desIndex == null) {
+                            this.drawPieTwo(this.drawPieTwoData[0], this.pieTwo[0])
+                        } else {
+                            this.drawPieTwo(this.drawPieTwoData[this.desIndex + 1], this.pieTwo[this.desIndex + 1])
+                        }
                     })
                 }
 
             },
             // 天然气月产量预测分析
-            drawLine() {
+            drawLine(seriesData) {
                 let myChart = this.$echarts.init(document.getElementById('line'));
                 let option = {
                     tooltip: {
                         trigger: 'axis',
                         formatter(params) {
-                            // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                            //     params[1].seriesName + ':' +
-                            //     params[1].value + '亿立方米'
                             if (params.length && params.length > 1) {
                                 return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
                                     params[1].seriesName + ':' +
@@ -670,7 +816,7 @@
                                     color: 'rgba(249,200,51,0.23)'
                                 }])
                             },
-                            data: [220, 182, 191, 234, 290, 330, 310, 220, 182, 191, 234, 290]
+                            data: seriesData[0].actur
                         },
                         {
                             name: '天然气月产量预测值',
@@ -696,7 +842,7 @@
                                     color: 'rgba(30,142,247,0.23)'
                                 }])
                             },
-                            data: [300, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90]
+                            data: seriesData[0].plan
                         }
                     ]
                 };
@@ -705,14 +851,22 @@
             },
             //点击地图上的点进行切换
             changePie(index) {
-                if(this.desIndex ==index ){
-                    this.showAll=true;
-                    this.desIndex=null;
+                if (this.desIndex == index) {
+                    this.showAll = true;
+                    this.desIndex = null;
                     this.drawPie(this.lengendGas[0], '万立方米', this.dataGas[0], this.pie_num[0]);
-                }else{
-                    this.desIndex=index;
-                    this.showAll=false;
+                    this.drawPieTwo(this.drawPieTwoData[0], this.pieTwo[0]);
+                    this.drawBarOne(this.drawBarOneData[0]);
+                    this.drawBarTwo(this.drawBarTwoData[0]);
+                    this.drawLine(this.drawLineData[0])
+                } else {
+                    this.desIndex = index;
+                    this.showAll = false;
+                    this.drawPieTwo(this.drawPieTwoData[this.desIndex + 1], this.pieTwo[this.desIndex + 1])
                     this.drawPie(this.lengendGas[index + 1], '万立方米', this.dataGas[index + 1], this.pie_num[index + 1]);
+                    this.drawBarOne(this.drawBarOneData[this.desIndex + 1]);
+                    this.drawBarTwo(this.drawBarTwoData[this.desIndex + 1]);
+                    this.drawLine(this.drawLineData[this.desIndex+1])
                 }
 
             }

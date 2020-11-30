@@ -715,30 +715,36 @@
             // 天然气月产量柱状图切换
             handleClick(tab, event) {
                 if (tab.index == 1) {
-                    this.$nextTick(() => {
-                        // 天然气产量与储量关联分析
-                        if (this.desIndex == null) {
+                    if (this.desIndex == null) {
+                        this.$nextTick(() => {
+                            // 天然气产量与储量关联分析
                             this.drawBarTwo(this.drawBarTwoData[this.desIndex + 1])
-                        } else {
-                            this.drawBarTwo(this.drawBarTwoData[0])
-                        }
+                        })
 
+                    } else {
+                        this.$nextTick(() => {
+                        this.drawBarTwo(this.drawBarTwoData[0])
+                        })
+                    }
 
-                    })
                 }
 
             },
             // 天然气月产量企业分布切换
             handlePieClick(tab, event) {
                 if (tab.index == 1) {
-                    this.$nextTick(() => {
-                        // 天然气月产量企业分布
-                        if (this.desIndex == null) {
+                    // 天然气月产量企业分布
+                    if (this.desIndex == null) {
+                        this.$nextTick(() => {
                             this.drawPieTwo(this.drawPieTwoData[0], this.pieTwo[0])
-                        } else {
+                        });
+                    } else {
+                        this.$nextTick(() => {
                             this.drawPieTwo(this.drawPieTwoData[this.desIndex + 1], this.pieTwo[this.desIndex + 1])
-                        }
-                    })
+                        });
+
+                    }
+
                 }
 
             },

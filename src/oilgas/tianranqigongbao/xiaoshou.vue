@@ -42,8 +42,8 @@
                 </div>
                 <div class="chart-item" v-if="selected_one === 1">
                     <div class="fontSize_div">
-                        <div class="fontSize">0.508</div>
-                        <div class="fontSize">亿立方米</div>
+                        <div class="fontSize">2420</div>
+                        <div class="fontSize">万立方米</div>
                     </div>
                     <dount-chart class="echarts" :optionObj="optionObjYQDW"></dount-chart>
                 </div>
@@ -337,17 +337,75 @@
                     [4, 9, 15, -7, 16, 7, 3]
                 ],
                 optionObjYQDW: {
-                    legendData: ["工业用户", "商业", "建筑业", "生活消费", "供暖"],
+                    legendData: ["民生用气", "甲醛化肥企业", "LNG企业用气", "可中断工业", "不可中断工业",'商业','居民用气'],
                     seriesName: "用气单位结构分析",
-                    unit: "亿立方米",
-                    seriesData: [
-                        {value: 335, name: "工业用户"},
-                        {value: 310, name: "商业"},
-                        {value: 234, name: "建筑业"},
-                        {value: 135, name: "生活消费"},
-                        {value: 738, name: "供暖"},
-                    ],
+                    unit: "万立方米",
+                    seriesData: [],
                 },
+                optionObjYQDWSeriesData:[
+                    // 总的
+                    [
+                        {
+                           name:'民生用气',
+                           value:500
+                        },
+                        {
+                            name:'甲醛化肥企业',
+                            value:420
+                        },
+                        {
+                            name:'LNG企业用气',
+                            value:350
+                        },
+                        {
+                            name:'可中断工业',
+                            value:330
+                        },
+                        {
+                            name:'不可中断工业',
+                            value:200
+                        },
+                        {
+                            name:'商业',
+                            value:170
+                        },
+                        {
+                            name:'居民用气',
+                            value:450
+                        },
+                    ],
+                    // 阿拉善盟
+                    [
+                        {
+                            name:'民生用气',
+                            value:18
+                        },
+                        {
+                            name:'甲醛化肥企业',
+                            value:14
+                        },
+                        {
+                            name:'LNG企业用气',
+                            value:12
+                        },
+                        {
+                            name:'可中断工业',
+                            value:10
+                        },
+                        {
+                            name:'不可中断工业',
+                            value:9
+                        },
+                        {
+                            name:'商业',
+                            value:8
+                        },
+                        {
+                            name:'居民用气',
+                            value:7
+                        },
+                    ]
+                ],
                 optionObjMS: {
                     legendData: ["阿拉善盟", "呼和浩特", "锡林郭勒", "呼伦贝尔", "鄂尔多斯", "其他"],
                     seriesName: "盟市消费结构分析",
@@ -410,6 +468,7 @@
             this.tablist_one[0]=this.tablist_city[0]
             this.optionObjBarGasXF.seriesLeftData=this.optionObjBarGasXFLeftData[0]
             this.optionObjBarGasXF.seriesRightData=this.optionObjBarGasXFRightData[0]
+            this.optionObjYQDW.seriesData=this.optionObjYQDWSeriesData[0]
         },
         watch: {
             selected_two() {

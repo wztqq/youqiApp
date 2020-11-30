@@ -16,7 +16,7 @@
             <div v-for="(item,index) in desList"
                  :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
                  class="des_list"
-                :ref="`list${index}`"
+                 :ref="`list${index}`"
                  v-show="desIndex==index&&showFlag"
             >
                 <div>{{item.name}}</div>
@@ -46,26 +46,39 @@
             </div>
             <div class="tabs-content">
 
-                <div>
+                <div  v-show="activeNamePie==='1'">
                     <div class="fontSize_div">
-                        <div class="fontSize">3000</div>
+                        <div class="fontSize">1800</div>
                         <div class="fontSize" style="font-size: 14px">万立方米</div>
                     </div>
-                    <div id="supplyPieOne" style="width:100%;height:240px;" v-show="activeNamePie==='1'"></div>
+                    <div id="supplyPieOne" style="width:100%;height:240px;"></div>
                 </div>
-
-                <div id="supplyPieTwo" style="width:100%;height:240px;" v-show="activeNamePie==='2'" ref="second"></div>
+                <div v-show="activeNamePie==='2'">
+                    <div class="fontSize_div">
+                        <div class="fontSize">100</div>
+                        <div class="fontSize" style="font-size: 14px">亿立方米</div>
+                    </div>
+                    <div id="supplyPieTwo" style="width:100%;height:240px;"  ref="second"></div>
+                </div>
             </div>
         </div>
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="scFristqh">
                 <el-tabs v-model="activeNameBar" @tab-click="supplyBarClick">
-                    <el-tab-pane label="供气量与合同量差额分析" name="1"></el-tab-pane>
+                    <el-tab-pane label="不同气田的日供应量级占比" name="1"></el-tab-pane>
                     <el-tab-pane label="未来30日供气量预测" name="2"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="content">
-                <div id="supplyBarTwo" style="width: 100%;height: 240px" v-show="activeNameBar==='1'"></div>
+                <div v-show="activeNameBar==='1'">
+                    <div class="fontSize_div">
+                        <div class="fontSize">1012</div>
+                        <div class="fontSize" style="font-size: 14px">万立方米</div>
+                    </div>
+                    <div id="supplyBarTwo" style="width: 100%;height: 240px" ></div>
+
+                </div>
+
                 <div id="supplyLineThree" style="width: 100%;height: 240px" v-show="activeNameBar==='2'"></div>
             </div>
         </div>
@@ -77,120 +90,120 @@
         name: 'child2',
         data() {
             return {
-                posList:[
+                posList: [
                     //苏里格气田
                     {
-                        left:'0.354',
-                        top:'1.0'
+                        left: '0.354',
+                        top: '1.0'
                     },
                     //靖边气田
                     {
-                        left:'0.4',
-                        top:'1.0'
+                        left: '0.4',
+                        top: '1.0'
                     },
                     //乌审旗气田
                     {
-                        left:'0.444',
-                        top:'1.015'
+                        left: '0.444',
+                        top: '1.015'
                     },
                     //大牛地气田
                     {
-                        left:'0.404',
-                        top:'1.060'
+                        left: '0.404',
+                        top: '1.060'
                     },
                     //胜利井气田
                     {
-                        left:'0.384',
-                        top:'1.110'
+                        left: '0.384',
+                        top: '1.110'
                     },
                     //包尔气田
                     {
-                        left:'0.50',
-                        top:'0.851'
+                        left: '0.50',
+                        top: '0.851'
                     },
                     //宝力格气田
                     {
-                        left:'0.68',
-                        top:'0.751'
+                        left: '0.68',
+                        top: '0.751'
                     },
                     //哈达图气田
                     {
-                        left:'0.72',
-                        top:'0.708'
+                        left: '0.72',
+                        top: '0.708'
                     },
                     //贝尔气田
                     {
-                        left:'0.74',
-                        top:'0.589'
+                        left: '0.74',
+                        top: '0.589'
                     },
                     //苏仁诺尔气田
                     {
-                        left:'0.68',
-                        top:'0.559'
+                        left: '0.68',
+                        top: '0.559'
                     }
                 ],//地图弹窗位置
-                desList:[
+                desList: [
                     {
-                        name:'苏里格气田',
-                        num:'22',
-                        left:'0.244',
-                        top:'0.845'
+                        name: '苏里格气田',
+                        num: '22',
+                        left: '0.244',
+                        top: '0.845'
                     },
                     {
-                        name:'靖边气田',
-                        num:'22',
-                        left:'0.244',
-                        top:'0.845'
+                        name: '靖边气田',
+                        num: '22',
+                        left: '0.244',
+                        top: '0.845'
                     }
                     ,
                     {
-                        name:'乌审旗气田',
-                        num:'22',
-                        left:'0.244',
-                        top:'0.845'
+                        name: '乌审旗气田',
+                        num: '22',
+                        left: '0.244',
+                        top: '0.845'
                     }
                     ,
                     {
-                        name:'大牛地气田',
-                        num:'22',
-                        left:'0.244',
-                        top:'0.845'
+                        name: '大牛地气田',
+                        num: '22',
+                        left: '0.244',
+                        top: '0.845'
                     },
                     {
-                        name:'胜利井气田',
-                        num:'22',
-                        left:'0.244',
-                        top:'0.845'
+                        name: '胜利井气田',
+                        num: '22',
+                        left: '0.244',
+                        top: '0.845'
                     },
                     {
-                        name:'包尔气田',
-                        num:'22',
-                        left:'0.40',
-                        top:'0.711'
+                        name: '包尔气田',
+                        num: '22',
+                        left: '0.40',
+                        top: '0.711'
                     },
                     {
-                        name:'宝力格气田',
-                        num:'22',
-                        left:'0.61',
-                        top:'0.601'
+                        name: '宝力格气田',
+                        num: '22',
+                        left: '0.61',
+                        top: '0.601'
                     },
                     {
-                        name:'哈达图气田',
-                        num:'22',
-                        left:'0.61',
-                        top:'0.561'
+                        name: '哈达图气田',
+                        num: '22',
+                        left: '0.61',
+                        top: '0.561'
                     },
                     {
-                        name:'贝尔气田',
-                        num:'22',
-                        left:'0.61',
-                        top:'0.441'
+                        name: '贝尔气田',
+                        num: '22',
+                        left: '0.61',
+                        top: '0.441'
                     },
                     {
-                        name:'苏仁诺尔气田',
-                        num:'22',
-                        left:'0.56',
-                        top:'0.411'
+                        name: '苏仁诺尔气田',
+                        num: '22',
+                        left: '0.56',
+                        top: '0.411'
                     }
                 ],//弹窗内容
                 screenWidth: document.body.clientWidth, // 屏幕宽
@@ -198,84 +211,84 @@
                 activeNamePie: '1',
                 activeNameBar: '1',
                 show: false,
-                desIndex:null,
-                isShow:false,
-                drawLineTotal:[
+                desIndex: null,
+                isShow: false,
+                drawLineTotal: [
                     {
-                        actual:[17,18,16,25,23,25,24],
-                        plan:[13,15,18,26,18,30,22],
-                        chain:[7,8,6,15,13,15,14]
+                        actual: [17, 18, 16, 25, 23, 25, 24],
+                        plan: [13, 15, 18, 26, 18, 30, 22],
+                        chain: [7, 8, 6, 15, 13, 15, 14]
                     },
                 ],
-                drawLineData:[
+                drawLineData: [
                     //苏里格气田
                     {
-                        actual:[7,8,6,15,13,15,14],
-                        plan:[3,5,8,16,8,20,22],
-                        chain:[7,8,6,15,13,15,14]
+                        actual: [7, 8, 6, 15, 13, 15, 14],
+                        plan: [3, 5, 8, 16, 8, 20, 22],
+                        chain: [7, 8, 6, 15, 13, 15, 14]
                     },
                     //靖边气田
                     {
-                        actual:[9,7,7,7,7,15,15],
-                        plan:[3,5,8,5,8,8,22],
-                        chain:[9,7,7,7,7,15,15]
+                        actual: [9, 7, 7, 7, 7, 15, 15],
+                        plan: [3, 5, 8, 5, 8, 8, 22],
+                        chain: [9, 7, 7, 7, 7, 15, 15]
                     },
                     //乌审旗气田
                     {
-                        actual:[5,5,5,12,6,21,16],
-                        plan:[3,5,8,16,8,20,22],
-                        chain:[5,5,5,12,6,21,16]
+                        actual: [5, 5, 5, 12, 6, 21, 16],
+                        plan: [3, 5, 8, 16, 8, 20, 22],
+                        chain: [5, 5, 5, 12, 6, 21, 16]
                     },
                     //大牛地气田
                     {
-                        actual:[3,8,7,4,11,20,11],
-                        plan:[3,5,8,16,18,20,22],
-                        chain:[3,9,7,4,11,20,11]
+                        actual: [3, 8, 7, 4, 11, 20, 11],
+                        plan: [3, 5, 8, 16, 18, 20, 22],
+                        chain: [3, 9, 7, 4, 11, 20, 11]
                     },
                     //胜利井气田
                     {
-                        actual:[5,6,4,8,10,23,17],
-                        plan:[3,5,8,16,8,20,22],
-                        chain:[5,6,4,8,10,23,17]
+                        actual: [5, 6, 4, 8, 10, 23, 17],
+                        plan: [3, 5, 8, 16, 8, 20, 22],
+                        chain: [5, 6, 4, 8, 10, 23, 17]
                     },
                     //包尔气田
                     {
-                        actual:[6,9,4,17,12,10,11],
-                        plan:[3,5,8,16,8,20,22],
-                        chain:[6,9,9,17,12,17,11]
+                        actual: [6, 9, 4, 17, 12, 10, 11],
+                        plan: [3, 5, 8, 16, 8, 20, 22],
+                        chain: [6, 9, 9, 17, 12, 17, 11]
                     },
                     //宝力格气田
                     {
-                        actual:[2,2,8,14,7,19,13],
-                        plan:[3,5,8,16,8,20,22],
-                        chain:[2,2,8,14,7,19,13]
+                        actual: [2, 2, 8, 14, 7, 19, 13],
+                        plan: [3, 5, 8, 16, 8, 20, 22],
+                        chain: [2, 2, 8, 14, 7, 19, 13]
                     },
                     //哈达图气田
                     {
-                        actual:[3,4,7,11,20,9,12],
-                        plan:[3,5,8,16,8,20,22],
-                        chain:[3,4,7,11,20,9,12]
+                        actual: [3, 4, 7, 11, 20, 9, 12],
+                        plan: [3, 5, 8, 16, 8, 20, 22],
+                        chain: [3, 4, 7, 11, 20, 9, 12]
                     },
                     //贝尔气田
                     {
-                        actual:[2,2,8,14,7,19,13],
-                        plan:[3,5,8,16,8,20,22],
-                        chain:[2,2,8,14,7,19,13]
+                        actual: [2, 2, 8, 14, 7, 19, 13],
+                        plan: [3, 5, 8, 16, 8, 20, 22],
+                        chain: [2, 2, 8, 14, 7, 19, 13]
                     },
                     //苏仁诺尔气田
                     {
-                        actual:[5,6,4,8,10,23,17],
-                        plan:[3,5,8,16,8,20,22],
-                        chain:[5,6,4,8,10,23,17]
+                        actual: [5, 6, 4, 8, 10, 23, 17],
+                        plan: [3, 5, 8, 16, 8, 20, 22],
+                        chain: [5, 6, 4, 8, 10, 23, 17]
                     }
                 ],
-                showFlag:false
+                showFlag: false
             };
         },
         mounted() {
-            this.drawLine(this.drawLineTotal,0);
+            this.drawLine(this.drawLineTotal, 0);
             this.drawPie();
-            this.drawSupplyBar()
+            this.drawSupplyBar();
 
         },
         methods: {
@@ -287,22 +300,22 @@
                 return 314.5 * a + 'px'
             },
             // 点击地图的点联动
-            showDes(index){
-                if(this.desIndex==index){
-                    if(this.$refs[`list${index}`][0].style.display=='none'){
-                        this.showFlag=true
-                        this.desIndex=index;
-                        this.drawLine(this.drawLineData,index);
-                    }else{
-                        this.drawLine(this.drawLineTotal,0);
-                        this.showFlag=false;
-                        this.desIndex=null;
+            showDes(index) {
+                if (this.desIndex == index) {
+                    if (this.$refs[`list${index}`][0].style.display == 'none') {
+                        this.showFlag = true
+                        this.desIndex = index;
+                        this.drawLine(this.drawLineData, index);
+                    } else {
+                        this.drawLine(this.drawLineTotal, 0);
+                        this.showFlag = false;
+                        this.desIndex = null;
 
                     }
-                }else{
-                    this.desIndex=index;
-                    this.showFlag=true;
-                    this.drawLine(this.drawLineData,index);
+                } else {
+                    this.desIndex = index;
+                    this.showFlag = true;
+                    this.drawLine(this.drawLineData, index);
                 }
 
 
@@ -320,7 +333,7 @@
                         bottom: 10,
                         left: "center",
                         itemGap: 10,
-                        data: ["液化工厂", "合成氨企业", "燃气公司", "甲醇工厂"],
+                        data: ["管道工厂", "甲醛厂", "合成氨", "液化工厂",'城燃企业公司'],
                         itemWidth: 15,
                         itemHeight: 10
                     },
@@ -348,27 +361,32 @@
                                 length2: 60
                             },
                             data: [{
-                                value: 1035,
-                                name: "液化工厂"
+                                value: 500,
+                                name: "管道工厂"
                             },
                                 {
-                                    value: 540,
-                                    name: "合成氨企业"
+                                    value: 420,
+                                    name: "甲醛厂"
                                 },
                                 {
-                                    value: 885,
-                                    name: "燃气公司"
+                                    value: 350,
+                                    name: "合成氨"
                                 },
                                 {
-                                    value: 540,
-                                    name: "甲醇工厂"
-                                }],
+                                    value: 330,
+                                    name: "液化工厂"
+                                },
+                                {
+                                    value: 200,
+                                    name: "城燃企业公司"
+                                }
+                            ],
                             itemStyle: {
                                 normal: {
                                     color: function (params) {
                                         //自定义颜色
                                         let colorList = [
-                                            '#31D9E5', '#23F5B1', '#FFA416', '#EF755F'
+                                            '#31D9E5', '#23F5B1', '#FFA416', '#EF755F','#5f59f7'
                                         ];
                                         return colorList[params.dataIndex]
                                     }
@@ -390,7 +408,7 @@
                 let option = {
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c}万立方米 ({d}%)"
+                        formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)"
                     },
                     legend: {
                         orient: 'horizontal',
@@ -400,24 +418,10 @@
                         data: ["中石油", "中石化"],
                         itemWidth: 15,
                         itemHeight: 10,
-                        // 使用回调函数
-                        // formatter: function (name) {
-                        //     var data = option.series[0].data;
-                        //     var total = 0;
-                        //     var tarValue;
-                        //     for (var i = 0, l = data.length; i < l; i++) {
-                        //         total += data[i].value;
-                        //         if (data[i].name == name) {
-                        //             tarValue = data[i].value;
-                        //         }
-                        //     }
-                        //     var p = ((tarValue / total) * 100).toFixed(1);
-                        //     return name + " " + " " + p + "%";
-                        // },
                     },
                     series: [
                         {
-                            name: "天然气月产量企业分布",
+                            name: "供气单位结构分析",
                             type: "pie",
                             radius: ["40%", "55%"],
                             center: ["50%", "40%"],
@@ -436,11 +440,11 @@
                                 length2: 60
                             },
                             data: [{
-                                value: 2550,
+                                value: 60,
                                 name: "中石油"
                             },
                                 {
-                                    value: 450,
+                                    value: 40,
                                     name: "中石化"
                                 },
                             ],
@@ -494,7 +498,7 @@
                 }
             },
             // 天然气日供气量趋势分析
-            drawLine(serData,index) {
+            drawLine(serData, index) {
                 let myChart = this.$echarts.init(document.getElementById('supplyLine'));
                 let option = {
                     tooltip: {
@@ -503,22 +507,22 @@
                             return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米' +
                                 '</br>' +
                                 params[1].seriesName + ':' +
-                                params[1].value + '万立方米'+
+                                params[1].value + '万立方米' +
                                 '</br>' +
                                 params[2].seriesName + ':' +
                                 params[2].value + '%'
                         }
                     },
                     legend: {
-                        data: ['天然气日供气量','计划日供气量', '环比变化'],
+                        data: ['天然气日供气量', '计划日供气量', '环比变化'],
                         x: 'right'
                     },
-                  /*  grid: {
-                        left: '3%',
-                        // right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },*/
+                    /*  grid: {
+                          left: '3%',
+                          // right: '4%',
+                          bottom: '3%',
+                          containLabel: true
+                      },*/
                     xAxis: [
                         {
                             type: 'category',
@@ -558,8 +562,8 @@
                             barWidth: 10,
                             itemStyle: {
                                 color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                    { offset: 0, color: "#44c2fd" },
-                                    { offset: 1, color: "#5f59f7" },
+                                    {offset: 0, color: "#44c2fd"},
+                                    {offset: 1, color: "#5f59f7"},
                                 ]),
                             },
                             data: serData[index].actual
@@ -570,8 +574,8 @@
                             barWidth: 10,
                             itemStyle: {
                                 color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                    { offset: 0, color: "#ffc700" },
-                                    { offset: 1, color: "#ff9200" },
+                                    {offset: 0, color: "#ffc700"},
+                                    {offset: 1, color: "#ff9200"},
                                 ]),
                             },
                             data: serData[index].plan
@@ -592,7 +596,7 @@
                                     }
                                 }
                             },
-                            data:serData[index].chain
+                            data: serData[index].chain
                         }
                     ]
                 };
@@ -606,24 +610,12 @@
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        formatter(params) {
-                            // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
-                            //     params[1].seriesName + ':' +
-                            //     params[1].value + '亿立方米'
-                            if(params.length && params.length > 1) {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value +
-                                    '万立方米' + '</br>' +
-                                    params[1].seriesName + ':' +
-                                    params[1].value + '万立方米'
-                            }else if(params.length === 1) {
-                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米'
-                            }
-                        }
+                        formatter: '{a0}{b0}: {c0}万立方米<br /> {a1}{b1}: {c1}万立方米<br /> {a2}{b2}: {c2}万立方米',
                     },
                     legend: {
                         itemWidth: 10,
                         itemHeight: 6,
-                        data: ['天然气日供气量', '合同量'],
+                        data: ['天然气日供气量', '合同量', '差值'],
                         x: 'right',
                         right: '20%'
                     },
@@ -646,9 +638,6 @@
                         {
                             type: 'value',
                             name: '万立方米',
-                            min: 0,
-                            max: 120,
-                            interval: 20,
                             axisLabel: {
                                 formatter: '{value}'
                             },
@@ -658,33 +647,19 @@
                                 }
                             }
                         },
-                       /* {
-                            type: 'value',
-                            min: 0,
-                            max: 120,
-                            interval: 20,
-                            axisLabel: {
-                                formatter: '{value}'
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#9B9DA1'
-                                }
-                            }
-                        }*/
                     ],
                     series: [
                         {
                             name: '天然气日供气量',
                             type: 'bar',
-                            barWidth: 20,
-                            data: [35,20,50,65,80,90,85],
+                            barWidth: 10,
+                            data: [35, 20, 50, 65, 80, 90, 85],
                             itemStyle: {
                                 normal: {
-                                    color:function(params){
-                                        if(params.value <60){
+                                    color: function (params) {
+                                        if (params.value < 60) {
                                             return "#FE8463";
-                                        }else{
+                                        } else {
                                             return "#9BCA63";
                                         }
 
@@ -695,112 +670,20 @@
                         {
                             name: '合同量',
                             type: 'line',
-                      /*      smooth: true,
-                            symbolSize: 0,
-                            yAxisIndex: 1,*/
                             data: [60, 60, 60, 60, 60, 60, 60],
                             itemStyle: {
                                 color: '#FBAF5D'
                             }
-                        }
-                    ]
-                };
-
-
-                // 使用刚指定的配置项和数据显示图表。
-                myChart.setOption(option);
-            },
-            // 供气量与合同量差额分析
-            drawSupplyBar() {
-                let myChart = this.$echarts.init(document.getElementById('supplyBarTwo'));
-                // 指定图表的配置项和数据
-                let option = {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         },
-                        formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米'
-                        }
-                    },
-                    legend: {
-                        data: ['差值'],
-                        x: 'right'
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: [
-                        {
-                            type: 'value',
-                            splitLine: {
-              show: false,
-            },
-            axisTick: {
-              show: false, // 去除坐标轴间隔
-            },
-            axisLine: {
-              // 坐标轴样式
-              lineStyle: {
-                color: "#9B9DA1",
-              },
-            },
-            axisLabel: {
-              // 坐标轴label样式
-              textStyle: {
-                color: "#9B9DA1",
-              },
-            },
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            type: 'category',
-                            name: '日期',
-                            axisTick: {
-                                show: false
-                            },
-                            data: ['1月1日', '1月2日', '1月3日', '1月4日', '1月5日', '1月6日', '1月7日'],
-                            axisLabel: {
-                                formatter: '{value}'
-                            },
-                            splitLine: {
-                                show: false
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#9B9DA1'
-                                }
-                            }
-                        }
-                    ],
-                    series: [
                         {
                             name: '差值',
                             type: 'bar',
                             barWidth: 10,
-                            data: [320, -120, 341, -132, 390, -134, 420],
+                            data: [-25, -40, -10, 5, 20, 30, 25],
                             itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 1, 0,
-                                        [
-                                            {offset: 0, color: '#4572FF'},                   //柱图渐变色
-                                            {offset: 1, color: '#65FCFA'},                   //柱图渐变色
-                                        ]
-                                    )
-                                }
-                            },
-                            showBackground: true,
-                            backgroundStyle: {
-                                color: '#f7f7f7'
-
-                            },
-                        }
+                                color: '#5f59f7'
+                            }
+                        },
                     ]
                 };
 
@@ -808,6 +691,89 @@
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
             },
+             // 不同气田的日供应量级占比
+             drawSupplyBar() {
+                 let myChart = this.$echarts.init(document.getElementById('supplyBarTwo'));
+                 // 指定图表的配置项和数据
+                 let option = {
+                     tooltip: {
+                         trigger: "item",
+                         formatter: "{a} <br/>{b}: {c}万立方米 ({d}%)"
+                     },
+                     legend: {
+                         orient: 'horizontal',
+                         bottom: 10,
+                         left: "center",
+                         itemGap: 10,
+                         data: ["苏里格气田", "大牛地气田",'靖边气田','胜利井气田','乌审旗气田','其他'],
+                         itemWidth: 15,
+                         itemHeight: 10
+                     },
+                     series: [
+                         {
+                             name: "不同气田的日供应量级占比",
+                             type: "pie",
+                             radius: ["40%", "55%"],
+                             center: ["50%", "40%"],
+                             label: {
+                                 formatter: "{per|{d}%\n}",
+                                 padding: [0, -60, 5],
+                                 rich: {
+                                     per: {
+                                         fontSize: 12,
+                                         color: "#9B9DA1"
+                                     }
+                                 }
+                             },
+                             labelLine: {
+                                 length: 15,
+                                 length2: 60
+                             },
+                             data: [{
+                                 value: 118,
+                                 name: "苏里格气田"
+                             },
+                                 {
+                                     value: 240,
+                                     name: "大牛地气田"
+                                 },
+                                 {
+                                     value: 210,
+                                     name: "靖边气田"
+                                 },
+                                 {
+                                     value: 120,
+                                     name: "胜利井气田"
+                                 },
+                                 {
+                                     value: 112,
+                                     name: "乌审旗气田"
+                                 },
+                                 {
+                                     value: 240,
+                                     name: "其他"
+                                 },
+                             ],
+                             itemStyle: {
+                                 normal: {
+                                     color: function (params) {
+                                         //自定义颜色
+                                         let colorList = [
+                                             '#95F0F1', '#FF850D','#FFA416', '#EF755F','#a0d911', '#52c41a', '#fa541c'
+                                         ];
+                                         return colorList[params.dataIndex]
+                                     }
+                                 }
+
+
+                             },
+
+                         }
+                     ]
+                 };
+                 // 使用刚指定的配置项和数据显示图表。
+                 myChart.setOption(option);
+             },
             // 未来30日供气量预测
             drawSupplyLineThree() {
                 let myChart = this.$echarts.init(document.getElementById('supplyLineThree'));
@@ -818,12 +784,12 @@
                             // return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '亿立方米' + '</br>' +
                             //     params[1].seriesName + ':' +
                             //     params[1].value + '亿立方米'
-                            if(params.length && params.length > 1) {
+                            if (params.length && params.length > 1) {
                                 return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value +
                                     '万立方米' + '</br>' +
                                     params[1].seriesName + ':' +
                                     params[1].value + '万立方米'
-                            }else if(params.length === 1) {
+                            } else if (params.length === 1) {
                                 return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万立方米'
                             }
                         }
@@ -886,10 +852,7 @@
                                     }
                                 }
                             },
-                            areaStyle: {
-                                color: 'rgba(27,202,201,0.1)'
-                            },
-                            data: [80,90,85,81,92,78,85]
+                            data: [80, 90, 85, 81]
                         },
                         {
                             name: '天然气日产量预测值',
@@ -906,7 +869,7 @@
                                     }
                                 }
                             },
-                            data: [82,85,75,67,71,76,67]
+                            data: [82, 85, 75, 67, 71, 76, 67]
                         }
                     ]
                 };
@@ -923,7 +886,7 @@
 
 <style scoped lang="scss">
     .child2 {
-        .des_list{
+        .des_list {
             background-color: rgba(37, 54, 104, 0.5);
             position: absolute;
             padding: 0.08rem;
@@ -1126,7 +1089,7 @@
             width: 13px;
             height: 13px;
             position: absolute;
-            z-index:2;
+            z-index: 2;
         }
 
     }

@@ -130,60 +130,60 @@
                     {
                         name: '乌海市储气情况',
                         num1: '1',
-                        num2: '2',
-                        total: '0.42',
-                        cpy: '0.16',
-                        city: '0.26',
+                        num2: '0',
+                        total: '0.5',
+                        cpy: '0.03',
+                        city: '0',
                         left: '0.194',
                         top: '0.615'
                     },
                     {
                         name: '鄂尔多斯市储气情况',
-                        num1: '1',
-                        num2: '2',
-                        total: '0.46',
-                        cpy: '0.2',
-                        city: '0.26',
+                        num1: '12',
+                        num2: '1',
+                        total: '9.1',
+                        cpy: '0.1082',
+                        city: '0.436',
                         left: '0.274',
                         top: '0.641'
                     },
                     {
                         name: '巴彦淖尔市储气情况',
-                        num1: '1',
-                        num2: '2',
-                        total: '0.44',
-                        cpy: '0.18',
-                        city: '0.26',
+                        num1: '3',
+                        num2: '0',
+                        total: '1',
+                        cpy: '0.04',
+                        city: '0.012',
                         left: '0.244',
                         top: '0.515'
                     },
                     {
                         name: '包头市储气情况',
-                        num1: '1',
-                        num2: '2',
-                        total: '0.45',
-                        cpy: '0.19',
-                        city: '0.26',
+                        num1: '6',
+                        num2: '1',
+                        total: '4.66',
+                        cpy: '0.2566',
+                        city: '0',
                         left: '0.244',
                         top: '0.515'
                     },
                     {
                         name: '呼和浩特市储气情况',
-                        num1: '1',
-                        num2: '2',
-                        total: '0.44',
-                        cpy: '0.17',
-                        city: '0.26',
+                        num1: '6',
+                        num2: '0',
+                        total: '7.81',
+                        cpy: '0.4088',
+                        city: '0.06',
                         left: '0.244',
                         top: '0.525'
                     },
                     {
                         name: '通辽市储气情况',
-                        num1: '1',
-                        num2: '2',
-                        total: '0.47',
-                        cpy: '0.21',
-                        city: '0.26',
+                        num1: '8',
+                        num2: '0',
+                        total: '0.195',
+                        cpy: '0.0117',
+                        city: '0',
                         left: '0.444',
                         top: '0.435'
                     }
@@ -432,8 +432,20 @@
                     ['通辽地方政府3天储气占比', '通辽城燃企业5%储气占比'],
                 ],
                 //盟市储气量达标分析
-                drawLineOneLegend:[],
-                drawLineTwoLegend:[],
+                drawLineOneLegend:['城燃企业5%要求储气量','城燃企业5%实际储气量'],
+                drawLineTwoLegend:['地方政府3天要求储气量','地方政府3天实际储气量'],
+                drawLineOneSerData:[
+                    {
+                        plan:[0.1082,0.03,0.04,0.4088,0.2556,0.0117],
+                        actual:[0.1062,0.0273,0.032,0.4188,0.2326,0.0123]
+                    }
+                ],
+                drawLineTwoSerData:[
+                    {
+                        plan:[0.436,0,0.012,0.06,0,0],
+                        actual:[0.443,0,0.0112,0.056,0,0]
+                    }
+                ]
             }
         },
         mounted() {
@@ -441,6 +453,7 @@
             this.$nextTick(function () {
                 this.drawGasPie(this.drawGasPieData, this.pie_num);
             });
+            this.drawLine(this.drawLineOneLegend,this.drawLineOneSerData)
         },
         methods: {
             //盟市储气量达标分析
@@ -489,7 +502,7 @@
                                     {offset: 1, color: "#5f59f7"},
                                 ]),
                             },
-                            data: serData[0].actual
+                            data: serData[0].plan
                         },
                         {
                             name: legendData[1],
@@ -501,7 +514,7 @@
                                     {offset: 1, color: "#ff9200"},
                                 ]),
                             },
-                            data: serData[0].plan
+                            data: serData[0].actual
                         }
                     ]
                 };
@@ -509,7 +522,15 @@
                 myChart.setOption(option);
             },
             changeChart() {
-
+                if(this.value1==0){
+                    this.$nextTick(function () {
+                        this.drawLine(this.drawLineOneLegend,this.drawLineOneSerData)
+                    });
+                }else{
+                    this.$nextTick(function () {
+                        this.drawLine(this.drawLineTwoLegend,this.drawLineTwoSerData)
+                    });
+                }
             },
             // 用于点击的div块绑定函数
             be_click_left(a) {

@@ -42,13 +42,30 @@
                 </div>
                 <div class="chart-item" v-if="selected_one === 1">
                     <div class="fontSize_div">
-                        <div class="fontSize">2420</div>
+                        <div class="fontSize">{{pie_num}}</div>
                         <div class="fontSize">万立方米</div>
                     </div>
                     <dount-chart class="echarts" :optionObj="optionObjYQDW"></dount-chart>
                 </div>
             </div>
-
+            <!-- 日消费量预测 && 日消费缺口预测 -->
+            <div class="chart module">
+                <div class="tab_oil">
+          <span v-for="(item, index) in tablist_three"
+                :key="index"
+                @click="tabButton_three(index)"
+                v-bind:class="[
+              { tab_oil_two: index == selected_three },
+              { tab_oil_one: true },
+            ]">{{ item }}</span>
+                </div>
+                <div class="chart-item" v-if="selected_three === 0">
+                    <doublebar-chart :optionObj="optionObjXFYC"></doublebar-chart>
+                </div>
+                <div class="chart-item" v-if="selected_three === 1">
+                    <bothway-chart :optionObj="optionObjXFQKYC"></bothway-chart>
+                </div>
+            </div>
             <!-- 盟市消费结构分析 && 销售单位结构分析 -->
             <div class="chart module">
                 <div class="tab_oil">
@@ -76,24 +93,7 @@
                 </div>
             </div>
 
-            <!-- 日消费量预测 && 日消费缺口预测 -->
-            <div class="chart module">
-                <div class="tab_oil">
-          <span v-for="(item, index) in tablist_three"
-                :key="index"
-                @click="tabButton_three(index)"
-                v-bind:class="[
-              { tab_oil_two: index == selected_three },
-              { tab_oil_one: true },
-            ]">{{ item }}</span>
-                </div>
-                <div class="chart-item" v-if="selected_three === 0">
-                    <doublebar-chart :optionObj="optionObjXFYC"></doublebar-chart>
-                </div>
-                <div class="chart-item" v-if="selected_three === 1">
-                    <bothway-chart :optionObj="optionObjXFQKYC"></bothway-chart>
-                </div>
-            </div>
+
         </div>
     </div>
 </template>
@@ -111,6 +111,8 @@
         },
         data() {
             return {
+                pie_num: 2420,
+                pie_numArry: [2420, 78, 176, 222, 203, 210, 147, 111, 149, 183, 167, 144],
                 posList: [
                     //阿拉善盟
                     {
@@ -252,23 +254,24 @@
                 selected_one: 0,
                 selected_two: 0,
                 selected_three: 0,
-                tablist_one: ["", "用气单位结构分析"],
-                tablist_city:[
-                    "天然气日消费量分析",
-                    "阿拉善盟天然气日消费量分析",
-                    "巴彦淖尔天然气日消费量分析",
-                    "鄂尔多斯天然气日消费量分析",
-                    "包头天然气日消费量分析",
-                    "呼和浩特天然气日消费量分析",
-                    "乌兰察布天然气日消费量分析",
-                    "锡林郭勒盟天然气日消费量分析",
-                    "赤峰天然气日消费量分析",
-                    "通辽天然气日消费量分析",
-                    "兴安盟天然气日消费量分析",
-                    "呼伦贝尔天然气日消费量分析"
+                tablist_copy: ["天然气日消费量分析", "用气单位结构分析"],
+                tablist_one: ["天然气日消费量分析", "用气单位结构分析"],
+                tablist_city: [
+                    "阿拉善盟",
+                    "巴彦淖尔",
+                    "鄂尔多斯",
+                    "包头",
+                    "呼和浩特",
+                    "乌兰察布",
+                    "锡林郭勒盟",
+                    "赤峰",
+                    "通辽",
+                    "兴安盟",
+                    "呼伦贝尔"
                 ],
                 tablist_two: ["盟市消费结构分析", "销售单位结构分析"],
                 tablist_three: ["日消费量预测", "日消费缺口预测"],
+                tablist_three_copy:["日消费量预测", "日消费缺口预测"],
                 optionObjBarGasXF: {
                     legendData: ["天然气日消费量", "同比变化"],
                     yLeftName: "万立方米",
@@ -286,7 +289,7 @@
                     rightMax: 20,
                     // rightInterval: 1
                 },
-                optionObjBarGasXFLeftData:[
+                optionObjBarGasXFLeftData: [
                     [160, 177, 163, 169, 159, 179, 169],
                     //阿拉善盟
                     [74, 81, 71, 89, 78, 75, 78],
@@ -311,7 +314,7 @@
                     // 呼伦贝尔
                     [190, 232, 210, 189, 240, 210, 211]
                 ],
-                optionObjBarGasXFRightData:[
+                optionObjBarGasXFRightData: [
                     [9, 3, -6, 12, 9, 3, 0],
                     //阿拉善盟
                     [10, 4, -3, 5, 9, 14, 12],
@@ -337,74 +340,384 @@
                     [4, 9, 15, -7, 16, 7, 3]
                 ],
                 optionObjYQDW: {
-                    legendData: ["民生用气", "甲醛化肥企业", "LNG企业用气", "可中断工业", "不可中断工业",'商业','居民用气'],
+                    legendData: ["民生用气", "甲醛化肥企业", "LNG企业用气", "可中断工业", "不可中断工业", '商业', '居民用气'],
                     seriesName: "用气单位结构分析",
                     unit: "万立方米",
                     seriesData: [],
                 },
-                optionObjYQDWSeriesData:[
+                optionObjYQDWSeriesData: [
                     // 总的
                     [
                         {
-                           name:'民生用气',
-                           value:500
+                            name: '民生用气',
+                            value: 500
                         },
                         {
-                            name:'甲醛化肥企业',
-                            value:420
+                            name: '甲醛化肥企业',
+                            value: 420
                         },
                         {
-                            name:'LNG企业用气',
-                            value:350
+                            name: 'LNG企业用气',
+                            value: 350
                         },
                         {
-                            name:'可中断工业',
-                            value:330
+                            name: '可中断工业',
+                            value: 330
                         },
                         {
-                            name:'不可中断工业',
-                            value:200
+                            name: '不可中断工业',
+                            value: 200
                         },
                         {
-                            name:'商业',
-                            value:170
+                            name: '商业',
+                            value: 170
                         },
                         {
-                            name:'居民用气',
-                            value:450
+                            name: '居民用气',
+                            value: 450
                         },
                     ],
                     // 阿拉善盟
                     [
                         {
-                            name:'民生用气',
-                            value:18
+                            name: '民生用气',
+                            value: 18
                         },
                         {
-                            name:'甲醛化肥企业',
-                            value:14
+                            name: '甲醛化肥企业',
+                            value: 14
                         },
                         {
-                            name:'LNG企业用气',
-                            value:12
+                            name: 'LNG企业用气',
+                            value: 12
                         },
                         {
-                            name:'可中断工业',
-                            value:10
+                            name: '可中断工业',
+                            value: 10
                         },
                         {
-                            name:'不可中断工业',
-                            value:9
+                            name: '不可中断工业',
+                            value: 9
                         },
                         {
-                            name:'商业',
-                            value:8
+                            name: '商业',
+                            value: 8
                         },
                         {
-                            name:'居民用气',
-                            value:7
+                            name: '居民用气',
+                            value: 7
                         },
-                    ]
+                    ],
+                    //巴彦淖尔
+                    [
+                        {
+                            name: '民生用气',
+                            value: 37
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 16
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 18
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 23
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 18
+                        },
+                        {
+                            name: '商业',
+                            value: 16
+                        },
+                        {
+                            name: '居民用气',
+                            value: 10
+                        },
+                    ],
+                    //鄂尔多斯
+                    [
+                        {
+                            name: '民生用气',
+                            value: 42
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 38
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 35
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 33
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 28
+                        },
+                        {
+                            name: '商业',
+                            value: 26
+                        },
+                        {
+                            name: '居民用气',
+                            value: 20
+                        },
+                    ],
+                    //包头
+                    [
+                        {
+                            name: '民生用气',
+                            value: 60
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 50
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 30
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 25
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 15
+                        },
+                        {
+                            name: '商业',
+                            value: 10
+                        },
+                        {
+                            name: '居民用气',
+                            value: 13
+                        },
+                    ],
+                    //呼和浩特
+                    [
+                        {
+                            name: '民生用气',
+                            value: 55
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 45
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 35
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 28
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 20
+                        },
+                        {
+                            name: '商业',
+                            value: 15
+                        },
+                        {
+                            name: '居民用气',
+                            value: 12
+                        },
+                    ],
+                    //乌兰察布
+                    [
+                        {
+                            name: '民生用气',
+                            value: 36
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 31
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 25
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 20
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 15
+                        },
+                        {
+                            name: '商业',
+                            value: 13
+                        },
+                        {
+                            name: '居民用气',
+                            value: 7
+                        },
+                    ],
+                    // 锡林郭勒盟
+                    [
+                        {
+                            name: '民生用气',
+                            value: 26
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 20
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 18
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 16
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 14
+                        },
+                        {
+                            name: '商业',
+                            value: 10
+                        },
+                        {
+                            name: '居民用气',
+                            value: 7
+                        },
+                    ],
+                    //赤峰
+                    [
+                        {
+                            name: '民生用气',
+                            value: 40
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 35
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 20
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 17
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 15
+                        },
+                        {
+                            name: '商业',
+                            value: 12
+                        },
+                        {
+                            name: '居民用气',
+                            value: 10
+                        },
+                    ],
+                    //通辽
+                    [
+                        {
+                            name: '民生用气',
+                            value: 50
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 40
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 30
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 25
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 15
+                        },
+                        {
+                            name: '商业',
+                            value: 10
+                        },
+                        {
+                            name: '居民用气',
+                            value: 13
+                        },
+                    ],
+                    //兴安盟
+                    [
+                        {
+                            name: '民生用气',
+                            value: 40
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 35
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 30
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 25
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 17
+                        },
+                        {
+                            name: '商业',
+                            value: 13
+                        },
+                        {
+                            name: '居民用气',
+                            value: 7
+                        },
+                    ],
+                    //呼伦贝尔
+                    [
+                        {
+                            name: '民生用气',
+                            value: 30
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 28
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 26
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 21
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 18
+                        },
+                        {
+                            name: '商业',
+                            value: 14
+                        },
+                        {
+                            name: '居民用气',
+                            value: 7
+                        },
+                    ],
                 ],
                 optionObjMS: {
                     legendData: ["阿拉善盟", "呼和浩特", "锡林郭勒", "呼伦贝尔", "鄂尔多斯", "其他"],
@@ -447,28 +760,108 @@
                     xData: ["1月1日", "1月2日", "1月3日", "1月4日", "1月5日", "1月6日", "1月7日"],
                     yLeftName: "万立方米",
                     yRightName: "%",
-                    seriesLeftData: [160, 177, 163, 169, 159, 179, 168],
-                    seriesRightData: [180, 175, 179, 184, 187, 183, 189]
+                    seriesLeftData: [],
+                    seriesRightData: []
                 },
                 optionObjXFQKYC: {
-                    legendData: ["差值"],
-                    yName: "日期",
-                    seriesName: "差值",
+                    // legendData: ["差值"],
+                    // yName: "日期",
+                    seriesName: "缺口量预测",
                     yData: ["1月1日", "1月2日", "1月3日", "1月4日", "1月5日", "1月6日", "1月7日"],
                     // yLeftName: "亿立方",
-                    // yRightName: "%",
-                    seriesData: [5, 6, -5, -6, 3.8, 4, 4],
+                    xName: "万立方米",
+                    seriesData: [],
                 },
+                optionObjXFQKYCseriesData:[
+                    [10, 6, -3, 3, 4, -1, 2],
+                    //阿拉善盟
+                    [4, -1, 3,3, -2, 4, 1, 1],
+                    //巴彦淖尔
+                    [7, 3, -3,3,2, 5, 1, 1],
+                    // 鄂尔多斯
+                    [3, 6, -1,-2,2, 3, 5, 4],
+                    //包头
+                    [-2, 5,9,-3,1, 4, 3],
+                    // 呼和浩特
+                    [4, -4,-2,5,9, 6, 2],
+                    // 乌兰察布
+                    [6, -1,4,6,7, -1, 1],
+                    //锡林郭勒盟
+                    [5, 10,5,2,-3, 3, 5],
+                    // 赤峰
+                    [10, 3,-4,5,9, 5, 3],
+                    // 通辽
+                    [7, 3,-3,6,7, 2, 3],
+                    // 兴安盟
+                    [6, -3,8,10,-4, 6, 3],
+                    // 呼伦贝尔
+                    [7, 10,-4,4,-3, 6, 5],
+                ],
                 screenWidth: document.body.clientWidth, // 屏幕宽
                 showFlag: false,
-                desIndex: null
-            };
+                desIndex: null,
+                optionObjXFYCseriesLeftData: [
+                    // 总
+                    [160, 177, 163, 169, 159, 179],
+                    //阿拉善盟
+                    [74, 81, 71, 89, 78, 75],
+                    //巴彦淖尔
+                    [173, 154, 168, 179, 195, 177],
+                    // 鄂尔多斯
+                    [211, 240, 241, 222, 201, 235],
+                    //包头
+                    [230, 208, 190, 233, 187, 222],
+                    //呼和浩特
+                    [190, 232, 210, 189, 240, 210],
+                    // 乌兰察布
+                    [132, 149, 132, 153, 144, 149],
+                    // 锡林郭勒盟
+                    [111,123,106,98,105,122],
+                    //赤峰
+                    [143,139,143,159,160,144],
+                    // 通辽
+                    [176, 181, 210, 194, 177, 183],
+                    // 兴安盟
+                    [165,156,173,189,190,167],
+                    //呼伦贝尔
+                    [134,144,165,167,143,140]
+                ],
+                optionObjXFYCseriesRightData: [
+                    // 总
+                    [180, 175, 179, 184, 187, 183, 189],
+                    //阿拉善盟
+                    [80, 75, 79, 84, 87, 83, 89],
+                    //巴彦淖尔
+                    [190, 196, 183, 158, 188, 199, 180],
+                    // 鄂尔多斯
+                    [230, 211, 222, 213, 230, 250, 241],
+                    //包头
+                    [201, 222, 201, 222, 251, 233, 241],
+                    //呼和浩特
+                    [210, 222, 191, 212, 241, 230, 250],
+                    // 乌兰察布
+                    [141, 160, 153, 169, 143, 188,164],
+                    // 锡林郭勒盟
+                    [120,133,120,111,109,103,122],
+                    //赤峰
+                    [157,144,138,167,154,156,155],
+                     //通辽
+                    [180,176,199,190,188,187,190],
+                    // 兴安盟
+                    [180,167,156,175,183,188,190],
+                    //呼伦贝尔
+                    [150,145,130,161,166,172,150]
+                ]
+            }
         },
         mounted() {
-            this.tablist_one[0]=this.tablist_city[0]
-            this.optionObjBarGasXF.seriesLeftData=this.optionObjBarGasXFLeftData[0]
-            this.optionObjBarGasXF.seriesRightData=this.optionObjBarGasXFRightData[0]
-            this.optionObjYQDW.seriesData=this.optionObjYQDWSeriesData[0]
+            this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[0];
+            this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[0];
+            this.optionObjXFYC.seriesLeftData=this.optionObjXFYCseriesLeftData[0];
+            this.optionObjXFYC.seriesRightData=this.optionObjXFYCseriesRightData[0];
+            this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[0];
+            this.optionObjXFQKYC.seriesData=this.optionObjXFQKYCseriesData[0]
+            this.pie_num = this.pie_numArry[0];
         },
         watch: {
             selected_two() {
@@ -482,16 +875,30 @@
             showDes(index) {
                 if (this.desIndex == index) {
                     if (this.$refs[`list${index}`][0].style.display == 'none') {
-                        this.showFlag = true
+                        this.showFlag = true;
                         this.desIndex = index;
-                        this.optionObjBarGasXF.seriesLeftData=this.optionObjBarGasXFLeftData[index+1];
-                        this.optionObjBarGasXF.seriesRightData=this.optionObjBarGasXFRightData[index+1];
-                        this.tablist_one[0]=this.tablist_city[index+1];
+                        this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[index + 1];
+                        this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[index + 1];
+                        //日消费量预测
+                        this.optionObjXFYC.seriesLeftData=this.optionObjXFYCseriesLeftData[index+1];
+                        this.optionObjXFYC.seriesRightData=this.optionObjXFYCseriesRightData[index+1];
+                        this.tablist_one = [this.tablist_city[index] + this.tablist_copy[0], this.tablist_city[index] + this.tablist_copy[1]];
+                        this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[index + 1];
+                        this.optionObjXFQKYC.seriesData=this.optionObjXFQKYCseriesData[index+1];
+                        this.pie_num = this.pie_numArry[index + 1];
+                        this.tablist_three = [this.tablist_city[index] + this.tablist_three_copy[0], this.tablist_city[index] + this.tablist_three_copy[1]];
 
                     } else {
-                        this.optionObjBarGasXF.seriesLeftData=this.optionObjBarGasXFLeftData[0];
-                        this.optionObjBarGasXF.seriesRightData=this.optionObjBarGasXFRightData[0];
-                        this.tablist_one[0]=this.tablist_city[0];
+                        this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[0];
+                        this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[0];
+                        //日消费量预测
+                        this.optionObjXFYC.seriesLeftData=this.optionObjXFYCseriesLeftData[0];
+                        this.optionObjXFYC.seriesRightData=this.optionObjXFYCseriesRightData[0];
+                        this.tablist_one = this.tablist_copy;
+                        this.tablist_three = this.tablist_three_copy;
+                        this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[0];
+                        this.optionObjXFQKYC.seriesData=this.optionObjXFQKYCseriesData[0];
+                        this.pie_num = this.pie_numArry[0];
                         this.showFlag = false;
                         this.desIndex = null;
 
@@ -499,9 +906,16 @@
                 } else {
                     this.desIndex = index;
                     this.showFlag = true;
-                    this.optionObjBarGasXF.seriesLeftData=this.optionObjBarGasXFLeftData[index+1];
-                    this.optionObjBarGasXF.seriesRightData=this.optionObjBarGasXFRightData[index+1];
-                    this.tablist_one[0]=this.tablist_city[index+1];
+                    this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[index + 1];
+                    this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[index + 1];
+                    //日消费量预测
+                    this.optionObjXFYC.seriesLeftData=this.optionObjXFYCseriesLeftData[index+1];
+                    this.optionObjXFYC.seriesRightData=this.optionObjXFYCseriesRightData[index+1];
+                    this.tablist_one = [this.tablist_city[index] + this.tablist_copy[0], this.tablist_city[index] + this.tablist_copy[1]];
+                    this.tablist_three = [this.tablist_city[index] + this.tablist_three_copy[0], this.tablist_city[index] + this.tablist_three_copy[1]];
+                    this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[index + 1];
+                    this.optionObjXFQKYC.seriesData=this.optionObjXFQKYCseriesData[index+1];
+                    this.pie_num = this.pie_numArry[index + 1];
                 }
 
 

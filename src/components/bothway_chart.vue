@@ -59,6 +59,7 @@ export default {
       let option = {
         tooltip: {
           trigger: "axis",
+          formatter: '{a0}{b0}: {c0}'+this.optionObj.xName,
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
             type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
@@ -72,12 +73,13 @@ export default {
         },
         grid: {
           left: "3%",
-          right: "4%",
+          right: "20%",
           bottom: "3%",
           containLabel: true,
         },
         xAxis: [
           {
+            name: this.optionObj.xName,
             type: "value",
             splitLine: {
               show: false,
@@ -88,13 +90,13 @@ export default {
             axisLine: {
               // 坐标轴样式
               lineStyle: {
-                color: "#DADADA",
+                color: "#9B9DA1",
               },
             },
             axisLabel: {
               // 坐标轴label样式
               textStyle: {
-                color: "#DADADA",
+                color: "#9B9DA1",
               },
             },
           },

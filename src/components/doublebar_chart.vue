@@ -52,6 +52,7 @@ export default {
     },
   },
   methods: {
+
     getBarOption() {
       this.chartBar = null;
       // this.chartBar = echarts.init(document.getElementById(this.id));

@@ -60,6 +60,18 @@
         </div>
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="title">
+                盟市储气量达标分析
+            </div>
+            <div class="content">
+                <van-dropdown-menu>
+                    <van-dropdown-item v-model="value1" :options="option1" @change="changeChart"/>
+                </van-dropdown-menu>
+                <div id="chuqiBar"  style="width: 100%;height: 240px"></div>
+            </div>
+        </div>
+
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+            <div class="title">
                 本年度储气能力
             </div>
             <div class="content">
@@ -77,6 +89,11 @@
         name: 'child3',
         data() {
             return {
+                option1: [
+                    {text: '城燃企业5%储气量', value: 0},
+                    {text: '地方政府3天储气量', value: 1}
+                ],
+                value1: 0,
                 posList: [
                     //乌海市储气
                     {
@@ -413,7 +430,10 @@
                     ['包头地方政府3天储气占比', '包头城燃企业5%储气占比'],
                     ['呼和浩特地方政府3天储气占比', '呼和浩特城燃企业5%储气占比'],
                     ['通辽地方政府3天储气占比', '通辽城燃企业5%储气占比'],
-                ]
+                ],
+                //盟市储气量达标分析
+                drawLineOneLegend:[],
+                drawLineTwoLegend:[],
             }
         },
         mounted() {
@@ -423,6 +443,74 @@
             });
         },
         methods: {
+            //盟市储气量达标分析
+            drawLine(legendData,serData) {
+                let myChart = this.$echarts.init(document.getElementById('chuqiBar'));
+                let option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: legendData,
+                        x: 'right'
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: ['鄂尔多斯市','乌海市','巴彦淖尔市','呼和浩特市','包头市','通辽市'],
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#9B9DA1'
+                                }
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: '亿立方米',
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#9B9DA1'
+                                }
+                            }
+
+                        },
+
+                    ],
+                    series: [
+                        {
+                            name: legendData[0],
+                            type: 'bar',
+                            barWidth: 10,
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#44c2fd"},
+                                    {offset: 1, color: "#5f59f7"},
+                                ]),
+                            },
+                            data: serData[0].actual
+                        },
+                        {
+                            name: legendData[1],
+                            type: 'bar',
+                            barWidth: 10,
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#ffc700"},
+                                    {offset: 1, color: "#ff9200"},
+                                ]),
+                            },
+                            data: serData[0].plan
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            },
+            changeChart() {
+
+            },
             // 用于点击的div块绑定函数
             be_click_left(a) {
                 return this.screenWidth * a + 'px'
@@ -727,7 +815,7 @@
                             })
                         } else {
                             this.$nextTick(() => {
-                            this.drawPie('gasPieTwo', this.gasPieTwoLegend, this.gasPieTwoData, "亿立方米", "地方政府3天");
+                                this.drawPie('gasPieTwo', this.gasPieTwoLegend, this.gasPieTwoData, "亿立方米", "地方政府3天");
                             })
                         }
 
@@ -965,6 +1053,23 @@
         }
         .el-tabs__nav {
             z-index: 1;
+        }
+    }
+</style>
+<style lang="scss">
+    .child3 {
+        .van-dropdown-menu__bar {
+            height: 32px;
+        }
+        .van-dropdown-menu__title {
+            font-size: 12px;
+        }
+        .van-cell, .van-dropdown-menu__title--active {
+            font-size: 12px;
+            color: #3A6DDA;
+        }
+        .van-dropdown-item__option--active .van-dropdown-item__icon {
+            color: #3A6DDA;
         }
     }
 </style>

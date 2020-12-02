@@ -15,7 +15,7 @@ export default {
         title:'',
         legendData:['总面积'], //legend.data以及series.name
         seriesName:""
-        seriesData:[], 
+        seriesData:[],
       }
     */
   },
@@ -100,12 +100,12 @@ export default {
                 show: true,
                 color: "#9C9DA2",
                 fontSize: 14,
-                formatter: "{b}: {d}%",
+                formatter: "{d}%",
                 rich: {
                   c: {
                     color: "#9C9DA2",
                     fontWeight: "bold",
-                    fontSize: 40,
+                    fontSize: 14,
                     align: "center",
                     verticalAlign: "bottom",
                   },
@@ -133,9 +133,13 @@ export default {
                       c2: "#15E9EC",
                     },
                     {
-                      c1: " #01A6FF", 
+                      c1: " #01A6FF",
                       c2: "#01A6FF",
                     },
+                      {
+                          c1: " #ff913e",
+                          c2: "#ff913e",
+                      },
                   ];
                   return new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                     {

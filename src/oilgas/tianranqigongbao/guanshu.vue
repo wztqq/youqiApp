@@ -1,23 +1,36 @@
 <template>
-    <div>
+    <div @click="hidePos">
         <div id="confess_content" style="background-color: #dadbdb">
 
             <!-- banner -->
             <img class="map"
-                 src="../../assets/img/oilgas/guanshu.png"
+                 src="../../assets/img/地图.png"
                  alt="图片未显示"/>
             <!--地图定位-->
             <div>
-                <div class="clickbtn" v-for="(item,index) in posList"
+                <img :src="item.src" alt="图片未显示" v-for="(item,index) in posList" class="imgS"
                      :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
-                     @click="showDes(index)"
-                ></div>
+                     @click.stop="showDes(index)"
+                     v-show="activeIndex===-1||activeIndex===index">
+            </div>
+            <!--起止点位置图标-->
+            <div  >
+                <img src="../../assets/img/begin.gif" class="imgG"
+                     v-for="(item,index) in beginList"
+                     v-show="activeIndex===index"
+                     :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+                >
+                <img src="../../assets/img/end.gif" class="imgG"
+                     v-for="(item,index) in endList"
+                     v-show="activeIndex===index"
+                     :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+                >
             </div>
             <!--地图上展示信息-->
             <div class="lay-content"
                  v-for="(item,index) in desList"
                  :ref="`list${index}`"
-                 v-show="desIndex==index&&showFlag"
+                 v-show="activeIndex ===index"
                  :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
                 <div>{{item.name}}</div>
                 <div>总里程：{{item.total}}公里</div>
@@ -40,7 +53,13 @@
                     </table>
                 </div>
             </div>
-
+            <!-- 天然气管道日进出气量统计 -->
+            <div class="chart module">
+                <h4>天然气管道日进出气量统计</h4>
+                <div class="chart-item">
+                    <div id="guanshuBar" style="width: 100%;height: 239px"></div>
+                </div>
+            </div>
             <!-- 天然气日消费缺口预测 && 调峰计划建议 -->
             <div class="chart module">
                 <div class="tab_oil">
@@ -54,14 +73,14 @@
                 </div>
                 <div class="chart-item" :key="timer" v-if="selected_one === 0">
                     <div class="fontSize_div">
-                        <div class="fontSize">190</div>
+                        <div class="fontSize">130</div>
                         <div class="fontSize">万立方米</div>
                     </div>
                     <dount-chart class="echarts" :optionObj="optionObjLineQTGQ"></dount-chart>
                 </div>
                 <div class="chart-item" :key="timer" v-if="selected_one === 1">
                     <div class="fontSize_div">
-                        <div class="fontSize">3000</div>
+                        <div class="fontSize">3600</div>
                         <div class="fontSize">万立方米</div>
                     </div>
                     <pie-chart class="echarts" :optionObj="optionObjGQQY"></pie-chart>
@@ -93,53 +112,102 @@
         },
         data() {
             return {
-                desIndex:null,
-                posList: [
-                    //长庆气田-乌海-临河输气管道
+                activeIndex: -1,
+                desIndex: null,
+                beginList: [
                     {
-                        left: '0.364',
-                        top: '0.949'
+                        left: '0.374',
+                        top: '1.02',
                     },
-                    // 苏-东-淮天然气管道
+                    {
+                        left: '0.354',
+                        top: '1.04',
+                    },
                     {
                         left: '0.384',
-                        top: '1.08'
+                        top: '1.06',
                     },
-                    // 长庆气田-呼和浩特天然气输气管道
                     {
-                        left: '0.474',
-                        top: '0.969'
+                        left: '0.409',
+                        top: '1.06',
+                    }
+                ],
+                endList: [
+                    {
+                        left: '0.303',
+                        top: '0.941',
                     },
-
-
+                    {
+                        left: '0.43',
+                        top: '1.01',
+                    },
+                    {
+                        left: '0.465',
+                        top: '0.981',
+                    },
+                    {
+                        left: '0.495',
+                        top: '0.961',
+                    }
+                ],
+                posList: [
+                    {
+                        left: '0.303',
+                        top: '0.969',
+                        src: require('../../assets/img/长庆气田-乌海-临河天然气管道.png')
+                    },
+                    {
+                        left: '0.354',
+                        top: '1.03',
+                        src: require('../../assets/img/苏东准管道.png')
+                    },
+                    {
+                        left: '0.386',
+                        top: '1.01',
+                        src: require('../../assets/img/长呼复.png')
+                    },
+                    {
+                        left: '0.412',
+                        top: '0.996',
+                        src: require('../../assets/img/长庆气田—呼和浩特天然气管道.png')
+                    }
                 ],//地图弹窗位置
                 desList: [
                     {
                         left: '0.143',
-                        top: '0.622',
+                        top: '0.522',
                         name: '长庆气田-乌海-临河输气管道',
                         total: '4583',
                         inside: '700',
-                        num:'6.3',
-                        year:'2008年'
+                        num: '6.3',
+                        year: '2008年'
                     },
                     {
-                        left: '0.198',
-                        top: '0.769',
+                        left: '0.143',
+                        top: '0.522',
                         name: '苏-东-淮天然气管道',
                         total: '4583',
                         inside: '2000',
-                        num:'35',
-                        year:'2010年'
+                        num: '35',
+                        year: '2010年'
                     },
                     {
-                        left: '0.218',
-                        top: '0.594',
+                        left: '0.143',
+                        top: '0.522',
+                        name: '长庆气田-呼和浩特天然气管道复线',
+                        total: '4583',
+                        inside: '2000',
+                        num: '35',
+                        year: '2010年'
+                    },
+                    {
+                        left: '0.143',
+                        top: '0.522',
                         name: '长庆气田-呼和浩特天然气输气管道',
                         total: '4583',
                         inside: '1583',
-                        num:'17.5',
-                        year:'2003年'
+                        num: '17.5',
+                        year: '2003年'
                     }
 
                 ],//地图上方信息展示
@@ -164,7 +232,7 @@
                 ],
                 timer: "",
                 selected_one: 0,
-                tablist_one: ["送气端主要气田供气占比", "送气端主要企业供气占比"],
+                tablist_one: ["送气端结构气田占比分析", "天然气管线管输量分布"],
                 tableTh_one: [
                     {
                         value: "序号",
@@ -201,21 +269,21 @@
                         chuqi: "1500",
                     },
                     {
-                        guanxian: "长呼输气管道",
-                        totalkm: "561.2",
-                        partlm: "55%",
-                        jinqi: "50",
-                        chuqi: "50",
-                    },
-                    {
                         guanxian: "长呼复输气管道复",
                         totalkm: "468.2",
                         partlm: "80%",
                         jinqi: "760",
                         chuqi: "760",
                     },
+                    {
+                        guanxian: "长呼输气管道",
+                        totalkm: "561.2",
+                        partlm: "55%",
+                        jinqi: "50",
+                        chuqi: "50",
+                    }
                 ],
-                listData_flag:[
+                listData_flag: [
                     {
                         guanxian: "长乌临输气管道",
                         totalkm: "355",
@@ -231,19 +299,19 @@
                         chuqi: "1500",
                     },
                     {
-                        guanxian: "长呼输气管道",
-                        totalkm: "561.2",
-                        partlm: "55%",
-                        jinqi: "50",
-                        chuqi: "50",
-                    },
-                    {
                         guanxian: "长呼复输气管道复",
                         totalkm: "468.2",
                         partlm: "80%",
                         jinqi: "760",
                         chuqi: "760",
                     },
+                    {
+                        guanxian: "长呼输气管道",
+                        totalkm: "561.2",
+                        partlm: "55%",
+                        jinqi: "50",
+                        chuqi: "50",
+                    }
                 ],
                 tableTh_two: [
                     {
@@ -294,15 +362,13 @@
                     },
                 ],
                 optionObjLineQTGQ: {
-                    legendData: ["苏里格气田", "大牛地气田", "乌审旗气田", "胜利井气田", "靖边气田"],
-                    seriesName: "送气端主要气田供气占比",
+                    legendData: ["苏里格气田", "大牛地气田",  "胜利井气田"],
+                    seriesName: "送气端结构气田占比分析",
                     unit: "万立方米",
                     seriesData: [
                         {value: 90, name: "苏里格气田"},
                         {value: 20, name: "大牛地气田"},
-                        {value: 40, name: "乌审旗气田"},
-                        {value: 20, name: "胜利井气田"},
-                        {value: 20, name: "靖边气田"}
+                        {value: 20, name: "胜利井气田"}
                     ],
                 },
                 optionObjJSD: {
@@ -316,21 +382,129 @@
                     ],
                 },
                 optionObjGQQY: {
-                    legendData: ["中石油", "中石化"],
-                    seriesName: "送气端主要企业供气占比",
+                    legendData: ["长-乌-临", "苏-东-淮",'长-呼','长-呼复线'],
+                    seriesName: "天然气管线管输量分布",
                     unit: "万立方米",
                     seriesData: [
-                        {value: 2500, name: "中石油"},
-                        {value: 500, name: "中石化"},
+                        {value: 1200, name: "长-乌-临"},
+                        {value: 1000, name: "苏-东-淮"},
+                        {value: 800, name: "长-呼"},
+                        {value: 600, name: "长-呼复线"},
                     ],
                 },
-                showFlag:false
+                showFlag: false
             };
         },
         mounted() {
-            this.timer = new Date().getTime()
+            this.timer = new Date().getTime();
+            this.drawBarOne();
         },
         methods: {
+            //天然气管道日进出气量统计
+            drawBarOne() {
+                let myChart = this.$echarts.init(document.getElementById('guanshuBar'));
+                // 指定图表的配置项和数据
+                myChart.setOption({
+                    tooltip: {
+                        trigger: "axis",
+                        formatter: '{a0}{b0}: {c0}万立方米<br /> {a1}{b1}: {c1}万立方米<br /> {a2}{b2}: {c2}万立方米',
+                        axisPointer: {
+                            type: "cross",
+                            crossStyle: {
+                                color: "#999",
+                            },
+                        },
+                    },
+                    legend: {
+                        data: ['日进气量', '日出气量', '管存量']
+                    },
+                    xAxis: [
+                        {
+                            type: "category",
+                            data: [
+                                "11月20日",
+                                "11月21日",
+                                "11月22日",
+                                "11月23日",
+                                "11月24日",
+                                "11月25日",
+                                "11月26日"
+                            ],
+                            axisPointer: {
+                                type: "shadow",
+                            },
+                            axisLabel: {
+                                fontSize: 12,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
+                    ],
+                    yAxis: [
+                        {
+                            name: "万立方米",
+                            type: "value",
+                            axisLabel: {
+                                fontSize: 12,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        }
+                    ],
+                    series: [
+                        {
+                            name: "日进气量",
+                            type: "bar",
+                            barWidth: 6,
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#FFE6A3"},
+                                    {offset: 1, color: "#FF8B2E"},
+                                ]),
+                            },
+                            data: [44,34,27,37,28,27,20]
+                        },
+                        {
+                            name: "日出气量",
+                            type: "bar",
+                            barWidth: 6,
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#63edd4"},
+                                    {offset: 1, color: "rgba(14, 137, 238, 1)"},
+                                ]),
+                            },
+                            data: [36,37,35,34,32,41,40]
+                        },
+                        {
+                            name: "管存量",
+                            type: "bar",
+                            barWidth: 6,
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#90ffe2"},
+                                    {offset: 1, color: "#5affe1"},
+                                ]),
+                            },
+                            data: [54,77,71,68,69,76,69]
+                        },
+                    ],
+                });
+            },
             // 用于点击的div块绑定函数
             be_click_left(a) {
                 return this.screenWidth * a + 'px'
@@ -345,12 +519,11 @@
             tabButton_two(index) {
                 this.selected_two = index;
             },
-            showDes(index){
+            /*showDes(index){
                 if(this.desIndex==index){
                     if(this.$refs[`list${index}`][0].style.display=='none'){
                         this.showFlag=true
                         this.desIndex=index;
-
                         this.listData_one=[this.listData_flag[index]]
                     }else{
                         this.listData_one=this.listData_flag
@@ -364,6 +537,14 @@
                     this.listData_one=[this.listData_flag[index]];
                 }
 
+            }*/
+            showDes(index) {
+                this.activeIndex = index;
+                this.listData_one = [this.listData_flag[index]];
+            },
+            hidePos() {
+                this.activeIndex = -1;
+                this.listData_one = this.listData_flag
             }
         },
     };
@@ -371,6 +552,15 @@
 
 <style lang="scss" scoped>
     #confess_content {
+        .imgS {
+            position: absolute;
+            width: 10%;
+        }
+        .imgG {
+            width: 2%;
+            position: absolute;
+
+        }
         .lay-content {
             border: 1px solid rgba(37, 54, 104, 0.6);
             position: absolute;
@@ -518,6 +708,7 @@
                 border: 1px solid #b9bec9;
                 padding: 3px 7px 2px 7px;
                 text-align: center;
+                vertical-align: middle;
             }
 
             th {

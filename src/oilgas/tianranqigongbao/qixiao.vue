@@ -4,15 +4,25 @@
 
             <!-- banner -->
             <img class="map"
-                 src="../../assets/img/oilgas/changongchuxiao.png"
+                 src="../../assets/img/地图.png"
                  alt="图片未显示"/>
 
             <!--地图气田定位-->
+            <!--<div>-->
+                <!--<div class="clickbtn" v-for="(item,index) in posList"-->
+                     <!--:style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"-->
+                     <!--@click="show(index)"-->
+                <!--&gt;</div>-->
+            <!--</div>-->
             <div>
-                <div class="clickbtn" v-for="(item,index) in posList"
+                <img :src="item.src" v-for="(item,index) in posList" class="clickbtn"
                      :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
-                     @click="show(index)"
-                ></div>
+                     @click="show(index)">
+            </div>
+            <div>
+                <img :src="item.src" v-for="(item,index) in guanshuList" class="imgG"
+                     :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+                    >
             </div>
 
             <!--盟市供应、消费量-->
@@ -41,13 +51,13 @@
             </div>
             <!--储气-->
             <div v-for="(item,index) in storageList" :style="{top:be_click_top(item.top),left:be_click_left(item.left)}"
-                 class="des_list" v-show="index+5==desIndex">
+                 class="des_list" v-show="index+3==desIndex">
                 <div>储气量:{{item.num1}}亿立方米</div>
                 <div>日调用量:{{item.num2}}亿立方米</div>
             </div>
             <!--管道-->
             <div v-for="(item,index) in channelList" :style="{top:be_click_top(item.top),left:be_click_left(item.left)}"
-                 class="des_list" v-show="index+11==desIndex">
+                 class="des_list" v-show="index+9==desIndex">
                 <div>{{item.name}}</div>
                 <div>管存量:{{item.num1}}万立方米</div>
                 <div>压力:{{item.num2}}Mpa</div>
@@ -166,7 +176,7 @@
                         num2: '2170',//储量
                         num3: '18',//月产量
                         num4: '35',//储采比
-                        top: '0.68',
+                        top: '0.62',
                         left: '0.23'
                     },
                     //苏里格气田
@@ -176,7 +186,7 @@
                         num2: '3332',//储量
                         num3: '19',//月产量
                         num4: '45',//储采比
-                        top: '0.68',
+                        top: '0.62',
                         left: '0.23'
                     },
                     //大牛地气田
@@ -186,37 +196,18 @@
                         num2: '2380',//储量
                         num3: '16',//月产量
                         num4: '34',//储采比
-                        top: '0.73',
-                        left: '0.33'
-                    },
-                    //乌审旗气田
-                    {
-                        name: '乌审旗气田',//
-                        num1: '3432',//资源量
-                        num2: '1428',//储量
-                        num3: '15',//月产量
-                        num4: '29',//储采比
-                        top: '0.68',
-                        left: '0.23'
-                    },
-                    //靖边气田
-                    {
-                        name: '靖边气田',//
-                        num1: '3432',//资源量
-                        num2: '1982',//储量
-                        num3: '22',//月产量
-                        num4: '31',//储采比
-                        top: '0.81',
+                        top: '0.62',
                         left: '0.23'
                     }
+
                 ],//气田显示页面
                 storageList: [
                     // 阿拉善盟储气
                     {
                         num1:'4.66',
                         num2:'17',
-                        left: '0.21',
-                        top: '0.92',
+                        left: '0.01',
+                        top: '0.99',
 
                     },
                     // 巴彦淖尔储气
@@ -224,15 +215,15 @@
                         num1:'4.66',
                         num2:'17',
                         left: '0.18',
-                        top: '0.84',
+                        top: '0.79',
 
                     },
                     // 鄂尔多斯储气
                     {
                         num1:'9.1',
                         num2:'22',
-                        left: '0.28',
-                        top: '0.87',
+                        left: '0.18',
+                        top: '0.79',
                     },
                     // 包头
                     {
@@ -245,7 +236,7 @@
                     {
                         num1:'7.81',
                         num2:'19',
-                        left: '0.42',
+                        left: '0.52',
                         top: '0.91',
                     },
                     // 通辽储气
@@ -265,28 +256,37 @@
                         num3:'790',
                         num4:'790',
                         left: '0.17',
-                        top: '0.66',
+                        top: '0.61',
                     },
-                    // 长庆气田-乌海
-                    {
-                        name:'长庆气田-呼和浩特天然气输气管道',
-                         num1:'355',
-                        num2:'6.4',
-                        num3:'790',
-                        num4:'790',
-                        left: '0.27',
-                        top: '0.66',
-                    },
-                    // 长庆气田-乌海
+
+                    // 苏-东-淮
                     {
                         name:'苏-东-淮天然气管道',
                          num1:'355',
                         num2:'6.4',
                         num3:'790',
                         num4:'790',
-                        left: '0.27',
-                        top: '0.79',
-                    }
+                        left: '0.17',
+                        top: '0.61',
+                    },
+                    {
+                        name:'长庆气田-呼和浩特天然气管道复线',
+                        num1:'355',
+                        num2:'6.4',
+                        num3:'790',
+                        num4:'790',
+                        left: '0.17',
+                        top: '0.61',
+                    },
+                    {
+                        name:'长庆气田-呼和浩特天然气输气管道',
+                        num1:'355',
+                        num2:'6.4',
+                        num3:'790',
+                        num4:'790',
+                        left: '0.17',
+                        top: '0.61',
+                    },
                 ],//管道
                 desListOne: [
                     // 乌海
@@ -338,71 +338,101 @@
                     {
                         left: '0.355',
                         top: '1.02',
+                        src: require('../../assets/img/jing.png')
                     },
                     //苏里格气田
                     {
                         left: '0.385',
                         top: '1.03',
+                        src: require('../../assets/img/jing.png')
                     },
                     //大牛地气田
                     {
                         left: '0.445',
                         top: '1.035',
-                    },
-                    //乌审旗气田
-                    {
-                        left: '0.415',
-                        top: '1.07',
-                    },
-                    //靖边气田
-                    {
-                        left: '0.365',
-                        top: '1.1',
+                        src: require('../../assets/img/jing.png')
                     },
                     //阿拉善盟储气
                     {
                         left: '0.32',
                         top: '1.03',
+                        src: require('../../assets/img/chuqiguan.png')
                     },
                     //巴彦淖尔储气
                     {
-                        left: '0.31',
-                        top: '0.96',
+                        left: '0.35',
+                        top: '0.94',
+                        src: require('../../assets/img/chuqiguan.png')
                     },
                     //鄂尔多斯储气
                     {
                         left: '0.38',
                         top: '0.99',
+                        src: require('../../assets/img/chuqiguan.png')
                     },
                     //包头储气
                     {
                         left: '0.43',
                         top: '0.92',
+                        src: require('../../assets/img/chuqiguan.png')
                     },
                     //呼和浩特储气
                     {
                         left: '0.49',
                         top: '1.02',
+                        src: require('../../assets/img/chuqiguan.png')
                     },
                     //通辽储气
                     {
                         left: '0.79',
                         top: '0.81',
+                        src: require('../../assets/img/chuqiguan.png')
                     },
                     //长庆气田-乌海
                     {
-                        left: '0.37',
-                        top: '0.96',
-                    },
-                    //长庆气田-呼和浩特
-                    {
-                        left: '0.48',
+                        left: '0.303',
                         top: '0.969',
+                        src: require('../../assets/img/guandaotou.png')
                     },
-                    //苏-东-淮
+                    //苏东淮
                     {
-                        left: '0.395',
-                        top: '1.09',
+                        left: '0.374',
+                        top: '1.08',
+                        src: require('../../assets/img/guandaotou.png')
+                    },
+                    // 长呼复
+                    {
+                        left: '0.47',
+                        top: '0.99',
+                        src: require('../../assets/img/guandaotou.png')
+                    },
+                    // 长呼
+                    {
+                        left: '0.47',
+                        top: '0.95',
+                        src: require('../../assets/img/guandaotou.png')
+                    }
+                ],
+                guanshuList:[
+                    {
+                        left: '0.303',
+                        top: '0.969',
+                        src: require('../../assets/img/长庆气田-乌海-临河天然气管道.png')
+                    },
+                    {
+                        left: '0.354',
+                        top: '1.03',
+                        src: require('../../assets/img/苏东准管道.png')
+                    },
+                    {
+                        left: '0.386',
+                        top: '0.996',
+                        src: require('../../assets/img/长呼复.png')
+                    },
+                    {
+                        left: '0.412',
+                        top: '0.9',
+                        src: require('../../assets/img/长庆气田—呼和浩特天然气管道.png')
                     }
                 ],
                 selected_one: 0,
@@ -461,15 +491,15 @@
                     },
                 ],
                 optionObjTFJGFX: {
-                    legendData: ["苏里格气田", "大牛地气田", "靖边气田", "胜利井气田", "乌审旗气田"],
+                    legendData: ["苏里格气田", "大牛地气田",  "胜利井气田"],
                     seriesName: "月产量分析",
                     unit: "亿立方米",
                     seriesData: [
                         {value: 5440, name: "苏里格气田"},
                         {value: 5033, name: "大牛地气田"},
-                        {value: 3801, name: "靖边气田"},
+                        // {value: 3801, name: "靖边气田"},
                         {value: 2193, name: "胜利井气田"},
-                        {value: 11986, name: "乌审旗气田"},
+                        // {value: 11986, name: "乌审旗气田"},
                     ],
                 },
                 optionObjXFJGFX: {
@@ -588,6 +618,11 @@
 
 <style lang="scss" scoped>
     #confess_content {
+        .imgG {
+            width: 10%;
+            position: absolute;
+
+        }
         .clickbtn {
             width: 9px;
             height: 9px;

@@ -27,15 +27,17 @@
                     </table>
                 </div>
             </div>
-            <!--天然气日调峰量趋势分析-->
-            <div>
-
-            </div>
-
             <!-- 日调峰同比分析 -->
             <div class="chart module">
                 <h4>{{title}}</h4>
-                <barline-two-chart :optionObj="optionObjYTF" @showBar="showBar"></barline-two-chart>
+                <van-dropdown-menu style="margin-bottom: 0.06rem">
+                    <van-dropdown-item v-model="value1" :options="option1" @change="changeOne"/>
+                </van-dropdown-menu>
+                <van-dropdown-menu style="margin-bottom: 0.08rem">
+                    <van-dropdown-item v-model="value2" :options="option2" @change="changeTwo"/>
+                </van-dropdown-menu>
+                <div style="width: 100%;height:242px" id="yafeiBar"></div>
+                <!--<barline-two-chart :optionObj="optionObjYTF" @showBar="showBar"></barline-two-chart>-->
             </div>
             <div v-for="(item,index) in desList"
                  class="des_list"
@@ -59,17 +61,16 @@
                         <div class="fontSize">{{pie_num}}</div>
                         <div class="fontSize">万立方米</div>
                     </div>
-                    <dount-chart class="echarts" :optionObj="optionObjTFMS"></dount-chart>
+                    <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
                 </div>
                 <div class="chart-item" v-if="selected_one === 1">
                     <div class="fontSize_div">
-                        <div class="fontSize">{{pie_num}}</div>
+                        <div class="fontSize">9675</div>
                         <div class="fontSize">万立方米</div>
                     </div>
-                    <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
+                    <dount-chart class="echarts" :optionObj="optionObjTFMS"></dount-chart>
                 </div>
             </div>
-
 
 
         </div>
@@ -87,6 +88,17 @@
         },
         data() {
             return {
+                value1: 0,
+                option1: [
+                    {text: '上游调峰企业', value: 0},
+                    {text: '中游调峰企业', value: 1},
+                    {text: '下游调整企业', value: 2}
+                ],
+                option2: [
+                    {text: '中石油', value: 0},
+                    {text: '中石化', value: 1}
+                ],
+                value2: 0,
                 desList: ['', '', '', '', ''],
                 posList: [
                     //呼和浩特
@@ -125,7 +137,8 @@
                 selected_one: 0,
                 selected_two: 0,
                 selected_three: "0",
-                tablist_one: ["日调峰气量盟市占比", "日调峰气量企业占比"],
+                tablist_one: [ "日调峰气量企业占比","日调峰气量盟市占比"],
+                tablist_one_change:['日调峰气量企业占比','呼和浩特日调峰气量企业占比','鄂尔多斯日调峰气量企业占比','包头日调峰气量企业占比','巴彦淖尔日调峰气量企业占比','通辽日调峰气量企业占比'],
                 tablist_two: ["天然气日消费缺口预测", "调峰计划建议"],
                 tableTh_two: [
                     {
@@ -205,7 +218,14 @@
                     legendData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
                     seriesName: "调峰结构分析",
                     unit: "万立方米",
-                    seriesData: []
+                    seriesData:[
+                        {value: (9675 * 0.2265).toFixed(2), name: "巴彦淖尔"},
+                        {value: (9675 * 0.2096).toFixed(2), name: "包头"},
+                        {value: (9675 * 0.1582).toFixed(2), name: "呼和浩特"},
+                        {value: (9675 * 0.0913).toFixed(2), name: "鄂尔多斯"},
+                        {value: (9675 * 0.0859).toFixed(2), name: "乌海"},
+                        {value: (9675 * 0.2285).toFixed(2), name: "通辽"},
+                    ]
                 },
                 optionObjTFJGFX: {
                     legendData: ["LNG", "甲醇化肥", "可中断工业", "不可中断工业", "商业"],
@@ -265,26 +285,78 @@
                     seriesData1: [6, 13, 18, 13, 13, 18, 13, 9, 13, 9],
                     seriesData2: [4, 8, 15, 9, 7, 11, 9, 11, 6, 5],
                 },
-                pie_num: 75,
+                pie_num: 1470,
+                pie_numAry:[1470,467,475,509,509,261],
                 screenWidth: document.body.clientWidth, // 屏幕宽
                 desIndex: null,
-                title: '日调峰同比分析',
-                titleArry: ['日调峰同比分析', '呼和浩特日调峰同比分析', '鄂尔多斯日调峰同比分析', '包头日调峰同比分析', '巴彦淖尔日调峰同比分析', '通辽日调峰同比分析'],
-                showFlag: false
+                title: '天然气日调峰量趋势分析',
+                titleArry: ['天然气日调峰量趋势分析', '呼和浩特天然气日调峰量趋势分析', '鄂尔多斯天然气日调峰量趋势分析', '包头天然气日调峰量趋势分析', '巴彦淖尔天然气日调峰量趋势分析', '通辽天然气日调峰量趋势分析'],
+                showFlag: false,
+                barOneSer: [
+                    //总
+                    [
+                        {
+                            actur: [15, 11, 18, 16, 18, 24, 14],
+                            plan: [16, 13, 19, 16, 17, 22, 18],
+                            compare: [24, 18, 15, 28, 27, 31, 19]
+                        }
+                    ],
+                    //呼和浩特
+                    [
+                        {
+                            actur: [41, 43, 55, 57, 56, 43, 55],
+                            plan: [32, 27, 21, 24, 29, 27, 21],
+                            compare: [27, 18, 26, 15, 13, 18, 26]
+                        }
+                    ],
+                    //鄂尔多斯
+                    [
+                        {
+                            actur: [53, 52, 42, 47, 56, 42, 51],
+                            plan: [35, 29, 30, 27, 31, 24, 31],
+                            compare: [16, 19, 19, 12, 17, 21, 28]
+                        }
+                    ],
+                    //包头市
+                    [
+                        {
+                            actur: [52, 46, 54, 46, 43, 42, 51],
+                            plan: [17, 18, 16, 20, 24, 24, 31],
+                            compare: [18, 15, 28, 27, 19, 21, 28]
+                        }
+                    ],
+                    //巴彦淖尔
+                    [
+                        {
+                            actur: [54, 52, 53, 46, 41, 42, 51],
+                            plan: [28, 26, 32, 33, 21, 24, 31],
+                            compare: [19, 27, 27, 18, 28, 21, 28]
+                        }
+                    ],
+                    //通辽
+                    [
+                        {
+                            actur: [23, 25, 31, 30, 24, 25, 27],
+                            plan: [18, 19, 16, 17, 18, 22, 24],
+                            compare: [24, 26, 30, 29, 27, 23, 20]
+                        }
+                    ],
+                ]
             };
         },
         mounted() {
+            this.drawBarOne(this.barOneSer[0])
             this.optionObjYTF.seriesLeftData = this.optionObjYTFLeftData[0]
             this.optionObjYTF.seriesRightData = this.optionObjYTFRightData[0]
-            this.optionObjTFMS.seriesData =
-                [
-                    {value: (this.pie_num * 0.2265).toFixed(2), name: "巴彦淖尔"},
-                    {value: (this.pie_num * 0.2096).toFixed(2), name: "包头"},
-                    {value: (this.pie_num * 0.1582).toFixed(2), name: "呼和浩特"},
-                    {value: (this.pie_num * 0.0913).toFixed(2), name: "鄂尔多斯"},
-                    {value: (this.pie_num * 0.0859).toFixed(2), name: "乌海"},
-                    {value: (this.pie_num * 0.2285).toFixed(2), name: "通辽"},
-                ];
+            // this.optionObjTFMS.seriesData =
+            //     [
+            //         {value: (this.pie_num * 0.2265).toFixed(2), name: "巴彦淖尔"},
+            //         {value: (this.pie_num * 0.2096).toFixed(2), name: "包头"},
+            //         {value: (this.pie_num * 0.1582).toFixed(2), name: "呼和浩特"},
+            //         {value: (this.pie_num * 0.0913).toFixed(2), name: "鄂尔多斯"},
+            //         {value: (this.pie_num * 0.0859).toFixed(2), name: "乌海"},
+            //         {value: (this.pie_num * 0.2285).toFixed(2), name: "通辽"},
+            //     ];
             this.optionObjTFJGFX.seriesData =
                 [
                     {value: (this.pie_num * 0.1912).toFixed(2), name: "LNG"},
@@ -296,6 +368,162 @@
 
         },
         methods: {
+            drawBarOne(seriesData) {
+                let myChart = this.$echarts.init(document.getElementById('yafeiBar'));
+                // 指定图表的配置项和数据
+                myChart.setOption({
+                    tooltip: {
+                        trigger: "axis",
+                        formatter: function(params){
+                            const cpyAry=['可中断工业','不可中断工业','LNG企业','商业','甲醇化肥'];
+                            if(params[0].name=='1月1日'){
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value+'万立方米'+
+                                    '</br>' +
+                                    params[1].seriesName  +
+                                    params[1].value + '万立方米' + '</br>' +
+                                    params[2].seriesName + ':' +
+                                    params[2].value + '%' + '</br>'+'调峰单位:' +cpyAry[0]
+                            }else if(params[0].name=='1月2日'){
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value+'万立方米'+
+                                    '</br>' +
+                                    params[1].seriesName  +
+                                    params[1].value + '万立方米' + '</br>' +
+                                    params[2].seriesName + ':' +
+                                    params[2].value + '%' + '</br>'+'调峰单位:' +cpyAry[1]
+                            }else if(params[0].name=='1月3日'){
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value+'万立方米'+
+                                    '</br>' +
+                                    params[1].seriesName  +
+                                    params[1].value + '万立方米' + '</br>' +
+                                    params[2].seriesName + ':' +
+                                    params[2].value + '%' + '</br>'+'调峰单位:' +cpyAry[2]
+                            }else{
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value+'万立方米'+
+                                    '</br>' +
+                                    params[1].seriesName  +
+                                    params[1].value + '万立方米' + '</br>' +
+                                    params[2].seriesName + ':' +
+                                    params[2].value + '%' + '</br>'+'调峰单位:' +cpyAry[2]
+                            }
+
+
+                        },
+                        axisPointer: {
+                            type: "cross",
+                            crossStyle: {
+                                color: "#999",
+                            },
+                        },
+                    },
+                    legend: {
+                        data: ['天然气调峰值', '计划调峰量', '同比变化']
+                    },
+                    xAxis: [
+                        {
+                            type: "category",
+                            data: [
+                                "1月1日",
+                                "1月2日",
+                                "1月3日",
+                                "1月4日",
+                                "1月5日",
+                                "1月6日",
+                                "1月7日",
+                            ],
+                            axisPointer: {
+                                type: "shadow",
+                            },
+                            axisLabel: {
+                                fontSize: 12,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
+                    ],
+                    yAxis: [
+                        {
+                            name: "万立方米",
+                            type: "value",
+                            axisLabel: {
+                                fontSize: 12,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
+                        {
+                            show: false,
+                            name: "%",
+                            type: "value",
+                            max: 40,
+                            interval: 10,
+                            axisLabel: {
+                                fontSize: 12,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
+                    ],
+                    series: [
+                        {
+                            name: "天然气调峰值",
+                            type: "bar",
+                            barWidth: 6,
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#63edd4"},
+                                    {offset: 1, color: "rgba(14, 137, 238, 1)"},
+                                ]),
+                            },
+                            data: seriesData[0].actur
+                        },
+                        {
+                            name: "计划调峰量",
+                            type: "bar",
+                            barWidth: 6,
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#FFE6A3"},
+                                    {offset: 1, color: "#FF8B2E"},
+                                ]),
+                            },
+                            data: seriesData[0].plan
+                        },
+                        {
+                            name: "同比变化",
+                            type: "line",
+                            itemStyle: {
+                                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#BB5FF0"},
+                                    {offset: 1, color: "#BB5FF0"},
+                                ]),
+                            },
+                            yAxisIndex: 1,
+                            data: seriesData[0].compare
+                        }
+                    ],
+                });
+            },
             // 用于点击的div块绑定函数
             be_click_left(a) {
                 return this.screenWidth * a + 'px'
@@ -311,24 +539,24 @@
             },
             //柱状图点击事件
             showBar(params) {
-                this.pie_num = params.value;
-                this.optionObjTFMS.seriesData =
-                    [
-                        {value: (this.pie_num * 0.2265).toFixed(2), name: "巴彦淖尔"},
-                        {value: (this.pie_num * 0.2096).toFixed(2), name: "包头"},
-                        {value: (this.pie_num * 0.1582).toFixed(2), name: "呼和浩特"},
-                        {value: (this.pie_num * 0.0913).toFixed(2), name: "鄂尔多斯"},
-                        {value: (this.pie_num * 0.0859).toFixed(2), name: "乌海"},
-                        {value: (this.pie_num * 0.2285).toFixed(2), name: "通辽"},
-                    ];
-                this.optionObjTFJGFX.seriesData =
-                    [
-                        {value: (this.pie_num * 0.1912).toFixed(2), name: "LNG"},
-                        {value: (this.pie_num * 0.1769).toFixed(2), name: "甲醇化肥"},
-                        {value: (this.pie_num * 0.1336).toFixed(2), name: "可中断工业"},
-                        {value: (this.pie_num * 0.0771).toFixed(2), name: "不可中断工业"},
-                        {value: (this.pie_num * 0.4212).toFixed(2), name: "商业"},
-                    ]
+                // this.pie_num = params.value;
+                // this.optionObjTFMS.seriesData =
+                //     [
+                //         {value: (this.pie_num * 0.2265).toFixed(2), name: "巴彦淖尔"},
+                //         {value: (this.pie_num * 0.2096).toFixed(2), name: "包头"},
+                //         {value: (this.pie_num * 0.1582).toFixed(2), name: "呼和浩特"},
+                //         {value: (this.pie_num * 0.0913).toFixed(2), name: "鄂尔多斯"},
+                //         {value: (this.pie_num * 0.0859).toFixed(2), name: "乌海"},
+                //         {value: (this.pie_num * 0.2285).toFixed(2), name: "通辽"},
+                //     ];
+                // this.optionObjTFJGFX.seriesData =
+                //     [
+                //         {value: (this.pie_num * 0.1912).toFixed(2), name: "LNG"},
+                //         {value: (this.pie_num * 0.1769).toFixed(2), name: "甲醇化肥"},
+                //         {value: (this.pie_num * 0.1336).toFixed(2), name: "可中断工业"},
+                //         {value: (this.pie_num * 0.0771).toFixed(2), name: "不可中断工业"},
+                //         {value: (this.pie_num * 0.4212).toFixed(2), name: "商业"},
+                //     ]
             },
             // 点击地图的点联动
             showDes(index) {
@@ -339,17 +567,43 @@
                         this.optionObjYTF.seriesLeftData = this.optionObjYTFLeftData[index + 1];
                         this.optionObjYTF.seriesRightData = this.optionObjYTFRightData[index + 1];
                         this.title = this.titleArry[index + 1]
-                        if(index==4){
-                            this.listData_two=this.listData_copy;
-                        }else{
-                            this.listData_two=[this.listData_copy[index]]
+                        this.$nextTick(function () {
+                            this.drawBarOne(this.barOneSer[index + 1])
+                        })
+                        if (index == 4) {
+                            this.listData_two = this.listData_copy;
+                        } else {
+                            this.listData_two = [this.listData_copy[index]]
                         }
+                        this.optionObjTFJGFX.seriesData =
+                            [
+                                {value: (this.pie_numAry[index+1] * 0.1912).toFixed(2), name: "LNG"},
+                                {value: (this.pie_numAry[index+1] * 0.1769).toFixed(2), name: "甲醇化肥"},
+                                {value: (this.pie_numAry[index+1] * 0.1336).toFixed(2), name: "可中断工业"},
+                                {value: (this.pie_numAry[index+1] * 0.0771).toFixed(2), name: "不可中断工业"},
+                                {value: (this.pie_numAry[index+1] * 0.4212).toFixed(2), name: "商业"},
+                            ]
+                        this.pie_num=this.pie_numAry[index+1]
+                        this.tablist_one[0]=this.tablist_one_change[index+1]
 
                     } else {
                         this.optionObjYTF.seriesLeftData = this.optionObjYTFLeftData[0];
                         this.optionObjYTF.seriesRightData = this.optionObjYTFRightData[0];
                         this.title = this.titleArry[0];
-                        this.listData_two=this.listData_copy;
+                        this.$nextTick(function () {
+                            this.drawBarOne(this.barOneSer[0])
+                        })
+                        this.optionObjTFJGFX.seriesData =
+                            [
+                                {value: (this.pie_numAry[0] * 0.1912).toFixed(2), name: "LNG"},
+                                {value: (this.pie_numAry[0] * 0.1769).toFixed(2), name: "甲醇化肥"},
+                                {value: (this.pie_numAry[0] * 0.1336).toFixed(2), name: "可中断工业"},
+                                {value: (this.pie_numAry[0] * 0.0771).toFixed(2), name: "不可中断工业"},
+                                {value: (this.pie_numAry[0] * 0.4212).toFixed(2), name: "商业"},
+                            ]
+                        this.pie_num=this.pie_numAry[0]
+                        this.tablist_one[0]=this.tablist_one_change[0]
+                        this.listData_two = this.listData_copy;
                         this.showFlag = false;
                         this.desIndex = null;
                     }
@@ -360,15 +614,64 @@
                     this.optionObjYTF.seriesLeftData = this.optionObjYTFLeftData[index + 1];
                     this.optionObjYTF.seriesRightData = this.optionObjYTFRightData[index + 1];
                     this.title = this.titleArry[index + 1];
-                    if(index==4){
-                        this.listData_two=this.listData_copy;
-                    }else{
-                        this.listData_two=[this.listData_copy[index]]
+                    if (index == 4) {
+                        this.listData_two = this.listData_copy;
+                    } else {
+                        this.listData_two = [this.listData_copy[index]]
                     }
+                    this.$nextTick(function () {
+                        this.drawBarOne(this.barOneSer[index + 1])
+                    })
+                    this.optionObjTFJGFX.seriesData =
+                        [
+                            {value: (this.pie_numAry[index+1] * 0.1912).toFixed(2), name: "LNG"},
+                            {value: (this.pie_numAry[index+1] * 0.1769).toFixed(2), name: "甲醇化肥"},
+                            {value: (this.pie_numAry[index+1] * 0.1336).toFixed(2), name: "可中断工业"},
+                            {value: (this.pie_numAry[index+1] * 0.0771).toFixed(2), name: "不可中断工业"},
+                            {value: (this.pie_numAry[index+1] * 0.4212).toFixed(2), name: "商业"},
+                        ]
+                    this.pie_num=this.pie_numAry[index+1]
+                    this.tablist_one[0]=this.tablist_one_change[index+1]
                 }
 
 
             },
+
+            changeOne() {
+                switch (this.value1) {
+                    case 0:
+                        this.option2 = [{text: '中石油', value: 0},
+                            {text: '中石化', value: 1}];
+                        this.value2 = 0;
+                        this.drawBarOne(this.barOneSer[2]);
+                        break;
+                    case 1:
+                        this.option2 = [{text: '西部天然气', value: 0},
+                            {text: '新圣天然气', value: 1}];
+                        this.value2 = 0;
+                        this.drawBarOne(this.barOneSer[3]);
+                        break;
+                    case 2:
+                        this.option2 = [{text: '西部天然气', value: 0},
+                            {text: '新圣天然气', value: 1}, {text: '其他', value: 2}];
+                        this.value2 = 0;
+                        this.drawBarOne(this.barOneSer[1]);
+                        break;
+                }
+            },
+            changeTwo() {
+                switch (this.value2) {
+                    case 0:
+                        this.drawBarOne(this.barOneSer[4]);
+                        break;
+                    case 1:
+                        this.drawBarOne(this.barOneSer[1]);
+                        break;
+                    case 2:
+                        this.drawBarOne(this.barOneSer[2]);
+                        break;
+                }
+            }
         },
     };
 </script>
@@ -414,6 +717,7 @@
             &.module {
                 margin: 10px 0;
                 padding: 0 15px 15px;
+                height: 320px;
             }
             h4 {
                 font: 500 13px 微软雅黑;
@@ -504,5 +808,22 @@
         background-repeat: no-repeat;
         background-position: 50% 37%;
         background-size: 65px 65px;
+    }
+</style>
+<style lang="scss">
+    #confess_content {
+        .van-dropdown-menu__bar {
+            height: 32px;
+        }
+        .van-dropdown-menu__title {
+            font-size: 12px;
+        }
+        .van-cell, .van-dropdown-menu__title--active {
+            font-size: 12px;
+            color: #3A6DDA;
+        }
+        .van-dropdown-item__option--active .van-dropdown-item__icon {
+            color: #3A6DDA;
+        }
     }
 </style>

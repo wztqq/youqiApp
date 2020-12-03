@@ -37,6 +37,8 @@
                 <div>区内里程：{{item.inside}}公里</div>
                 <div>设计输量：{{item.num}}亿立方米/年</div>
                 <div>起止年限：{{item.year}}</div>
+                <div>管道末站压力：{{item.pa}}</div>
+                <div>管道末站压力阈值：{{item.palimit}}</div>
             </div>
             <!-- 日调峰记录查询 && 调峰结构分析 -->
             <div class="chart table">
@@ -112,6 +114,7 @@
         },
         data() {
             return {
+                timer: '',
                 activeIndex: -1,
                 desIndex: null,
                 beginList: [
@@ -175,39 +178,47 @@
                 desList: [
                     {
                         left: '0.143',
-                        top: '0.522',
+                        top: '0.462',
                         name: '长庆气田-乌海-临河输气管道',
                         total: '4583',
                         inside: '700',
                         num: '6.3',
-                        year: '2008年'
+                        year: '2008年',
+                        pa:'1.5Mpa',
+                        palimit:'2Mpa'
                     },
                     {
                         left: '0.143',
-                        top: '0.522',
+                        top: '0.462',
                         name: '苏-东-淮天然气管道',
                         total: '4583',
                         inside: '2000',
                         num: '35',
-                        year: '2010年'
+                        year: '2010年',
+                        pa:'2Mpa',
+                        palimit:'2Mpa'
                     },
                     {
                         left: '0.143',
-                        top: '0.522',
+                        top: '0.462',
                         name: '长庆气田-呼和浩特天然气管道复线',
                         total: '4583',
                         inside: '2000',
                         num: '35',
-                        year: '2010年'
+                        year: '2010年',
+                        pa:'2Mpa',
+                        palimit:'2Mpa'
                     },
                     {
                         left: '0.143',
-                        top: '0.522',
+                        top: '0.462',
                         name: '长庆气田-呼和浩特天然气输气管道',
                         total: '4583',
                         inside: '1583',
                         num: '17.5',
-                        year: '2003年'
+                        year: '2003年',
+                        pa:'2Mpa',
+                        palimit:'2Mpa'
                     }
 
                 ],//地图上方信息展示
@@ -398,6 +409,8 @@
         mounted() {
             this.timer = new Date().getTime();
             this.drawBarOne();
+            this.changImg();
+            this.timer=setInterval(this.changImg, 1000);
         },
         methods: {
             //天然气管道日进出气量统计
@@ -540,13 +553,27 @@
             }*/
             showDes(index) {
                 this.activeIndex = index;
+                this.posList[0].src=require('../../assets/img/长庆气田-乌海-临河天然气管道.png')
                 this.listData_one = [this.listData_flag[index]];
+                clearInterval(this.timer);
             },
             hidePos() {
                 this.activeIndex = -1;
-                this.listData_one = this.listData_flag
+                this.listData_one = this.listData_flag;
+                this.timer=setInterval(this.changImg, 1000);
+            },
+            changImg(){
+                let imgSrc=this.posList[0].src;
+                if(imgSrc=='img/长庆气田-乌海-临河天然气管道.28ad2fe2.png'){
+                    this.posList[0].src=require('../../assets/img/长庆气田-乌海-临河天然气管道1.png')
+                }else{
+                    this.posList[0].src=require('../../assets/img/长庆气田-乌海-临河天然气管道.png')
+                }
             }
         },
+        beforeDestroy() {
+            clearInterval(this.timer);
+        }
     };
 </script>
 

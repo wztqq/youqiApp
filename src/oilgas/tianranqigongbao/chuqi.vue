@@ -75,6 +75,9 @@
                 本年度储气能力
             </div>
             <div class="content">
+                <van-dropdown-menu>
+                    <van-dropdown-item v-model="value2" :options="option2" @change="changePie"/>
+                </van-dropdown-menu>
                 <div class="fontSize_div">
                     <div class="fontSize" style="top:92px">{{pie_num}}</div>
                     <div class="fontSize" style="font-size: 14px;top:92px">个</div>
@@ -93,7 +96,13 @@
                     {text: '城燃企业5%储气量', value: 0},
                     {text: '地方政府3天储气量', value: 1}
                 ],
+                option2: [
+                    {text: '2020年', value: 0},
+                    {text: '2019年', value: 1},
+                    {text: '2018年', value: 2}
+                ],
                 value1: 0,
+                value2:0,
                 posList: [
                     //乌海市储气
                     {
@@ -309,7 +318,7 @@
                     ]
 
 				],*/
-                drawGasPieData: [{
+                drawGasPieDataOne: [{
                     name: '已建设储气能力',
                     value: 38
                 },
@@ -321,7 +330,34 @@
                         name: '待建设储气能力',
                         value: 1
                     }],
-                pie_num: 43,
+                drawGasPieDataTwo: [{
+                    name: '已建设储气能力',
+                    value: 33
+                },
+                    {
+                        name: '正建设储气能力',
+                        value: 5
+                    },
+                    {
+                        name: '待建设储气能力',
+                        value: 4
+                    }],
+                drawGasPieDataThree: [{
+                    name: '已建设储气能力',
+                    value: 27
+                },
+                    {
+                        name: '正建设储气能力',
+                        value: 6
+                    },
+                    {
+                        name: '待建设储气能力',
+                        value: 2
+                    }],
+                pie_num:43,
+                pie_num_one: 43,
+                pie_num_two: 42,
+                pie_num_three: 35,
                 // pie:[2.67,0.42,0.46,0.44,0.45,0.43,0.47],
                 showFlag: false,
                 drawBarOneLengend: ['城燃企业5%要求储气量', '城燃企业5%实际储气量'],
@@ -451,7 +487,7 @@
         mounted() {
             this.drawPie('gasPieTwo', this.gasPieTwoLegend, this.gasPieTwoData, "亿立方米", "地方政府3天");
             this.$nextTick(function () {
-                this.drawGasPie(this.drawGasPieData, this.pie_num);
+                this.drawGasPie(this.drawGasPieDataOne, this.pie_num_one);
             });
             this.drawLine(this.drawLineOneLegend,this.drawLineOneSerData)
         },
@@ -531,6 +567,25 @@
                         this.drawLine(this.drawLineTwoLegend,this.drawLineTwoSerData)
                     });
                 }
+            },
+            changePie(){
+                        switch (this.value2) {
+                            case 0:
+                            this.$nextTick(function () {
+                                this.drawGasPie(this.drawGasPieDataOne, this.pie_num_one);
+                            });
+                            break;
+                            case 1:
+                                this.$nextTick(function () {
+                                    this.drawGasPie(this.drawGasPieDataTwo, this.pie_num_two);
+                                });
+                                break;
+                            case 2:
+                                this.$nextTick(function () {
+                                    this.drawGasPie(this.drawGasPieDataThree, this.pie_num_three);
+                                });
+                                break;
+                        }
             },
             // 用于点击的div块绑定函数
             be_click_left(a) {

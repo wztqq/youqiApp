@@ -27,7 +27,23 @@
                     </table>
                 </div>
             </div>
-            <!-- 月调峰气量盟市占比 && 月调峰气量企业占比 -->
+            <!--天然气日调峰量趋势分析-->
+            <div>
+
+            </div>
+
+            <!-- 日调峰同比分析 -->
+            <div class="chart module">
+                <h4>{{title}}</h4>
+                <barline-two-chart :optionObj="optionObjYTF" @showBar="showBar"></barline-two-chart>
+            </div>
+            <div v-for="(item,index) in desList"
+                 class="des_list"
+                 :ref="`list${index}`"
+                 v-show="desIndex==index&&showFlag"
+            >
+            </div>
+            <!-- 日调峰气量盟市占比 && 日调峰气量企业占比 -->
             <div class="chart">
                 <div class="tab_oil">
           <span v-for="(item, index) in tablist_one"
@@ -41,30 +57,20 @@
                 <div class="chart-item" v-if="selected_one === 0">
                     <div class="fontSize_div">
                         <div class="fontSize">{{pie_num}}</div>
-                        <div class="fontSize">亿立方米</div>
+                        <div class="fontSize">万立方米</div>
                     </div>
                     <dount-chart class="echarts" :optionObj="optionObjTFMS"></dount-chart>
                 </div>
                 <div class="chart-item" v-if="selected_one === 1">
                     <div class="fontSize_div">
                         <div class="fontSize">{{pie_num}}</div>
-                        <div class="fontSize">亿立方米</div>
+                        <div class="fontSize">万立方米</div>
                     </div>
                     <dount-chart class="echarts" :optionObj="optionObjTFJGFX"></dount-chart>
                 </div>
             </div>
 
-            <!-- 月调峰同比分析 -->
-            <div class="chart module">
-                <h4>{{title}}</h4>
-                <barline-two-chart :optionObj="optionObjYTF" @showBar="showBar"></barline-two-chart>
-            </div>
-            <div v-for="(item,index) in desList"
-                 class="des_list"
-                 :ref="`list${index}`"
-                 v-show="desIndex==index&&showFlag"
-            >
-            </div>
+
 
         </div>
     </div>
@@ -119,7 +125,7 @@
                 selected_one: 0,
                 selected_two: 0,
                 selected_three: "0",
-                tablist_one: ["月调峰气量盟市占比", "月调峰气量企业占比"],
+                tablist_one: ["日调峰气量盟市占比", "日调峰气量企业占比"],
                 tablist_two: ["天然气日消费缺口预测", "调峰计划建议"],
                 tableTh_two: [
                     {
@@ -132,11 +138,11 @@
                     },
                     {
                         value: "未来3日日均缺口量",
-                        width: 330,
+                        width: 270,
                     },
                     {
-                        value: "日均气化率",
-                        width: 100,
+                        value: "日均气化量",
+                        width: 200,
                     },
                     {
                         value: "调峰建议",
@@ -146,70 +152,70 @@
                 listData_two: [
                     {
                         area: "呼和浩特市",
-                        pitchPlan: "1月1日:9万立方米<br/>1月2日:7万立方米<br/>1月3日:14万立方米",
-                        level: "17%",
+                        pitchPlan: "14万立方米",
+                        level: "12万立方米",
                         date: "减少日用气量4%",
                     },
                     {
                         area: "鄂尔多斯市",
-                        pitchPlan: "1月1日:21万立方米<br/>1月2日:17万立方米<br/>1月3日:24万立方米",
-                        level: "12%",
+                        pitchPlan: "17万立方米",
+                        level: "18万立方米",
                         date: "停止供气",
                     },
                     {
                         area: "包头市",
-                        pitchPlan: "1月1日:14万立方米<br/>1月2日:27万立方米<br/>1月3日:23万立方米",
-                        level: "18%",
+                        pitchPlan: "23万立方米",
+                        level: "24万立方米",
                         date: "停止供气",
                     },
                     {
                         area: "巴彦淖尔市",
-                        pitchPlan: "1月1日:11万立方米<br/>1月2日:12万立方米<br/>1月3日:15万立方米",
-                        level: "18%",
+                        pitchPlan: "15万立方米",
+                        level: "12万立方米",
                         date: "减小日用气量12%",
                     },
                 ],
-                listData_copy:  [
+                listData_copy: [
                     {
                         area: "呼和浩特市",
-                        pitchPlan: "1月1日:9万立方米<br/>1月2日:7万立方米<br/>1月3日:14万立方米",
-                        level: "17%",
+                        pitchPlan: "14万立方米",
+                        level: "12万立方米",
                         date: "减少日用气量4%",
                     },
                     {
                         area: "鄂尔多斯市",
-                        pitchPlan: "1月1日:21万立方米<br/>1月2日:17万立方米<br/>1月3日:24万立方米",
-                        level: "12%",
+                        pitchPlan: "17万立方米",
+                        level: "18万立方米",
                         date: "停止供气",
                     },
                     {
                         area: "包头市",
-                        pitchPlan: "1月1日:14万立方米<br/>1月2日:27万立方米<br/>1月3日:23万立方米",
-                        level: "18%",
+                        pitchPlan: "23万立方米",
+                        level: "24万立方米",
                         date: "停止供气",
                     },
                     {
                         area: "巴彦淖尔市",
-                        pitchPlan: "1月1日:11万立方米<br/>1月2日:12万立方米<br/>1月3日:15万立方米",
-                        level: "18%",
+                        pitchPlan: "15万立方米",
+                        level: "12万立方米",
                         date: "减小日用气量12%",
                     },
                 ],
                 optionObjTFMS: {
                     legendData: ["巴彦淖尔", "包头", "呼和浩特", "鄂尔多斯", "乌海", "通辽"],
                     seriesName: "调峰结构分析",
-                    unit: "亿立方米",
+                    unit: "万立方米",
                     seriesData: []
                 },
                 optionObjTFJGFX: {
                     legendData: ["LNG", "甲醇化肥", "可中断工业", "不可中断工业", "商业"],
                     seriesName: "调峰结构分析",
-                    unit: "亿立方米",
+                    unit: "万立方米",
                     seriesData: [],
                 },
                 optionObjYTF: {
-                    legendData: ["月调峰量", "同比变化"],
-                    yLeftName: "亿立方米",
+                    legendData: ["调峰量", "同比变化"],
+                    yLeftName: "万立方米",
                     yRightName: "%",
                     xData: ["10月", "11月", "12月", "1月", "2月", "3月",],
                     seriesLeftData: [],
@@ -251,7 +257,7 @@
                     [28, 26, 32, 35, 34, 33],
                 ],
                 optionObjLineQKYC: {
-                    yName: "亿立方米",
+                    yName: "万立方米",
                     legendData: ["日需求量", "日供应量"],
                     seriesName1: "日需求量",
                     seriesName2: "日供应量",
@@ -262,8 +268,8 @@
                 pie_num: 75,
                 screenWidth: document.body.clientWidth, // 屏幕宽
                 desIndex: null,
-                title: '月调峰同比分析',
-                titleArry: ['月调峰同比分析', '呼和浩特月调峰同比分析', '鄂尔多斯月调峰同比分析', '包头月调峰同比分析', '巴彦淖尔月调峰同比分析', '通辽月调峰同比分析'],
+                title: '日调峰同比分析',
+                titleArry: ['日调峰同比分析', '呼和浩特日调峰同比分析', '鄂尔多斯日调峰同比分析', '包头日调峰同比分析', '巴彦淖尔日调峰同比分析', '通辽日调峰同比分析'],
                 showFlag: false
             };
         },

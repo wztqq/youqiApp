@@ -7,7 +7,12 @@
                 <img class="map"
                      src="../../assets/img/oilgas/xiaoshou.png"
                      alt="图片未显示"/>
+                <div style="position: absolute;font-size: 12px;color:#3F51B5;font-weight: bold"
+                     :style="{'left':be_click_left(uint.left),'top':be_click_top(uint.top)}">万立方米</div>
                 <!--地图定位-->
+                <img src="../../assets/img/oilgas/wuhai.png" alt="图片未显示" style="position: absolute;width: 6%"
+                     :style="{'left':be_click_left(wuhai.left),'top':be_click_top(wuhai.top)}"
+                >
                 <div>
                     <div :class="item.class" v-for="(item,index) in posList"
                          :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
@@ -18,10 +23,9 @@
                     <div v-for="(item,index) in desList"
                          :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
                          class="des_list"
-                         :ref="`list${index}`"
-                         v-show="desIndex==index&&showFlag"
+                         v-show="showFlag||index==desIndex"
                     >
-                        <div>{{item.num}}万立方米</div>
+                        <div>{{item.num}}</div>
                     </div>
                 </div>
             </div>
@@ -111,14 +115,28 @@
         },
         data() {
             return {
+                uint:{
+                    left: '0.841',
+                    top: '0.93',
+                },
+                wuhai: {
+                    left: '0.31',
+                    top: '0.994',
+                },
                 pie_num: 2420,
-                pie_numArry: [2420, 78, 176, 222, 203, 210, 147, 111, 149, 183, 167, 144],
+                pie_numArry: [2420, 78, 144, 176, 222, 203, 210, 147, 111, 149, 183, 167, 144],
                 posList: [
                     //阿拉善盟
                     {
                         left: '0.2',
                         top: '1.0',
                         class: 'clickbtn'
+                    },
+                    //乌海
+                    {
+                        left: '0.32',
+                        top: '1.0',
+                        class: 'clickbtn2'
                     },
                     //巴彦淖尔
                     {
@@ -185,25 +203,31 @@
                     // 阿拉善盟
                     {
                         num: '78',
-                        left: '0.104',
+                        left: '0.21',
                         top: '0.94'
+                    },
+                    // 乌海
+                    {
+                        num: '144',
+                        left: '0.31',
+                        top: '0.96'
                     },
                     // 巴彦淖尔
                     {
                         num: '176',
-                        left: '0.19',
+                        left: '0.32',
                         top: '0.87'
                     },
                     // 鄂尔多斯
                     {
                         num: '222',
-                        left: '0.28',
+                        left: '0.38',
                         top: '0.99'
                     },
                     //包头市
                     {
                         num: '203',
-                        left: '0.38',
+                        left: '0.42',
                         top: '0.88'
                     },
                     //呼和浩特
@@ -215,26 +239,26 @@
                     //乌兰察布
                     {
                         num: '147',
-                        left: '0.57',
-                        top: '0.92'
+                        left: '0.51',
+                        top: '0.88'
                     },
                     //锡林郭勒盟
                     {
                         num: '111',
-                        left: '0.52',
+                        left: '0.6',
                         top: '0.74'
                     },
                     //赤峰
                     {
                         num: '149',
-                        left: '0.67',
+                        left: '0.71',
                         top: '0.80'
                     },
                     //通辽
                     {
                         num: '183',
                         left: '0.8',
-                        top: '0.895'
+                        top: '0.8'
                     },
                     //兴安盟
                     {
@@ -258,6 +282,7 @@
                 tablist_one: ["天然气日消费量分析", "用气单位结构分析"],
                 tablist_city: [
                     "阿拉善盟",
+                    "乌海",
                     "巴彦淖尔",
                     "鄂尔多斯",
                     "包头",
@@ -271,7 +296,7 @@
                 ],
                 tablist_two: ["盟市消费结构分析", "销售单位结构分析"],
                 tablist_three: ["日消费量预测", "日消费缺口预测"],
-                tablist_three_copy:["日消费量预测", "日消费缺口预测"],
+                tablist_three_copy: ["日消费量预测", "日消费缺口预测"],
                 optionObjBarGasXF: {
                     legendData: ["天然气日消费量", "同比变化"],
                     yLeftName: "万立方米",
@@ -293,6 +318,8 @@
                     [160, 177, 163, 169, 159, 179, 169],
                     //阿拉善盟
                     [74, 81, 71, 89, 78, 75, 78],
+                    //乌海
+                    [142, 143, 112, 153, 144, 136, 122],
                     // 巴彦淖尔
                     [173, 154, 168, 179, 195, 177, 166],
                     //鄂尔多斯
@@ -318,6 +345,8 @@
                     [9, 3, -6, 12, 9, 3, 0],
                     //阿拉善盟
                     [10, 4, -3, 5, 9, 14, 12],
+                    // 乌海
+                    [7, 4, -1, -4, 3, 6, 3],
                     // 巴彦淖尔
                     [3, 8, 15, 6, 2, -5, 2],
                     // 鄂尔多斯
@@ -406,6 +435,37 @@
                         {
                             name: '居民用气',
                             value: 7
+                        },
+                    ],
+                    // 乌海
+                    [
+                        {
+                            name: '民生用气',
+                            value: 30
+                        },
+                        {
+                            name: '甲醛化肥企业',
+                            value: 26
+                        },
+                        {
+                            name: 'LNG企业用气',
+                            value: 23
+                        },
+                        {
+                            name: '可中断工业',
+                            value: 20
+                        },
+                        {
+                            name: '不可中断工业',
+                            value: 18
+                        },
+                        {
+                            name: '商业',
+                            value: 15
+                        },
+                        {
+                            name: '居民用气',
+                            value: 12
                         },
                     ],
                     //巴彦淖尔
@@ -772,39 +832,43 @@
                     xName: "万立方米",
                     seriesData: [],
                 },
-                optionObjXFQKYCseriesData:[
+                optionObjXFQKYCseriesData: [
                     [10, 6, -3, 3, 4, -1, 2],
                     //阿拉善盟
-                    [4, -1, 3,3, -2, 4, 1, 1],
+                    [4, -1, 3, 3, -2, 4, 1, 1],
+                    //乌海
+                    [2, 3, -1, 4, 2, 1, 3, 1],
                     //巴彦淖尔
-                    [7, 3, -3,3,2, 5, 1, 1],
+                    [7, 3, -3, 3, 2, 5, 1, 1],
                     // 鄂尔多斯
-                    [3, 6, -1,-2,2, 3, 5, 4],
+                    [3, 6, -1, -2, 2, 3, 5, 4],
                     //包头
-                    [-2, 5,9,-3,1, 4, 3],
+                    [-2, 5, 9, -3, 1, 4, 3],
                     // 呼和浩特
-                    [4, -4,-2,5,9, 6, 2],
+                    [4, -4, -2, 5, 9, 6, 2],
                     // 乌兰察布
-                    [6, -1,4,6,7, -1, 1],
+                    [6, -1, 4, 6, 7, -1, 1],
                     //锡林郭勒盟
-                    [5, 10,5,2,-3, 3, 5],
+                    [5, 10, 5, 2, -3, 3, 5],
                     // 赤峰
-                    [10, 3,-4,5,9, 5, 3],
+                    [10, 3, -4, 5, 9, 5, 3],
                     // 通辽
-                    [7, 3,-3,6,7, 2, 3],
+                    [7, 3, -3, 6, 7, 2, 3],
                     // 兴安盟
-                    [6, -3,8,10,-4, 6, 3],
+                    [6, -3, 8, 10, -4, 6, 3],
                     // 呼伦贝尔
-                    [7, 10,-4,4,-3, 6, 5],
+                    [7, 10, -4, 4, -3, 6, 5],
                 ],
                 screenWidth: document.body.clientWidth, // 屏幕宽
-                showFlag: false,
+                showFlag: true,
                 desIndex: null,
                 optionObjXFYCseriesLeftData: [
                     // 总
                     [160, 177, 163, 169, 159, 179],
                     //阿拉善盟
                     [74, 81, 71, 89, 78, 75],
+                    // 乌海
+                    [142, 143, 112, 153, 144, 136],
                     //巴彦淖尔
                     [173, 154, 168, 179, 195, 177],
                     // 鄂尔多斯
@@ -816,21 +880,23 @@
                     // 乌兰察布
                     [132, 149, 132, 153, 144, 149],
                     // 锡林郭勒盟
-                    [111,123,106,98,105,122],
+                    [111, 123, 106, 98, 105, 122],
                     //赤峰
-                    [143,139,143,159,160,144],
+                    [143, 139, 143, 159, 160, 144],
                     // 通辽
                     [176, 181, 210, 194, 177, 183],
                     // 兴安盟
-                    [165,156,173,189,190,167],
+                    [165, 156, 173, 189, 190, 167],
                     //呼伦贝尔
-                    [134,144,165,167,143,140]
+                    [134, 144, 165, 167, 143, 140]
                 ],
                 optionObjXFYCseriesRightData: [
                     // 总
                     [180, 175, 179, 184, 187, 183, 189],
                     //阿拉善盟
                     [80, 75, 79, 84, 87, 83, 89],
+                    //乌海
+                    [156, 141, 133, 140, 130, 150, 166],
                     //巴彦淖尔
                     [190, 196, 183, 158, 188, 199, 180],
                     // 鄂尔多斯
@@ -840,27 +906,27 @@
                     //呼和浩特
                     [210, 222, 191, 212, 241, 230, 250],
                     // 乌兰察布
-                    [141, 160, 153, 169, 143, 188,164],
+                    [141, 160, 153, 169, 143, 188, 164],
                     // 锡林郭勒盟
-                    [120,133,120,111,109,103,122],
+                    [120, 133, 120, 111, 109, 103, 122],
                     //赤峰
-                    [157,144,138,167,154,156,155],
-                     //通辽
-                    [180,176,199,190,188,187,190],
+                    [157, 144, 138, 167, 154, 156, 155],
+                    //通辽
+                    [180, 176, 199, 190, 188, 187, 190],
                     // 兴安盟
-                    [180,167,156,175,183,188,190],
+                    [180, 167, 156, 175, 183, 188, 190],
                     //呼伦贝尔
-                    [150,145,130,161,166,172,150]
+                    [150, 145, 130, 161, 166, 172, 150]
                 ]
             }
         },
         mounted() {
             this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[0];
             this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[0];
-            this.optionObjXFYC.seriesLeftData=this.optionObjXFYCseriesLeftData[0];
-            this.optionObjXFYC.seriesRightData=this.optionObjXFYCseriesRightData[0];
+            this.optionObjXFYC.seriesLeftData = this.optionObjXFYCseriesLeftData[0];
+            this.optionObjXFYC.seriesRightData = this.optionObjXFYCseriesRightData[0];
             this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[0];
-            this.optionObjXFQKYC.seriesData=this.optionObjXFQKYCseriesData[0]
+            this.optionObjXFQKYC.seriesData = this.optionObjXFQKYCseriesData[0]
             this.pie_num = this.pie_numArry[0];
         },
         watch: {
@@ -874,47 +940,30 @@
             // 点击地图的点联动
             showDes(index) {
                 if (this.desIndex == index) {
-                    if (this.$refs[`list${index}`][0].style.display == 'none') {
-                        this.showFlag = true;
-                        this.desIndex = index;
-                        this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[index + 1];
-                        this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[index + 1];
-                        //日消费量预测
-                        this.optionObjXFYC.seriesLeftData=this.optionObjXFYCseriesLeftData[index+1];
-                        this.optionObjXFYC.seriesRightData=this.optionObjXFYCseriesRightData[index+1];
-                        this.tablist_one = [this.tablist_city[index] + this.tablist_copy[0], this.tablist_city[index] + this.tablist_copy[1]];
-                        this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[index + 1];
-                        this.optionObjXFQKYC.seriesData=this.optionObjXFQKYCseriesData[index+1];
-                        this.pie_num = this.pie_numArry[index + 1];
-                        this.tablist_three = [this.tablist_city[index] + this.tablist_three_copy[0], this.tablist_city[index] + this.tablist_three_copy[1]];
-
-                    } else {
-                        this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[0];
-                        this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[0];
-                        //日消费量预测
-                        this.optionObjXFYC.seriesLeftData=this.optionObjXFYCseriesLeftData[0];
-                        this.optionObjXFYC.seriesRightData=this.optionObjXFYCseriesRightData[0];
-                        this.tablist_one = this.tablist_copy;
-                        this.tablist_three = this.tablist_three_copy;
-                        this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[0];
-                        this.optionObjXFQKYC.seriesData=this.optionObjXFQKYCseriesData[0];
-                        this.pie_num = this.pie_numArry[0];
-                        this.showFlag = false;
-                        this.desIndex = null;
-
-                    }
+                    this.showFlag = true;
+                    this.desIndex = null;
+                    this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[0];
+                    this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[0];
+                    //日消费量预测
+                    this.optionObjXFYC.seriesLeftData = this.optionObjXFYCseriesLeftData[0];
+                    this.optionObjXFYC.seriesRightData = this.optionObjXFYCseriesRightData[0];
+                    this.tablist_one = this.tablist_copy;
+                    this.tablist_three = this.tablist_three_copy;
+                    this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[0];
+                    this.optionObjXFQKYC.seriesData = this.optionObjXFQKYCseriesData[0];
+                    this.pie_num = this.pie_numArry[0];
                 } else {
                     this.desIndex = index;
-                    this.showFlag = true;
+                    this.showFlag = false;
                     this.optionObjBarGasXF.seriesLeftData = this.optionObjBarGasXFLeftData[index + 1];
                     this.optionObjBarGasXF.seriesRightData = this.optionObjBarGasXFRightData[index + 1];
                     //日消费量预测
-                    this.optionObjXFYC.seriesLeftData=this.optionObjXFYCseriesLeftData[index+1];
-                    this.optionObjXFYC.seriesRightData=this.optionObjXFYCseriesRightData[index+1];
+                    this.optionObjXFYC.seriesLeftData = this.optionObjXFYCseriesLeftData[index + 1];
+                    this.optionObjXFYC.seriesRightData = this.optionObjXFYCseriesRightData[index + 1];
                     this.tablist_one = [this.tablist_city[index] + this.tablist_copy[0], this.tablist_city[index] + this.tablist_copy[1]];
                     this.tablist_three = [this.tablist_city[index] + this.tablist_three_copy[0], this.tablist_city[index] + this.tablist_three_copy[1]];
                     this.optionObjYQDW.seriesData = this.optionObjYQDWSeriesData[index + 1];
-                    this.optionObjXFQKYC.seriesData=this.optionObjXFQKYCseriesData[index+1];
+                    this.optionObjXFQKYC.seriesData = this.optionObjXFQKYCseriesData[index + 1];
                     this.pie_num = this.pie_numArry[index + 1];
                 }
 

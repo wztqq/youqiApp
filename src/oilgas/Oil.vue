@@ -44,6 +44,7 @@
 		},
 		computed: {
 			curPath: function(){
+			    this.active=this.$route.name;
 				return this.$route.name;
 			}
 		},

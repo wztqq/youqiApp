@@ -1,13 +1,16 @@
 <template>
     <div class="child3" style="background-color: #E6E8EC;">
         <div class="map-box">
-            <img class="map" src="../../assets/img/oilgas/chuqi.png"/>
+            <img class="map" src="../../assets/img/地图.png"/>
             <!--地图定位-->
             <div>
-                <div class="clickbtn" v-for="(item,index) in posList"
+                <!--<div class="clickbtn" v-for="(item,index) in posList"-->
+                     <!--:style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"-->
+                     <!--@click="showDes(index)"-->
+                <!--&gt;</div>-->
+                <img :src="item.src" alt="图片未显示" class="clickbtn" v-for="(item,index) in posList"
                      :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
-                     @click="showDes(index)"
-                ></div>
+                     @click="showDes(index)">
             </div>
             <div>
                 <div v-for="(item,index) in desList"
@@ -107,32 +110,38 @@
                     //乌海市储气
                     {
                         left: '0.284',
-                        top: '1.05'
+                        top: '1.05',
+                        src:require('../../assets/img/chuqiguan.png')
                     },
                     //鄂尔多斯市储气
                     {
                         left: '0.358',
-                        top: '1.07'
+                        top: '1.07',
+                        src:require('../../assets/img/chuqiguan.png')
                     },
                     //巴彦淖尔储气
                     {
                         left: '0.378',
-                        top: '0.947'
+                        top: '0.947',
+                        src:require('../../assets/img/chuqiguan.png')
                     },
                     //包头市储气
                     {
                         left: '0.428',
-                        top: '0.944'
+                        top: '0.944',
+                        src:require('../../assets/img/chuqiguan.png')
                     },
                     //呼和浩特市储气
                     {
                         left: '0.478',
-                        top: '0.964'
+                        top: '0.964',
+                        src:require('../../assets/img/chuqiguan.png')
                     },
                     //通辽市储气
                     {
                         left: '0.786',
-                        top: '0.864'
+                        top: '0.864',
+                        src:require('../../assets/img/chuqiguan.png')
                     }
                 ],//地图弹窗位置
                 desList: [
@@ -143,8 +152,8 @@
                         total: '0.5',
                         cpy: '0.03',
                         city: '0',
-                        left: '0.194',
-                        top: '0.615'
+                        left: '0.244',
+                        top: '0.515'
                     },
                     {
                         name: '鄂尔多斯市储气情况',
@@ -153,8 +162,8 @@
                         total: '9.1',
                         cpy: '0.1082',
                         city: '0.436',
-                        left: '0.274',
-                        top: '0.641'
+                        left: '0.244',
+                        top: '0.455'
                     },
                     {
                         name: '巴彦淖尔市储气情况',

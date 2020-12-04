@@ -2,15 +2,18 @@
     <div class="child2" style="background-color: #E6E8EC;">
         <div id="banner">
             <img class="map"
-                 src="../../assets/img/oilgas/gongying.png"
+                 src="../../assets/img/地图.png"
                  alt="图片未显示"/>
         </div>
         <!--地图定位-->
         <div>
-            <div class="clickbtn" v-for="(item,index) in posList"
+            <!--<div class="clickbtn" v-for="(item,index) in posList"-->
+                 <!--:style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"-->
+                 <!--@click="showDes(index)"-->
+            <!--&gt;</div>-->
+            <img :src="item.src" alt="图片未显示" class="clickbtn" v-for="(item,index) in posList"
                  :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
-                 @click="showDes(index)"
-            ></div>
+                 @click="showDes(index)">
         </div>
         <div>
             <div v-for="(item,index) in desList"
@@ -94,52 +97,62 @@
                     //苏里格气田
                     {
                         left: '0.354',
-                        top: '1.0'
+                        top: '1.0',
+                        src:require('../../assets/img/jing.png')
                     },
                     //靖边气田
                     {
                         left: '0.4',
-                        top: '1.0'
+                        top: '1.0',
+                        src:require('../../assets/img/jing.png')
                     },
                     //乌审旗气田
                     {
                         left: '0.444',
-                        top: '1.015'
+                        top: '1.015',
+                        src:require('../../assets/img/jing.png')
                     },
                     //大牛地气田
                     {
                         left: '0.404',
-                        top: '1.060'
+                        top: '1.060',
+                        src:require('../../assets/img/jing.png')
                     },
                     //胜利井气田
                     {
                         left: '0.384',
-                        top: '1.110'
+                        top: '1.110',
+                        src:require('../../assets/img/jing.png')
                     },
                     //包尔气田
                     {
                         left: '0.50',
-                        top: '0.851'
+                        top: '0.851',
+                        src:require('../../assets/img/jing.png')
                     },
                     //宝力格气田
                     {
                         left: '0.68',
-                        top: '0.751'
+                        top: '0.751',
+                        src:require('../../assets/img/jing.png')
                     },
                     //哈达图气田
                     {
                         left: '0.72',
-                        top: '0.708'
+                        top: '0.708',
+                        src:require('../../assets/img/jing.png')
                     },
                     //贝尔气田
                     {
                         left: '0.74',
-                        top: '0.589'
+                        top: '0.589',
+                        src:require('../../assets/img/jing.png')
                     },
                     //苏仁诺尔气田
                     {
                         left: '0.68',
-                        top: '0.559'
+                        top: '0.559',
+                        src:require('../../assets/img/jing.png')
                     }
                 ],//地图弹窗位置
                 desList: [
@@ -178,26 +191,26 @@
                     {
                         name: '包尔气田',
                         num: '22',
-                        left: '0.40',
+                        left: '0.310',
                         top: '0.711'
                     },
                     {
                         name: '宝力格气田',
                         num: '22',
-                        left: '0.61',
+                        left: '0.34',
                         top: '0.601'
                     },
                     {
                         name: '哈达图气田',
                         num: '22',
-                        left: '0.61',
-                        top: '0.561'
+                        left: '0.34',
+                        top: '0.5861'
                     },
                     {
                         name: '贝尔气田',
                         num: '22',
                         left: '0.61',
-                        top: '0.441'
+                        top: '0.411'
                     },
                     {
                         name: '苏仁诺尔气田',
@@ -1090,6 +1103,7 @@
             height: 13px;
             position: absolute;
             z-index: 2;
+            /*background-color: red;*/
         }
 
     }

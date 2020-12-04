@@ -241,7 +241,6 @@
                         value: "2016-2017"
                     },
                 ],
-                timer: "",
                 selected_one: 0,
                 tablist_one: ["送气端结构气田占比分析", "天然气管线管输量分布"],
                 tableTh_one: [
@@ -292,28 +291,24 @@
                     {
                         guanxian: "长乌临输气管道",
                         totalkm: "355",
-                        partlm: "55%",
                         jinqi: "790",
                         chuqi: "790",
                     },
                     {
                         guanxian: "苏东准输气管",
                         totalkm: "147",
-                        partlm: "60%",
                         jinqi: "1500",
                         chuqi: "1500",
                     },
                     {
                         guanxian: "长呼复输气管道复",
                         totalkm: "468.2",
-                        partlm: "80%",
                         jinqi: "760",
                         chuqi: "760",
                     },
                     {
                         guanxian: "长呼输气管道",
                         totalkm: "561.2",
-                        partlm: "55%",
                         jinqi: "50",
                         chuqi: "50",
                     }

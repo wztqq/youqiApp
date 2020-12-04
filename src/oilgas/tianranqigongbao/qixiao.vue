@@ -293,8 +293,8 @@
                     {
                         supply: '435',
                         consume: '230',
-                        top: '0.758',
-                        left: '0.194'
+                        top: '0.798',
+                        left: '0.214'
                     },
                     // 鄂尔多斯
                     {
@@ -638,7 +638,7 @@
         }
         .bar {
             height: 1.4rem;
-            width: 0.4rem;
+            width: 0.25rem;
         }
         .bar_num {
             font-size: 0.12rem;

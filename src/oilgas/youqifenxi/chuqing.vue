@@ -1,5 +1,6 @@
 <template>
     <div style="position: relative; width: 100%; top: 93px; background-color: #DADBDB;">
+      
         <!-- 弹窗 -->
         <div :class="[{tanchuang:true},{tanchuang_one: show}]">
             <div style="width: 100%;height: 100%;overflow: auto;">
@@ -26,6 +27,22 @@
 
         <!-- 储情分析的主要内容 -->
         <div id="confess_content" v-show="a" style="background-color: #DADBDB;">
+            <!-- 原油天然气切换按钮 -->
+            <div class="btn_chuqing">
+                <div class="btn_shenchan_div">
+                    <div :class="[{btn_shenchan_xuan:btn_shenchan_num},{btn_shenchan_wei:!btn_shenchan_num}]"
+                         @click="btnOil()">
+                        <img class="img_produce" :src="imgUrl_oil" alt="图片未显示">
+                        <div style="position: absolute;top: 8px;left: 25px;">原油</div>
+                    </div>
+                    <div :class="[{btn_shenchan_xuan:!btn_shenchan_num},{btn_shenchan_wei:btn_shenchan_num}]"
+                         @click="btnGas()">
+                        <img class="img_produce" :src="imgUrl_gas" alt="图片未显示">
+                        <div style="position: absolute;top: 32px;left: 25px;">天然气</div>
+                    </div>
+                </div>
+            </div>
+
             <!--地图图片上内容展示-->
             <div>
                 <!--石油宏观显示-->
@@ -80,43 +97,78 @@
                               '原油剩余技术储量',echarts.lengend_data_jishu_one,'35','1'):drawLine('echartsOne',
                               echarts.data_one_jingji, '万吨',
                               '原油剩余经济储量',echarts.lengend_data_jishu_one,'14','1')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.344),'top':be_click_top(0.638)}"
-                             @click="oilHandel(echarts.data_one_jishu,echarts.lengend_data_jishu_one,'35',echarts.data_one_jingji,'14','1',$event)"></div>
+                        <div >
+                            <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.344),'top':be_click_top(0.638)}"
+                             @click="oilHandel(echarts.data_one_jishu,echarts.lengend_data_jishu_one,'35',echarts.data_one_jingji,'14','1',$event)">
+                        </div> 
+
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.344),'top':be_click_top(0.638)}"
+                             @click="oilHandel(echarts.data_one_jishu,echarts.lengend_data_jishu_one,'35',echarts.data_one_jingji,'14','1',$event)"></div> -->
                         <!-- <div class="clickbtn" :style="{'left':be_click_left(0.538),'top':be_click_top(0.602)}"
                               @click="selected_one==0?drawLine('echartsOne', echarts.data_two_jishu, '万吨',
                               '原油剩余技术储量',echarts.lengend_data_jishu_two,'47','2'):drawLine('echartsOne',
                               echarts.data_two_jingji, '万吨',
                               '原油剩余经济储量',echarts.lengend_data_jishu_two,'18','2')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.538),'top':be_click_top(0.602)}"
-                             @click="oilHandel(echarts.data_two_jishu,echarts.lengend_data_jishu_two,'47',echarts.data_two_jingji,'18','2')"></div>
+                        <div >
+                            <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.538),'top':be_click_top(0.602)}"
+                             @click="oilHandel(echarts.data_two_jishu,echarts.lengend_data_jishu_two,'47',echarts.data_two_jingji,'18','2')">
+                        </div> 
+
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.538),'top':be_click_top(0.602)}"
+                             @click="oilHandel(echarts.data_two_jishu,echarts.lengend_data_jishu_two,'47',echarts.data_two_jingji,'18','2')"></div> -->
                         <!--   <div class="clickbtn" :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
                                 @click="selected_one==0?drawLine('echartsOne', echarts.data_three_jishu, '万吨',
                                 '原油剩余技术储量',echarts.lengend_data_jishu_three,'480','3'):drawLine('echartsOne',
                                 echarts.data_three_jingji, '万吨',
                                 '原油剩余经济储量',echarts.lengend_data_jishu_three,'180','3')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
-                             @click="oilHandel(echarts.data_three_jishu,echarts.lengend_data_jishu_three,'480',echarts.data_three_jingji,'180','3')"></div>
+                        <div >
+                            <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
+                             @click="oilHandel(echarts.data_three_jishu,echarts.lengend_data_jishu_three,'480',echarts.data_three_jingji,'180','3')">    
+                        </div> 
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
+                             @click="oilHandel(echarts.data_three_jishu,echarts.lengend_data_jishu_three,'480',echarts.data_three_jingji,'180','3')"></div> -->
                         <!--<div class="clickbtn" :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
                              @click="selected_one==0?drawLine('echartsOne', echarts.data_five_jishu, '万吨',
                              '原油剩余技术储量',echarts.lengend_data_jishu_five,'636','5'):drawLine('echartsOne',
                              echarts.data_five_jingji, '万吨',
                              '原油剩余经济储量',echarts.lengend_data_jishu_five,'278','5')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
-                             @click="oilHandel(echarts.data_five_jishu,echarts.lengend_data_jishu_five,'636',echarts.data_five_jingji,'278','5')"></div>
+                        <div >
+                            <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
+                            @click="oilHandel(echarts.data_five_jishu,echarts.lengend_data_jishu_five,'636',echarts.data_five_jingji,'278','5')"> 
+                        </div> 
+
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
+                             @click="oilHandel(echarts.data_five_jishu,echarts.lengend_data_jishu_five,'636',echarts.data_five_jingji,'278','5')"></div> -->
                         <!--  <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.515)}"
                                @click="selected_one==0?drawLine('echartsOne', echarts.data_four_jishu, '万吨',
                                '原油剩余技术储量',echarts.lengend_data_jishu_four,'71','4'):drawLine('echartsOne',
                                echarts.data_four_jingji, '万吨',
                                '原油剩余经济储量',echarts.lengend_data_jishu_four,'28','4')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.515)}"
-                             @click="oilHandel(echarts.data_four_jishu,echarts.lengend_data_jishu_four,'71',echarts.data_four_jingji,'28','4')"></div>
+                        <div >
+                            <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.760),'top':be_click_top(0.515)}"
+                            @click="oilHandel(echarts.data_four_jishu,echarts.lengend_data_jishu_four,'71',echarts.data_four_jingji,'28','4')">
+                        </div> 
+
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.515)}"
+                             @click="oilHandel(echarts.data_four_jishu,echarts.lengend_data_jishu_four,'71',echarts.data_four_jingji,'28','4')"></div> -->
                         <!-- <div class="clickbtn" :style="{'left':be_click_left(0.820),'top':be_click_top(0.595)}"
                               @click="selected_one==0?drawLine('echartsOne', echarts.data_six_jishu, '万吨',
                               '原油剩余技术储量',echarts.lengend_data_jishu_six,'24','6'):drawLine('echartsOne',
                               echarts.data_six_jingji, '万吨',
                               '原油剩余经济储量',echarts.lengend_data_jishu_six,'9','6')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.820),'top':be_click_top(0.595)}"
-                             @click="oilHandel(echarts.data_six_jishu,echarts.lengend_data_jishu_six,'24',echarts.data_six_jingji,'9','6')"></div>
+                        <div >
+                            <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.820),'top':be_click_top(0.595)}"
+                            @click="oilHandel(echarts.data_six_jishu,echarts.lengend_data_jishu_six,'24',echarts.data_six_jingji,'9','6')">
+                        </div>
+
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.820),'top':be_click_top(0.595)}"
+                             @click="oilHandel(echarts.data_six_jishu,echarts.lengend_data_jishu_six,'24',echarts.data_six_jingji,'9','6')"></div> -->
                     </div>
                 </div>
                 <!--天然气宏观显示-->
@@ -155,42 +207,71 @@
                                '天然气剩余技术储量',echarts.lengendGas_data_one,'0.34','1'):drawLine_Gas('echartsTwo',
                                echarts.dataGas_one_jingji, '万立方米',
                                '天然气剩余经济储量',echarts.lengendGas_data_one,'0.56','1')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.444),'top':be_click_top(0.768)}"
-                             @click="gasHandel(echarts.dataGas_one_jishu,echarts.lengendGas_data_one,'0.34',echarts.dataGas_one_jingji,'0.56','1')"></div>
+                        <div >
+                            <img class="clickbtn1" src="../../assets/img/produce-fx/qitian.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.44),'top':be_click_top(0.72)}"
+                            @click="gasHandel(echarts.dataGas_one_jishu,echarts.lengendGas_data_one,'0.34',echarts.dataGas_one_jingji,'0.56','1')">
+                        </div> 
+
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.444),'top':be_click_top(0.768)}"
+                             @click="gasHandel(echarts.dataGas_one_jishu,echarts.lengendGas_data_one,'0.34',echarts.dataGas_one_jingji,'0.56','1')"></div> -->
                         <!-- <div class="clickbtn" :style="{'left':be_click_left(0.500),'top':be_click_top(0.552)}"
                               @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_two_jishu, '万立方米',
                               '天然气剩余技术储量',echarts.lengendGas_data_two,'0.02','2'):drawLine_Gas('echartsTwo',
                               echarts.dataGas_two_jingji, '万立方米',
                               '天然气剩余经济储量',echarts.lengendGas_data_two,'0.03','2')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.500),'top':be_click_top(0.552)}"
-                             @click="gasHandel(echarts.dataGas_two_jishu,echarts.lengendGas_data_two,'0.02',echarts.dataGas_two_jingji,'0.03','2')"></div>
+                        <div >
+                            <img class="clickbtn1" src="../../assets/img/produce-fx/qitian.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.500),'top':be_click_top(0.552)}"
+                            @click="gasHandel(echarts.dataGas_two_jishu,echarts.lengendGas_data_two,'0.02',echarts.dataGas_two_jingji,'0.03','2')">
+                        </div> 
+
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.500),'top':be_click_top(0.552)}"
+                             @click="gasHandel(echarts.dataGas_two_jishu,echarts.lengendGas_data_two,'0.02',echarts.dataGas_two_jingji,'0.03','2')"></div> -->
                         <!--<div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
                              @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_three_jishu, '万立方米',
                              '天然气剩余技术储量',echarts.lengendGas_data_three,'0.02','3'):drawLine_Gas('echartsTwo',
                              echarts.dataGas_three_jingji, '万立方米',
                              '天然气剩余经济储量',echarts.lengendGas_data_three,'0.03','3')"></div>-->
-                        <div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
-                             @click="gasHandel(echarts.dataGas_three_jishu,echarts.lengendGas_data_three,'0.02',echarts.dataGas_three_jingji,'0.03','3')"></div>
+                        <div >
+                            <img class="clickbtn1" src="../../assets/img/produce-fx/qitian.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
+                            @click="gasHandel(echarts.dataGas_three_jishu,echarts.lengendGas_data_three,'0.02',echarts.dataGas_three_jingji,'0.03','3')">
+                        </div> 
+
+                        <!-- <div class="clickbtn" :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
+                             @click="gasHandel(echarts.dataGas_three_jishu,echarts.lengendGas_data_three,'0.02',echarts.dataGas_three_jingji,'0.03','3')"></div> -->
                         <!--<div class="clickbtn" :style="{'left':be_click_left(0.760),'top':be_click_top(0.245)}"
                              @click="selected_two==0?drawLine_Gas('echartsTwo', echarts.dataGas_four_jishu, '万立方米',
                              '天然气剩余技术储量',echarts.lengendGas_data_four,'0.02','4'):drawLine_Gas('echartsTwo',
                              echarts.dataGas_four_jingji, '万立方米',
                              '天然气剩余经济储量',echarts.lengendGas_data_four,'0.03','4')"></div>-->
-                        <div class="clickbtn"
+                        <div >
+                            <img class="clickbtn1" src="../../assets/img/produce-fx/qitian.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.760),'top':be_click_top(0.245)}"
+                            @click="gasHandel(echarts.dataGas_four_jishu,echarts.lengendGas_data_four,'0.02',echarts.dataGas_four_jingji,'0.03','4')">
+                        </div> 
+
+                        <!-- <div class="clickbtn"
                              :style="{'left':be_click_left(0.760),'top':be_click_top(0.245)}"
-                             @click="gasHandel(echarts.dataGas_four_jishu,echarts.lengendGas_data_four,'0.02',echarts.dataGas_four_jingji,'0.03','4')"></div>
+                             @click="gasHandel(echarts.dataGas_four_jishu,echarts.lengendGas_data_four,'0.02',echarts.dataGas_four_jingji,'0.03','4')"></div> -->
                     </div>
                 </div>
-                <div class="click-change"
+                <!-- <div class="click-change"
                      :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.230)}:{'left':be_click_left(0.060),'top':be_click_top(0.230)}"
                      @click="btnOil()"></div>
                 <div class="click-change"
                      :style="oilShow?{'left':be_click_left(0.060),'top':be_click_top(0.310)}:{'left':be_click_left(0.060),'top':be_click_top(0.310)}"
-                     @click="btnGas()"></div>
-            </div>
+                     @click="btnGas()"></div> -->
+                 </div>
+     
 
 
-            <img class="map" :src="oilShow?src:src1" alt="图片未显示">
+            <img class="map" src="../../assets/img/YouqiGongying/地图.png" alt="图片未显示">
+
+            <img class="map1" v-show='hot_map1' src= "../../assets/img/produce-fx/hotmap_oil.png" alt="图片未显示">
+            <img class="map2" v-show='hot_map2' src= "../../assets/img/produce-fx/hotmap_gas.png" alt="图片未显示">
+          
             <div class="chuqing_chart" v-show="oilShow?true:false">
                 <div class="tab_oil">
                     <span v-for="(item,index) in tablist_one" :key='index' @click="tabButton_one(index)"
@@ -204,7 +285,6 @@
                 <div class="echarts" id="echartsOne"></div>
             </div>
             <div class="chart_t" v-show="oilShow?false:true">
-                <div style="width: 100%;height: 8px;background-color: #DADBDB;margin-bottom: 10px;"></div>
                 <div class="tab_oil">
                     <span v-for="(item,index) in tablist_two" :key='index' @click="tabButton_two(index)"
                           v-bind:class="[{tab_oil_two:index == selected_two},{tab_oil_one:true}]">{{item}}</span>
@@ -254,6 +334,7 @@
 
         <!--生产分析-->
         <div id="produce_content" v-show="b">
+
             <div class="btn_shenchan">
                 <div class="btn_shenchan_div">
                     <div :class="[{btn_shenchan_xuan:btn_shenchan_num},{btn_shenchan_wei:!btn_shenchan_num}]"
@@ -268,14 +349,51 @@
                     </div>
                 </div>
             </div>
-            <div>
+
+            <!-- <div>
                 <div class="click-change"
                      :style="{'left':be_click_left(0.740),'top':be_click_top(0.801)}"
                      @click="proShow=true"></div>
                 <div class="click-change"
                      :style="{'left':be_click_left(0.740),'top':be_click_top(0.880)}"
                      @click="proShow=false"></div>
+            </div> -->
+
+
+            <div class="btn_shengchan_youxia" v-show="sctable_yx">
+                <div class="btn_shenchan_div">
+                    <div @click="proShow=true">
+                        <img class="img_produce_yx" :src="imgUrl_oil_jing" alt="图片未显示">
+                
+                        <div :class="[{btn_gasoil_tab:proShow},{btn_gasoil_tab_two:!proShow}]">原油</div>
+
+                    </div>
+                    <div @click="proShow=false">
+                        <img class="img_produce_yx" :src="imgUrl_gas_jing" alt="图片未显示">
+                      
+                        <div :class="[{btn_oilgas_tab:proShow},{btn_oilgas_tab_two:!proShow}]">天然气</div>
+                    </div>
+                </div>
             </div>
+    
+     
+                <div class="btn_lianhuamei_youxia" v-show="lhmtable_yx">         
+                    <div>
+                        <img class="img_produce_yx" :src="imgUrl_lhm_js" alt="图片未显示">
+                        <div style="position: absolute;top: 2px;left: 23px;">成品油生产分析</div>
+                    </div>
+                    <div>
+                        <img class="img_produce_yx" :src="imgUrl_lhm_fs" alt="图片未显示">
+                        <div style="position: absolute;top: 22px;left: 23px;">煤制油生产分析</div>
+                    </div>
+                    <div>
+                        <img class="img_produce_yx" :src="imgUrl_lhm_hs" alt="图片未显示">
+                        <div style="position: absolute;top: 42px;left: 23px;">煤制气生产分析</div>
+                    </div> 
+                </div>
+            
+
+
             <div id="produce" v-show="d">
                 <div v-show="proShow">
                     <!--生产分析地图原油显示-->
@@ -311,9 +429,27 @@
                             <div>累计产量：3.36万吨</div>
                         </div>
                     </div>
-                    <!--生产分析原油地图弹窗-->
-                    <div>
-                        <div class="clickbtn1" :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
+                    <!--生产分析原油地图弹窗-->              
+                    <div>      
+                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
+                            @click="tanchuangShow(listData_pro1,tableTh1_pro)" >
+                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.463),'top':be_click_top(0.64)}"
+                             @click="tanchuangShow(listData_pro2,tableTh1_pro)" >
+                            <img class="clickbtn3" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.559),'top':be_click_top(0.55)}"
+                            @click="tanchuangShow(listData_pro3,tableTh1_pro)" >
+                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.649),'top':be_click_top(0.297)}"
+                            @click="tanchuangShow(listData_pro4,tableTh1_pro)" >
+                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
+                            @click="tanchuangShow(listData_pro5,tableTh1_pro)" >
+                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.759),'top':be_click_top(0.55)}"
+                            @click="tanchuangShow(listData_pro6,tableTh1_pro)" >                      
+                        <!-- <div class="clickbtn1" :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
                              @click="tanchuangShow(listData_pro1,tableTh1_pro)"></div>
                         <div class="clickbtn1" :style="{'left':be_click_left(0.463),'top':be_click_top(0.64)}"
                              @click="tanchuangShow(listData_pro2,tableTh1_pro)"></div>
@@ -324,7 +460,7 @@
                         <div class="clickbtn1" :style="{'left':be_click_left(0.759),'top':be_click_top(0.55)}"
                              @click="tanchuangShow(listData_pro5,tableTh1_pro)"></div>
                         <div class="clickbtn1" :style="{'left':be_click_left(0.789),'top':be_click_top(0.62)}"
-                             @click="tanchuangShow(listData_pro6,tableTh1_pro)"></div>
+                             @click="tanchuangShow(listData_pro6,tableTh1_pro)"></div> -->
                     </div>
                 </div>
                 <div v-show="proShow?false:true">
@@ -353,19 +489,36 @@
                     </div>
                     <!--生产分析气田地图弹窗-->
                     <div>
-                        <div class="clickbtn2" :style="{'left':be_click_left(0.359),'top':be_click_top(0.768)}"
+
+                         <img class="clickbtn3" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.359),'top':be_click_top(0.768)}"
+                            @click="tanchuangShow(listData_gas1,tableTh1_gas)">
+
+                        <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.489),'top':be_click_top(0.585)}"
+                            @click="tanchuangShow(listData_gas2,tableTh1_gas)">
+
+                        <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.639),'top':be_click_top(0.501)}"
+                            @click="tanchuangShow(listData_gas3,tableTh1_gas)">
+
+                        <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.679),'top':be_click_top(0.237)}"
+                            @click="tanchuangShow(listData_gas4,tableTh1_gas)">
+                        <!-- <div class="clickbtn2" :style="{'left':be_click_left(0.359),'top':be_click_top(0.768)}"
                              @click="tanchuangShow(listData_gas1,tableTh1_gas)"></div>
                         <div class="clickbtn1" :style="{'left':be_click_left(0.489),'top':be_click_top(0.585)}"
                              @click="tanchuangShow(listData_gas2,tableTh1_gas)"></div>
                         <div class="clickbtn1" :style="{'left':be_click_left(0.639),'top':be_click_top(0.501)}"
                              @click="tanchuangShow(listData_gas3,tableTh1_gas)"></div>
                         <div class="clickbtn2" :style="{'left':be_click_left(0.679),'top':be_click_top(0.237)}"
-                             @click="tanchuangShow(listData_gas4,tableTh1_gas)"></div>
+                             @click="tanchuangShow(listData_gas4,tableTh1_gas)"></div> -->
                     </div>
                 </div>
 
 
                 <img class="map" :src="proShow?srcpro:srcpro1" alt="图片未显示">
+
                 <div class="chart">
                     <div class="tab_oil">
                         <span v-for="(item,index) in tablist_four" :key='index' @click="tabButton_four(index)"
@@ -473,7 +626,24 @@
                         <li>上月销量：<span>{{page_c[4]}}</span>{{page_c[7]}}</li>
                     </ul>
                 </div>
-                <div class="clickbtn" :style="{'left':be_click_left(0.415),'top':be_click_top(0.818)}"
+
+                <img class="clickbtn4" src="../../assets/img/produce-fx/logo_fs.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.415),'top':be_click_top(0.818)}"
+                            @click="tanchuang(produce_tc,page_c2,1)">
+                <img class="clickbtn4" src="../../assets/img/produce-fx/logo_hs.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.375),'top':be_click_top(0.785)}"
+                            @click="tanchuang(produce_tc,page_c3,2)">
+                <img class="clickbtn4" src="../../assets/img/produce-fx/logo_fs.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.435),'top':be_click_top(0.758)}"
+                            @click="tanchuang(produce_tc,page_c4,3)">
+                <img class="clickbtn4" src="../../assets/img/produce-fx/logo_js.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.493),'top':be_click_top(0.711)}"
+                            @click="tanchuang(produce_tc,page_c5,4)">
+                <img class="clickbtn4" src="../../assets/img/produce-fx/logo_hs.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.717),'top':be_click_top(0.586)}"
+                            @click="tanchuang(produce_tc,page_c1,5)">
+
+                <!-- <div class="clickbtn" :style="{'left':be_click_left(0.415),'top':be_click_top(0.818)}"
                      @click="tanchuang(produce_tc,page_c2,1)"></div>
                 <div class="clickbtn" :style="{'left':be_click_left(0.375),'top':be_click_top(0.785)}"
                      @click="tanchuang(produce_tc,page_c3,2)"></div>
@@ -482,8 +652,8 @@
                 <div class="clickbtn" :style="{'left':be_click_left(0.493),'top':be_click_top(0.711)}"
                      @click="tanchuang(produce_tc,page_c5,4)"></div>
                 <div class="clickbtn" :style="{'left':be_click_left(0.717),'top':be_click_top(0.586)}"
-                     @click="tanchuang(produce_tc,page_c1,5)"></div>
-                <img class="map" src="../../assets/img/industryAnalysis/炼化煤地图2.png" alt="图片未显示"
+                     @click="tanchuang(produce_tc,page_c1,5)"></div> -->
+                <img class="map" src="../../assets/img/produce-fx/producemap.png" alt="图片未显示"
                      @click.prevent="default_t">
                 <div class="chart">
                     <div class="tab_oil">
@@ -592,10 +762,12 @@
                 showAll: true,
                 showAllGas: true,
                 value1: 0,
-                src: require('../../assets/img/原油.png'),
-                src1: require('../../assets/img/天然气.png'),
-                srcpro: require('../../assets/img/industryAnalysis/shengchanfenxi-youtian.png'),
-                srcpro1: require('../../assets/img/industryAnalysis/shengchanfenxi-qitian.png'),
+                src: require('../../assets/img/produce-fx/hotmap_oil.png'),
+                src1: require('../../assets/img/produce-fx/hotmap_gas.png'),
+                // srcpro: require('../../assets/img/industryAnalysis/shengchanfenxi-youtian.png'),
+                srcpro: require('../../assets/img/produce-fx/producemap.png'),
+                // srcpro1: require('../../assets/img/industryAnalysis/shengchanfenxi-qitian.png'),
+                srcpro1: require('../../assets/img/produce-fx/producemap.png'),
                 option1: [
                     {text: '年度', value: 0},
                     {text: '季度', value: 1},
@@ -662,6 +834,8 @@
                 screenHeight: document.body.clientHeight, // 屏幕高
                 screenLeft: '',
                 screenTop: '',
+                hot_map1 :1,//热力图
+                hot_map2 :0,
                 show: 0, //控制弹窗显示
                 oilShow: true,//地图原油展示
                 proShow: true,//生产分析原油天然气切换
@@ -1050,10 +1224,13 @@
                 i: 0, //判断是否点击
                 j: 0,
                 g: 0,
-
-
+                //第一个页面里切换显隐按钮
+                sctable_yx : 1,  
                 //第二个页面的子页面按钮选中判断
                 btn_shenchan_num: 1,
+                asd:1,
+                //第二个页面炼化煤图例
+                lhmtable_yx: 0 ,
                 //第二个页面的三个按钮
                 p_i: 0,
                 p_j: 0,
@@ -1583,9 +1760,19 @@
                 produce_pieTwo_oil: [149, 6916],
                 produce_pieTwo_gas: [1149, 6516],
 
+                //第1个页面按钮图标
+                imgUrl_oil: require('../../assets/img/produce-fx/oil_logo.png'),
+                imgUrl_gas: require('../../assets/img/produce-fx/gas_logo.png'),
                 //第二个页面按钮图标
                 imgUrl: require('../../assets/img/industryAnalysis/原油黄.png'),
                 imgUrl2: require('../../assets/img/industryAnalysis/炼化煤灰.png'),
+                //第二个页面右下图标
+                imgUrl_oil_jing: require('../../assets/img/produce-fx/sc_yj.png'),
+                imgUrl_gas_jing: require('../../assets/img/produce-fx/sc_qj.png'),
+                //第二个页面图例
+                imgUrl_lhm_fs: require('../../assets/img/produce-fx/logo_fs.png'),
+                imgUrl_lhm_hs: require('../../assets/img/produce-fx/logo_hs.png'),
+                imgUrl_lhm_js: require('../../assets/img/produce-fx/logo_js.png'),
                 imgUrlArry: [
                     require('../../assets/img/industryAnalysis/原油黄.png'),
                     require('../../assets/img/industryAnalysis/原油灰.png'),
@@ -2466,6 +2653,8 @@
                     this.p_i = 0
                     this.p_j = 0
                     this.p_g = 0
+                    this.sctable_yx = 1  
+                    this.lhmtable_yx = 0                   
                     this.selected_four = 0
                     this.selected_five = 0
                     this.selected_six = 0
@@ -2486,6 +2675,8 @@
                     this.selected_seven = 0
                     this.selected_eight = 0
                     this.k1 = 1
+                    this.sctable_yx = 0
+                    this.lhmtable_yx = 1
                     this.$nextTick(function () {
                         this.drawLine_one('echartsSix', this.bardata_four)
                         this.drawPie_four('echartsEight');
@@ -2814,10 +3005,13 @@
             },
             // 原油按钮
             btnOil() {
+                this.btn_shenchan_num = 1
                 this.selected_one = 0;
                 this.oilShow = true;
                 this.showAllGas = true;
                 this.i = 0;
+                this.hot_map1 = 1;
+                this.hot_map2 = 0;
                 this.$nextTick(function () {
                     this.drawLine('echartsOne', this.echarts.data_one, "万吨", "原油剩余技术储量",
                         this.echarts.lengend_data_one, 1177, null);
@@ -2825,10 +3019,13 @@
             },
             // 天然气按钮切换
             btnGas() {
+                this.btn_shenchan_num = 0
                 this.selected_two = 0;
                 this.oilShow = false;
                 this.showAll = true;
                 this.j = 0;
+                this.hot_map1 = 0;
+                this.hot_map2 = 1;
                 this.$nextTick(function () {
                     this.drawLine_Gas('echartsTwo', this.echarts.data_two, "亿立方米", "天然气剩余技术储量",
                         this.echarts.lengend_data_three, 0.78, null);
@@ -2992,22 +3189,38 @@
     }
 
     .clickbtn {
-        width: 13px;
-        height: 13px;
+        width: 11.2px;
+        height: 16.8px;
         position: absolute;
+        z-index: 1;
     }
 
     .clickbtn1 {
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 27px;
         position: absolute;
+        z-index: 1;
     }
 
     .clickbtn2 {
-        width: 30px;
-        height: 30px;
+        width: 16.17px;
+        height: 19.91px;
         position: absolute;
+        z-index: 1;
     }
+    .clickbtn3 {
+        width: 20.58px;
+        height: 25.34px;
+        position: absolute;
+        z-index: 1;
+    }
+    .clickbtn4 {
+        width: 23.2px;
+        height: 22.4px;
+        position: absolute;
+        z-index: 1;
+    }
+
 
     .click-change {
         width: 90px;
@@ -3105,6 +3318,35 @@
         color: #7D87A0;
         background-color: #FFFFFF;
     }
+/* 生产分析原油天然气切换 */
+    .btn_gasoil_tab {
+        position: absolute;
+        top: 2px;
+        left: 23px;
+        font-size: 12px;
+        color: pink;
+    }
+    .btn_gasoil_tab_two {
+        position: absolute;
+        top: 2px;
+        left: 23px;
+        font-size: 12px;
+        color: white;
+    }
+    .btn_oilgas_tab {
+        position: absolute;
+        top: 22px;
+        left: 23px;
+        font-size: 12px;
+        color: white;
+    }
+    .btn_oilgas_tab_two {
+        position: absolute;
+        top: 22px;
+        left: 23px;
+        font-size: 12px;
+        color: pink;
+    }
 
     .btn_shenchan {
         width: 130px;
@@ -3115,7 +3357,34 @@
         left: 35px;
         box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);;
     }
+    .btn_chuqing {
+        width: 80px;
+        height: 60px;
+        background-color: #FFFFFF;
+        position: absolute;
+        top: 69px;
+        left: 35px;
+        z-index: 1;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);;
+    }
 
+    .btn_shengchan_youxia {
+        width: 80px;
+        height: 60px;
+        position: absolute;
+        top: 240px;
+        left: 280px;
+        font-size: 12px;
+    }
+    .btn_lianhuamei_youxia {
+        width: 120px;
+        height: 90px;
+        position: absolute;
+        top: 240px;
+        left: 240px;
+        font-size: 10px;
+        color:gray;
+    }
     /* 按钮的图标 */
     .img_produce {
         width: 20px;
@@ -3123,6 +3392,13 @@
         position: relative;
         top: 2.5px;
     }
+    .img_produce_yx {
+        width: 15px;
+        height: 15px;
+        position: relative;
+        top: 2.5px;
+    }
+    
 
     /* 关于地图内容的调整期 */
     .map {
@@ -3132,10 +3408,20 @@
     }
 
     .map1 {
-        width: 100%;
-        height: 298px;
-        background-color: #DADBDB;
-        margin-top: 14.5px;
+        left:110px;
+	    top:88px;
+        width: 197.5px;
+        height: 141.5px;
+        position: absolute;
+        z-index: 0;
+    }
+    .map2 {
+        left:125px;
+	    top:100px;
+        width: 168.5px;
+        height: 188px;
+        position: absolute;
+        z-index: 0;
     }
 
     /* 通用同比环比图片样式 */
@@ -3468,6 +3754,25 @@
             font: 15px bolder microsoft-yahei;
         }
     }
+
+// 整改newmap
+        .map_newall {
+            width: 100%;
+            margin-top: 93px;
+            background-color: #dadbdb;
+            overflow: hidden;
+        }
+        .map_newwaibao {
+            width: 100%;
+            height: 314.5px;
+            position: absolute;
+            // display: none;
+            // z-index: 1;  
+        }
+
+
+
+
 
 
 </style>

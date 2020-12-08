@@ -1,0 +1,954 @@
+<template>
+    <div class="child1" style="background-color: #E6E8EC;">
+        <img
+                class="map"
+                src="../../assets/img/地图.png"
+        />
+        <!--地图定位-->
+        <img class="clickbtn" :src="item.src" alt="图片未显示" v-for="(item,index) in posList"
+             :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}" @click="showDes(index)">
+        <!--地图上展示信息-->
+        <div class="lay-content"
+             v-for="(item,index) in desList"
+             :ref="`list${index}`"
+             v-show="desIndex==index&&showFlag"
+             :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
+            <div>{{item.name}}</div>
+            <div>探明储量：{{item.num1}}万吨</div>
+            <div>10月产量：{{item.num2}}万吨</div>
+            <div>储采比：{{item.num3}}年</div>
+
+        </div>
+
+        <!--饼图-->
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+            <div class="scFristqh">
+                <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
+                    <el-tab-pane :label=tabList[0] name="1"></el-tab-pane>
+                    <el-tab-pane :label=tabList[1] name="2" :laze="true"></el-tab-pane>
+                </el-tabs>
+            </div>
+            <div class="tabs-content">
+
+                <div v-show="activeNamePie==='1'">
+                    <div id="echartsOne" style="width:100%;height:240px;"></div>
+                </div>
+                <div v-show="activeNamePie==='2'">
+                    <div class="fontSize_div">
+                        <div class="fontSize">{{pie_PieTwo}}</div>
+                        <div class="fontSize" style="font-size: 14px">万吨</div>
+                    </div>
+                    <div id="echartsNine" style="width:100%;height:240px;" ref="second"></div>
+
+                </div>
+            </div>
+        </div>
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+            <div class="title">
+                油田产量分布分析
+            </div>
+            <div class="content">
+                <div class="fontSize_div">
+                    <div class="fontSize">7.5</div>
+                    <div class="fontSize" style="font-size: 14px">万吨</div>
+                </div>
+                <div id="echartsTen" style="width: 100%;height: 240px"></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'child1',
+        data() {
+            return {
+                posList: [
+                    //吉祥油田
+                    {
+                        left: '0.313',
+                        top: '0.938',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    //达尔其油田
+                    {
+                        left: '0.353',
+                        top: '0.938',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    //包尔油田
+                    {
+                        left: '0.486',
+                        top: '0.910',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 赛罕油田
+                    {
+                        left: '0.516',
+                        top: '0.950',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 宝力格油田
+                    {
+                        left: '0.564',
+                        top: '0.775',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 乌里雅斯太油田
+                    {
+                        left: '0.614',
+                        top: '0.775',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 哈达图油田
+                    {
+                        left: '0.564',
+                        top: '0.835',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 新苏木油田
+                    {
+                        left: '0.614',
+                        top: '0.835',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 锡林油田
+                    {
+                        left: '0.564',
+                        top: '0.895',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 乌兰诺尔油田
+                    {
+                        left: '0.614',
+                        top: '0.895',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 苏德尔特油田
+                    {
+                        left: '0.764',
+                        top: '0.465',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 苏仁诺尔油田
+                    {
+                        left: '0.814',
+                        top: '0.465',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 贝尔油田
+                    {
+                        left: '0.764',
+                        top: '0.515',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 巴彦塔拉油田
+                    {
+                        left: '0.814',
+                        top: '0.515',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 呼和诺仁油田
+                    {
+                        left: '0.814',
+                        top: '0.565',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 科尔沁油田
+                    {
+                        left: '0.744',
+                        top: '0.715',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 交力格油田
+                    {
+                        left: '0.744',
+                        top: '0.775',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 广发油田
+                    {
+                        left: '0.784',
+                        top: '0.775',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 龙筒湾油田
+                    {
+                        left: '0.784',
+                        top: '0.835',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    },
+                    // 科尔康油田
+                    {
+                        left: '0.824',
+                        top: '0.865',
+                        src: require('../../assets/img/produce-fx/sc_yj.png')
+                    }
+                ],//地图弹窗位置
+                desList: [
+                    {
+                        left: '0.143',
+                        top: '0.682',
+                        name: '吉祥油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.143',
+                        top: '0.682',
+                        name: '达尔其油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.243',
+                        top: '0.582',
+                        name: '包尔油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.243',
+                        top: '0.582',
+                        name: '赛罕油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.243',
+                        top: '0.582',
+                        name: '宝力格油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.243',
+                        top: '0.582',
+                        name: '乌里雅斯太油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.243',
+                        top: '0.582',
+                        name: '哈达图油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.243',
+                        top: '0.582',
+                        name: '新苏木油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.243',
+                        top: '0.582',
+                        name: '锡林油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.243',
+                        top: '0.582',
+                        name: '乌兰诺尔油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '苏德尔特油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '苏仁诺尔油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '贝尔油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '巴彦塔拉油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '呼和诺仁油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '科尔沁油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '交力格油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '广发油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '龙筒湾油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    },
+                    {
+                        left: '0.443',
+                        top: '0.482',
+                        name: '科尔康油田',
+                        num1: '350',
+                        num2: '5',
+                        num3: '27'
+                    }
+                ],//地图上方信息展示
+                activeName: '1',
+                activeNamePie: '1',
+                screenWidth: document.body.clientWidth, // 屏幕宽
+                screenLeft: "",
+                pie_PieTwo: 8,
+                showFlag: false,
+                desIndex: null,
+                YuanYou_OneSerData: [
+                    [{
+                        actur: [3, 7, 9, 6, 9, 8, 13, 17, 17, 13],
+                        plan: [11, 13, 12, 19, 13, 18, 13, 12, 12, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [4, 8, 10, 6, 9, 10, 11, 16, 14, 13],
+                        plan: [11, 12, 11, 16, 19, 13, 12, 17, 19, 20],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 6, 8, 6, 7, 8, 11, 16, 12, 18],
+                        plan: [10, 12, 11, 16, 14, 17, 12, 19, 11, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 7, 9, 6, 9, 8, 13, 17, 17, 13],
+                        plan: [11, 13, 12, 19, 13, 18, 13, 12, 12, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [4, 8, 10, 6, 9, 10, 11, 16, 14, 13],
+                        plan: [11, 12, 11, 16, 19, 13, 12, 17, 19, 20],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 6, 8, 6, 7, 8, 11, 16, 12, 18],
+                        plan: [10, 12, 11, 16, 14, 17, 12, 19, 11, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 7, 9, 6, 9, 8, 13, 17, 17, 13],
+                        plan: [11, 13, 12, 19, 13, 18, 13, 12, 12, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [4, 8, 10, 6, 9, 10, 11, 16, 14, 13],
+                        plan: [11, 12, 11, 16, 19, 13, 12, 17, 19, 20],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 6, 8, 6, 7, 8, 11, 16, 12, 18],
+                        plan: [10, 12, 11, 16, 14, 17, 12, 19, 11, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 7, 9, 6, 9, 8, 13, 17, 17, 13],
+                        plan: [11, 13, 12, 19, 13, 18, 13, 12, 12, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [4, 8, 10, 6, 9, 10, 11, 16, 14, 13],
+                        plan: [11, 12, 11, 16, 19, 13, 12, 17, 19, 20],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 6, 8, 6, 7, 8, 11, 16, 12, 18],
+                        plan: [10, 12, 11, 16, 14, 17, 12, 19, 11, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 7, 9, 6, 9, 8, 13, 17, 17, 13],
+                        plan: [11, 13, 12, 19, 13, 18, 13, 12, 12, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [4, 8, 10, 6, 9, 10, 11, 16, 14, 13],
+                        plan: [11, 12, 11, 16, 19, 13, 12, 17, 19, 20],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 6, 8, 6, 7, 8, 11, 16, 12, 18],
+                        plan: [10, 12, 11, 16, 14, 17, 12, 19, 11, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 7, 9, 6, 9, 8, 13, 17, 17, 13],
+                        plan: [11, 13, 12, 19, 13, 18, 13, 12, 12, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [4, 8, 10, 6, 9, 10, 11, 16, 14, 13],
+                        plan: [11, 12, 11, 16, 19, 13, 12, 17, 19, 20],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 6, 8, 6, 7, 8, 11, 16, 12, 18],
+                        plan: [10, 12, 11, 16, 14, 17, 12, 19, 11, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 7, 9, 6, 9, 8, 13, 17, 17, 13],
+                        plan: [11, 13, 12, 19, 13, 18, 13, 12, 12, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [4, 8, 10, 6, 9, 10, 11, 16, 14, 13],
+                        plan: [11, 12, 11, 16, 19, 13, 12, 17, 19, 20],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }],
+                    [{
+                        actur: [3, 6, 8, 6, 7, 8, 11, 16, 12, 18],
+                        plan: [10, 12, 11, 16, 14, 17, 12, 19, 11, 19],
+                        change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                    }]
+
+                ],
+                tabList:['原油月产量趋势分析','原油月生产结构企业占比'],
+                tabList_copy:['原油月产量趋势分析','原油月生产结构企业占比'],
+                city:['吉祥油田','达尔其油田','包尔油田','赛罕油田','宝力格油田','乌里雅斯太油田','哈达图油田','新苏木油田','锡林油田','乌兰诺尔油田','苏德尔特油田','苏仁诺尔油田','贝尔油田','巴彦塔拉油田','呼和诺仁油田','科尔沁油田','交力格油田','广发油田','龙筒湾油田','科尔康油田']
+
+            };
+        },
+        mounted() {
+            //原油月产量趋势分析
+            this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[0]);
+            this.YuanYou_Three('echartsTen')
+
+
+        },
+        methods: {
+            // 用于点击的div块绑定函数
+            be_click_left(a) {
+                return this.screenWidth * a + 'px'
+            },
+            be_click_top(a) {
+                return 314.5 * a + 'px'
+            },
+            //原油月产量趋势分析
+            YuanYou_One(name, series) {
+                let echarts = require("echarts");
+                let myChart = echarts.init(document.getElementById(name));
+                myChart.setOption({
+                    tooltip: {
+                        trigger: "axis",
+                        formatter: '{a0}{b0}: {c0}万吨<br /> {a1}{b1}: {c1}万吨<br /> {a2}{b2}: {c2}%',
+                        axisPointer: {
+                            type: "cross",
+                            crossStyle: {
+                                color: "#999",
+                            },
+                        },
+                    },
+                    legend: {
+                        data: ['原油月产量', '计划月产量', '同比变化']
+                    },
+                    xAxis: [
+                        {
+                            type: "category",
+                            data: [
+                                "1月",
+                                "2月",
+                                "3月",
+                                "4月",
+                                "5月",
+                                "6月",
+                                "7月",
+                                "8月",
+                                "9月",
+                                "10月",
+                            ],
+                            axisPointer: {
+                                type: "shadow",
+                            },
+                            axisLabel: {
+                                fontSize: 12,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
+                    ],
+                    yAxis: [
+                        {
+                            name: "万吨 / 月",
+                            type: "value",
+                            min: 0,
+                            interval: 5,
+                            axisLabel: {
+                                fontSize: 12,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
+                        {
+                            show: false,
+                            name: "%",
+                            type: "value",
+                            min: -20,
+                            interval: 5,
+                            axisLabel: {
+                                fontSize: 12,
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "#9B9DA1", // 颜色
+                                    width: 1, // 粗细
+                                },
+                            },
+                            axisTick: {
+                                show: false,
+                            },
+                        },
+                    ],
+                    series: [
+                        {
+                            name: "原油月产量",
+                            type: "bar",
+                            barWidth: 10,
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#63edd4"},
+                                    {offset: 1, color: "rgba(14, 137, 238, 1)"},
+                                ]),
+                            },
+                            data: series[0].actur,
+                        },
+                        {
+                            name: "计划月产量",
+                            type: "bar",
+                            barWidth: 10,
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#FFE6A3"},
+                                    {offset: 1, color: "#FF8B2E"},
+                                ]),
+                            },
+                            data: series[0].plan,
+                        },
+                        {
+                            name: "同比变化",
+                            type: "line",
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    {offset: 0, color: "#BB5FF0"},
+                                    {offset: 1, color: "#BB5FF0"},
+                                ]),
+                            },
+                            yAxisIndex: 1,
+                            data: series[0].change,
+                        }
+                    ],
+                });
+            },
+            //原油月生产结构企业占比
+            YuanYou_Two(name, arry) {
+                let echarts = require("echarts");
+                let myChart = echarts.init(document.getElementById(name));
+                myChart.setOption({
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{b}： <br/>{c} 万吨'
+                    },
+                    legend: {
+                        bottom: 10,
+                        left: 'center',
+                        data: ['中石油', '中石化']
+                    },
+                    series: [
+                        {
+                            type: 'pie',
+                            radius: ["40%", "55%"],
+                            center: ["50%", "40%"],
+                            labelLine: {
+                                normal: {
+                                    length: 30,//设置延长线的长度
+                                    length2: 50,//设置第二段延长线的长
+                                    lineStyle: {
+                                        width: 1,
+                                        color: '#53E5CF'  // 改变标示线的颜色
+                                    }
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    formatter: "{b} \n\n {d}% ",
+                                    padding: [0, -30],
+                                    textStyle: {
+                                        color: '#C4C4C4',
+                                        fontSize: 12,// 改变标示文字的颜色
+                                    },
+                                }
+
+                            },
+
+                            data: [
+                                {value: 4.8, name: '中石油'},
+                                {value: 3.2, name: '中石化'},
+                            ],
+                            color: ['#01A3F4', '#53E5CF'],
+                        }
+                    ]
+                });
+            },
+
+            // 天然气月产量柱状图切换
+            handlePieClick(tab, event) {
+                this.$nextTick(() => {
+                    this.YuanYou_Two("echartsNine")
+                });
+            },
+            //油田产量分布分析
+            YuanYou_Three(name, arry) {
+                let echarts = require("echarts");
+                let myChart = echarts.init(document.getElementById(name));
+                myChart.setOption({
+                    tooltip: {
+                        trigger: "item",
+                        formatter: "{a} <br/>{b}: {c} ({d}%)",
+                    },
+                    legend: {
+                        orient: "horizontal",
+                        bottom: 20,
+                        left: "center",
+                        itemGap: 15,
+                        data: ["海拉尔油区", "二连油区", "科尔沁油区", "其他"],
+                        itemWidth: 15,
+                        itemHeight: 10,
+                    },
+                    grid: {
+                        bottom: 40,
+                    },
+                    series: [
+                        {
+                            name: "油田产量:",
+                            type: "pie",
+                            radius: ["40%", "55%"],
+                            center: ["50%", "40%"],
+                            label: {
+                                formatter: "{per|{d}%\n}",
+                                padding: [0, -40, 5],
+                                rich: {
+                                    per: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                },
+                            },
+                            labelLine: {
+                                length: 15,
+                                length2: 30,
+                            },
+                            data: [
+                                {
+                                    value: 1.7,
+                                    name: "海拉尔油区",
+                                },
+                                {
+                                    value: 1.5,
+                                    name: "二连油区",
+                                },
+                                {
+                                    value: 1.3,
+                                    name: "科尔沁油区",
+                                },
+                                {
+                                    value: 3,
+                                    name: "其他",
+                                },
+                            ],
+                            color: [
+                                "#44c2fd",
+                                "#22ffc2",
+                                "#ffc522",
+                                "#ff1a40",
+                                "#d527b7",
+                                "#0000ff",
+                            ],
+                        },
+                    ],
+                });
+            },
+
+            // 点击地图的点联动
+            showDes(index) {
+                if (this.desIndex == index) {
+                    if (this.$refs[`list${index}`][0].style.display == 'none') {
+                        this.showFlag = true;
+                        this.desIndex = index;
+                        this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[index+1]);
+                        this.tabList[0]=this.city[index]+this.tabList_copy[0]
+                    } else {
+                        this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[0]);
+                        this.tabList[0]=this.tabList_copy[0]
+                        this.showFlag = false;
+                        this.desIndex = null;
+
+
+                    }
+                } else {
+                    this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[index+1]);
+                    this.tabList[0]=this.city[index]+this.tabList_copy[0]
+                    this.desIndex = index;
+                    this.showFlag = true;
+                }
+
+
+            },
+        }
+    }
+</script>
+
+<style scoped lang="scss">
+    .child1 {
+        .lay-content {
+            border: 1px solid rgba(37, 54, 104, 0.6);
+            position: absolute;
+            font-size: 0.12rem;
+            border-radius: 0.04rem;
+            background-color: rgba(37, 54, 104, 0.5);;
+            color: #fff;
+            width: 113px;
+        }
+        .map {
+            margin-top: 93px;
+            /*height: 309px;*/
+            width: 100%;
+            /* background-size: cover;
+             background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
+        }
+
+        .scFristqh {
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scFristqh /deep/ .el-tabs__item {
+            /* color: #236BD7;
+             font-size: 13px;
+             height: 28px;
+             line-height: 28px;
+             width: 170px;
+             text-align: center;
+             padding: 0;
+             border-radius: 3px;*/
+            width: 169.5px;
+            height: 25px;
+            font: 12px PingFangSC-Regular;
+            color: #3a6dda;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            padding-left: 0;
+        }
+
+        .scFristqh /deep/ .el-tabs__item.is-active {
+            /*background-color: #236BD7;
+            color: #fff;*/
+            width: 169.5px;
+            height: 25px;
+            background-color: #3a6dda;
+            font: 12px PingFangSC-Regular;
+            color: white;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .scFristqh /deep/ .el-tabs {
+            /*width: 342px;
+            border: 1px solid #236BD7;
+            border-radius: 3px;*/
+            width: 345px;
+            height: 31px;
+            background-color: white;
+            margin: 0px auto;
+            border: 1px solid #3a6dda;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .scFristqh /deep/ .el-tabs__header {
+            margin: 0;
+        }
+
+        .scFristqh /deep/ .el-tabs__active-bar, .scFristqh /deep/ .el-tabs__nav-wrap::after {
+            display: none;
+        }
+
+        .scFristqh /deep/ .el-tabs__nav-scroll {
+            height: 31px;
+        }
+
+        #PieOne {
+            background-image: url(../../assets/img/industryAnalysis/椭圆.png);
+            background-repeat: no-repeat;
+            background-position: 50% 37%;
+            background-size: 65px 65px;
+        }
+
+        /* 文字块 */
+        .fontSize_div {
+            position: absolute;
+            width: 100%;
+            // height: 100%;
+            text-align: center;
+        }
+
+        .fontSize {
+            position: relative;
+            top: 70px;
+            color: #4D5F7B;
+            font: 25px bolder MicrosoftYaHe
+        }
+
+        .title {
+            font-size: 13px;
+            color: #394564;
+            padding-left: 14px;
+            font-weight: bold;
+        }
+
+        .tanchuang {
+            position: absolute;
+            width: 100%;
+            height: 314.5px;
+            background-color: #4c4c4c;
+            z-index: 5;
+            display: none;
+            top: 93px;
+        }
+
+        .tanchuang_one {
+            position: absolute;
+            width: 100%;
+            height: 314.5px;
+            background-color: #4c4c4c;
+            z-index: 5;
+            display: block;
+            top: 93px;
+        }
+
+        .table_one_t {
+            font-family: PingFang SC;
+            border-collapse: collapse;
+            width: 1100px;
+
+        }
+
+        .table_one_t th,
+        .table_one_t td {
+            font-size: 14px;
+            border: 1px solid #b9bec9;
+            padding: 3px 7px 2px 7px;
+            text-align: center;
+            background-color: white;
+        }
+
+        .table_one_t th {
+            background-color: #d8dbde;
+        }
+
+        #close {
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            top: 205px;
+        }
+
+        .table-title {
+            color: #246BD7;
+            font-size: 14px;
+            padding: 10px;
+            width: 1100px;
+            background-color: #fff;
+        }
+        .clickbtn {
+            width: 15px;
+            position: absolute;
+            height: 15px;
+            z-index: 2;
+        }
+
+    }
+
+</style>

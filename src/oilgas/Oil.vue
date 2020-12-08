@@ -29,7 +29,7 @@
 					router: 'Shengchanguanli'
 				}, {
 					name: '油气生产管理',
-					router: 'Yunayou'
+					router: 'Youqishengchanuganli'
 				}, {
 					name: '油气供应管理',
 					router: 'Youqigongyingguanli'

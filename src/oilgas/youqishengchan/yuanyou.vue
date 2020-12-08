@@ -1,20 +1,6 @@
 <template>
     <div style="position: relative; width: 100%; top: 93px;background-color: #dadbdb">
-        <!-- 表格 -->
-        <div :class="[{tanchuang:true},{tanchuang_one: show}]">
-            <div style="width: 100%;height: 100%;overflow: auto;">
-                <table class="table_one_t">
-                    <tr>
-                        <th v-for="(th,index) in tableTh" :key='index'>{{th}}</th>
-                    </tr>
-                    <tr v-for="(tr,index) in listData" :key='index'>
-                        <td v-for="(td,index) in tr" :key='index'> {{td}}</td>
-                    </tr>
-                </table>
-            </div>
-            <img id="close" :style="{'left':closeLeft}" src="../../assets/img/YouqiGongying/关闭.png" alt="图片未显示"
-                 @click="tanchuangClose()">
-        </div>
+
         <!-- 主要切换按钮 -->
         <div id="tab_button" :style="{ left: screenLeft }">
             <span v-for="(item, index) in tablist" :key="index" @click="tabButton(index)"
@@ -22,18 +8,21 @@
         </div>
         <!-- 油气生产的主要内容 -->
         <div id="produce_content" v-show="a">
-            <img class="map" src="../../assets/img/produce-fx/produce_sym.png" alt="图片未显示"/>
+            <img class="map" src="../../assets/img/地图.png" alt="图片未显示"/>
             <!-- 动态点击切换按钮 -->
-            <div class="clickbtn" :style="{'left':be_click_left(0.325),'top':be_click_top(0.748)}"
-                 @click.prevent="tanchuangShow(1,listData_one)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.475),'top':be_click_top(0.65)}"
-                 @click.prevent="tanchuangShow(2,listData_two)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.61),'top':be_click_top(0.56)}"
-                 @click.prevent="tanchuangShow(3,listData_three)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.79),'top':be_click_top(0.575)}"
-                 @click.prevent="tanchuangShow(4,listData_four)"></div>
-            <div class="clickbtn" :style="{'left':be_click_left(0.7),'top':be_click_top(0.3257)}"
-                 @click.prevent="tanchuangShow(5,listData_five)"></div>
+            <img :src="item.src" alt="图片未显示" class="clickbtn" v-for="(item,index) in posList"
+                 :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
+                >
+            <!--<div class="clickbtn" :style="{'left':be_click_left(0.325),'top':be_click_top(0.748)}"-->
+                 <!--@click.prevent="tanchuangShow(1,listData_one)"></div>-->
+            <!--<div class="clickbtn" :style="{'left':be_click_left(0.475),'top':be_click_top(0.65)}"-->
+                 <!--@click.prevent="tanchuangShow(2,listData_two)"></div>-->
+            <!--<div class="clickbtn" :style="{'left':be_click_left(0.61),'top':be_click_top(0.56)}"-->
+                 <!--@click.prevent="tanchuangShow(3,listData_three)"></div>-->
+            <!--<div class="clickbtn" :style="{'left':be_click_left(0.79),'top':be_click_top(0.575)}"-->
+                 <!--@click.prevent="tanchuangShow(4,listData_four)"></div>-->
+            <!--<div class="clickbtn" :style="{'left':be_click_left(0.7),'top':be_click_top(0.3257)}"-->
+                 <!--@click.prevent="tanchuangShow(5,listData_five)"></div>-->
             <div class="chart">
                 <div class="tab_oil">
                     <span v-for="(item, index) in tablist_one" :key="index" @click="tabButton_one(index)"
@@ -59,39 +48,20 @@
         </div>
         <!-- 第二个页面 -->
         <div id="produce_content" v-show="b">
-            <div class="pagethree_tc" v-show="produce_tc">
+            <div class="pagethree_tc" v-show="produce_tc" :style="{ left: be_click_left(0.29),top: be_click_top(0.42)
+             }">
                 <ul>
                     <li>{{page_c1}}</li>
-                    <li>企业数量<span>{{page_c2}}</span>个</li>
-                    <li>上月汽油产量：<span>{{page_c3}}</span>万吨</li>
-                    <li>上月柴油产量：<span>{{page_c4}}</span>万吨</li>
-                    <li>上月煤油产量：<span>{{page_c5}}</span>万吨</li>
+                    <li>10月原油加工量<span>{{page_c2}}</span>万吨</li>
+                    <li>10月汽油产量：<span>{{page_c3}}</span>万吨</li>
+                    <li>10月柴油产量：<span>{{page_c4}}</span>万吨</li>
+                    <li>10月煤油产量：<span>{{page_c5}}</span>万吨</li>
                 </ul>
             </div>
-            <img class="map" src="../../assets/img/produce-fx/producemap.png" alt="图片未显示"/>
-            <div class="produce_logo" :style="{ left: logoposionleft1,top: logoposiontop1 }">
+            <img class="map" src="../../assets/img/地图.png" alt="图片未显示"/>
+            <div class="produce_logo" :style="{ left: be_click_left(0.49),top: be_click_top(0.72) }">
                 <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"
                      @click='tanchuang(produce_tc,arry1,1)'>
-            </div>
-            <div class="produce_logo" :style="{ left: logoposionleft2,top: logoposiontop2 }">
-                <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"
-                     @click='tanchuang(produce_tc,arry2,2)'>
-            </div>
-            <div class="produce_logo" :style="{ left: logoposionleft3,top: logoposiontop3 }">
-                <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"
-                     @click='tanchuang(produce_tc,arry3,3)'>
-            </div>
-            <div class="produce_logo" :style="{ left: logoposionleft4,top: logoposiontop4 }">
-                <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"
-                     @click='tanchuang(produce_tc,arry4,4)'>
-            </div>
-            <div class="produce_logo" :style="{ left: logoposionleft5,top: logoposiontop5 }">
-                <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"
-                     @click='tanchuang(produce_tc,arry5,5)'>
-            </div>
-            <div class="produce_logo" :style="{ left: logoposionleft6,top: logoposiontop6 }">
-                <img src="../../assets/img/produce-fx/producelogo.png" alt="图片未显示"
-                     @click='tanchuang(produce_tc,arry6,6)'>
             </div>
             <div class="chart">
                 <div class="tab_oil">
@@ -130,10 +100,10 @@
             <div class="pagethree_tc" v-show="produce_tc">
                 <ul>
                     <li>{{page_c1}}</li>
-                    <li>企业数量：<span>{{page_c2}}</span>人</li>
-                    <li>上月石脑油供应量：<span>{{page_c3}}</span>万吨</li>
-                    <li>上月柴油供应量:<span>{{page_c4}}</span>万吨</li>
-                    <li>上月液化气供应量：<span>{{page_c5}}</span>万吨</li>
+                    <li>10月粉煤加工量：<span>{{page_c2}}</span>万吨</li>
+                    <li>10月石脑油产量：<span>{{page_c3}}</span>万吨</li>
+                    <li>10月柴油产量:<span>{{page_c4}}</span>万吨</li>
+                    <li>10月液化气产量：<span>{{page_c5}}</span>万吨</li>
                 </ul>
             </div>
             <div class="produce_logo" :style="{ left: logoposionleft8,top: logoposiontop8 }">
@@ -221,6 +191,39 @@
         name: "FuncFormsBase",
         data() {
             return {
+                posList:[
+                    //吉祥油田
+                    {
+                        src:require('../../assets/img/jing.png'),
+                        left:'0.35',
+                        top:'0.67'
+                    },
+                    //赛罕油田
+                    {
+                        src:require('../../assets/img/jing.png'),
+                        left:'0.5',
+                        top:'0.67'
+                    },
+                    //新苏木油田
+                    {
+                        src:require('../../assets/img/jing.png'),
+                        left:'0.58',
+                        top:'0.57'
+                    },
+                    //呼和诺仁油田
+                    {
+                        src:require('../../assets/img/jing.png'),
+                        left:'0.65',
+                        top:'0.31'
+                    },
+                    //呼和诺仁油田
+                    {
+                        src:require('../../assets/img/jing.png'),
+                        left:'0.65',
+                        top:'0.51'
+                    },
+
+                ],
                 screenWidth: document.body.clientWidth, // 屏幕宽
                 screenHeight: document.body.clientHeight,
                 screenLeft: '',
@@ -493,7 +496,6 @@
                 logoposiontop9: '',
                 logoposionleft10: '',
                 logoposiontop10: '',
-                show: 0, //控制弹窗显示
                 produce_tc: true,
                 pie_number: 20,
                 //弹窗数据
@@ -502,20 +504,20 @@
                 page_c3: '',
                 page_c4: '',
                 page_c5: '',
-                arry1: ['成品油企业', '1300', '1000', '895', '769'],
+                arry1: ['呼和浩特石化', '20', '9', '7', '2'],
                 arry2: ['成品油企业', '1300', '1000', '895', '769'],
                 arry3: ['成品油企业', '1300', '1000', '895', '769'],
                 arry4: ['成品油企业', '1300', '1000', '895', '769'],
                 arry5: ['成品油企业', '1300', '1000', '895', '769'],
                 arry6: ['成品油企业', '1300', '1000', '895', '769'],
-                arry7: ['伊泰煤制油', '1300', '1000', '895', '600'],
-                arry8: ['神华煤制油', '1200', '800', '695', '500'],
+                arry7: ['伊泰煤制油', '97', '80', '40', '10'],
+                arry8: ['神华煤制油', '92', '70', '30', '20'],
                 arry9: ['大唐煤制气', '1300', '100', '900', ''],
                 arry10: ['汇能煤制气', '1200', '80', '1200', ''],
                 tablist: ["原油", "成品油", "煤制油", "煤制气"],
                 tablist_one: ["原油月产量趋势分析", "原油月生产结构企业占比"],
                 tablist_two: ["原油加工量变化趋势", "成品油产量变化趋势"],
-                tablist_three: ["汽油月产量结构分析", "柴油月产量结构分析"],
+                tablist_three: ["汽油结构分析", "柴油结构分析"],
                 tablist_four: ["粉煤月进量分析", "水资源用量"],
                 tablist_five: ["煤制油产量变化趋势", "产品结构分析"],
                 tablist_six: ["平均符合率变化趋势分析", "单位产品综合能耗"],
@@ -592,6 +594,8 @@
             },
             //第二三四页面点击
             tanchuang(a, arry, b) {
+                console.log(a)
+                console.log(b)
                 if (a) {
                     this.page_c1 = arry[0];
                     this.page_c2 = arry[1];
@@ -1174,15 +1178,15 @@
                             },
                             data: [
                                 {
-                                    value: 0.6,
+                                    value: 290,
                                     name: "92#汽油",
                                 },
                                 {
-                                    value: 1.8,
+                                    value: 260,
                                     name: "89#汽油",
                                 },
                                 {
-                                    value: 1.6,
+                                    value: 350,
                                     name: "95#汽油",
                                 }
                             ],
@@ -1208,7 +1212,7 @@
                         bottom: 30,
                         left: "center",
                         itemGap: 10,
-                        data: ["-20#柴油", "-35#柴油", "0#柴油"],
+                        data: ["-35#柴油","-20#柴油", "0#柴油", "10#柴油"],
                         itemWidth: 15,
                         itemHeight: 10,
                     },
@@ -1237,22 +1241,27 @@
                             },
                             data: [
                                 {
-                                    value: 0.3,
-                                    name: "-20#柴油",
-                                },
-                                {
-                                    value: 0.9,
+                                    value: 210,
                                     name: "-35#柴油",
                                 },
                                 {
-                                    value: 0.8,
+                                    value: 180,
+                                    name: "-20#柴油",
+                                },
+                                {
+                                    value: 210,
                                     name: "0#柴油",
+                                },
+                                {
+                                    value: 110,
+                                    name: "10#柴油",
                                 }
                             ],
                             color: [
                                 "#15E9EC",
                                 "#FFD350",
                                 "#01A6FF",
+                                "#a3ff6f",
                             ],
                         },
                     ],
@@ -2855,7 +2864,7 @@
                     this.b = 1;
                     this.c = 0;
                     this.d = 0;
-                    this.pie_number = 4;
+                    this.pie_number = 900;
                     this.$nextTick(function () {
                         this.ChenPinYou_One("echartsEleven");
                         this.ChenPinYou_Three("echartsThirteenth");
@@ -2956,7 +2965,7 @@
                 if (0 == id) {
                     this.j3 = 1;
                     this.j4 = 0;
-                    this.pie_number = 4;
+                    this.pie_number = 900;
                     this.$nextTick(function () {
                         this.ChenPinYou_Three("echartsThirteenth");
                     });
@@ -2965,7 +2974,7 @@
                 if (1 == id) {
                     this.j3 = 0;
                     this.j4 = 1;
-                    this.pie_number = 2;
+                    this.pie_number = 710;
                     this.$nextTick(function () {
                         this.ChenPinYou_Four("echartsFourteen");
                     });
@@ -3243,8 +3252,6 @@
         background-color: rgba(0, 0, 0, 0.3);
         background-image: url(../../assets/img/produce-fx/produce_tc.png);
         position: absolute;
-        left: 40px;
-        top: 80px;
     }
 
     .pagefour_tc {
@@ -3279,7 +3286,7 @@
     }
 
     .produce_logo img {
-        width: 100%;
+        width: 15px;
     }
 
     /* 文字块 */
@@ -3376,9 +3383,8 @@
 
     /* 动态块位置 */
     .clickbtn {
-        width: 13px;
-        height: 13px;
-        /* background-color: #000000; */
+        width: 16.17px;
+        height: 19.89px;
         position: absolute;
     }
 

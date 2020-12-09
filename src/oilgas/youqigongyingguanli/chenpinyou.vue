@@ -16,7 +16,7 @@
                   v-show="desIndex==index&&showFlag"
                   :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
                  <div>{{item.name}}</div>
-                 <div>10月原油加工量：{{item.num}}万吨</div>
+                 <div>人数：{{item.num}}人</div>
                  <div>10月汽油产量：{{item.num1}}万吨</div>
                  <div>10月柴油产量：{{item.num2}}万吨</div>
                  <div>10月煤油产量：{{item.num3}}万吨</div>
@@ -25,8 +25,8 @@
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="scFristqh">
                 <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
-                    <el-tab-pane label="原油加工量变化趋势" name="1"></el-tab-pane>
-                    <el-tab-pane label="成品油产量变化趋势" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane label="成品油月供应量趋势分析" name="1"></el-tab-pane>
+                    <el-tab-pane label="成品油调入量和调出量对比分析" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -43,22 +43,22 @@
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="scFristqh">
                 <el-tabs v-model="activeName" @tab-click="handleClick">
-                    <el-tab-pane label="汽油结构分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="柴油结构分析" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane label="供油对象结构分析" name="1"></el-tab-pane>
+                    <el-tab-pane label="成品油供应地区分析" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
 
                 <div v-show="activeName==='1'">
                     <div class="fontSize_div">
-                        <div class="fontSize">900</div>
+                        <div class="fontSize">1010</div>
                         <div class="fontSize" style="font-size: 14px">万吨</div>
                     </div>
                     <div id="echartsThirteenth" style="width:100%;height:240px;"></div>
                 </div>
                 <div v-show="activeName==='2'">
                     <div class="fontSize_div">
-                        <div class="fontSize">710</div>
+                        <div class="fontSize">1010</div>
                         <div class="fontSize" style="font-size: 14px">万吨</div>
                     </div>
                     <div id="echartsFourteen" style="width:100%;height:240px;" ref="second"></div>
@@ -67,11 +67,29 @@
             </div>
         </div>
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
-            <div class="title">
-                平均负荷率变化趋势
+            <div class="scFristqh">
+                <el-tabs v-model="active" @tab-click="handleThree">
+                    <el-tab-pane label="汽油供应标号结构分析" name="1"></el-tab-pane>
+                    <el-tab-pane label="柴油供应标号结构分析" name="2" :laze="true"></el-tab-pane>
+                </el-tabs>
             </div>
-            <div class="content">
-                <div id="echartsEight" style="width: 100%;height: 240px"></div>
+            <div class="tabs-content">
+
+                <div v-show="active==='1'">
+                    <div class="fontSize_div">
+                        <div class="fontSize">610</div>
+                        <div class="fontSize" style="font-size: 14px">万吨</div>
+                    </div>
+                    <div id="echarts5" style="width:100%;height:240px;"></div>
+                </div>
+                <div v-show="active==='2'">
+                    <div class="fontSize_div">
+                        <div class="fontSize">400</div>
+                        <div class="fontSize" style="font-size: 14px">万吨</div>
+                    </div>
+                    <div id="echarts6" style="width:100%;height:240px;" ref="second"></div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -95,13 +113,14 @@
                     {
                         left: '0.243',
                         top: '0.612',
-                        name: '呼和浩特石化',
-                        num: '20',
-                        num1: '9',
-                        num2: '7',
-                        num3: '2'
+                        name: '呼和浩特石化公司',
+                        num: '1209',
+                        num1: '231',
+                        num2: '46',
+                        num3: '122'
                     }
                 ],//地图上方信息展示
+                active:'1',
                 activeName: '1',
                 activeNamePie: '1',
                 screenWidth: document.body.clientWidth, // 屏幕宽
@@ -118,10 +137,10 @@
         mounted() {
             //原油加工量变化趋势
             this.ChenPinYou_One("echartsEleven");
-            // 汽油结构分析
-            this.ChenPinYou_Three("echartsThirteenth");
-            // 平均负荷率变化趋势
-            this.ChenPinYou_Five("echartsEight");
+            // 供油对象
+            this.GongYouDuiXiangJieGouFenXi_pie("echartsThirteenth");
+            // 汽油
+            this.qiyou_pie("echarts5");
 
 
         },
@@ -133,14 +152,14 @@
             be_click_top(a) {
                 return 314.5 * a + 'px'
             },
-            //原油加工量变化趋势
+            //成品油月供应量趋势分析
             ChenPinYou_One(name, arry) {
                 let echarts = require("echarts");
                 let myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
                     tooltip: {
                         trigger: "axis",
-                        formatter: '{a0}{b0}: {c0}万吨<br /> {a1}{b1}: {c1}万吨<br /> {a2}{b2}: {c2}%',
+                        formatter: '{a0}{b0}: {c0}万吨<br /> {a1}{b1}: {c1}万吨<br /> {a2}{b2}: {c2}万吨',
                         axisPointer: {
                             type: "cross",
                             crossStyle: {
@@ -149,12 +168,8 @@
                         },
                     },
                     legend: {
-                        data: ['原油月加工量', '计划月加工量', '同比变化']
+                        data: ['汽油', '柴油', '航油']
                     },
-                    // grid: {
-                    //   height: 160,
-                    //   bottom: 50,
-                    // },
                     xAxis: [
                         {
                             type: "category",
@@ -167,8 +182,7 @@
                                 "6月",
                                 "7月",
                                 "8月",
-                                "9月",
-                                "10月",
+                                "9月"
                             ],
                             axisPointer: {
                                 type: "shadow",
@@ -189,7 +203,7 @@
                     ],
                     yAxis: [
                         {
-                            name: "万吨 / 月",
+                            name: "万吨",
                             type: "value",
                             min: 0,
                             interval: 5,
@@ -228,52 +242,52 @@
                     ],
                     series: [
                         {
-                            name: "原油月加工量",
+                            name: "汽油",
                             type: "bar",
-                            barWidth: 10,
+                            barWidth: 5,
                             itemStyle: {
                                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                                     {offset: 0, color: "#63edd4"},
                                     {offset: 1, color: "rgba(14, 137, 238, 1)"},
                                 ]),
                             },
-                            data: [3, 7, 9, 6, 9, 8, 13, 17, 17, 13],
+                            data: [3, 3.2, 5.1, 12.2, 5.8, 14.3, 16.3, 9, 5.2],
                         },
                         {
-                            name: "计划月加工量",
+                            name: "柴油",
                             type: "bar",
-                            barWidth: 10,
+                            barWidth: 5,
                             itemStyle: {
                                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                                     {offset: 0, color: "#FFE6A3"},
                                     {offset: 1, color: "#FF8B2E"},
                                 ]),
                             },
-                            data: [11, 13, 12, 19, 13, 18, 13, 12, 12, 19],
+                            data: [2, 2.2, 4.1, 11.2, 4.8, 13.3, 15.3, 8, 4.2],
                         },
                         {
-                            name: "同比变化",
-                            type: "line",
+                            name: "航油",
+                            type: "bar",
+                            barWidth: 5,
                             itemStyle: {
                                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                                     {offset: 0, color: "#BB5FF0"},
                                     {offset: 1, color: "#BB5FF0"},
                                 ]),
                             },
-                            yAxisIndex: 1,
-                            data: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
+                            data: [2.5, 2.7, 4.6, 11.7, 5.3, 13.8, 15.8, 8.5, 4.7],
                         }
                     ],
                 });
             },
-            //成品油产量变化趋势
+            //成品油调入量和调出量
             ChenPinYou_Two(name, arry) {
                 let echarts = require("echarts");
                 let myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
                     tooltip: {
                         trigger: "axis",
-                        formatter: '{a0}{b0}: {c0}万吨<br /> {a1}{b1}: {c1}万吨<br /> {a2}{b2}: {c2}%',
+                        formatter: '{a0}{b0}: {c0}万吨<br /> {a1}{b1}: {c1}万吨<br /> {a2}{b2}: {c2}万吨',
                         axisPointer: {
                             type: "cross",
                             crossStyle: {
@@ -282,12 +296,8 @@
                         },
                     },
                     legend: {
-                        data: ['成品油月加工量', '计划月加工量', '同比变化']
+                        data: ['区外调入量', '呼炼供应量', '调出量']
                     },
-                    // grid: {
-                    //   height: 160,
-                    //   bottom: 50,
-                    // },
                     xAxis: [
                         {
                             type: "category",
@@ -322,7 +332,7 @@
                     ],
                     yAxis: [
                         {
-                            name: "万吨 / 月",
+                            name: "万吨",
                             type: "value",
                             min: 0,
                             interval: 5,
@@ -361,9 +371,10 @@
                     ],
                     series: [
                         {
-                            name: "成品油月加工量",
+                            name: "区外调入量",
                             type: "bar",
                             barWidth: 10,
+                            stack: '1',
                             itemStyle: {
                                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                                     {offset: 0, color: "#63edd4"},
@@ -373,9 +384,10 @@
                             data: [9, 11, 15, 16, 13, 15, 13, 14, 13, 15],
                         },
                         {
-                            name: "计划月加工量",
+                            name: "呼炼供应量",
                             type: "bar",
                             barWidth: 10,
+                            stack: '1',
                             itemStyle: {
                                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                                     {offset: 0, color: "#FFE6A3"},
@@ -385,52 +397,56 @@
                             data: [11, 13, 12, 17, 13, 16, 13, 12, 12, 18],
                         },
                         {
-                            name: "同比变化",
-                            type: "line",
+                            name: "调出量",
+                            type: "bar",
+                            barWidth: 10,
                             itemStyle: {
                                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                                     {offset: 0, color: "#BB5FF0"},
                                     {offset: 1, color: "#BB5FF0"},
                                 ]),
                             },
-                            yAxisIndex: 1,
                             data: [4, 5, 2, -7, 5, -5, 2, 9, -5, 3],
                         }
                     ],
                 });
             },
-            // 汽油结构分析
-            ChenPinYou_Three(name, arry) {
+            //供油对象结构分析饼图
+            GongYouDuiXiangJieGouFenXi_pie(name, arry) {
                 let echarts = require("echarts");
                 let myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
                     tooltip: {
                         trigger: "item",
-                        formatter: "{b}: {c}万吨 ({d}%)",
+                        formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
                     },
                     legend: {
                         orient: "horizontal",
-                        bottom: 30,
+                        bottom: 10,
                         left: "center",
                         itemGap: 10,
-                        data: ["92#汽油", "89#汽油", "95#汽油"],
-                        itemWidth: 15,
-                        itemHeight: 10,
-                    },
-                    grid: {
-                        bottom: 40,
+                        data: [ "商业","交通", "工业", "农业"],
+                        itemWidth: 10,
+                        itemHeight: 5,
+                        textStyle: {
+                            color: "#9FA0A5"
+                        },
                     },
                     series: [
                         {
-                            // name: "汽油标号结构",
+                            name: "供油对象结构分析",
                             type: "pie",
                             radius: ["40%", "55%"],
                             center: ["50%", "40%"],
                             label: {
-                                formatter: "{b} \n\n {d}% ",
-                                padding: [0, -50, 5],
+                                formatter: "{d}%",
+                                padding: [0, -10],
                                 rich: {
                                     per: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                    b: {
                                         fontSize: 12,
                                         color: "#9FA0A5",
                                     },
@@ -442,59 +458,64 @@
                             },
                             data: [
                                 {
-                                    value: 290,
-                                    name: "92#汽油",
+                                    value: 331,
+                                    name: "商业",
                                 },
                                 {
-                                    value: 260,
-                                    name: "89#汽油",
+                                    value: 310,
+                                    name: "交通",
                                 },
                                 {
-                                    value: 350,
-                                    name: "95#汽油",
-                                }
+                                    value: 234,
+                                    name: "工业",
+                                },
+                                {
+                                    value: 135,
+                                    name: "农业",
+                                },
+
                             ],
-                            color: [
-                                "#15E9EC",
-                                "#FFD350",
-                                "#01A6FF",
-                            ],
+                            color: ["#FF6060", "#15E9EC", "#FFD350", "#01A6FF"],
                         },
                     ],
                 });
             },
-            //柴油结构分析
-            ChenPinYou_Four(name, arry) {
+            //成品油供应地区分析
+            gongying_pie(name, arry) {
                 let echarts = require("echarts");
                 let myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
                     tooltip: {
                         trigger: "item",
-                        formatter: "{b}: {c}万吨 ({d}%)",
+                        formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
                     },
                     legend: {
                         orient: "horizontal",
-                        bottom: 30,
+                        bottom: 10,
                         left: "center",
                         itemGap: 10,
-                        data: ["-35#柴油","-20#柴油", "0#柴油", "10#柴油"],
-                        itemWidth: 15,
-                        itemHeight: 10,
-                    },
-                    grid: {
-                        bottom: 40,
+                        data: [ "呼和浩特","包头", "鄂尔多斯", "其他"],
+                        itemWidth: 10,
+                        itemHeight: 5,
+                        textStyle: {
+                            color: "#9FA0A5"
+                        },
                     },
                     series: [
                         {
-                            // name: "柴油标号结构",
+                            name: "成品油供应地区分析",
                             type: "pie",
                             radius: ["40%", "55%"],
                             center: ["50%", "40%"],
                             label: {
-                                formatter: "{b} \n\n {d}% ",
-                                padding: [0, -50, 5],
+                                formatter: "{d}%",
+                                padding: [0, -10],
                                 rich: {
                                     per: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                    b: {
                                         fontSize: 12,
                                         color: "#9FA0A5",
                                     },
@@ -506,28 +527,154 @@
                             },
                             data: [
                                 {
-                                    value: 210,
+                                    value: 200,
+                                    name: "呼和浩特",
+                                },
+                                {
+                                    value: 300,
+                                    name: "包头",
+                                },
+                                {
+                                    value: 350,
+                                    name: "鄂尔多斯",
+                                },
+                                {
+                                    value: 160,
+                                    name: "其他",
+                                },
+
+                            ],
+                            color: ["#FF6060", "#15E9EC", "#FFD350", "#01A6FF"],
+                        },
+                    ],
+                });
+            },
+            //汽油供应
+            qiyou_pie(name, arry) {
+                let echarts = require("echarts");
+                let myChart = echarts.init(document.getElementById(name));
+                myChart.setOption({
+                    tooltip: {
+                        trigger: "item",
+                        formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
+                    },
+                    legend: {
+                        orient: "horizontal",
+                        bottom: 10,
+                        left: "center",
+                        itemGap: 10,
+                        data: [ "89#汽油","92#汽油", "95#汽油"],
+                        itemWidth: 10,
+                        itemHeight: 5,
+                        textStyle: {
+                            color: "#9FA0A5"
+                        },
+                    },
+                    series: [
+                        {
+                            name: "汽油供应标号结构",
+                            type: "pie",
+                            radius: ["40%", "55%"],
+                            center: ["50%", "40%"],
+                            label: {
+                                formatter: "{d}%",
+                                padding: [0, -10],
+                                rich: {
+                                    per: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                    b: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                },
+                            },
+                            labelLine: {
+                                length: 15,
+                                length2: 50,
+                            },
+                            data: [
+                                {
+                                    value: 160,
+                                    name: "89#汽油",
+                                },
+                                {
+                                    value: 190,
+                                    name: "92#汽油",
+                                },
+                                {
+                                    value: 260,
+                                    name: "95#汽油",
+                                }
+
+                            ],
+                            color: ["#FF6060", "#15E9EC", "#FFD350", "#01A6FF"],
+                        },
+                    ],
+                });
+            },
+            //柴油供应
+            chaiyou_pie(name, arry) {
+                let echarts = require("echarts");
+                let myChart = echarts.init(document.getElementById(name));
+                myChart.setOption({
+                    tooltip: {
+                        trigger: "item",
+                        formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
+                    },
+                    legend: {
+                        orient: "horizontal",
+                        bottom: 10,
+                        left: "center",
+                        itemGap: 10,
+                        data: [ "-35#柴油","-20#柴油", "0#柴油"],
+                        itemWidth: 10,
+                        itemHeight: 5,
+                        textStyle: {
+                            color: "#9FA0A5"
+                        },
+                    },
+                    series: [
+                        {
+                            name: "柴油供应标号结构分析",
+                            type: "pie",
+                            radius: ["40%", "55%"],
+                            center: ["50%", "40%"],
+                            label: {
+                                formatter: "{d}%",
+                                padding: [0, -10],
+                                rich: {
+                                    per: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                    b: {
+                                        fontSize: 12,
+                                        color: "#9FA0A5",
+                                    },
+                                },
+                            },
+                            labelLine: {
+                                length: 15,
+                                length2: 50,
+                            },
+                            data: [
+                                {
+                                    value: 90,
                                     name: "-35#柴油",
                                 },
                                 {
-                                    value: 180,
+                                    value: 100,
                                     name: "-20#柴油",
                                 },
                                 {
                                     value: 210,
                                     name: "0#柴油",
-                                },
-                                {
-                                    value: 110,
-                                    name: "10#柴油",
                                 }
+
                             ],
-                            color: [
-                                "#15E9EC",
-                                "#FFD350",
-                                "#01A6FF",
-                                "#a3ff6f",
-                            ],
+                            color: ["#FF6060", "#15E9EC", "#FFD350", "#01A6FF"],
                         },
                     ],
                 });
@@ -539,169 +686,16 @@
                     this.ChenPinYou_Two("echartsTwelve")
                 });
             },
-            //柴油结构分析tab切换
+            //供油对象结构分析tab切换
             handleClick(){
                 this.$nextTick(() => {
-                    this.ChenPinYou_Four("echartsFourteen");
+                    this.gongying_pie("echartsFourteen");
                 });
             },
-            //平均负荷率变化趋势
-            ChenPinYou_Five(name, arry) {
-                let echarts = require("echarts");
-                let myChart = echarts.init(document.getElementById(name));
-                myChart.setOption({
-                    tooltip: {
-                        trigger: "axis",
-                        formatter: '{a0}{b0}: {c0}%</br>{a1}{b1}: {c1}%</br>{a2}{b2}: {c2}%'
-                    },
-                    legend: {
-                        data: ['平均负荷率', '计划负荷率', '同比变化']
-                    },
-                    xAxis: {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月','10月'],
-                        axisTick: {
-                            show: true,
-                        },
-                        axisLine: {
-                            lineStyle: {
-                                color: "#9B9DA1", // 颜色
-                                width: 1, // 粗细
-                            },
-                        },
-                        axisLabel: {
-                            show: true,
-                            interval: 0,//设置间隔
-                            fontSize: 12,
-                            padding: [0, 0, 0, 0],
-                        },
-                    },
-                    yAxis: [{
-                        name:'%',
-                        type: 'value',
-                        min: '0',
-                        axisTick: {
-                            show: true,
-                            interval: 1,
-                        },
-                        axisLine: {
-                            lineStyle: {
-                                color: "#9B9DA1", // 颜色
-                                width: 1, // 粗细
-                            },
-                        },
-                        axisLabel: {
-                            show: true,
-                            interval: 0,//设置间隔
-                            fontSize: 12,
-                            padding: [0, 0, 0, 0],
-                        },
-                    },
-                        {
-                            show:false,
-                            name:'%',
-                            type: 'value',
-                            min: -20,
-                            axisTick: {
-                                show: true,
-                                interval: 1,
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: "#9B9DA1", // 颜色
-                                    width: 1, // 粗细
-                                },
-                            },
-                            axisLabel: {
-                                show: true,
-                                interval: 0,//设置间隔
-                                fontSize: 12,
-                                padding: [0, 0, 0, 0],
-                            },
-                        }
-                    ],
-                    series: [{
-                        name: '平均负荷率',
-                        data: [80,90,85,81,92,78,85,96,78,93],
-                        type: 'line',
-                        symbol: 'none',
-                        smooth: true,
-                        areaStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient
-                                (0, 0, 0, 1, [
-                                    {
-                                        offset: 0,
-                                        color: 'rgba(241, 158, 194, 0.3)'
-                                    },
-                                    {
-                                        offset: 0.8,
-                                        color: 'rgba(241, 158, 194, 0)'
-                                    }
-                                ], false),
-                                shadowColor: 'rgba(0, 0, 0, 0.1)',
-                                shadowBlur: 10
-                            }
-                        },
-                        //控制线条的颜色
-                        itemStyle: {
-                            normal: {
-                                color: '#BB5FF0',
-                                borderColor: '#BB5FF0',
-                                borderWidth: 3
-                            }
-                        },
-                    },
-                        {
-                            name: '计划负荷率',
-                            data: [82,85,75,67,71,76,67,73,75,80],
-                            type: 'line',
-                            symbol: 'none',
-                            smooth: true,
-                            //控制线条的颜色
-                            itemStyle: {
-                                normal: {
-                                    color: '#F0765F',
-                                    borderColor: '#F0765F',
-                                    borderWidth: 3
-                                }
-                            },
-                        },
-                        {
-                            name: '同比变化',
-                            data: [8,9,10,3,-4,8,-6,1,10,-5],
-                            type: 'line',
-                            symbol: 'none',
-                            smooth: true,
-                            yAxisIndex: 1,
-                            areaStyle: {
-                                normal: {
-                                    color: new echarts.graphic.LinearGradient
-                                    (0, 0, 0, 1, [
-                                        {
-                                            offset: 0,
-                                            color: 'rgba(241, 158, 194, 0.3)'
-                                        },
-                                        {
-                                            offset: 0.8,
-                                            color: 'rgba(241, 158, 194, 0)'
-                                        }
-                                    ], false),
-                                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                                    shadowBlur: 10
-                                }
-                            },
-                            //控制线条的颜色
-                            itemStyle: {
-                                normal: {
-                                    color: 'rgb(241,158,194)',
-                                    borderColor: 'rgba(241,158,194,0.2)',
-                                    borderWidth: 3
-                                }
-                            },
-                        }
-                    ]
+            //汽油
+            handleThree(){
+                this.$nextTick(() => {
+                    this.chaiyou_pie("echarts6");
                 });
             },
 

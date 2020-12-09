@@ -50,42 +50,42 @@
                     <div
                             class="lay-content"
                             v-show="flag=='1'||showAll"
-                            :style="{'left':be_click_left(0.058),'top':be_click_top(0.562)}">
+                            :style="{'left':be_click_left(0.03),'top':be_click_top(0.5)}">
                         <div>吉祥油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：562万吨</div>
                     </div>
                     <div class="lay-content"
                          v-show="flag=='2'||showAll"
-                         :style="{'left':be_click_left(0.398),'top':be_click_top(0.649)}">
+                         :style="{'left':be_click_left(0.392),'top':be_click_top(0.74)}">
                         <div>包尔油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：750万吨</div>
                     </div>
                     <div class="lay-content"
                          v-show="flag=='3'||showAll"
-                         :style="{'left':be_click_left(0.358),'top':be_click_top(0.358)}">
+                         :style="{'left':be_click_left(0.332),'top':be_click_top(0.358)}">
                         <div>二连油田区域</div>
                         <div>油田个数：6个</div>
                         <div>探明储量：7500万吨</div>
                     </div>
                     <div class="lay-content"
                          v-show="flag=='5'||showAll"
-                         :style="{'left':be_click_left(0.698),'top':be_click_top(0.108)}">
+                         :style="{'left':be_click_left(0.406),'top':be_click_top(0.13)}">
                         <div>海拉尔油田区域</div>
                         <div>油田个数：5个</div>
                         <div>探明储量：8437万吨</div>
                     </div>
                     <div class="lay-content"
                          v-show="flag=='4'||showAll"
-                         :style="{'left':be_click_left(0.698),'top':be_click_top(0.348)}">
+                         :style="{'left':be_click_left(0.696),'top':be_click_top(0.354)}">
                         <div>科尔沁油田区域</div>
                         <div>油田个数：3个</div>
                         <div>探明储量：1125万吨</div>
                     </div>
                     <div class="lay-content"
                          v-show="flag=='6'||showAll"
-                         :style="{'left':be_click_left(0.708),'top':be_click_top(0.638)}">
+                         :style="{'left':be_click_left(0.697),'top':be_click_top(0.67)}">
                         <div>科尔康油田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：375万吨</div>
@@ -99,7 +99,7 @@
                               '原油剩余经济储量',echarts.lengend_data_jishu_one,'14','1')"></div>-->
                         <div >
                             <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.344),'top':be_click_top(0.638)}"
+                            :style="{'left':be_click_left(0.32),'top':be_click_top(0.72)}"
                              @click="oilHandel(echarts.data_one_jishu,echarts.lengend_data_jishu_one,'35',echarts.data_one_jingji,'14','1',$event)">
                         </div> 
 
@@ -112,7 +112,7 @@
                               '原油剩余经济储量',echarts.lengend_data_jishu_two,'18','2')"></div>-->
                         <div >
                             <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.538),'top':be_click_top(0.602)}"
+                            :style="{'left':be_click_left(0.51),'top':be_click_top(0.642)}"
                              @click="oilHandel(echarts.data_two_jishu,echarts.lengend_data_jishu_two,'47',echarts.data_two_jingji,'18','2')">
                         </div> 
 
@@ -125,7 +125,7 @@
                                 '原油剩余经济储量',echarts.lengend_data_jishu_three,'180','3')"></div>-->
                         <div >
                             <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
+                            :style="{'left':be_click_left(0.626),'top':be_click_top(0.56)}"
                              @click="oilHandel(echarts.data_three_jishu,echarts.lengend_data_jishu_three,'480',echarts.data_three_jingji,'180','3')">    
                         </div> 
                         <!-- <div class="clickbtn" :style="{'left':be_click_left(0.656),'top':be_click_top(0.465)}"
@@ -137,7 +137,7 @@
                              '原油剩余经济储量',echarts.lengend_data_jishu_five,'278','5')"></div>-->
                         <div >
                             <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.740),'top':be_click_top(0.285)}"
+                            :style="{'left':be_click_left(0.720),'top':be_click_top(0.285)}"
                             @click="oilHandel(echarts.data_five_jishu,echarts.lengend_data_jishu_five,'636',echarts.data_five_jingji,'278','5')"> 
                         </div> 
 
@@ -150,7 +150,7 @@
                                '原油剩余经济储量',echarts.lengend_data_jishu_four,'28','4')"></div>-->
                         <div >
                             <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.760),'top':be_click_top(0.515)}"
+                            :style="{'left':be_click_left(0.752),'top':be_click_top(0.542)}"
                             @click="oilHandel(echarts.data_four_jishu,echarts.lengend_data_jishu_four,'71',echarts.data_four_jingji,'28','4')">
                         </div> 
 
@@ -163,7 +163,7 @@
                               '原油剩余经济储量',echarts.lengend_data_jishu_six,'9','6')"></div>-->
                         <div >
                             <img class="clickbtn" src="../../assets/img/produce-fx/youtong.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.820),'top':be_click_top(0.595)}"
+                            :style="{'left':be_click_left(0.810),'top':be_click_top(0.595)}"
                             @click="oilHandel(echarts.data_six_jishu,echarts.lengend_data_jishu_six,'24',echarts.data_six_jingji,'9','6')">
                         </div>
 
@@ -174,28 +174,28 @@
                 <!--天然气宏观显示-->
                 <div v-show="oilShow?false:true">
                     <div class="lay-content" v-show="flagGas=='1'||showAllGas"
-                         :style="{'left':be_click_left(0.148),'top':be_click_top(0.712)}">
+                         :style="{'left':be_click_left(0.5),'top':be_click_top(0.75)}">
                         <div>苏里格气田区域</div>
                         <div>气田个数：5个</div>
                         <div>探明储量：11900万立方米</div>
                     </div>
                     <div class="lay-content"
                          v-show="flagGas=='2'||showAllGas"
-                         :style="{'left':be_click_left(0.198),'top':be_click_top(0.429)}">
+                         :style="{'left':be_click_left(0.192),'top':be_click_top(0.429)}">
                         <div>包尔气田区域</div>
                         <div>气田个数：1个</div>
                         <div>探明储量：560万立方米</div>
                     </div>
                     <div class="lay-content"
                          v-show="flagGas=='3'||showAllGas"
-                         :style="{'left':be_click_left(0.608),'top':be_click_top(0.538)}">
+                         :style="{'left':be_click_left(0.69),'top':be_click_top(0.5)}">
                         <div>二连气田区域</div>
                         <div>气田个数：2个</div>
                         <div>探明储量：700万立方米</div>
                     </div>
                     <div class="lay-content"
                          v-show="flagGas=='4'||showAllGas"
-                         :style="{'left':be_click_left(0.448),'top':be_click_top(0.148)}">
+                         :style="{'left':be_click_left(0.44),'top':be_click_top(0.146)}">
                         <div>海拉尔气田区域</div>
                         <div>油田个数：2个</div>
                         <div>探明储量：840万立方米</div>
@@ -235,7 +235,7 @@
                              '天然气剩余经济储量',echarts.lengendGas_data_three,'0.03','3')"></div>-->
                         <div >
                             <img class="clickbtn1" src="../../assets/img/produce-fx/qitian.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.666),'top':be_click_top(0.485)}"
+                            :style="{'left':be_click_left(0.635),'top':be_click_top(0.472)}"
                             @click="gasHandel(echarts.dataGas_three_jishu,echarts.lengendGas_data_three,'0.02',echarts.dataGas_three_jingji,'0.03','3')">
                         </div> 
 
@@ -266,7 +266,7 @@
                  </div>
      
 
-
+            <img class="legend_map" src="../../assets/img/YouqiGongying/trq_legend.png" alt="图片未显示">
             <img class="map" src="../../assets/img/YouqiGongying/地图.png" alt="图片未显示">
 
             <img class="map1" v-show='hot_map1' src= "../../assets/img/produce-fx/hotmap_oil.png" alt="图片未显示">
@@ -340,12 +340,12 @@
                     <div :class="[{btn_shenchan_xuan:btn_shenchan_num},{btn_shenchan_wei:!btn_shenchan_num}]"
                          @click="tabButton_produce(1)">
                         <img class="img_produce" :src="imgUrl" alt="图片未显示">
-                        <div style="position: absolute;top: 8px;left: 25px;">原油天然气生产</div>
+                        <div style="position: absolute;top: 6px;left: 25px;">原油天然气生产</div>
                     </div>
                     <div :class="[{btn_shenchan_xuan:!btn_shenchan_num},{btn_shenchan_wei:btn_shenchan_num}]"
                          @click="tabButton_produce(0)">
                         <img class="img_produce" :src="imgUrl2" alt="图片未显示">
-                        <div style="position: absolute;top: 32px;left: 25px;">炼化煤化企业生产</div>
+                        <div style="position: absolute;top: 28px;left: 25px;">炼化煤化企业生产</div>
                     </div>
                 </div>
             </div>
@@ -398,32 +398,32 @@
                 <div v-show="proShow">
                     <!--生产分析地图原油显示-->
                     <div>
-                        <div class="lay-content-pro" :style="{'left':be_click_left(0.043),'top':be_click_top(0.712)}">
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.032),'top':be_click_top(0.712)}">
                             <div>吉祥油田区域</div>
                             <div>上月产量：1.4万吨</div>
                             <div>累计产量：4.2万吨</div>
                         </div>
-                        <div class="lay-content-pro" :style="{'left':be_click_left(0.178),'top':be_click_top(0.512)}">
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.15),'top':be_click_top(0.512)}">
                             <div>包尔油田区域</div>
                             <div>上月产量：2.4万吨</div>
                             <div>累计产量：5.4万吨</div>
                         </div>
-                        <div class="lay-content-pro" :style="{'left':be_click_left(0.408),'top':be_click_top(0.382)}">
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.4),'top':be_click_top(0.382)}">
                             <div>二连油田区域</div>
                             <div>上月产量：2.4万吨</div>
                             <div>累计产量：38.7万吨</div>
                         </div>
-                        <div class="lay-content-pro" :style="{'left':be_click_left(0.688),'top':be_click_top(0.152)}">
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.695),'top':be_click_top(0.152)}">
                             <div>海拉尔油田区域</div>
                             <div>上月产量：5万吨</div>
                             <div>累计产量：21万吨</div>
                         </div>
-                        <div class="lay-content-pro" :style="{'left':be_click_left(0.7),'top':be_click_top(0.362)}">
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.7),'top':be_click_top(0.35)}">
                             <div>科尔沁油田区域</div>
                             <div>上月产量：3万吨</div>
                             <div>累计产量：12.6万吨</div>
                         </div>
-                        <div class="lay-content-pro" :style="{'left':be_click_left(0.7),'top':be_click_top(0.642)}">
+                        <div class="lay-content-pro" :style="{'left':be_click_left(0.65),'top':be_click_top(0.61)}">
                             <div>科尔康油田区域</div>
                             <div>上月产量：1.4万吨</div>
                             <div>累计产量：3.36万吨</div>
@@ -431,23 +431,29 @@
                     </div>
                     <!--生产分析原油地图弹窗-->              
                     <div>      
-                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
+                            <!-- 吉祥 -->
+                            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.326),'top':be_click_top(0.712)}"
                             @click="tanchuangShow(listData_pro1,tableTh1_pro)" >
-                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.463),'top':be_click_top(0.64)}"
+                            <!-- 包尔 -->
+                            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.469),'top':be_click_top(0.63)}"
                              @click="tanchuangShow(listData_pro2,tableTh1_pro)" >
-                            <img class="clickbtn3" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.559),'top':be_click_top(0.55)}"
+                             <!-- 二连 -->
+                            <img class="clickbtn3" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.55),'top':be_click_top(0.54)}"
                             @click="tanchuangShow(listData_pro3,tableTh1_pro)" >
-                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
+                            <!-- 海拉尔 -->
+                            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示" 
                             :style="{'left':be_click_left(0.649),'top':be_click_top(0.297)}"
                             @click="tanchuangShow(listData_pro4,tableTh1_pro)" >
-                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
+
+                            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.713),'top':be_click_top(0.518)}"
                             @click="tanchuangShow(listData_pro5,tableTh1_pro)" >
-                            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.759),'top':be_click_top(0.55)}"
+                            <!-- 科尔康 -->
+                            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.779),'top':be_click_top(0.55)}"
                             @click="tanchuangShow(listData_pro6,tableTh1_pro)" >                      
                         <!-- <div class="clickbtn1" :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
                              @click="tanchuangShow(listData_pro1,tableTh1_pro)"></div>
@@ -466,22 +472,22 @@
                 <div v-show="proShow?false:true">
                     <!--生产分析地图气田显示-->
                     <div>
-                        <div class="lay-content-gas" :style="{'left':be_click_left(0.013),'top':be_click_top(0.712)}">
+                        <div class="lay-content-gas" :style="{'left':be_click_left(0.014),'top':be_click_top(0.616)}">
                             <div>苏里格气田区域</div>
                             <div>上月产量：12亿立方米</div>
                             <div>累计产量：176亿立方米</div>
                         </div>
-                        <div class="lay-content-gas" :style="{'left':be_click_left(0.128),'top':be_click_top(0.462)}">
+                        <div class="lay-content-gas" :style="{'left':be_click_left(0.128),'top':be_click_top(0.43)}">
                             <div>包尔气田区域</div>
                             <div>上月产量：0.52亿立方米</div>
                             <div>累计产量：3.92亿立方米</div>
                         </div>
-                        <div class="lay-content-gas" :style="{'left':be_click_left(0.608),'top':be_click_top(0.562)}">
+                        <div class="lay-content-gas" :style="{'left':be_click_left(0.63),'top':be_click_top(0.572)}">
                             <div>二连气田区域</div>
                             <div>上月产量：0.68亿立方米</div>
                             <div>累计产量：6.88亿立方米</div>
                         </div>
-                        <div class="lay-content-gas" :style="{'left':be_click_left(0.388),'top':be_click_top(0.092)}">
+                        <div class="lay-content-gas" :style="{'left':be_click_left(0.588),'top':be_click_top(0.312)}">
                             <div>海拉尔气田区域</div>
                             <div>上月产量：0.8亿立方米</div>
                             <div>累计产量：9.8亿立方米</div>
@@ -490,20 +496,20 @@
                     <!--生产分析气田地图弹窗-->
                     <div>
 
-                         <img class="clickbtn3" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.359),'top':be_click_top(0.768)}"
+                         <img class="clickbtn3" src="../../assets/img/YouqiGongying/q_gy.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.34),'top':be_click_top(0.75)}"
                             @click="tanchuangShow(listData_gas1,tableTh1_gas)">
 
-                        <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示" 
+                        <img class="clickbtn2" src="../../assets/img/YouqiGongying/q_gy.png" alt="图片未显示" 
                             :style="{'left':be_click_left(0.489),'top':be_click_top(0.585)}"
                             @click="tanchuangShow(listData_gas2,tableTh1_gas)">
 
-                        <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示" 
+                        <img class="clickbtn2" src="../../assets/img/YouqiGongying/q_gy.png" alt="图片未显示" 
                             :style="{'left':be_click_left(0.639),'top':be_click_top(0.501)}"
                             @click="tanchuangShow(listData_gas3,tableTh1_gas)">
 
-                        <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示" 
-                            :style="{'left':be_click_left(0.679),'top':be_click_top(0.237)}"
+                        <img class="clickbtn2" src="../../assets/img/YouqiGongying/q_gy.png" alt="图片未显示" 
+                            :style="{'left':be_click_left(0.679),'top':be_click_top(0.242)}"
                             @click="tanchuangShow(listData_gas4,tableTh1_gas)">
                         <!-- <div class="clickbtn2" :style="{'left':be_click_left(0.359),'top':be_click_top(0.768)}"
                              @click="tanchuangShow(listData_gas1,tableTh1_gas)"></div>
@@ -821,11 +827,11 @@
                 ],
                 // 炼化煤页面弹窗
                 page_c: [],
-                page_c1: ['大唐煤制气', 1200, 100, 1000, 500, '0.465', '0.153', '万立方米'],
-                page_c2: ['神华煤制油', 1250, 100, 1000, 500, '0.445', '0.433', '万吨'],
-                page_c3: ['汇能煤制气', 2000, 100, 1000, 400, '0.405', '0.393', '万立方米'],
-                page_c4: ['伊泰煤制油', 1600, 100, 1000, 600, '0.445', '0.373', '万吨'],
-                page_c5: ['呼和浩特石化公司', 1700, 100, 1000, 500, '0.455', '0.303', '万吨'],
+                page_c1: ['大唐煤制气', 1200, 100, 1000, 500, '0.45', '0.153', '万立方米'],
+                page_c2: ['神华煤制油', 1250, 100, 1000, 500, '0.01', '0.41', '万吨'],
+                page_c3: ['汇能煤制气', 2000, 100, 1000, 400, '0.01', '0.41', '万立方米'],
+                page_c4: ['伊泰煤制油', 1600, 100, 1000, 600, '0.01', '0.41', '万吨'],
+                page_c5: ['呼和浩特石化公司', 1700, 100, 1000, 500, '0.01', '0.41', '万吨'],
                 produce_tc: false,
                 xuan: 0,
 
@@ -3123,24 +3129,24 @@
 
     /* 炼化煤弹窗样式 */
     .produce_tc {
-        width: 200px;
+        width: 187px;
         background-color: rgba(37, 54, 104, 0.6);
         /*left: 190px;
         top: 60px;*/
         position: absolute;
-        padding-top: 8px;
+        padding-top: 4px;
     }
 
     .produce_tc ul li {
-        font-size: 10px;
+        font-size: 8px;
         color: #C9D6FD;
-        padding: 0 6px;
+        padding: 0 5px;
     }
 
     .produce_tc ul :first-child {
         font-weight: bold;
-        font-size: 15px;
-        padding: 4px;
+        font-size: 12px;
+        padding: 3px;
         color: white;
     }
 
@@ -3203,14 +3209,14 @@
     }
 
     .clickbtn2 {
-        width: 16.17px;
-        height: 19.91px;
+        width: 34.5px;
+        height: 34.5px;
         position: absolute;
         z-index: 1;
     }
     .clickbtn3 {
-        width: 20.58px;
-        height: 25.34px;
+        width: 50px;
+        height: 50px;
         position: absolute;
         z-index: 1;
     }
@@ -3246,6 +3252,7 @@
         background-color: rgba(106, 113, 129, 0.5);
         color: #fff;
         width: 110px;
+        // z-index: 1;
     }
 
     .lay-content-gas {
@@ -3409,9 +3416,9 @@
 
     .map1 {
         left:110px;
-	    top:88px;
+	    top:96px;
         width: 197.5px;
-        height: 141.5px;
+        height: 143px;
         position: absolute;
         z-index: 0;
     }
@@ -3424,6 +3431,15 @@
         z-index: 0;
     }
 
+    .legend_map {
+        left:30px;
+	    top:245px;
+        width: 6px;
+        height: 66px;
+        position: absolute;
+        background-color: #DADBDB;
+        z-index: 0;
+    }
     /* 通用同比环比图片样式 */
     .imgStyle {
         width: 5px;

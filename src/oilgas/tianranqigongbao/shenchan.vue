@@ -2,14 +2,18 @@
     <div class="child1" style="background-color: #E6E8EC;">
         <img
                 class="map"
-                src="../../assets/img/oilgas/shenchan.png"
+                src="../../assets/img/地图.png"
         />
+        <img class="map2"  src= "../../assets/img/produce-fx/hotmap_gas.png" alt="图片未显示">
         <!--地图定位-->
         <div>
-            <div class="clickbtn" v-for="(item,index) in posList"
+            <!--<div class="clickbtn" v-for="(item,index) in posList"-->
+                 <!--:style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"-->
+                 <!--@click="changePie(index)"-->
+            <!--&gt;</div>-->
+            <img :src="item.src" alt="" class="clickbtn" v-for="(item,index) in posList"
                  :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}"
-                 @click="changePie(index)"
-            ></div>
+                 @click="changePie(index)">
         </div>
         <!--地图上展示信息-->
         <div class="lay-content"
@@ -80,20 +84,24 @@
                 posList: [
                     //苏里格气田区域
                     {
-                        left: '0.444',
-                        top: '1.021'
+                        left: '0.394',
+                        top: '0.95',
+                        src:require('../../assets/img/produce-fx/qitian.png')
                     },
                     {
                         left: '0.496',
-                        top: '0.810'
+                        top: '0.810',
+                        src:require('../../assets/img/produce-fx/qitian.png')
                     },
                     {
                         left: '0.664',
-                        top: '0.751'
+                        top: '0.751',
+                        src:require('../../assets/img/produce-fx/qitian.png')
                     },
                     {
                         left: '0.764',
-                        top: '0.515'
+                        top: '0.515',
+                        src:require('../../assets/img/produce-fx/qitian.png')
                     }
                 ],//地图弹窗位置
                 desList: [
@@ -898,7 +906,14 @@
             /* background-size: cover;
              background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
         }
-
+        .map2 {
+            left:125px;
+            top:175px;
+            width: 168.5px;
+            height: 188px;
+            position: absolute;
+            z-index: 0;
+        }
         .scFristqh {
             margin-bottom: 22px;
             display: flex;
@@ -1053,8 +1068,6 @@
             background-color: #fff;
         }
         .clickbtn {
-            width: 13px;
-            height: 13px;
             position: absolute;
             z-index: 2;
         }

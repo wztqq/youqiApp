@@ -34,7 +34,7 @@ const Shengchanguanli= () => import("./oilgas/tianranqigongbao/shengchanguanli.v
 const YouqixiaoShou= () => import("./oilgas/youqixiaoshou/chengpinyou.vue");
 
 // 油气储运
-const KuCun= () => import("./oilgas/youqichuyun/kucun.vue");
+const KuCun= () => import("./oilgas/youqichuyun/youqikuyun.vue");
 // 油气销售
 const XSChengPinYou= () => import("./oilgas/youqixiaoshou/chengpinyou.vue");
 //油气供应

@@ -16,9 +16,9 @@
              v-show="desIndex==index&&showFlag"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>10月石脑油产量：{{item.num2}}万吨</div>
-            <div>10月柴油产量：{{item.num3}}万吨</div>
-            <div>10月液化气产量：{{item.num4}}万吨</div>
+            <div>10月石脑油供应量：{{item.num2}}万吨</div>
+            <div>10月柴油供应量：{{item.num3}}万吨</div>
+            <div>10月液化气供应量：{{item.num4}}万吨</div>
         </div>
 
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">

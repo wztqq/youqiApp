@@ -5,7 +5,7 @@
                 src="../../assets/img/地图.png"
         />
         <!--地图定位-->
-        <img class="clickbtn" :src="item.src" alt="图片未显示" v-for="(item,index) in posList"
+        <img :class="item.cls" :src="item.src" alt="图片未显示" v-for="(item,index) in posList"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}" @click="showDes(index)">
         <!--地图上展示信息-->
         <div class="lay-content"
@@ -75,37 +75,44 @@
                     {
                         left: '0.333',
                         top: '0.918',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn'
+
                     },
                     //包尔油田区域
                     {
                         left: '0.503',
                         top: '0.918',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn'
                     },
                     //二连油田区域
                     {
                         left: '0.603',
-                        top: '0.818',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        top: '0.748',
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn1'
                     },
                     //海拉尔油田区域
                     {
                         left: '0.673',
                         top: '0.548',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn2'
                     },
                     //科尔沁油田区域
                     {
                         left: '0.743',
                         top: '0.748',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn2'
                     },
                     //科尔康油田区域
                     {
                         left: '0.783',
                         top: '0.838',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn'
                     }
                 ],//地图弹窗位置
                 desList: [
@@ -424,9 +431,9 @@
                     ],
                     [
                         {
-                        name: '科尔康油田',
-                        value: 0.46
-                    },
+                            name: '科尔康油田',
+                            value: 0.46
+                        },
                         {
                             name: '龙筒湾油田',
                             value: 0.55
@@ -444,7 +451,7 @@
         mounted() {
             //原油月供应量趋势分析
             this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[0]);
-            this.ZhuYaoQiYeZhanBi_pie('echartsFour',this.YuanYou_FourLengend[0],this.YuanYou_FourSerData[0])
+            this.ZhuYaoQiYeZhanBi_pie('echartsFour', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
 
 
         },
@@ -771,7 +778,7 @@
                 });
             },
             //油田供应分布分析
-            ZhuYaoQiYeZhanBi_pie(name, lengend,series) {
+            ZhuYaoQiYeZhanBi_pie(name, lengend, series) {
                 let echarts = require("echarts");
                 let myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
@@ -836,28 +843,28 @@
                     this.showAll = true;
                     this.desIndex = null;
                     this.tabList = this.tabList_copy;
-                    this.tabList_two=this.tabList_two_copy
+                    this.tabList_two = this.tabList_two_copy
                     this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[0]);
-                    this.pie_one=this.pie_oneAry[0]
-                    this.pie_two=this.pie_twoAry[0]
+                    this.pie_one = this.pie_oneAry[0]
+                    this.pie_two = this.pie_twoAry[0]
                     this.$nextTick(() => {
                         this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[0]);
                     })
                     this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[0]);
-                    this.ZhuYaoQiYeZhanBi_pie('echartsFour',this.YuanYou_FourLengend[0],this.YuanYou_FourSerData[0])
+                    this.ZhuYaoQiYeZhanBi_pie('echartsFour', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
                 } else {
                     this.desIndex = index;
                     this.showAll = false;
-                    this.pie_one=this.pie_oneAry[index+1]
-                    this.pie_two=this.pie_twoAry[index+1]
+                    this.pie_one = this.pie_oneAry[index + 1]
+                    this.pie_two = this.pie_twoAry[index + 1]
                     this.tabList = [this.city[index] + this.tabList_copy[0], this.city[index] + this.tabList_copy[1]]
                     this.$nextTick(() => {
-                        this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[index+1]);
+                        this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[index + 1]);
                     })
                     this.tabList_two = [this.city[index] + this.tabList_two_copy[0], this.city[index] + this.tabList_two_copy[1]]
-                    this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[index+1]);
-                    this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[index+1]);
-                    this.ZhuYaoQiYeZhanBi_pie('echartsFour',this.YuanYou_FourLengend[index+1],this.YuanYou_FourSerData[index+1])
+                    this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[index + 1]);
+                    this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[index + 1]);
+                    this.ZhuYaoQiYeZhanBi_pie('echartsFour', this.YuanYou_FourLengend[index + 1], this.YuanYou_FourSerData[index + 1])
                 }
 
 
@@ -1042,6 +1049,18 @@
             position: absolute;
             z-index: 2;
             width: 20px;
+        }
+        .clickbtn1 {
+            width: 35px;
+            position: absolute;
+            height: 35px;
+            z-index: 2;
+        }
+        .clickbtn2 {
+            width: 30px;
+            position: absolute;
+            height: 30px;
+            z-index: 2;
         }
 
     }

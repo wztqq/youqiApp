@@ -5,7 +5,7 @@
                 src="../../assets/img/地图.png"
         />
         <!--地图定位-->
-        <img class="clickbtn" :src="item.src" alt="图片未显示" v-for="(item,index) in posList"
+        <img :class="item.cls" :src="item.src" alt="图片未显示" v-for="(item,index) in posList"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}" @click="showDes(index)">
         <!--地图上展示信息-->
         <div class="lay-content"
@@ -65,37 +65,44 @@
                     {
                         left: '0.333',
                         top: '0.918',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn'
+
                     },
                     //包尔油田区域
                     {
                         left: '0.503',
                         top: '0.918',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn'
                     },
                     //二连油田区域
                     {
                         left: '0.603',
-                        top: '0.818',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        top: '0.748',
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn1'
                     },
                     //海拉尔油田区域
                     {
                         left: '0.673',
                         top: '0.548',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn2'
                     },
                     //科尔沁油田区域
                     {
                         left: '0.743',
                         top: '0.748',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn2'
                     },
                     //科尔康油田区域
                     {
                         left: '0.783',
                         top: '0.838',
-                        src: require('../../assets/img/YouqiGongying/y_gy.png')
+                        src: require('../../assets/img/YouqiGongying/y_gy.png'),
+                        cls: 'clickbtn'
                     }
                 ],//地图弹窗位置
                 desList: [
@@ -795,9 +802,21 @@
             background-color: #fff;
         }
         .clickbtn {
-            width: 15px;
+            width: 25px;
             position: absolute;
-            height: 15px;
+            height: 25px;
+            z-index: 2;
+        }
+        .clickbtn1 {
+            width: 35px;
+            position: absolute;
+            height: 35px;
+            z-index: 2;
+        }
+        .clickbtn2 {
+            width: 30px;
+            position: absolute;
+            height: 30px;
             z-index: 2;
         }
 

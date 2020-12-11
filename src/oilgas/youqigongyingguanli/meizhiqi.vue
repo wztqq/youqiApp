@@ -47,7 +47,7 @@
                 煤制气供应企业分析
             </div>
             <div class="content">
-                <div id="echartsSeventeen" style="width: 100%;height: 240px"></div>
+                <div id="echartsSeventeennew" style="width: 100%;height: 240px"></div>
             </div>
         </div>
     </div>
@@ -171,7 +171,7 @@
         mounted() {
             //煤制气供应量变化趋势
             this.MeiZhiQi_One("echartsTone", this.MeiZhiQi_OneSerData[0]);
-            this.MeiZhiQiGongYingQiYeFenXi_twobar('echartsSeventeen')
+            this.MeiZhiQiGongYingQiYeFenXi_twobar('echartsSeventeennew')
 
         },
         methods: {

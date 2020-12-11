@@ -26,8 +26,8 @@
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="scFristqh">
                 <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
-                    <el-tab-pane label="汽油库存量变化趋势分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="柴油库存量变化趋势分析" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane :label="tabList_one[0]" name="1"></el-tab-pane>
+                    <el-tab-pane :label="tabList_one[1]" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -46,8 +46,8 @@
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="scFristqh">
                 <el-tabs v-model="activeNamePie1" @tab-click="handleClick">
-                    <el-tab-pane label="航煤库存量变化趋势分析" name="1"></el-tab-pane>
-                    <el-tab-pane label="原油库存量变化趋势分析" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane :label="tabList_two[0]" name="1"></el-tab-pane>
+                    <el-tab-pane :label="tabList_two[1]" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -64,8 +64,8 @@
         <div style="background-color: #fff;padding-top: 18px">
             <div class="scFristqh">
                 <el-tabs v-model="activeName" @tab-click="handleClickThree">
-                    <el-tab-pane label="汽油库存企业结构" name="1"></el-tab-pane>
-                    <el-tab-pane label="柴油库存企业结构" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane :label="tabList_three[0]" name="1"></el-tab-pane>
+                    <el-tab-pane :label="tabList_three[1]" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -89,8 +89,8 @@
         <div style="background-color: #fff;padding-top: 18px">
             <div class="scFristqh">
                 <el-tabs v-model="activeName4" @tab-click="handleClickFour">
-                    <el-tab-pane label="航煤库存企业结构" name="1"></el-tab-pane>
-                    <el-tab-pane label="原油库存企业结构" name="2" :laze="true"></el-tab-pane>
+                    <el-tab-pane :label="tabList_four[0]" name="1"></el-tab-pane>
+                    <el-tab-pane :label="tabList_four[1]" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
             <div class="tabs-content">
@@ -119,6 +119,7 @@
         name: 'child1',
         data() {
             return {
+                cityAry:['阿拉善盟','乌海','巴彦淖尔','鄂尔多斯','包头','呼和浩特','乌兰察布','锡林郭勒盟','赤峰','呼伦贝尔','兴安盟','通辽'],
                 posList: [
                     //阿拉善盟
                     {
@@ -315,6 +316,14 @@
                         top: '0.475'
                     }
                 ],//弹窗内容
+                tabList_one:['汽油库存量变化趋势','柴油库存量变化趋势'],
+                tabList_one_copy:['汽油库存量变化趋势','柴油库存量变化趋势'],
+                tabList_two:['航煤库存量变化趋势','原油库存量变化趋势'],
+                tabList_two_copy:['航煤库存量变化趋势','原油库存量变化趋势'],
+                tabList_three:['汽油库存企业结构','柴油库存企业结构'],
+                tabList_three_copy:['汽油库存企业结构','柴油库存企业结构'],
+                tabList_four:['航煤库存企业结构','原油库存企业结构'],
+                tabList_four_copy:['航煤库存企业结构','原油库存企业结构'],
                 activeName: '1',
                 activeNamePie: '1',
                 activeNamePie1: '1',
@@ -1881,6 +1890,10 @@
                         this.pie_two=this.pie_twoAry[index+1]
                         this.pie_three=this.pie_threeAry[index+1]
                         this.pie_four=this.pie_fourAry[index+1]
+                        this.tabList_one=[this.cityAry[index]+this.tabList_one_copy[0],this.cityAry[index]+this.tabList_one_copy[1]]
+                        this.tabList_two=[this.cityAry[index]+this.tabList_two_copy[0],this.cityAry[index]+this.tabList_two_copy[1]]
+                        this.tabList_three=[this.cityAry[index]+this.tabList_three_copy[0],this.cityAry[index]+this.tabList_three_copy[1]]
+                        this.tabList_four=[this.cityAry[index]+this.tabList_four_copy[0],this.cityAry[index]+this.tabList_four_copy[1]]
 
                     } else {
                         this.showFlag = false;
@@ -1897,6 +1910,10 @@
                         this.pie_two=this.pie_twoAry[0]
                         this.pie_three=this.pie_threeAry[0]
                         this.pie_four=this.pie_fourAry[0]
+                        this.tabList_one=this.tabList_one_copy
+                        this.tabList_two=this.tabList_two_copy
+                        this.tabList_three=this.tabList_three_copy
+                        this.tabList_four=this.tabList_four_copy
                     }
                 } else {
                     this.desIndex = index;
@@ -1913,6 +1930,10 @@
                     this.KuCun_Six("echartsSix", this.sixseries[index+1]);
                     this.KuCun_Seven("echartsSeven", this.sevenseries[index+1]);
                     this.KuCun_Eight("echartsEight", this.eightseries[index+1]);
+                    this.tabList_one=[this.cityAry[index]+this.tabList_one_copy[0],this.cityAry[index]+this.tabList_one_copy[1]]
+                    this.tabList_two=[this.cityAry[index]+this.tabList_two_copy[0],this.cityAry[index]+this.tabList_two_copy[1]]
+                    this.tabList_three=[this.cityAry[index]+this.tabList_three_copy[0],this.cityAry[index]+this.tabList_three_copy[1]]
+                    this.tabList_four=[this.cityAry[index]+this.tabList_four_copy[0],this.cityAry[index]+this.tabList_four_copy[1]]
                 }
 
             }
@@ -1960,7 +1981,7 @@
              text-align: center;
              padding: 0;
              border-radius: 3px;*/
-            width: 169.5px;
+            width: 180px;
             height: 25px;
             font: 12px PingFangSC-Regular;
             color: #3a6dda;
@@ -1976,7 +1997,7 @@
         .scFristqh /deep/ .el-tabs__item.is-active {
             /*background-color: #236BD7;
             color: #fff;*/
-            width: 169.5px;
+            width: 180px;
             height: 25px;
             background-color: #3a6dda;
             font: 12px PingFangSC-Regular;
@@ -1994,7 +2015,7 @@
             /*width: 342px;
             border: 1px solid #236BD7;
             border-radius: 3px;*/
-            width: 345px;
+            width: 370px;
             height: 31px;
             background-color: white;
             margin: 0px auto;

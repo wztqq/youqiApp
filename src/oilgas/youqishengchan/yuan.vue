@@ -85,22 +85,22 @@
                     },
                     //海拉尔油田区域
                     {
-                        left: '0.673',
-                        top: '0.548',
+                        left: '0.626',
+                        top: '0.56',
                         src: require('../../assets/img/YouqiGongying/y_gy.png'),
                         cls: 'clickbtn2'
                     },
                     //科尔沁油田区域
                     {
                         left: '0.743',
-                        top: '0.748',
+                        top: '0.758',
                         src: require('../../assets/img/YouqiGongying/y_gy.png'),
                         cls: 'clickbtn2'
                     },
                     //科尔康油田区域
                     {
                         left: '0.783',
-                        top: '0.838',
+                        top: '0.848',
                         src: require('../../assets/img/YouqiGongying/y_gy.png'),
                         cls: 'clickbtn'
                     }
@@ -123,14 +123,14 @@
                     },
 
                     {
-                        left: '0.373',
+                        left: '0.313',
                         top: '0.582',
                         name: '二连油田区域',
                         num1: '0.7',
                         num2: '4.2',
                     },
                     {
-                        left: '0.383',
+                        left: '0.333',
                         top: '0.392',
                         name: '海拉尔油田区域',
                         num1: '0.7',
@@ -138,7 +138,7 @@
                     },
                     {
                         left: '0.693',
-                        top: '0.592',
+                        top: '0.578',
                         name: '科尔沁油田区域',
                         num1: '0.7',
                         num2: '4.2',
@@ -806,9 +806,9 @@
             background-color: #fff;
         }
         .clickbtn {
-            width: 25px;
+            width: 20px;
             position: absolute;
-            height: 25px;
+            height: 20px;
             z-index: 2;
         }
         .clickbtn1 {
@@ -818,9 +818,9 @@
             z-index: 2;
         }
         .clickbtn2 {
-            width: 30px;
+            width: 25px;
             position: absolute;
-            height: 30px;
+            height: 25px;
             z-index: 2;
         }
 

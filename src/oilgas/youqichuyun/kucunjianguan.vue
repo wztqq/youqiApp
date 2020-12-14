@@ -30,6 +30,7 @@
                     <el-tab-pane :label="tabList_one[1]" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
+            <div :class="[{titleOne:cityAll},{titleAll:!cityAll}]">{{city}}</div>
             <div class="tabs-content">
 
                 <div v-show="activeNamePie==='1'">
@@ -50,6 +51,7 @@
                     <el-tab-pane :label="tabList_two[1]" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
+            <div :class="[{titleOne:cityAll},{titleAll:!cityAll}]">{{city}}</div>
             <div class="tabs-content">
 
                 <div v-show="activeNamePie1==='1'">
@@ -61,13 +63,14 @@
                 </div>
             </div>
         </div>
-        <div style="background-color: #fff;padding-top: 18px">
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="scFristqh">
                 <el-tabs v-model="activeName" @tab-click="handleClickThree">
                     <el-tab-pane :label="tabList_three[0]" name="1"></el-tab-pane>
                     <el-tab-pane :label="tabList_three[1]" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
+            <div :class="[{titleOne:cityAll},{titleAll:!cityAll}]">{{city}}</div>
             <div class="tabs-content">
                 <div v-show="activeName==='1'">
                     <div class="fontSize_div">
@@ -86,13 +89,14 @@
 
             </div>
         </div>
-        <div style="background-color: #fff;padding-top: 18px">
+        <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
             <div class="scFristqh">
                 <el-tabs v-model="activeName4" @tab-click="handleClickFour">
                     <el-tab-pane :label="tabList_four[0]" name="1"></el-tab-pane>
                     <el-tab-pane :label="tabList_four[1]" name="2" :laze="true"></el-tab-pane>
                 </el-tabs>
             </div>
+            <div :class="[{titleOne:cityAll},{titleAll:!cityAll}]">{{city}}</div>
             <div class="tabs-content">
                 <div v-show="activeName4==='1'">
                     <div class="fontSize_div">
@@ -119,6 +123,8 @@
         name: 'child1',
         data() {
             return {
+                cityAll:true,
+                city:'',
                 cityAry:['阿拉善盟','乌海','巴彦淖尔','鄂尔多斯','包头','呼和浩特','乌兰察布','锡林郭勒盟','赤峰','呼伦贝尔','兴安盟','通辽'],
                 posList: [
                     //阿拉善盟
@@ -316,10 +322,10 @@
                         top: '0.475'
                     }
                 ],//弹窗内容
-                tabList_one:['汽油库存量变化趋势','柴油库存量变化趋势'],
-                tabList_one_copy:['汽油库存量变化趋势','柴油库存量变化趋势'],
-                tabList_two:['航煤库存量变化趋势','原油库存量变化趋势'],
-                tabList_two_copy:['航煤库存量变化趋势','原油库存量变化趋势'],
+                tabList_one:['汽油库存量变化趋势分析','柴油库存量变化趋势分析'],
+                tabList_one_copy:['汽油库存量变化趋势分析','柴油库存量变化趋势分析'],
+                tabList_two:['航煤库存量变化趋势分析','原油库存量变化趋势分析'],
+                tabList_two_copy:['航煤库存量变化趋势分析','原油库存量变化趋势分析'],
                 tabList_three:['汽油库存企业结构','柴油库存企业结构'],
                 tabList_three_copy:['汽油库存企业结构','柴油库存企业结构'],
                 tabList_four:['航煤库存企业结构','原油库存企业结构'],
@@ -1878,6 +1884,8 @@
                     if (this.$refs[`list${index}`][0].style.display == 'none') {
                         this.showFlag = true
                         this.desIndex = index;
+                        this.cityAll=false
+                        this.city =this.cityAry[index]
                         this.KuCun_One("echartsOne", this.oneseries[index+1]);
                         if(this.activeNamePie==2){
                             this.KuCun_Two("echartsTwo", this.twoseries[index+1]);
@@ -1901,14 +1909,16 @@
                         this.pie_two=this.pie_twoAry[index+1]
                         this.pie_three=this.pie_threeAry[index+1]
                         this.pie_four=this.pie_fourAry[index+1]
-                        this.tabList_one=[this.cityAry[index]+this.tabList_one_copy[0],this.cityAry[index]+this.tabList_one_copy[1]]
-                        this.tabList_two=[this.cityAry[index]+this.tabList_two_copy[0],this.cityAry[index]+this.tabList_two_copy[1]]
-                        this.tabList_three=[this.cityAry[index]+this.tabList_three_copy[0],this.cityAry[index]+this.tabList_three_copy[1]]
-                        this.tabList_four=[this.cityAry[index]+this.tabList_four_copy[0],this.cityAry[index]+this.tabList_four_copy[1]]
+                        // this.tabList_one=[this.cityAry[index]+this.tabList_one_copy[0],this.cityAry[index]+this.tabList_one_copy[1]]
+                        // this.tabList_two=[this.cityAry[index]+this.tabList_two_copy[0],this.cityAry[index]+this.tabList_two_copy[1]]
+                        // this.tabList_three=[this.cityAry[index]+this.tabList_three_copy[0],this.cityAry[index]+this.tabList_three_copy[1]]
+                        // this.tabList_four=[this.cityAry[index]+this.tabList_four_copy[0],this.cityAry[index]+this.tabList_four_copy[1]]
 
                     } else {
                         this.showFlag = false;
                         this.desIndex = null;
+                        this.cityAll=true
+                        this.city ='';
                         this.KuCun_One("echartsOne", this.oneseries[0]);
                         if(this.activeNamePie==2){
                             this.KuCun_Two("echartsTwo", this.twoseries[0]);
@@ -1930,14 +1940,16 @@
                         this.pie_two=this.pie_twoAry[0]
                         this.pie_three=this.pie_threeAry[0]
                         this.pie_four=this.pie_fourAry[0]
-                        this.tabList_one=this.tabList_one_copy
+                        /*this.tabList_one=this.tabList_one_copy
                         this.tabList_two=this.tabList_two_copy
                         this.tabList_three=this.tabList_three_copy
-                        this.tabList_four=this.tabList_four_copy
+                        this.tabList_four=this.tabList_four_copy*/
                     }
                 } else {
                     this.desIndex = index;
                     this.showFlag = true;
+                    this.cityAll=false
+                    this.city =this.cityAry[index]
                     this.pie_one=this.pie_oneAry[index+1]
                     this.pie_two=this.pie_twoAry[index+1]
                     this.pie_three=this.pie_threeAry[index+1]
@@ -1958,10 +1970,10 @@
                     if(this.activeName4==2){
                         this.KuCun_Eight("echartsEight", this.eightseries[index+1]);
                     }
-                    this.tabList_one=[this.cityAry[index]+this.tabList_one_copy[0],this.cityAry[index]+this.tabList_one_copy[1]]
+                  /*  this.tabList_one=[this.cityAry[index]+this.tabList_one_copy[0],this.cityAry[index]+this.tabList_one_copy[1]]
                     this.tabList_two=[this.cityAry[index]+this.tabList_two_copy[0],this.cityAry[index]+this.tabList_two_copy[1]]
                     this.tabList_three=[this.cityAry[index]+this.tabList_three_copy[0],this.cityAry[index]+this.tabList_three_copy[1]]
-                    this.tabList_four=[this.cityAry[index]+this.tabList_four_copy[0],this.cityAry[index]+this.tabList_four_copy[1]]
+                    this.tabList_four=[this.cityAry[index]+this.tabList_four_copy[0],this.cityAry[index]+this.tabList_four_copy[1]]*/
                 }
 
             }
@@ -1978,6 +1990,19 @@
             border-radius: 0.04rem;
             background-color: rgba(37, 54, 104, 0.5);;
             color: #fff;
+        }
+        .titleAll{
+            font-size: 0.12rem;
+            margin-bottom: 8px;
+            color: #394564;
+            padding-left: 14px;
+            font-weight: bold;
+        }
+        .titleAll:before{
+            content: '';
+            height: 10px;
+            border: 2px solid #40a9ff;
+            margin-right: 8px;
         }
         .map {
             margin-top: 93px;
@@ -2009,7 +2034,7 @@
              text-align: center;
              padding: 0;
              border-radius: 3px;*/
-            width: 180px;
+            width: 169.5px;
             height: 25px;
             font: 12px PingFangSC-Regular;
             color: #3a6dda;
@@ -2025,7 +2050,7 @@
         .scFristqh /deep/ .el-tabs__item.is-active {
             /*background-color: #236BD7;
             color: #fff;*/
-            width: 180px;
+            width: 169.5px;
             height: 25px;
             background-color: #3a6dda;
             font: 12px PingFangSC-Regular;
@@ -2043,7 +2068,7 @@
             /*width: 342px;
             border: 1px solid #236BD7;
             border-radius: 3px;*/
-            width: 370px;
+            width: 345px;
             height: 31px;
             background-color: white;
             margin: 0px auto;

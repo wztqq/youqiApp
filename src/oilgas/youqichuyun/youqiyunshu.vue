@@ -6,9 +6,11 @@
             <img class="map" @click="hidePos"
                  src="../../assets/img/地图.png"
                  alt="图片未显示"/>
-            <ul class="lay-content" :style="{'left':be_click_left(0.12),'top':be_click_top(0.48)}"
-                v-show="activeIndex==-1">
-                <li  v-for="(item) in bannerData">{{item.label}}:{{item.value}}</li>
+            <ul
+                    :style="{'left':be_click_left(0),'top':be_click_top(0.41),width:be_click_left(0.85)}"
+                    style="position:absolute;font-size: 0.12rem;clear: both"
+            >
+                <li v-for="(item) in bannerData" class="list-item">{{item.label}}:{{item.value}}</li>
             </ul>
             <!--地图定位-->
             <div>
@@ -53,10 +55,11 @@
                 </div>
             </div>
             <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;" v-show="gasShow">
-                <div class="scFristqh">
+                <div class="scFristqh tabNew">
                     <el-tabs v-model="activeNamePie" @tab-click="handlePieClick">
                         <el-tab-pane label="天然气日进气量" name="1"></el-tab-pane>
                         <el-tab-pane label="天然气日出气量" name="2" :laze="true"></el-tab-pane>
+                        <el-tab-pane label="天然气日管存量" name="3" :laze="true"></el-tab-pane>
                     </el-tabs>
                 </div>
                 <div class="tabs-content">
@@ -68,14 +71,17 @@
                         <div id="echartsEleven" style="width: 100%;height: 239px"></div>
 
                     </div>
+                    <div v-show="activeNamePie==='3'">
+                        <div id="echartsEle" style="width: 100%;height: 239px"></div>
+                    </div>
                 </div>
             </div>
-            <div class="chart module" v-show="gasShow">
-                <h4>天然气日管存量</h4>
-                <div class="chart-item">
-                    <div id="echartsEle" style="width: 100%;height: 239px"></div>
-                </div>
-            </div>
+            <!--<div class="chart module" v-show="gasShow">-->
+            <!--<h4>天然气日管存量</h4>-->
+            <!--<div class="chart-item">-->
+            <!--<div id="echartsEle" style="width: 100%;height: 239px"></div>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 </template>
@@ -90,7 +96,7 @@
         },
         data() {
             return {
-                activeNamePie:'1',
+                activeNamePie: '1',
                 activeIndex: -1,
                 desIndex: null,
                 beginList: [
@@ -174,61 +180,61 @@
                         left: '0.303',
                         top: '0.969',
                         src: require('../../assets/img/长庆气田-乌海-临河天然气管道.png'),
-                        cls:'imgS'
+                        cls: 'imgS'
                     },
                     {
                         left: '0.354',
                         top: '1.03',
                         src: require('../../assets/img/苏东准管道.png'),
-                        cls:'imgS'
+                        cls: 'imgS'
                     },
                     {
                         left: '0.386',
                         top: '1.01',
                         src: require('../../assets/img/长呼复.png'),
-                        cls:'imgS'
+                        cls: 'imgS'
                     },
                     {
                         left: '0.412',
                         top: '0.998',
                         src: require('../../assets/img/长庆气田—呼和浩特天然气管道.png'),
-                        cls:'imgS'
+                        cls: 'imgS'
                     },
                     {
                         left: '0.312',
                         top: '0.986',
                         src: require('../../assets/img/长庆输油气银巴线.png'),
-                        cls:'imgS1'
+                        cls: 'imgS1'
                     },
                     {
                         left: '0.432',
                         top: '0.986',
                         src: require('../../assets/img/5-长呼线（原油）.png'),
-                        cls:'imgS'
+                        cls: 'imgS'
                     },
                     {
                         left: '0.562',
                         top: '0.796',
                         src: require('../../assets/img/阿尔善—赛汉塔拉原油.png'),
-                        cls:'imgS'
+                        cls: 'imgS'
                     },
                     {
                         left: '0.662',
                         top: '0.536',
                         src: require('../../assets/img/11-呼伦贝尔油田原油管道-从下往上流.png'),
-                        cls:'imgS3'
+                        cls: 'imgS3'
                     },
                     {
                         left: '0.842',
                         top: '0.466',
                         src: require('../../assets/img/1-漠大线（原油管线）.png'),
-                        cls:'imgS3'
+                        cls: 'imgS3'
                     }
                 ],//地图弹窗位置
                 desList: [
                     {
                         left: '0.143',
-                        top: '0.462',
+                        top: '0.562',
                         name: '长庆气田-乌海-临河输气管道',
                         one: '鄂尔多斯市乌审旗掏利首站',
                         two: '巴彦淖尔市临河区末站',
@@ -236,11 +242,11 @@
                         four: '天然气',
                         five: '昨日进气量：790万立方米',
                         six: '昨日出气量：790万立方米',
-                        seven:'150万立方米'
+                        seven: '150万立方米'
                     },
                     {
                         left: '0.143',
-                        top: '0.462',
+                        top: '0.562',
                         name: '苏-东-淮天然气管道',
                         one: '鄂尔多斯市乌审旗掏利首站',
                         two: '巴彦淖尔市临河区末站',
@@ -248,11 +254,11 @@
                         four: '天然气',
                         five: '昨日进气量：1500万立方米',
                         six: '昨日出气量：1500万立方米',
-                        seven:'180万立方米'
+                        seven: '180万立方米'
                     },
                     {
                         left: '0.143',
-                        top: '0.462',
+                        top: '0.562',
                         name: '长庆气田-呼和浩特天然气管道复线',
                         one: '鄂尔多斯市乌审旗掏利首站',
                         two: '巴彦淖尔市临河区末站',
@@ -260,11 +266,11 @@
                         four: '天然气',
                         five: '昨日进气量：1500万立方米',
                         six: '昨日出气量：1500万立方米',
-                        seven:'2100万立方米'
+                        seven: '2100万立方米'
                     },
                     {
                         left: '0.143',
-                        top: '0.462',
+                        top: '0.562',
                         name: '长庆气田-呼和浩特天然气输气管道',
                         one: '鄂尔多斯市乌审旗掏利首站',
                         two: '巴彦淖尔市临河区末站',
@@ -272,11 +278,11 @@
                         four: '天然气',
                         five: '昨日进气量：780万立方米',
                         six: '昨日出气量：780万立方米',
-                        seven:'1500万立方米'
+                        seven: '1500万立方米'
                     },
                     {
                         left: '0.143',
-                        top: '0.462',
+                        top: '0.562',
                         name: '中俄漠大二线管道',
                         one: '大兴安岭地区漠河首站',
                         two: '大庆市林源末站',
@@ -284,11 +290,11 @@
                         four: '原油',
                         five: '昨日进油量：89万吨',
                         six: '昨日出油量：89万吨',
-                        seven:'85万吨'
+                        seven: '85万吨'
                     },
                     {
                         left: '0.083',
-                        top: '0.462',
+                        top: '0.562',
                         name: '长庆气田-呼和浩特石化原油管道',
                         one: '陕西省定边县房庄运行储备库',
                         two: '内蒙古呼和浩特是赛罕区金桥开发去呼和浩特石化炼油厂',
@@ -296,11 +302,11 @@
                         four: '原油',
                         five: '昨日进油量：92万吨',
                         six: '昨日出油量：90万吨',
-                        seven:'88万吨'
+                        seven: '88万吨'
                     },
                     {
                         left: '0.053',
-                        top: '0.462',
+                        top: '0.562',
                         name: '阿尔善-赛罕塔拉原油管道',
                         one: '鄂尔多斯市乌审旗掏利首站',
                         two: '巴彦淖尔市临河区末站',
@@ -308,11 +314,11 @@
                         four: '原油',
                         five: '昨日进油量：100万吨',
                         six: '昨日出油量：100万吨',
-                        seven:'86万吨'
+                        seven: '86万吨'
                     },
                     {
                         left: '0.143',
-                        top: '0.462',
+                        top: '0.562',
                         name: '呼伦贝尔油田原油管道',
                         one: '鄂尔多斯市乌审旗掏利首站',
                         two: '巴彦淖尔市临河区末站',
@@ -320,11 +326,11 @@
                         four: '原油',
                         five: '昨日进油量：80万吨',
                         six: '昨日出油量：70万吨',
-                        seven:'56万吨'
+                        seven: '56万吨'
                     },
                     {
                         left: '0.143',
-                        top: '0.462',
+                        top: '0.562',
                         name: '中俄漠大线管道',
                         one: '鄂尔多斯市乌审旗掏利首站',
                         two: '巴彦淖尔市临河区末站',
@@ -332,7 +338,7 @@
                         four: '原油',
                         five: '昨日进油量：90万吨',
                         six: '昨日出油量：90万吨',
-                        seven:'88万吨'
+                        seven: '88万吨'
                     }
 
 
@@ -388,14 +394,14 @@
 
                 ],
                 showFlag: false,
-                oilShow:true,
-                gasShow:true
+                oilShow: true,
+                gasShow: true
             };
         },
         mounted() {
-            this.YunShu_One("echartsNine",this.oneseries[0]);
-            this.YunShu_Two('echartsTen',this.twoseries[0]);
-            this.YunShu_Four('echartsEle',this.fourseries[0])
+            this.YunShu_One("echartsNine", this.oneseries[0]);
+            this.YunShu_Two('echartsTen', this.twoseries[0]);
+            // this.YunShu_Four('echartsEle',this.fourseries[0])
         },
         methods: {
             YunShu_One(name, series) {
@@ -423,7 +429,7 @@
                         },
                         axisLabel: {
                             fontSize: 12,
-                            rotate:50
+                            rotate: 50
                         },
                         axisLine: {
                             lineStyle: {
@@ -435,8 +441,8 @@
                             show: false,
                         },
                     },
-                    grid:{
-                        left:'15%'
+                    grid: {
+                        left: '15%'
                     },
                     yAxis: {
                         name: "万吨",
@@ -484,8 +490,8 @@
                         trigger: 'axis',
                         formatter: "{a} <br/>{b}: {c}万立方米",
                     },
-                    grid:{
-                      left:'15%'
+                    grid: {
+                        left: '15%'
                     },
                     xAxis: {
                         name: '日',
@@ -504,7 +510,7 @@
                         },
                         axisLabel: {
                             fontSize: 12,
-                            rotate:50
+                            rotate: 50
                         },
                         axisLine: {
                             lineStyle: {
@@ -562,8 +568,8 @@
                         trigger: 'axis',
                         formatter: "{a} <br/>{b}: {c}万立方米",
                     },
-                    grid:{
-                        left:'15%'
+                    grid: {
+                        left: '15%'
                     },
                     xAxis: {
                         name: '日',
@@ -582,7 +588,7 @@
                         },
                         axisLabel: {
                             fontSize: 12,
-                            rotate:50
+                            rotate: 50
                         },
                         axisLine: {
                             lineStyle: {
@@ -640,8 +646,8 @@
                         trigger: 'axis',
                         formatter: "{a} <br/>{b}: {c}万立方米",
                     },
-                    grid:{
-                        left:'15%'
+                    grid: {
+                        left: '15%'
                     },
                     xAxis: {
                         name: '日',
@@ -660,7 +666,7 @@
                         },
                         axisLabel: {
                             fontSize: 12,
-                            rotate:50
+                            rotate: 50
                         },
                         axisLine: {
                             lineStyle: {
@@ -725,38 +731,45 @@
             },
             showDes(index) {
                 this.activeIndex = index;
-                if(index>=4){
-                    this.oilShow= true;
-                    this.gasShow=false;
-                    this.YunShu_One("echartsNine",this.oneseries[index-4]);
-                }else{
-                    this.oilShow= false;
-                    this.gasShow=true;
-                    this.YunShu_Two('echartsTen',this.twoseries[index+1]);
-                    if(this.activeNamePie==2){
-                    this.YunShu_Three('echartsEleven',this.threeseries[index+1])
+                if (index >= 4) {
+                    this.oilShow = true;
+                    this.gasShow = false;
+                    this.YunShu_One("echartsNine", this.oneseries[index - 4]);
+                } else {
+                    this.oilShow = false;
+                    this.gasShow = true;
+                    this.YunShu_Two('echartsTen', this.twoseries[index + 1]);
+                    if (this.activeNamePie == 2) {
+                        this.YunShu_Three('echartsEleven', this.threeseries[index + 1])
                     }
-                        this.YunShu_Four('echartsEle',this.fourseries[index+1])
-
-
+                    if (this.activeNamePie == 3) {
+                        this.YunShu_Four('echartsEle', this.fourseries[index + 1])
+                    }
                 }
             },
             hidePos() {
                 this.activeIndex = -1;
-                this.oilShow= true;
-                this.gasShow=true;
-                this.YunShu_One("echartsNine",this.oneseries[0]);
-                this.YunShu_Two('echartsTen',this.twoseries[0]);
-                if(this.activeNamePie==2){
-                this.YunShu_Three('echartsEleven',this.threeseries[0])
+                this.oilShow = true;
+                this.gasShow = true;
+                this.YunShu_One("echartsNine", this.oneseries[0]);
+                this.YunShu_Two('echartsTen', this.twoseries[0]);
+                if (this.activeNamePie == 2) {
+                    this.YunShu_Three('echartsEleven', this.threeseries[0])
                 }
-                this.YunShu_Four('echartsEle',this.fourseries[0])
+                if (this.activeNamePie == 3) {
+                    this.YunShu_Four('echartsEle', this.fourseries[0])
+                }
 
             },
-            handlePieClick(tab){
-                if(tab.index ==1 ){
-                    this.$nextTick(()=>{
-                        this.YunShu_Three('echartsEleven',this.threeseries[0])
+            handlePieClick(tab) {
+                if (tab.index == 1) {
+                    this.$nextTick(() => {
+                        this.YunShu_Three('echartsEleven', this.threeseries[0])
+                    })
+                }
+                if (tab.index == 2) {
+                    this.$nextTick(() => {
+                        this.YunShu_Four('echartsEle', this.fourseries[0])
                     })
                 }
             }
@@ -774,7 +787,16 @@
             border-radius: 0.04rem;
             background-color: rgba(37, 54, 104, 0.5);;
             color: #fff;
-            width: 113px;
+        }
+        .list-item {
+            float: left;
+        }
+        .list-item:nth-child(1):after, .list-item:nth-child(3):after {
+            content: '';
+            height: 10px;
+            width: 2px;
+            border: 1px solid #40a9ff;
+            margin: 0 5px;
         }
         .map {
             margin-top: 93px;
@@ -784,8 +806,8 @@
              background: url(../../assets/img/oilgas/shenchan.png) no-repeat;*/
         }
         .map2 {
-            left:125px;
-            top:175px;
+            left: 125px;
+            top: 175px;
             width: 168.5px;
             height: 188px;
             position: absolute;
@@ -848,7 +870,44 @@
             border-radius: 5px;
             z-index: 1;
         }
+        .scFristqh.tabNew /deep/ .el-tabs__item {
+            /* color: #236BD7;
+             font-size: 13px;
+             height: 28px;
+             line-height: 28px;
+             width: 170px;
+             text-align: center;
+             padding: 0;
+             border-radius: 3px;*/
+            width: 114px;
+            height: 25px;
+            font: 12px PingFangSC-Regular;
+            color: #3a6dda;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            padding-left: 0;
+        }
 
+        .scFristqh.tabNew /deep/ .el-tabs__item.is-active {
+            /*background-color: #236BD7;
+            color: #fff;*/
+            width: 114px;
+            height: 25px;
+            background-color: #3a6dda;
+            font: 12px PingFangSC-Regular;
+            color: white;
+            line-height: 25px;
+            float: left;
+            position: relative;
+            top: 2px;
+            left: 2px;
+            text-align: center;
+            border-radius: 5px;
+        }
         .scFristqh /deep/ .el-tabs__header {
             margin: 0;
         }
@@ -950,6 +1009,7 @@
         }
 
     }
+
     #confess_content {
         .imgS {
             position: absolute;
@@ -963,7 +1023,7 @@
             position: absolute;
             width: 12%;
         }
-        .imgS3{
+        .imgS3 {
             position: absolute;
             width: 7%;
         }
@@ -979,7 +1039,6 @@
             border-radius: 0.04rem;
             background-color: rgba(37, 54, 104, 0.5);;
             color: #fff;
-            width: 3.4rem;
             padding: 0.08rem;
         }
         .clickbtn {

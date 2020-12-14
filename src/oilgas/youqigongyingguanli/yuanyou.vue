@@ -95,8 +95,8 @@
                     },
                     //海拉尔油田区域
                     {
-                        left: '0.673',
-                        top: '0.548',
+                        left: '0.633',
+                        top: '0.558',
                         src: require('../../assets/img/YouqiGongying/y_gy.png'),
                         cls: 'clickbtn2'
                     },
@@ -133,22 +133,22 @@
                     },
 
                     {
-                        left: '0.373',
-                        top: '0.582',
+                        left: '0.313',
+                        top: '0.562',
                         name: '二连油田区域',
                         num1: '0.7',
                         num2: '4.2',
                     },
                     {
-                        left: '0.383',
+                        left: '0.343',
                         top: '0.392',
                         name: '海拉尔油田区域',
                         num1: '0.7',
                         num2: '4.2',
                     },
                     {
-                        left: '0.693',
-                        top: '0.592',
+                        left: '0.696',
+                        top: '0.572',
                         name: '科尔沁油田区域',
                         num1: '0.7',
                         num2: '4.2',
@@ -1061,9 +1061,9 @@
             z-index: 2;
         }
         .clickbtn2 {
-            width: 30px;
+            width: 25px;
             position: absolute;
-            height: 30px;
+            height: 25px;
             z-index: 2;
         }
 

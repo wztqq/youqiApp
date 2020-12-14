@@ -31,14 +31,14 @@
 
                 <div v-show="activeNamePie==='1'">
                     <div class="fontSize_div">
-                        <div class="fontSize">80</div>
+                        <div class="fontSize">{{pie_one}}</div>
                         <div class="fontSize" style="font-size: 14px">万立方米</div>
                     </div>
                     <div id="echartsTone" style="width:100%;height:240px;"></div>
                 </div>
                 <div v-show="activeNamePie==='2'">
                     <div class="fontSize_div">
-                        <div class="fontSize">100</div>
+                        <div class="fontSize">{{pie_two}}</div>
                         <div class="fontSize" style="font-size: 14px">万立方米</div>
                     </div>
                     <div id="echartsTtwo" style="width:100%;height:240px;" ref="second"></div>
@@ -116,13 +116,147 @@
                 desIndex: null,
                 tabListOne: ['按用途消费结构分析', '按行业消费结构分析'],
                 tabListOne_copy: ['按用途消费结构分析', '按行业消费结构分析'],
-                tabListTwo:['调峰煤制气变化趋势分析','气价煤价对比分析'],
+                tabListTwo: ['调峰煤制气变化趋势分析', '气价煤价对比分析'],
+                tabListTwo_copy: ['调峰煤制气变化趋势分析', '气价煤价对比分析'],
                 title: ['汇能', '大唐'],
+                pie_one:190,
+                pie_oneAry:[190,80,110],
+                seriesOne: [
+                    [
+                        {
+                            value: 90,
+                            name: "终端消费",
+                        },
+                        {
+                            value: 20,
+                            name: "化工",
+                        },
+                        {
+                            value: 40,
+                            name: "火力发电",
+                        },
+                        {
+                            value: 40,
+                            name: "供热",
+                        },
+                    ],
+                    [
+                        {
+                            value: 30,
+                            name: "终端消费",
+                        },
+                        {
+                            value: 20,
+                            name: "化工",
+                        },
+                        {
+                            value: 15,
+                            name: "火力发电",
+                        },
+                        {
+                            value: 15,
+                            name: "供热",
+                        },
+                    ],
+                    [
+                        {
+                            value: 40,
+                            name: "终端消费",
+                        },
+                        {
+                            value: 30,
+                            name: "化工",
+                        },
+                        {
+                            value: 20,
+                            name: "火力发电",
+                        },
+                        {
+                            value: 20,
+                            name: "供热",
+                        },
+                    ]
+                ],
+                pie_two:230,
+                pie_twoAry:[230,100,130],
+                seriesTwo: [
+                    [
+                        {
+                            value: 90,
+                            name: "工业",
+                        },
+                        {
+                            value: 40,
+                            name: "建筑业",
+                        },
+                        {
+                            value: 40,
+                            name: "商业",
+                        },
+                        {
+                            value: 40,
+                            name: "交通",
+                        },
+                        {
+                            value: 20,
+                            name: "生活消费",
+                        },
+                    ],
+                    [
+                        {
+                            value: 30,
+                            name: "工业",
+                        },
+                        {
+                            value: 20,
+                            name: "建筑业",
+                        },
+                        {
+                            value: 10,
+                            name: "商业",
+                        },
+                        {
+                            value: 10,
+                            name: "交通",
+                        },
+                        {
+                            value: 30,
+                            name: "生活消费",
+                        },
+                    ],
+                    [
+                        {
+                            value: 50,
+                            name: "工业",
+                        },
+                        {
+                            value: 20,
+                            name: "建筑业",
+                        },
+                        {
+                            value: 20,
+                            name: "商业",
+                        },
+                        {
+                            value: 10,
+                            name: "交通",
+                        },
+                        {
+                            value: 40,
+                            name: "生活消费",
+                        },
+                    ]
+                ],
+                seriesThree:[
+                    [4,4,7,17,8,17,20,13,8,12],
+                    [2,1,3,7,3,16,6,6,4,4],
+                    [2,3,4,10,5,11,14,7,4,8]
+                ]
             };
         },
         mounted() {
-            this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone')
-            this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3')
+            this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone',this.seriesOne[0])
+            this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3',this.seriesThree[0])
         },
         methods: {
             // 用于点击的div块绑定函数
@@ -133,7 +267,7 @@
                 return 314.5 * a + 'px'
             },
             //按用途消费结构分析
-            AnYongTuXiaoFeiJieGouFenXi_pie(name, arry) {
+            AnYongTuXiaoFeiJieGouFenXi_pie(name, series) {
                 let echarts = require("echarts");
                 let myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
@@ -173,31 +307,14 @@
                                 length: 15,
                                 length2: 30,
                             },
-                            data: [
-                                {
-                                    value: 0.18,
-                                    name: "终端消费",
-                                },
-                                {
-                                    value: 0.12,
-                                    name: "化工",
-                                },
-                                {
-                                    value: 0.18,
-                                    name: "火力发电",
-                                },
-                                {
-                                    value: 0.18,
-                                    name: "供热",
-                                },
-                            ],
+                            data: series,
                             color: ["#64B9EC", "#13D99E", "#ED6046", "#FF9712"],
                         },
                     ],
                 });
             },
             //按行业消费结构分析
-            AnHangYeXiaoFeiJieGouFenXi(name, arry) {
+            AnHangYeXiaoFeiJieGouFenXi(name, series) {
                 var echarts = require("echarts");
                 var myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
@@ -241,28 +358,7 @@
                                 length: 15,
                                 length2: 50,
                             },
-                            data: [
-                                {
-                                    value: 0.19,
-                                    name: "工业",
-                                },
-                                {
-                                    value: 0.06,
-                                    name: "建筑业",
-                                },
-                                {
-                                    value: 0.16,
-                                    name: "商业",
-                                },
-                                {
-                                    value: 0.06,
-                                    name: "交通",
-                                },
-                                {
-                                    value: 0.19,
-                                    name: "生活消费",
-                                },
-                            ],
+                            data: series,
                             color: [
                                 "#44c2fd",
                                 "#22ffc2",
@@ -275,7 +371,7 @@
                 });
             },
             //调峰煤制气月变化趋势
-            TiaoFengMeiZhiYueBianHuaQuShi(name, arry) {
+            TiaoFengMeiZhiYueBianHuaQuShi(name, series) {
                 var echarts = require("echarts");
                 var myChart = echarts.init(document.getElementById(name));
                 myChart.setOption({
@@ -296,11 +392,8 @@
                         containLabel: true
                     },
                     xAxis: {
-                        name:'万立方米',
+                        name: '万立方米',
                         type: 'value',
-                        min: 0,
-                        max: 8,
-                        interval: 1,
                         boundaryGap: [0, 0.01],
                         axisTick: {
                             show: false
@@ -330,7 +423,10 @@
                             "4月",
                             "5月",
                             "6月",
-                            "7月"
+                            "7月",
+                            "8月",
+                            "9月",
+                            "10月"
                         ],
                         axisTick: {
                             show: false
@@ -355,15 +451,7 @@
                             name: '调峰煤制气',
                             type: 'bar',
                             barWidth: 10,
-                            data: [
-                                4.9,
-                                4.1,
-                                3.6,
-                                4.7,
-                                5.5,
-                                7.8,
-                                3.2
-                            ],
+                            data: series,
                             itemStyle: {
                                 normal: {
                                     color: new this.$echarts.graphic.LinearGradient(
@@ -397,7 +485,7 @@
                     },
                     legend: {
                         data: ["煤价", "气价"],
-                        right:'10'
+                        right: '10'
                     },
                     xAxis: {
                         type: "category",
@@ -450,7 +538,7 @@
                             name: "煤价",
                             type: "line",
                             symbol: "none",
-                            itemStyle:{
+                            itemStyle: {
                                 color: "#a3ff6f",
                             },
                             data: [12, 20, 15, 13, 15, 7, 16, 18, 15, 6, 12, 14],
@@ -459,7 +547,7 @@
                             name: "气价",
                             type: "line",
                             symbol: "none",
-                            itemStyle:{
+                            itemStyle: {
                                 color: "#ff913e",
                             },
                             data: [11, 18, 16, 12, 16, 9, 15, 15, 13, 16, 13, 15],
@@ -471,14 +559,21 @@
 
             handlePieClick(tab, event) {
                 if (tab.index == 1) {
+                    if(this.desIndex==null){
                         this.$nextTick(() => {
-                            this.AnHangYeXiaoFeiJieGouFenXi("echartsTtwo");
+                            this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo',this.seriesTwo[0])
                         })
+                    }else{
+                        this.$nextTick(() => {
+                            this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo',this.seriesTwo[this.desIndex+1])
+                        })
+                    }
+
 
                 }
 
             },
-            handleClick(tab){
+            handleClick(tab) {
                 if (tab.index == 1) {
                     this.$nextTick(() => {
                         this.YouMeiDengJiaQuXian("echarts4");
@@ -489,17 +584,29 @@
 
             // 点击地图的点联动
             showDes(index) {
-                /*if (this.desIndex == index) {
+                if (this.desIndex == index) {
                     if (this.$refs[`list${index}`][0].style.display == 'none') {
                         this.showFlag = true;
                         this.desIndex = index;
                         this.tabListOne = [this.title[index] + this.tabListOne_copy[0], this.title[index] +
                         this.tabListOne_copy[1]]
+                        this.tabListTwo=[this.title[index] + this.tabListTwo_copy[0], this.tabListTwo_copy[1]];
+                        this.pie_one=this.pie_oneAry[index+1]
+                        this.pie_two=this.pie_twoAry[index+1]
+                        this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone',this.seriesOne[index+1])
+                        this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3',this.seriesThree[index+1])
+                        this.AnHangYeXiaoFeiJieGouFenXi('echarts2',this.seriesTwo[index+1])
 
                     } else {
                         this.tabListOne = this.tabListOne_copy;
+                        this.tabListTwo=this.tabListTwo_copy;
+                        this.pie_one=this.pie_oneAry[0]
+                        this.pie_two=this.pie_twoAry[0]
                         this.showFlag = false;
                         this.desIndex = null;
+                        this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone',this.seriesOne[0])
+                        this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3',this.seriesThree[0])
+                        this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo',this.seriesTwo[0])
 
                     }
                 } else {
@@ -507,7 +614,13 @@
                     this.showFlag = true;
                     this.tabListOne = [this.title[index] + this.tabListOne_copy[0], this.title[index] +
                     this.tabListOne_copy[1]]
-                }*/
+                    this.tabListTwo=[this.title[index] + this.tabListTwo_copy[0], this.tabListTwo_copy[1]];
+                    this.pie_one=this.pie_oneAry[index+1]
+                    this.pie_two=this.pie_twoAry[index+1]
+                    this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone',this.seriesOne[index+1])
+                    this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3',this.seriesThree[index+1])
+                    this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo',this.seriesTwo[index+1])
+                }
 
 
             },

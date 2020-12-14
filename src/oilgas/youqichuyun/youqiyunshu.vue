@@ -8,9 +8,15 @@
                  alt="图片未显示"/>
             <ul
                     :style="{'left':be_click_left(0),'top':be_click_top(0.41),width:be_click_left(0.85)}"
-                    style="position:absolute;font-size: 0.12rem;clear: both"
+                    style="position:absolute;font-size: 0.14rem;clear: both"
             >
-                <li v-for="(item) in bannerData" class="list-item">{{item.label}}:{{item.value}}</li>
+                <li v-for="(item) in bannerDataOne" class="list-item">{{item.label}}:{{item.value}}</li>
+            </ul>
+            <ul
+                    :style="{'left':be_click_left(0),'top':be_click_top(0.49),width:be_click_left(0.85)}"
+                    style="position:absolute;font-size: 0.14rem;clear: both"
+            >
+                <li v-for="(item) in bannerDataTwo" class="list-item">{{item.label}}:{{item.value}}</li>
             </ul>
             <!--地图定位-->
             <div>
@@ -344,7 +350,7 @@
 
                 ],//地图上方信息展示
                 screenWidth: document.body.clientWidth, // 屏幕宽
-                bannerData: [
+                bannerDataOne: [
                     {
                         label: "累计管输量",
                         value: '7000万吨'
@@ -352,7 +358,9 @@
                     {
                         label: "昨日进油量",
                         value: '89万吨'
-                    },
+                    }
+                ],
+                bannerDataTwo:[
                     {
                         label: "累计管输量",
                         value: "200亿立方米"
@@ -360,8 +368,7 @@
                     {
                         label: "昨日进气量",
                         value: "1.77亿立方米"
-                    },
-                ],
+                    }],
                 selected_one: 0,
                 oneseries: [
                     [444, 424, 444, 453, 423, 434, 426, 422, 453, 466, 462, 421, 423, 412, 432],
@@ -791,7 +798,7 @@
         .list-item {
             float: left;
         }
-        .list-item:nth-child(1):after, .list-item:nth-child(3):after {
+        .list-item:nth-child(1):before,.list-item:nth-child(1):after{
             content: '';
             height: 10px;
             width: 2px;

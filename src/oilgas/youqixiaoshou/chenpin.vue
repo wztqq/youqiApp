@@ -270,7 +270,8 @@
                 selected_two: 0,
                 selected_three: 0,
                 tablist_copy: ["汽油消费结构分析", "柴油消费结构分析"],
-                tablist_one: ["汽油消费结构分析", "柴油消费结构分析"],
+                tablist_one_copy: ["11月汽油消费结构分析", "11月柴油消费结构分析"],
+                tablist_one: ["11月汽油消费结构分析", "11月柴油消费结构分析"],
                 tablist_city: [
                     "阿拉善盟",
                     "乌海",
@@ -286,7 +287,7 @@
                     "呼伦贝尔"
                 ],
                 tablist_three: ["汽油消费量预测", "柴油消费量预测"],
-                tablist_two: ["成品油销售地区分布", "区内区外成品油销售量对比分析"],
+                tablist_two: ["11月成品油销售地区分布", "区内区外成品油销售量对比分析"],
                 screenWidth: document.body.clientWidth, // 屏幕宽
                 showFlag: true,
                 desIndex: null,
@@ -1015,9 +1016,14 @@
                     tooltip: {
                         trigger: "axis",
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
-                                params[1].seriesName + ':' +
-                                params[1].value + '万吨'
+                            if (params.length && params.length > 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value +
+                                    '万吨' + '</br>' +
+                                    params[1].seriesName + ':' +
+                                    params[1].value + '万吨'
+                            } else if (params.length === 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨'
+                            }
                         }
                     },
                     legend: {
@@ -1028,7 +1034,7 @@
                     xAxis: {
                         type: "category",
                         boundaryGap: false,
-                        data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月"],
+                        data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月","10月","11月","12月"],
                         axisLabel: {
                             fontSize: 12,
                         },
@@ -1043,7 +1049,7 @@
                         },
                     },
                     yAxis: {
-                        name: "万吨/年",
+                        name: "万吨",
                         type: "value",
                         axisLabel: {
                             fontSize: 12,
@@ -1067,7 +1073,7 @@
                             lineStyle: {
                                 color: "#FA5356",
                             },
-                            data: [60, 75, 83, 80, 79, 77, 79, 90, 65],
+                            data: [70, 75, 83, 80, 79, 77, 79, 90, 65,67,76],
                         },
                         {
                             name: "汽油消费量预测值",
@@ -1081,7 +1087,7 @@
                             lineStyle: {
                                 color: "#12DFBD",
                             },
-                            data: [55, 71, 88, 80, 72, 84, 85, 96, 62],
+                            data: [67, 71, 88, 80, 72, 84, 85, 96, 62,60,79,82],
                         },
                     ],
                 });
@@ -1094,9 +1100,14 @@
                     tooltip: {
                         trigger: "axis",
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
-                                params[1].seriesName + ':' +
-                                params[1].value + '万吨'
+                            if (params.length && params.length > 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value +
+                                    '万吨' + '</br>' +
+                                    params[1].seriesName + ':' +
+                                    params[1].value + '万吨'
+                            } else if (params.length === 1) {
+                                return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨'
+                            }
                         }
                     },
                     legend: {
@@ -1106,7 +1117,7 @@
                     xAxis: {
                         type: "category",
                         boundaryGap: false,
-                        data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月"],
+                        data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月",'10月','11月','12月'],
                         axisLabel: {
                             fontSize: 12,
                         },
@@ -1121,7 +1132,7 @@
                         },
                     },
                     yAxis: {
-                        name: "万吨/年",
+                        name: "万吨",
                         type: "value",
                         axisLabel: {
                             fontSize: 12,
@@ -1145,7 +1156,7 @@
                             lineStyle: {
                                 color: "#FA5356",
                             },
-                            data: [60, 72, 80, 86, 75, 73, 75, 85, 63],
+                            data: [60, 72, 80, 86, 75, 73, 75, 85, 63,73, 75],
                         },
                         {
                             name: "柴油消费量预测值",
@@ -1159,7 +1170,7 @@
                             lineStyle: {
                                 color: "#12DFBD",
                             },
-                            data: [55, 71, 88, 80, 72, 84, 85, 96, 62],
+                            data: [55, 71, 88, 80, 72, 84, 85, 96, 62,72, 84, 85, 96,],
                         },
                     ],
                 });
@@ -1169,7 +1180,7 @@
                 if (this.desIndex == index) {
                     this.showFlag = true;
                     this.desIndex = null;
-                    this.tablist_one = this.tablist_copy;
+                    this.tablist_one = this.tablist_one_copy;
                     this.QiYouXiaoFeiJieGouFenXi_pie('echartsOne',this.seriesOne[0])
                     if(this.two){
                         this.ChaiYouXiaoFeiJieGouFenXi_pie('echartsTwo',this.seriesTwo[0])

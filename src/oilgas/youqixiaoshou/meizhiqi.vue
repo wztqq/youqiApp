@@ -16,8 +16,8 @@
              v-show="desIndex==index&&showFlag"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>上月天然气销售量：{{item.num}}万立方米</div>
-            <div>累计天然气销售量：{{item.pro}}万立方米</div>
+            <div>11月天然气销售量：{{item.num}}万立方米</div>
+            <div>11月累计天然气销售量：{{item.pro}}万立方米</div>
         </div>
 
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
@@ -114,8 +114,9 @@
                 pie: 128,
                 showFlag: false,
                 desIndex: null,
-                tabListOne: ['按用途消费结构分析', '按行业消费结构分析'],
-                tabListOne_copy: ['按用途消费结构分析', '按行业消费结构分析'],
+                tabListOne: ['11月按用途消费结构分析', '11月按行业消费结构分析'],
+                tabListOne_copy: ['11月按用途消费结构分析', '11月按行业消费结构分析'],
+                tabListOne_New:['按用途消费结构分析','按行业消费结构分析'],
                 tabListTwo: ['调峰煤制气变化趋势分析', '气价煤价对比分析'],
                 tabListTwo_copy: ['调峰煤制气变化趋势分析', '气价煤价对比分析'],
                 title: ['汇能', '大唐'],
@@ -273,7 +274,7 @@
                 myChart.setOption({
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)",
+                        formatter: "{a} <br/>{b}: {c}万立方米 ({d}%)",
                     },
                     legend: {
                         orient: "horizontal",
@@ -320,7 +321,7 @@
                 myChart.setOption({
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c}立方米 ({d}%)",
+                        formatter: "{a} <br/>{b}: {c}万立方米 ({d}%)",
                     },
                     legend: {
                         orient: "horizontal",
@@ -480,7 +481,8 @@
                     tooltip: {
                         trigger: "axis",
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '标准煤' + '</br>' + params[1].seriesName + ':' + params[1].value + '标准煤'
+                            return params[0].name + '</br>' + params[0].seriesName + ':' +params[0].value + '元/吨标煤'  +
+                                '</br>' + params[1].seriesName + ':' + params[1].value + '元/吨标煤'
                         }
                     },
                     legend: {
@@ -518,7 +520,7 @@
                         },
                     },
                     yAxis: {
-                        name: "吨/标煤",
+                        name: "元/吨标煤",
                         type: "value",
                         axisLabel: {
                             fontSize: 12,
@@ -588,8 +590,8 @@
                     if (this.$refs[`list${index}`][0].style.display == 'none') {
                         this.showFlag = true;
                         this.desIndex = index;
-                        this.tabListOne = [this.title[index] + this.tabListOne_copy[0], this.title[index] +
-                        this.tabListOne_copy[1]]
+                        this.tabListOne = [this.title[index] + this.tabListOne_New[0], this.title[index] +
+                        this.tabListOne_New[1]]
                         this.tabListTwo = [this.title[index] + this.tabListTwo_copy[0], this.tabListTwo_copy[1]];
                         this.pie_one = this.pie_oneAry[index + 1]
                         this.pie_two = this.pie_twoAry[index + 1]
@@ -617,8 +619,8 @@
                 } else {
                     this.desIndex = index;
                     this.showFlag = true;
-                    this.tabListOne = [this.title[index] + this.tabListOne_copy[0], this.title[index] +
-                    this.tabListOne_copy[1]]
+                    this.tabListOne = [this.title[index] + this.tabListOne_New[0], this.title[index] +
+                    this.tabListOne_New[1]]
                     this.tabListTwo = [this.title[index] + this.tabListTwo_copy[0], this.tabListTwo_copy[1]];
                     this.pie_one = this.pie_oneAry[index + 1]
                     this.pie_two = this.pie_twoAry[index + 1]

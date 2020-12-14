@@ -1992,7 +1992,7 @@
             color: #fff;
         }
         .titleAll{
-            font-size: 0.12rem;
+            font-size: 0.14rem;
             margin-bottom: 8px;
             color: #394564;
             padding-left: 14px;

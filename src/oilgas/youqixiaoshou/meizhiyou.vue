@@ -16,9 +16,10 @@
              v-show="desIndex==index&&showFlag"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>上月石脑油销售量：{{item.num2}}万吨</div>
-            <div>上月柴油销售量：{{item.num3}}万吨</div>
-            <div>上月液化气销售量：{{item.num4}}万吨</div>
+            <div>11月石脑油销售量：{{item.num2}}万吨</div>
+            <div>11月柴油销售量：{{item.num3}}万吨</div>
+            <div>11月液化气销售量：{{item.num4}}万吨</div>
+            <div>11月累计销售量：{{item.num5}}万吨</div>
         </div>
 
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
@@ -96,7 +97,8 @@
                         name: '神华煤制油',
                         num2: '70',
                         num3: '30',
-                        num4: '10'
+                        num4: '10',
+                        num5: '110'
                     },
                     {
                         left: '0.198',
@@ -104,7 +106,8 @@
                         name: '伊泰煤制油',
                         num2: '80',
                         num3: '40',
-                        num4: '10'
+                        num4: '10',
+                        num5: '130'
                     }
                 ],//地图上方信息展示
                 activeName: '1',
@@ -116,9 +119,10 @@
                 pie: 121,
                 showFlag: false,
                 desIndex: null,
-                tabListOne: ['煤制柴油的消费结构分析', '煤制石脑油的消费结构分析'],
-                tabListTwo: ['煤制油产品地区消费分布', '煤油等价曲线'],
-                tabListOne_copy: ['煤制柴油的消费结构分析', '煤制石脑油的消费结构分析'],
+                tabListOne: ['11月柴油的消费结构分析', '11月石脑油的消费结构分析'],
+                tabListTwo: ['11月煤制油产品地区消费分布', '煤油等价曲线'],
+                tabListOne_copy: ['11月柴油的消费结构分析', '11月石脑油的消费结构分析'],
+                tabListOne_New: ['柴油的消费结构分析', '石脑油的消费结构分析'],
                 title: ['神华', '伊泰'],
                 seriesOne: [
                     [{
@@ -213,9 +217,10 @@
                                 params[1].seriesName + ':' +
                                 params[1].value + '万吨' + '</br>' +
                                 params[2].seriesName + ':' +
-                                params[2].value + '万吨'
+                                params[2].value + '万吨'+ '</br>' +
+                                    '总量:'+(params[0].value+params[1].value+params[2].value)+'万吨'
 
-                        }
+                        },
                     },
                     legend: {
                         itemWidth: 10,
@@ -447,7 +452,8 @@
                     tooltip: {
                         trigger: "axis",
                         formatter(params) {
-                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '标准煤' + '</br>' + params[1].seriesName + ':' + params[1].value + '标准煤'
+                            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '元/吨标煤' +
+                                '</br>' + params[1].seriesName + ':' + params[1].value + '元/吨标煤'
                         }
                     },
                     legend: {
@@ -485,7 +491,7 @@
                         },
                     },
                     yAxis: {
-                        name: "吨/标煤",
+                        name: "元/吨标煤",
                         type: "value",
                         axisLabel: {
                             fontSize: 12,
@@ -562,8 +568,8 @@
                     if (this.$refs[`list${index}`][0].style.display == 'none') {
                         this.showFlag = true;
                         this.desIndex = index;
-                        this.tabListOne = [this.title[index] + this.tabListOne_copy[0], this.title[index] +
-                        this.tabListOne_copy[1]]
+                        this.tabListOne = [this.title[index] + this.tabListOne_New[0], this.title[index] +
+                        this.tabListOne_New[1]]
                         this.pie_one=this.pie_oneAry[index+1]
                         this.MeiZhiChaiYouXiaoFeiJieGouFenXi_bar("echartsFifteen", this.seriesOne[index+1]);
                         if(this.activeNamePie==2){
@@ -586,8 +592,8 @@
                 } else {
                     this.desIndex = index;
                     this.showFlag = true;
-                    this.tabListOne = [this.title[index] + this.tabListOne_copy[0], this.title[index] +
-                    this.tabListOne_copy[1]]
+                    this.tabListOne = [this.title[index] + this.tabListOne_New[0], this.title[index] +
+                    this.tabListOne_New[1]]
                     this.pie_one=this.pie_oneAry[index+1]
                     this.MeiZhiChaiYouXiaoFeiJieGouFenXi_bar("echartsFifteen", this.seriesOne[index+1]);
                     if(this.activeNamePie==2){

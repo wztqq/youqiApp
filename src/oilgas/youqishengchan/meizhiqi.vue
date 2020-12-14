@@ -1042,15 +1042,15 @@
                         this.tabListThree = [this.title[index] + this.tabListThree_copy[0], this.title[index] +
                         this.tabListThree_copy[1]]
                         this.MeiZhiQi_One("echartsTone", this.MeiZhiQi_OneSerData[index + 1]);
-                        this.$nextTick(() => {
+                        if (this.activeNamePie == 2) {
                             this.MeiZhiQi_Two("echartsTtwo", this.MeiZhiQi_TwoSerData[index + 1]);
-                        });
-                        this.$nextTick(() => {
+                        }
+                        if (this.activeName == 2) {
                             this.MeiZhiQi_Four("echartsTfour", this.MeiZhiQi_FourSerData[index + 1]);
-                        });
-                        this.$nextTick(() => {
+                        }
+                        if (this.activeTabName == 2) {
                             this.MeiZhiQi_Six("echartsTsix", this.MeiZhiQi_SixSerData[index + 1]);
-                        });
+                        }
 
                         this.MeiZhiQi_Three("echartsTthree", this.MeiZhiQi_ThreeSerData[index + 1])
 
@@ -1058,15 +1058,15 @@
 
                     } else {
                         this.MeiZhiQi_One("echartsTone", this.MeiZhiQi_OneSerData[0]);
-                        this.$nextTick(() => {
+                        if (this.activeNamePie == 2) {
                             this.MeiZhiQi_Two("echartsTtwo", this.MeiZhiQi_TwoSerData[0]);
-                        });
-                        this.$nextTick(() => {
+                        }
+                        if (this.activeName == 2) {
                             this.MeiZhiQi_Four("echartsTfour", this.MeiZhiQi_FourSerData[0]);
-                        });
-                        this.$nextTick(() => {
+                        }
+                        if (this.activeTabName == 2) {
                             this.MeiZhiQi_Six("echartsTsix", this.MeiZhiQi_SixSerData[0]);
-                        });
+                        }
                         this.MeiZhiQi_Three("echartsTthree", this.MeiZhiQi_ThreeSerData[0]);
                         this.MeiZhiQi_Five("echartsTfive", this.MeiZhiQi_FiveSerData[0]);
                         this.tabListOne = this.tabListOne_copy;
@@ -1088,15 +1088,15 @@
                     this.MeiZhiQi_One("echartsTone", this.MeiZhiQi_OneSerData[index + 1]);
                     this.MeiZhiQi_Three("echartsTthree", this.MeiZhiQi_ThreeSerData[index + 1])
                     this.MeiZhiQi_Five("echartsTfive", this.MeiZhiQi_FiveSerData[index + 1]);
-                    this.$nextTick(() => {
+                    if (this.activeNamePie == 2) {
                         this.MeiZhiQi_Two("echartsTtwo", this.MeiZhiQi_TwoSerData[index + 1]);
-                    });
-                    this.$nextTick(() => {
+                    }
+                    if (this.activeName == 2) {
                         this.MeiZhiQi_Four("echartsTfour", this.MeiZhiQi_FourSerData[index + 1]);
-                    });
-                    this.$nextTick(() => {
+                    }
+                    if (this.activeTabName == 2) {
                         this.MeiZhiQi_Six("echartsTsix", this.MeiZhiQi_SixSerData[index + 1]);
-                    })
+                    }
                 }
 
 

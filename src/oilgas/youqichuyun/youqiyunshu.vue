@@ -733,8 +733,12 @@
                     this.oilShow= false;
                     this.gasShow=true;
                     this.YunShu_Two('echartsTen',this.twoseries[index+1]);
+                    if(this.activeNamePie==2){
                     this.YunShu_Three('echartsEleven',this.threeseries[index+1])
-                    this.YunShu_Four('echartsEle',this.fourseries[index+1])
+                    }
+                        this.YunShu_Four('echartsEle',this.fourseries[index+1])
+
+
                 }
             },
             hidePos() {
@@ -743,8 +747,11 @@
                 this.gasShow=true;
                 this.YunShu_One("echartsNine",this.oneseries[0]);
                 this.YunShu_Two('echartsTen',this.twoseries[0]);
+                if(this.activeNamePie==2){
                 this.YunShu_Three('echartsEleven',this.threeseries[0])
+                }
                 this.YunShu_Four('echartsEle',this.fourseries[0])
+
             },
             handlePieClick(tab){
                 if(tab.index ==1 ){

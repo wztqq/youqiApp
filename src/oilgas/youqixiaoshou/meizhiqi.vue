@@ -119,8 +119,8 @@
                 tabListTwo: ['调峰煤制气变化趋势分析', '气价煤价对比分析'],
                 tabListTwo_copy: ['调峰煤制气变化趋势分析', '气价煤价对比分析'],
                 title: ['汇能', '大唐'],
-                pie_one:190,
-                pie_oneAry:[190,80,110],
+                pie_one: 190,
+                pie_oneAry: [190, 80, 110],
                 seriesOne: [
                     [
                         {
@@ -177,8 +177,8 @@
                         },
                     ]
                 ],
-                pie_two:230,
-                pie_twoAry:[230,100,130],
+                pie_two: 230,
+                pie_twoAry: [230, 100, 130],
                 seriesTwo: [
                     [
                         {
@@ -247,16 +247,16 @@
                         },
                     ]
                 ],
-                seriesThree:[
-                    [4,4,7,17,8,17,20,13,8,12],
-                    [2,1,3,7,3,16,6,6,4,4],
-                    [2,3,4,10,5,11,14,7,4,8]
+                seriesThree: [
+                    [4, 4, 7, 17, 8, 17, 20, 13, 8, 12],
+                    [2, 1, 3, 7, 3, 16, 6, 6, 4, 4],
+                    [2, 3, 4, 10, 5, 11, 14, 7, 4, 8]
                 ]
             };
         },
         mounted() {
-            this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone',this.seriesOne[0])
-            this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3',this.seriesThree[0])
+            this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone', this.seriesOne[0])
+            this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3', this.seriesThree[0])
         },
         methods: {
             // 用于点击的div块绑定函数
@@ -559,13 +559,13 @@
 
             handlePieClick(tab, event) {
                 if (tab.index == 1) {
-                    if(this.desIndex==null){
+                    if (this.desIndex == null) {
                         this.$nextTick(() => {
-                            this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo',this.seriesTwo[0])
+                            this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo', this.seriesTwo[0])
                         })
-                    }else{
+                    } else {
                         this.$nextTick(() => {
-                            this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo',this.seriesTwo[this.desIndex+1])
+                            this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo', this.seriesTwo[this.desIndex + 1])
                         })
                     }
 
@@ -590,23 +590,28 @@
                         this.desIndex = index;
                         this.tabListOne = [this.title[index] + this.tabListOne_copy[0], this.title[index] +
                         this.tabListOne_copy[1]]
-                        this.tabListTwo=[this.title[index] + this.tabListTwo_copy[0], this.tabListTwo_copy[1]];
-                        this.pie_one=this.pie_oneAry[index+1]
-                        this.pie_two=this.pie_twoAry[index+1]
-                        this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone',this.seriesOne[index+1])
-                        this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3',this.seriesThree[index+1])
-                        this.AnHangYeXiaoFeiJieGouFenXi('echarts2',this.seriesTwo[index+1])
+                        this.tabListTwo = [this.title[index] + this.tabListTwo_copy[0], this.tabListTwo_copy[1]];
+                        this.pie_one = this.pie_oneAry[index + 1]
+                        this.pie_two = this.pie_twoAry[index + 1]
+                        this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone', this.seriesOne[index + 1])
+                        this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3', this.seriesThree[index + 1])
+                        if (this.activeNamePie == 2) {
+                            this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo', this.seriesTwo[index + 1])
+                        }
 
                     } else {
                         this.tabListOne = this.tabListOne_copy;
-                        this.tabListTwo=this.tabListTwo_copy;
-                        this.pie_one=this.pie_oneAry[0]
-                        this.pie_two=this.pie_twoAry[0]
+                        this.tabListTwo = this.tabListTwo_copy;
+                        this.pie_one = this.pie_oneAry[0]
+                        this.pie_two = this.pie_twoAry[0]
                         this.showFlag = false;
                         this.desIndex = null;
-                        this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone',this.seriesOne[0])
-                        this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3',this.seriesThree[0])
-                        this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo',this.seriesTwo[0])
+                        this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone', this.seriesOne[0])
+                        this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3', this.seriesThree[0])
+                        if (this.activeNamePie == 2) {
+                            this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo', this.seriesTwo[0])
+                        }
+
 
                     }
                 } else {
@@ -614,12 +619,15 @@
                     this.showFlag = true;
                     this.tabListOne = [this.title[index] + this.tabListOne_copy[0], this.title[index] +
                     this.tabListOne_copy[1]]
-                    this.tabListTwo=[this.title[index] + this.tabListTwo_copy[0], this.tabListTwo_copy[1]];
-                    this.pie_one=this.pie_oneAry[index+1]
-                    this.pie_two=this.pie_twoAry[index+1]
-                    this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone',this.seriesOne[index+1])
-                    this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3',this.seriesThree[index+1])
-                    this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo',this.seriesTwo[index+1])
+                    this.tabListTwo = [this.title[index] + this.tabListTwo_copy[0], this.tabListTwo_copy[1]];
+                    this.pie_one = this.pie_oneAry[index + 1]
+                    this.pie_two = this.pie_twoAry[index + 1]
+                    this.AnYongTuXiaoFeiJieGouFenXi_pie('echartsTone', this.seriesOne[index + 1])
+                    this.TiaoFengMeiZhiYueBianHuaQuShi('echarts3', this.seriesThree[index + 1])
+                    if (this.activeNamePie == 2) {
+                        this.AnHangYeXiaoFeiJieGouFenXi('echartsTtwo', this.seriesTwo[index + 1])
+                    }
+
                 }
 
 

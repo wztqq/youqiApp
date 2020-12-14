@@ -566,13 +566,19 @@
                         this.tabListOne_copy[1]]
                         this.pie_one=this.pie_oneAry[index+1]
                         this.MeiZhiChaiYouXiaoFeiJieGouFenXi_bar("echartsFifteen", this.seriesOne[index+1]);
+                        if(this.activeNamePie==2){
+                            this.MeiZhiShiNaoYouXiaoFeiJieGongFenXi_pie("echartsSixteen",this.seriesTwo[index+1]);
+                        }
+
 
                     } else {
 
                         this.pie_one = this.pie_oneAry[0]
                         this.tabListOne = this.tabListOne_copy;
                         this.MeiZhiChaiYouXiaoFeiJieGouFenXi_bar("echartsFifteen", this.seriesOne[0]);
-                        this.MeiZhiShiNaoYouXiaoFeiJieGongFenXi_pie("echartsSixteen",this.seriesTwo[0]);
+                        if(this.activeNamePie==2){
+                            this.MeiZhiShiNaoYouXiaoFeiJieGongFenXi_pie("echartsSixteen",this.seriesTwo[0]);
+                        }
                         this.showFlag = false;
                         this.desIndex = null;
 
@@ -584,7 +590,9 @@
                     this.tabListOne_copy[1]]
                     this.pie_one=this.pie_oneAry[index+1]
                     this.MeiZhiChaiYouXiaoFeiJieGouFenXi_bar("echartsFifteen", this.seriesOne[index+1]);
-                    this.MeiZhiShiNaoYouXiaoFeiJieGongFenXi_pie("echartsSixteen",this.seriesTwo[index+1]);
+                    if(this.activeNamePie==2){
+                        this.MeiZhiShiNaoYouXiaoFeiJieGongFenXi_pie("echartsSixteen",this.seriesTwo[index+1]);
+                    }
                 }
 
 

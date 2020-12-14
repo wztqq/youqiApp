@@ -1879,13 +1879,24 @@
                         this.showFlag = true
                         this.desIndex = index;
                         this.KuCun_One("echartsOne", this.oneseries[index+1]);
-                        this.KuCun_Two("echartsTwo", this.twoseries[index+1]);
+                        if(this.activeNamePie==2){
+                            this.KuCun_Two("echartsTwo", this.twoseries[index+1]);
+                        }
                         this.KuCun_Three("echartsThree", this.threeseries[index+1]);
-                        this.KuCun_Four("echartsFour", this.fourseries[index+1]);
+                        if(this.activeNamePie1==2){
+                            this.KuCun_Four("echartsFour", this.fourseries[index+1]);
+                        }
+
                         this.KuCun_Five("echartsFive", this.fiveseries[index+1]);
-                        this.KuCun_Six("echartsSix", this.sixseries[index+1]);
+                        if(this.activeName==2){
+                            this.KuCun_Six("echartsSix", this.sixseries[index+1]);
+                        }
+
                         this.KuCun_Seven("echartsSeven", this.sevenseries[index+1]);
-                        this.KuCun_Eight("echartsEight", this.eightseries[index+1]);
+                        if(this.activeName4==2){
+                            this.KuCun_Eight("echartsEight", this.eightseries[index+1]);
+                        }
+
                         this.pie_one=this.pie_oneAry[index+1]
                         this.pie_two=this.pie_twoAry[index+1]
                         this.pie_three=this.pie_threeAry[index+1]
@@ -1899,13 +1910,22 @@
                         this.showFlag = false;
                         this.desIndex = null;
                         this.KuCun_One("echartsOne", this.oneseries[0]);
-                        this.KuCun_Two("echartsTwo", this.twoseries[0]);
+                        if(this.activeNamePie==2){
+                            this.KuCun_Two("echartsTwo", this.twoseries[0]);
+                        }
                         this.KuCun_Three("echartsThree", this.threeseries[0]);
-                        this.KuCun_Four("echartsFour", this.fourseries[0]);
+                        if(this.activeNamePie1==2){
+                            this.KuCun_Four("echartsFour", this.fourseries[0]);
+                        }
                         this.KuCun_Five("echartsFive", this.fiveseries[0]);
-                        this.KuCun_Six("echartsSix", this.sixseries[0]);
+                        if(this.activeName==2){
+                            this.KuCun_Six("echartsSix", this.sixseries[0]);
+                        }
                         this.KuCun_Seven("echartsSeven", this.sevenseries[0]);
-                        this.KuCun_Eight("echartsEight", this.eightseries[0]);
+                        if(this.activeName4==2){
+                            this.KuCun_Eight("echartsEight", this.eightseries[0]);
+                        }
+
                         this.pie_one=this.pie_oneAry[0]
                         this.pie_two=this.pie_twoAry[0]
                         this.pie_three=this.pie_threeAry[0]
@@ -1923,13 +1943,21 @@
                     this.pie_three=this.pie_threeAry[index+1]
                     this.pie_four=this.pie_fourAry[index+1]
                     this.KuCun_One("echartsOne", this.oneseries[index+1]);
-                    this.KuCun_Two("echartsTwo", this.twoseries[index+1]);
+                    if(this.activeNamePie==2){
+                        this.KuCun_Two("echartsTwo", this.twoseries[index+1]);
+                    }
                     this.KuCun_Three("echartsThree", this.threeseries[index+1]);
-                    this.KuCun_Four("echartsFour", this.fourseries[index+1]);
+                    if(this.activeNamePie1==2){
+                        this.KuCun_Four("echartsFour", this.fourseries[index+1]);
+                    }
                     this.KuCun_Five("echartsFive", this.fiveseries[index+1]);
-                    this.KuCun_Six("echartsSix", this.sixseries[index+1]);
+                    if(this.activeName==2){
+                        this.KuCun_Six("echartsSix", this.sixseries[index+1]);
+                    }
                     this.KuCun_Seven("echartsSeven", this.sevenseries[index+1]);
-                    this.KuCun_Eight("echartsEight", this.eightseries[index+1]);
+                    if(this.activeName4==2){
+                        this.KuCun_Eight("echartsEight", this.eightseries[index+1]);
+                    }
                     this.tabList_one=[this.cityAry[index]+this.tabList_one_copy[0],this.cityAry[index]+this.tabList_one_copy[1]]
                     this.tabList_two=[this.cityAry[index]+this.tabList_two_copy[0],this.cityAry[index]+this.tabList_two_copy[1]]
                     this.tabList_three=[this.cityAry[index]+this.tabList_three_copy[0],this.cityAry[index]+this.tabList_three_copy[1]]

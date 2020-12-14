@@ -1171,7 +1171,10 @@
                     this.desIndex = null;
                     this.tablist_one = this.tablist_copy;
                     this.QiYouXiaoFeiJieGouFenXi_pie('echartsOne',this.seriesOne[0])
-                    this.ChaiYouXiaoFeiJieGouFenXi_pie('echartsTwo',this.seriesTwo[0])
+                    if(this.two){
+                        this.ChaiYouXiaoFeiJieGouFenXi_pie('echartsTwo',this.seriesTwo[0])
+                    }
+
                     this.pie_one=this.pie_oneAry[0]
                     this.pie_two=this.pie_twoAry[0]
 
@@ -1180,7 +1183,9 @@
                     this.showFlag = false;
                     this.tablist_one = [this.tablist_city[index] + this.tablist_copy[0], this.tablist_city[index] + this.tablist_copy[1]];
                     this.QiYouXiaoFeiJieGouFenXi_pie('echartsOne',this.seriesOne[index+1])
-                    this.ChaiYouXiaoFeiJieGouFenXi_pie('echartsTwo',this.seriesTwo[index+1])
+                    if(this.two){
+                        this.ChaiYouXiaoFeiJieGouFenXi_pie('echartsTwo',this.seriesTwo[index+1])
+                    }
                     this.pie_one=this.pie_oneAry[index+1]
                     this.pie_two=this.pie_twoAry[index+1]
                 }

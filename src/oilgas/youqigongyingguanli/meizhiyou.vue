@@ -160,59 +160,59 @@
                         plan: [24, 15.5, 13.5, 12, 18, 19, 13, 18, 22, 19, 11, 11],
                     }]
                 ],
-                MeiZhiYou_FourSerData:[
+                MeiZhiYou_FourSerData: [
                     [
                         {
-                            name:'石脑油',
-                            value:65
+                            name: '石脑油',
+                            value: 65
                         },
                         {
-                            name:'柴油',
-                            value:16
+                            name: '柴油',
+                            value: 16
                         },
                         {
-                            name:'液化气',
-                            value:20
+                            name: '液化气',
+                            value: 20
                         },
                         {
-                            name:'干气',
-                            value:20
+                            name: '干气',
+                            value: 20
                         }
                     ],
                     [
                         {
-                            name:'石脑油',
-                            value:35
+                            name: '石脑油',
+                            value: 35
                         },
                         {
-                            name:'柴油',
-                            value:8
+                            name: '柴油',
+                            value: 8
                         },
                         {
-                            name:'液化气',
-                            value:10
+                            name: '液化气',
+                            value: 10
                         },
                         {
-                            name:'干气',
-                            value:10
+                            name: '干气',
+                            value: 10
                         }
                     ],
                     [
                         {
-                            name:'石脑油',
-                            value:30
+                            name: '石脑油',
+                            value: 30
                         },
                         {
-                            name:'柴油',
-                            value:8
+                            name: '柴油',
+                            value: 8
                         },
                         {
-                            name:'液化气',
-                            value:10
+                            name: '液化气',
+                            value: 10
                         },
                         {
-                            name:'干气',
-                            value:10
+                            name: '干气',
+                            value: 10
                         }
                     ]
                 ]
@@ -480,7 +480,7 @@
                         bottom: 30,
                         left: "center",
                         itemGap: 10,
-                        data: ["神华煤制油","伊泰煤制油"],
+                        data: ["神华煤制油", "伊泰煤制油"],
                         itemWidth: 15,
                         itemHeight: 10,
                     },
@@ -508,13 +508,13 @@
                             },
                             data: [
                                 {
-                                    name:'神华煤制油',
-                                    value:16
+                                    name: '神华煤制油',
+                                    value: 16
                                 },
                                 {
-                                name:'伊泰煤制油',
-                                value:32
-                            },
+                                    name: '伊泰煤制油',
+                                    value: 32
+                                },
 
                             ],
                             color: [
@@ -625,12 +625,20 @@
                         this.tabListTwo_copy[1]]
                         this.pie = this.pie_num[index + 1]
                         this.MeiZhiYou_One("echartsFifteen", this.MeiZhiYou_OneSerData[index + 1]);
-                        this.MeiZhiYou_Two("echartsSixteen", this.MeiZhiYou_TwoSerData[index + 1]);
-                        this.MeiZhiYou_Four("echartsEighteenth", this.MeiZhiYou_FourSerData[index + 1])
+                        if (this.activeNamePie == 2) {
+                            this.MeiZhiYou_Two("echartsSixteen", this.MeiZhiYou_TwoSerData[index + 1]);
+                        }
+                        if (this.activeName == 2) {
+                            this.MeiZhiYou_Four("echartsEighteenth", this.MeiZhiYou_FourSerData[index + 1])
+                        }
                     } else {
                         this.MeiZhiYou_One("echartsFifteen", this.MeiZhiYou_OneSerData[0]);
-                        this.MeiZhiYou_Two("echartsSixteen", this.MeiZhiYou_TwoSerData[0]);
-                        this.MeiZhiYou_Four("echartsEighteenth", this.MeiZhiYou_FourSerData[0]);
+                        if (this.activeNamePie == 2) {
+                            this.MeiZhiYou_Two("echartsSixteen", this.MeiZhiYou_TwoSerData[0]);
+                        }
+                        if (this.activeName == 2){
+                            this.MeiZhiYou_Four("echartsEighteenth", this.MeiZhiYou_FourSerData[0]);
+                        }
                         this.pie = this.pie_num[0]
                         this.tabListOne = this.tabListOne_copy;
                         this.tabListTwo = this.tabListTwo_copy;
@@ -647,8 +655,12 @@
                     this.tabListTwo_copy[1]]
                     this.pie = this.pie_num[index + 1]
                     this.MeiZhiYou_One("echartsFifteen", this.MeiZhiYou_OneSerData[index + 1]);
-                    this.MeiZhiYou_Two("echartsSixteen", this.MeiZhiYou_TwoSerData[index + 1]);
-                    this.MeiZhiYou_Four("echartsEighteenth", this.MeiZhiYou_FourSerData[index + 1])
+                    if(this.activeNamePie==2){
+                        this.MeiZhiYou_Two("echartsSixteen", this.MeiZhiYou_TwoSerData[index + 1]);
+                    }
+                    if(this.activeName==2){
+                        this.MeiZhiYou_Four("echartsEighteenth", this.MeiZhiYou_FourSerData[index + 1])
+                    }
                 }
 
 

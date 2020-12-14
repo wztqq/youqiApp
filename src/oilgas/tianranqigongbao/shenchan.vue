@@ -869,17 +869,25 @@
                     this.showAll = true;
                     this.desIndex = null;
                     this.drawPie(this.lengendGas[0], '万立方米', this.dataGas[0], this.pie_num[0]);
-                    this.drawPieTwo(this.drawPieTwoData[0], this.pieTwo[0]);
+                    if(this.activeNamePie==2){
+                        this.drawPieTwo(this.drawPieTwoData[0], this.pieTwo[0]);
+                    }
                     this.drawBarOne(this.drawBarOneData[0]);
-                    this.drawBarTwo(this.drawBarTwoData[0]);
+                    if(this.activeName==2){
+                        this.drawBarTwo(this.drawBarTwoData[0]);
+                    }
                     this.drawLine(this.drawLineData[0])
                 } else {
                     this.desIndex = index;
                     this.showAll = false;
-                    this.drawPieTwo(this.drawPieTwoData[this.desIndex + 1], this.pieTwo[this.desIndex + 1])
+                    if(this.activeNamePie==2){
+                        this.drawPieTwo(this.drawPieTwoData[this.desIndex + 1], this.pieTwo[this.desIndex + 1])
+                    }
                     this.drawPie(this.lengendGas[index + 1], '万立方米', this.dataGas[index + 1], this.pie_num[index + 1]);
                     this.drawBarOne(this.drawBarOneData[this.desIndex + 1]);
-                    this.drawBarTwo(this.drawBarTwoData[this.desIndex + 1]);
+                    if(this.activeName==2){
+                        this.drawBarTwo(this.drawBarTwoData[this.desIndex + 1]);
+                    }
                     this.drawLine(this.drawLineData[this.desIndex+1])
                 }
 

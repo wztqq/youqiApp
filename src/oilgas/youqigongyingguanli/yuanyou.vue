@@ -847,10 +847,12 @@
                     this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[0]);
                     this.pie_one = this.pie_oneAry[0]
                     this.pie_two = this.pie_twoAry[0]
-                    this.$nextTick(() => {
+                    if(this.activeName==2){
                         this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[0]);
-                    })
-                    this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[0]);
+                    }
+                    if(this.activeNamePie==2){
+                        this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[0]);
+                    }
                     this.ZhuYaoQiYeZhanBi_pie('echartsFour', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
                 } else {
                     this.desIndex = index;
@@ -858,12 +860,14 @@
                     this.pie_one = this.pie_oneAry[index + 1]
                     this.pie_two = this.pie_twoAry[index + 1]
                     this.tabList = [this.city[index] + this.tabList_copy[0], this.city[index] + this.tabList_copy[1]]
-                    this.$nextTick(() => {
+                    if(this.activeName==2){
                         this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[index + 1]);
-                    })
+                    }
                     this.tabList_two = [this.city[index] + this.tabList_two_copy[0], this.city[index] + this.tabList_two_copy[1]]
                     this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[index + 1]);
-                    this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[index + 1]);
+                    if(this.activeNamePie==2){
+                        this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[index + 1]);
+                    }
                     this.ZhuYaoQiYeZhanBi_pie('echartsFour', this.YuanYou_FourLengend[index + 1], this.YuanYou_FourSerData[index + 1])
                 }
 

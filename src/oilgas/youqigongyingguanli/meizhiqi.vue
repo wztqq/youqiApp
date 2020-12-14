@@ -137,15 +137,15 @@
                     ],
                     [
                         {
-                            value: 19,
+                            value: 10,
                             name: "管道气",
                         },
                         {
-                            value: 31,
+                            value: 20,
                             name: "CNG",
                         },
                         {
-                            value: 78,
+                            value: 46,
                             name: "LNG",
                         }
                     ],
@@ -159,7 +159,7 @@
                             name: "CNG",
                         },
                         {
-                            value: 31,
+                            value: 32,
                             name: "LNG",
                         }
                     ],
@@ -482,10 +482,14 @@
                         this.tabListOne_copy[1]]
                         this.pie=this.pie_num[index+1]
                         this.MeiZhiQi_One("echartsTone", this.MeiZhiQi_OneSerData[index + 1]);
-                        this.GongYingFangShiFenXi_pie("echartsTtwo", this.MeiZhiQi_TwoSerData[index + 1])
+                        if(this.activeNamePie==2){
+                            this.GongYingFangShiFenXi_pie("echartsTtwo", this.MeiZhiQi_TwoSerData[index + 1])
+                        }
                     } else {
                         this.MeiZhiQi_One("echartsTone", this.MeiZhiQi_OneSerData[0]);
-                        this.GongYingFangShiFenXi_pie("echartsTtwo", this.MeiZhiQi_TwoSerData[0]);
+                        if(this.activeNamePie==2){
+                            this.GongYingFangShiFenXi_pie("echartsTtwo", this.MeiZhiQi_TwoSerData[0]);
+                        }
                         this.tabListOne = this.tabListOne_copy;
                         this.pie=this.pie_num[0]
                         this.showFlag = false;
@@ -499,7 +503,9 @@
                     this.tabListOne_copy[1]]
                     this.pie=this.pie_num[index+1]
                     this.MeiZhiQi_One("echartsTone", this.MeiZhiQi_OneSerData[index + 1])
-                    this.GongYingFangShiFenXi_pie("echartsTtwo", this.MeiZhiQi_TwoSerData[index + 1]);
+                    if(this.activeNamePie==2){
+                        this.GongYingFangShiFenXi_pie("echartsTtwo", this.MeiZhiQi_TwoSerData[index + 1]);
+                    }
                 }
 
 

@@ -609,7 +609,9 @@
                 if (this.desIndex == index) {
                     this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[0]);
                     this.pie_one = this.pie_oneAry[0]
-                    this.ZhuYaoQiYeZhanBi_pie('echartsNine', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
+                    if(this.activeNamePie==2){
+                        this.ZhuYaoQiYeZhanBi_pie('echartsNine', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
+                    }
                     this.tabList = this.tabList_copy
                     this.showAll = true;
                     this.desIndex = null;
@@ -617,7 +619,9 @@
                 } else {
                     this.pie_one = this.pie_oneAry[index + 1]
                     this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[index + 1]);
-                    this.ZhuYaoQiYeZhanBi_pie('echartsNine', this.YuanYou_FourLengend[index + 1], this.YuanYou_FourSerData[index + 1])
+                    if(this.activeNamePie==2){
+                        this.ZhuYaoQiYeZhanBi_pie('echartsNine', this.YuanYou_FourLengend[index + 1], this.YuanYou_FourSerData[index + 1])
+                    }
                     this.tabList = [this.city[index] + this.tabList_copy[0], this.city[index] + this.tabList_copy[1]]
                     this.desIndex = index;
                     this.showAll = false;

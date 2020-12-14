@@ -251,7 +251,6 @@
             </div>
 
 
-
             <div class="btn_shengchan_youxia" v-show="sctable_yx">
                 <div class="btn_shenchan_div">
                     <div @click="proShow=true">
@@ -652,7 +651,7 @@
                     ['科尔康油田', '龙筒湾油田']
                 ],
                 rankseriesData: [
-                    [3.36,4.2, 5.04, 12.6, 21, 38.7],
+                    [3.36, 4.2, 5.04, 12.6, 21, 38.7],
                     [2.1, 2.2],
                     [2.3, 2.8],
                     [5.4, 5.8, 6.1, 6.4, 6.7, 7.1],
@@ -660,24 +659,24 @@
                     [3.6, 3.8, 4.4],
                     [1.3, 1.8],
                 ],
-                rankYDataGas:[
-                    ['包尔气田区域','二连气田区域','海拉尔气田区域','苏里格气田区域'],
-                    ['靖边气田','乌审旗气田','胜利井气田','大牛地气田','苏里格气田'],
+                rankYDataGas: [
+                    ['包尔气田区域', '二连气田区域', '海拉尔气田区域', '苏里格气田区域'],
+                    ['靖边气田', '乌审旗气田', '胜利井气田', '大牛地气田', '苏里格气田'],
                     ['包尔气田'],
-                    ['哈达图气田','宝力格气田'],
-                    ['贝尔气田','苏仁诺尔气田']
+                    ['哈达图气田', '宝力格气田'],
+                    ['贝尔气田', '苏仁诺尔气田']
                 ],
-                rankseriesDataGas:[
-                    [3.92,5.88,9.8,176.4],
-                    [38,37,36,33,31],
+                rankseriesDataGas: [
+                    [3.92, 5.88, 9.8, 176.4],
+                    [38, 37, 36, 33, 31],
                     [3.92],
-                    [2.88,3],
-                    [4.6,5.2]
+                    [2.88, 3],
+                    [4.6, 5.2]
                 ],
                 showAll: true,
                 showAllGas: true,
                 showAllOil: true,
-                showAllGas_Oil:true,
+                showAllGas_Oil: true,
                 value1: 0,
                 src: require('../../assets/img/produce-fx/hotmap_oil.png'),
                 src1: require('../../assets/img/produce-fx/hotmap_gas.png'),
@@ -1107,16 +1106,16 @@
                 pie_number: 1177,  //原油剩余技术数值
                 pie_number_two: 0.78,  //天然气剩余技术数值
                 tablist_three: ['油田储采比排名', '气田储采比排名'],
-                tablist_four: [ '产区排名','原油产量分析'],
-                tablist_four_copy:[ '产区排名','原油产量分析'],
-                tablist_nine: ['产区排名','天然气产量分析'],
-                tablist_nine_copy: ['产区排名','天然气产量分析'],
+                tablist_four: ['产区排名', '原油产量分析'],
+                tablist_four_copy: ['产区排名', '原油产量分析'],
+                tablist_nine: ['产区排名', '天然气产量分析'],
+                tablist_nine_copy: ['产区排名', '天然气产量分析'],
                 tablist_five: ['本年度原油生产自给率', '本年度天然气生产自给率'],
                 tablist_six: ['本年度原油生产企业分布', '本年度天然气生产企业分布'],
                 tablist_seven: ['成品油产量分析', '煤制油产量分析', '煤制气产量分析'],
                 tablist_eight: ['成品油生产结构分析', '成品油自给率分析'],
-                oilAry: [ '吉祥', '包尔', '二连', '海拉尔', '科尔沁', '科尔康'],
-                gasAry:['苏里格','包尔','二连','海拉尔'],
+                oilAry: ['吉祥', '包尔', '二连', '海拉尔', '科尔沁', '科尔康'],
+                gasAry: ['苏里格', '包尔', '二连', '海拉尔'],
                 // 第二个页面上月完成数值
                 last_month: 20,
                 // 第二个页面年度累计完成数值
@@ -1649,7 +1648,7 @@
                         ['原油月产量', '同比变化'],
                     ]
                 ],
-                bardata_two:[
+                bardata_two: [
                     [
                         [23, 21, 35, 17, 12, 21, 23, 13, 8, 12, 31, 22],
                         [-23, -17, -14, -8, 2, 10, 14, 20, 14, 8, 15, 24],
@@ -1822,7 +1821,7 @@
                 flag: null, //判断原油地图点击的是哪个区域
                 flagGas: null, //判断天然气地图点击的是哪个区域
                 shenchanflagOil: null, //判断天然气地图点击的是哪个区域
-                shenchanflagGas:null
+                shenchanflagGas: null
             }
         },
         mounted() {
@@ -1833,14 +1832,14 @@
         },
         methods: {
             // 主要产区排名
-            echartsRank(id, yData, seriesData,unit) {
+            echartsRank(id, yData, seriesData, unit) {
                 let echarts = require('echarts');
                 let myChart = echarts.init(document.getElementById(id));
                 // 指定图表的配置项和数据
                 let option = {
                     tooltip: {
                         trigger: 'axis',
-                        formatter: '{b0}: {c0}'+unit,
+                        formatter: '{b0}: {c0}' + unit,
                     },
                     grid: {
                         right: '15%',
@@ -2672,11 +2671,11 @@
                     this.$nextTick(function () {
                         this.showAllOil = true;
                         this.shenchanflagOil = null;
-                        this.tablist_four=this.tablist_four_copy
+                        this.tablist_four = this.tablist_four_copy
                         this.showAllGas_Oil = true;
                         this.shenchanflagGas = null;
-                        this.tablist_nine=this.tablist_nine_copy
-                        this.echartsRank('echartsNie_rank', this.rankYData[0], this.rankseriesData[0],'万吨')
+                        this.tablist_nine = this.tablist_nine_copy
+                        this.echartsRank('echartsNie_rank', this.rankYData[0], this.rankseriesData[0], '万吨')
                         // this.drawLine_one_oil('echartsThree', this.bardata_one[0])
                         this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率")
                         this.drawPie_one('echartsFive', this.produce_pieTwo_oil, "万吨", "本年度原油生产企业分布")
@@ -2827,10 +2826,10 @@
             tabButton_produce(id) {
                 this.showAllOil = true;
                 this.shenchanflagOil = null;
-                this.tablist_four=this.tablist_four_copy
+                this.tablist_four = this.tablist_four_copy
                 this.showAllGas_Oil = true;
                 this.shenchanflagGas = null;
-                this.tablist_nine=this.tablist_nine_copy
+                this.tablist_nine = this.tablist_nine_copy
                 if (id) {
                     //
                     this.btn_shenchan_num = 1
@@ -2855,10 +2854,10 @@
                     this.pie_one_unit = this.produce_pie_oil[3]
                     this.bacolor = 1
                     this.$nextTick(function () {
-                        this.echartsRank('echartsNie_rank', this.rankYData[0], this.rankseriesData[0],'万吨')
+                        this.echartsRank('echartsNie_rank', this.rankYData[0], this.rankseriesData[0], '万吨')
                         // this.drawLine_one_oil('echartsThree', this.bardata_one[0])
                         this.echartsRank('echartsNieGas_rank', this.rankYDataGas[0],
-                            this.rankseriesDataGas[0],'亿立方米')
+                            this.rankseriesDataGas[0], '亿立方米')
                         // this.drawLine_one_oil('echartsThreeechartsNieGas', this.bardata_two[0])
                         this.drawPie('echartsFour', this.produce_pie_oil, "万吨", "本年度原油生产自给率")
                         this.drawPie_one('echartsFive', this.produce_pieTwo_oil, "个", "本年度原油生产企业分布")
@@ -2884,12 +2883,12 @@
 
                 this.selected_four = id;
                 if (this.p_i == 0 && id == 1) {
-                    if(this.shenchanflagOil==null){
+                    if (this.shenchanflagOil == null) {
                         this.$nextTick(() => {
                             this.drawLine_one_oil('echartsThree', this.bardata_one[0])
 
                         })
-                    }else{
+                    } else {
                         this.$nextTick(() => {
                             this.drawLine_one_oil('echartsThree', this.bardata_one[this.shenchanflagOil])
                         })
@@ -2897,13 +2896,13 @@
 
                 }
                 if (this.p_i == 1 && id == 0) {
-                    if(this.shenchanflagOil==null){
+                    if (this.shenchanflagOil == null) {
                         this.$nextTick(() => {
-                            this.echartsRank('echartsNie_rank', this.rankYData[0], this.rankseriesData[0],'万吨')
+                            this.echartsRank('echartsNie_rank', this.rankYData[0], this.rankseriesData[0], '万吨')
                         })
-                    }else{
+                    } else {
                         this.$nextTick(() => {
-                            this.echartsRank('echartsNie_rank', this.rankYData[this.shenchanflagOil], this.rankseriesData[this.shenchanflagOil],'万吨')
+                            this.echartsRank('echartsNie_rank', this.rankYData[this.shenchanflagOil], this.rankseriesData[this.shenchanflagOil], '万吨')
                         })
                     }
 
@@ -2913,11 +2912,11 @@
 
                 this.selected_nine = id;
                 if (this.p_q == 0 && id == 1) {
-                    if(this.shenchanflagGas==null){
+                    if (this.shenchanflagGas == null) {
                         this.$nextTick(() => {
                             this.drawLine_one_oil('echartsThreeechartsNieGas', this.bardata_two[0])
                         })
-                    }else{
+                    } else {
                         this.$nextTick(() => {
                             this.drawLine_one_oil('echartsThreeechartsNieGas', this.bardata_two[this.shenchanflagGas])
                         })
@@ -2925,15 +2924,15 @@
 
                 }
                 if (this.p_q == 1 && id == 0) {
-                    if(this.shenchanflagGas==null){
+                    if (this.shenchanflagGas == null) {
                         this.$nextTick(() => {
                             this.echartsRank('echartsNieGas_rank', this.rankYDataGas[0],
-                                this.rankseriesDataGas[0],'亿立方米')
+                                this.rankseriesDataGas[0], '亿立方米')
                         })
-                    }else{
+                    } else {
                         this.$nextTick(() => {
                             this.echartsRank('echartsNieGas_rank', this.rankYDataGas[this.shenchanflagGas],
-                                this.rankseriesDataGas[this.shenchanflagGas],'亿立方米')
+                                this.rankseriesDataGas[this.shenchanflagGas], '亿立方米')
                         })
                     }
 
@@ -3348,20 +3347,22 @@
                 if (this.shenchanflagOil == shenchanflagOil) {
                     this.showAllOil = true;
                     this.shenchanflagOil = null;
-                    this.tablist_four=this.tablist_four_copy
-                    this.$nextTick(() =>{
-                        this.echartsRank('echartsNie_rank', this.rankYData[0], this.rankseriesData[0],'万吨')
-                    })
-                    this.drawLine_one_oil('echartsThree', this.bardata_one[0])
+                    this.tablist_four = this.tablist_four_copy
+                    this.echartsRank('echartsNie_rank', this.rankYData[0], this.rankseriesData[0], '万吨')
+                    if (this.selected_four === 1) {
+                        this.drawLine_one_oil('echartsThree', this.bardata_one[0])
+                    }
+
                 } else {
                     this.showAllOil = false;
                     this.shenchanflagOil = shenchanflagOil
-                    this.tablist_four=[this.oilAry[parseInt(shenchanflagOil)-1]+this.tablist_four_copy[0],this.oilAry[parseInt(shenchanflagOil)-1]+this.tablist_four_copy[1]]
-                    this.$nextTick(() =>{
-                        this.echartsRank('echartsNie_rank', this.rankYData[parseInt(shenchanflagOil)],
-                            this.rankseriesData[parseInt(shenchanflagOil)],'万吨')
-                    })
-                    this.drawLine_one_oil('echartsThree', this.bardata_one[shenchanflagOil])
+                    this.tablist_four = [this.oilAry[parseInt(shenchanflagOil) - 1] + this.tablist_four_copy[0], this.oilAry[parseInt(shenchanflagOil) - 1] + this.tablist_four_copy[1]]
+                    this.echartsRank('echartsNie_rank', this.rankYData[parseInt(shenchanflagOil)],
+                        this.rankseriesData[parseInt(shenchanflagOil)], '万吨')
+                    if (this.selected_four === 1) {
+                        this.drawLine_one_oil('echartsThree', this.bardata_one[shenchanflagOil])
+                    }
+
                 }
             },
             // 生产分析天然气地图点击
@@ -3369,24 +3370,30 @@
                 if (this.shenchanflagGas == shenchanflagGas) {
                     this.showAllGas_Oil = true;
                     this.shenchanflagGas = null;
-                    this.tablist_nine=this.tablist_nine_copy
-                    this.echartsRank('echartsNieGas_rank', this.rankYDataGas[0], this.rankseriesDataGas[0],'亿立方米')
-                    this.drawLine_one_oil('echartsThreeechartsNieGas', this.bardata_two[0])
+                    this.tablist_nine = this.tablist_nine_copy
+                    this.echartsRank('echartsNieGas_rank', this.rankYDataGas[0], this.rankseriesDataGas[0], '亿立方米')
+                    if(this.selected_nine==1){
+                        this.drawLine_one_oil('echartsThreeechartsNieGas', this.bardata_two[0])
+                    }
                 } else {
                     this.showAllGas_Oil = false;
                     this.shenchanflagGas = shenchanflagGas
-                    this.tablist_nine=[this.gasAry[parseInt(shenchanflagGas)-1]+this.tablist_nine_copy[0],this.gasAry[parseInt(shenchanflagGas)-1]+this.tablist_nine_copy[1]]
+                    this.tablist_nine = [this.gasAry[parseInt(shenchanflagGas) - 1] + this.tablist_nine_copy[0], this.gasAry[parseInt(shenchanflagGas) - 1] + this.tablist_nine_copy[1]]
                     this.echartsRank('echartsNieGas_rank', this.rankYDataGas[parseInt(shenchanflagGas)],
-                   this.rankseriesDataGas[parseInt(shenchanflagGas)],'亿立方米')
-                    this.drawLine_one_oil('echartsThreeechartsNieGas', this.bardata_two[shenchanflagGas])
+                        this.rankseriesDataGas[parseInt(shenchanflagGas)], '亿立方米')
+                    if(this.selected_nine==1){
+                        this.drawLine_one_oil('echartsThreeechartsNieGas', this.bardata_two[shenchanflagGas])
+
+                    }
                 }
             },
-            showGas(){
-                this.proShow=false;
-                this.$nextTick(()=>{
+            showGas() {
+                this.proShow = false;
+                this.$nextTick(() => {
                     this.echartsRank('echartsNieGas_rank', this.rankYDataGas[0],
-                        this.rankseriesDataGas[0],'亿立方米')
-                });
+                        this.rankseriesDataGas[0], '亿立方米')
+                })
+
             }
 
 

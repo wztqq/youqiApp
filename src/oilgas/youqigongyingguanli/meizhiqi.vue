@@ -35,7 +35,7 @@
                 <div v-show="activeNamePie==='2'">
                     <div class="fontSize_div">
                         <div class="fontSize">{{pie}}</div>
-                        <div class="fontSize" style="font-size: 14px">万吨</div>
+                        <div class="fontSize" style="font-size: 14px">万立方米</div>
                     </div>
                     <div id="echartsTtwo" style="width:100%;height:240px;" ref="second"></div>
 
@@ -188,7 +188,7 @@
                 myChart.setOption({
                     tooltip: {
                         trigger: "axis",
-                        formatter: '{a0}{b0}: {c0}万吨<br /> {a1}{b1}: {c1}万吨<br /> {a2}{b2}: {c2}%',
+                        formatter: '{a0}{b0}: {c0}万立方米<br /> {a1}{b1}: {c1}万立方米<br /> {a2}{b2}: {c2}%',
                         axisPointer: {
                             type: "cross",
                             crossStyle: {
@@ -233,7 +233,7 @@
                     ],
                     yAxis: [
                         {
-                            name: "万吨 / 月",
+                            name: "万立方米 / 月",
                             type: "value",
                             min: 0,
                             interval: 5,

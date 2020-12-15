@@ -729,7 +729,7 @@
                 myChart.setOption({
                     tooltip: {
                         trigger: "item",
-                        formatter: "{a} <br/>{b}: {c}亿立方米 ({d}%)",
+                        formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
                     },
                     legend: {
                         orient: "horizontal",
@@ -742,7 +742,7 @@
                     },
                     series: [
                         {
-                            name: "原油月供应结构企业占比",
+                            name: "油田供应分布分析",
                             type: "pie",
                             radius: ["40%", "55%"],
                             center: ["50%", "40%"],

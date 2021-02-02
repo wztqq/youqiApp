@@ -16,8 +16,8 @@
              v-show="desIndex==index&&showFlag"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>10月粉煤加工量：{{item.num}}万吨</div>
-            <div>10月天然气产量：{{item.pro}}万立方米</div>
+            <div>12月粉煤加工量：{{item.num}}万吨</div>
+            <div>12月天然气产量：{{item.pro}}万立方米</div>
         </div>
 
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">

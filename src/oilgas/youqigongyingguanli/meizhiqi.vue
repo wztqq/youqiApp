@@ -16,7 +16,7 @@
              v-show="desIndex==index&&showFlag"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>10月天然气供应量：{{item.num}}万立方米</div>
+            <div>12月天然气供应量：{{item.num}}万立方米</div>
             <div>累计天然气供应量：{{item.pro}}万立方米</div>
         </div>
 

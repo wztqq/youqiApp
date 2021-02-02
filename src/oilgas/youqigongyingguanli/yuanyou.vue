@@ -13,7 +13,7 @@
              v-show="showAll||index==desIndex"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>10月供应：{{item.num1}}万吨</div>
+            <div>12月供应：{{item.num1}}万吨</div>
             <div>累计供应：{{item.num2}}万吨</div>
 
         </div>
@@ -143,8 +143,8 @@
                         left: '0.343',
                         top: '0.392',
                         name: '海拉尔油田区域',
-                        num1: '0.7',
-                        num2: '4.2',
+                        num1: '3.7',
+                        num2: '39.51',
                     },
                     {
                         left: '0.696',

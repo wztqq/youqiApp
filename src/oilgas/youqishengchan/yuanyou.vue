@@ -52,10 +52,10 @@
              }">
                 <ul>
                     <li>{{page_c1}}</li>
-                    <li>10月原油加工量<span>{{page_c2}}</span>万吨</li>
-                    <li>10月汽油产量：<span>{{page_c3}}</span>万吨</li>
-                    <li>10月柴油产量：<span>{{page_c4}}</span>万吨</li>
-                    <li>10月煤油产量：<span>{{page_c5}}</span>万吨</li>
+                    <li>12月原油加工量<span>{{page_c2}}</span>万吨</li>
+                    <li>12月汽油产量：<span>{{page_c3}}</span>万吨</li>
+                    <li>12月柴油产量：<span>{{page_c4}}</span>万吨</li>
+                    <li>12月煤油产量：<span>{{page_c5}}</span>万吨</li>
                 </ul>
             </div>
             <img class="map" src="../../assets/img/地图.png" alt="图片未显示"/>
@@ -100,10 +100,10 @@
             <div class="pagethree_tc" v-show="produce_tc">
                 <ul>
                     <li>{{page_c1}}</li>
-                    <li>10月粉煤加工量：<span>{{page_c2}}</span>万吨</li>
-                    <li>10月石脑油产量：<span>{{page_c3}}</span>万吨</li>
-                    <li>10月柴油产量:<span>{{page_c4}}</span>万吨</li>
-                    <li>10月液化气产量：<span>{{page_c5}}</span>万吨</li>
+                    <li>12月粉煤加工量：<span>{{page_c2}}</span>万吨</li>
+                    <li>12月石脑油产量：<span>{{page_c3}}</span>万吨</li>
+                    <li>12月柴油产量:<span>{{page_c4}}</span>万吨</li>
+                    <li>12月液化气产量：<span>{{page_c5}}</span>万吨</li>
                 </ul>
             </div>
             <div class="produce_logo" :style="{ left: logoposionleft8,top: logoposiontop8 }">

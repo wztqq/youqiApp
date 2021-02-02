@@ -16,10 +16,10 @@
              v-show="desIndex==index&&showFlag"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>11月石脑油销售量：{{item.num2}}万吨</div>
-            <div>11月柴油销售量：{{item.num3}}万吨</div>
-            <div>11月液化气销售量：{{item.num4}}万吨</div>
-            <div>11月累计销售量：{{item.num5}}万吨</div>
+            <div>12月石脑油销售量：{{item.num2}}万吨</div>
+            <div>12月柴油销售量：{{item.num3}}万吨</div>
+            <div>12月液化气销售量：{{item.num4}}万吨</div>
+            <div>12月累计销售量：{{item.num5}}万吨</div>
         </div>
 
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
@@ -119,9 +119,9 @@
                 pie: 121,
                 showFlag: false,
                 desIndex: null,
-                tabListOne: ['11月柴油的消费结构分析', '11月石脑油的消费结构分析'],
-                tabListTwo: ['11月煤制油产品地区消费分布', '煤油等价曲线'],
-                tabListOne_copy: ['11月柴油的消费结构分析', '11月石脑油的消费结构分析'],
+                tabListOne: ['12月柴油的消费结构分析', '12月石脑油的消费结构分析'],
+                tabListTwo: ['12月煤制油产品地区消费分布', '煤油等价曲线'],
+                tabListOne_copy: ['12月柴油的消费结构分析', '12月石脑油的消费结构分析'],
                 tabListOne_New: ['柴油的消费结构分析', '石脑油的消费结构分析'],
                 title: ['神华', '伊泰'],
                 seriesOne: [

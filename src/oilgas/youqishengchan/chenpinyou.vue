@@ -16,10 +16,10 @@
                   v-show="desIndex==index&&showFlag"
                   :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
                  <div>{{item.name}}</div>
-                 <div>10月原油加工量：{{item.num}}万吨</div>
-                 <div>10月汽油产量：{{item.num1}}万吨</div>
-                 <div>10月柴油产量：{{item.num2}}万吨</div>
-                 <div>10月煤油产量：{{item.num3}}万吨</div>
+                 <div>12月原油加工量：{{item.num}}万吨</div>
+                 <div>12月汽油产量：{{item.num1}}万吨</div>
+                 <div>12月柴油产量：{{item.num2}}万吨</div>
+                 <div>12月煤油产量：{{item.num3}}万吨</div>
              </div>
 
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">

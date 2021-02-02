@@ -16,8 +16,8 @@
              v-show="desIndex==index&&showFlag"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>11月天然气销售量：{{item.num}}万立方米</div>
-            <div>11月累计天然气销售量：{{item.pro}}万立方米</div>
+            <div>12月天然气销售量：{{item.num}}万立方米</div>
+            <div>12月累计天然气销售量：{{item.pro}}万立方米</div>
         </div>
 
         <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
@@ -114,8 +114,8 @@
                 pie: 128,
                 showFlag: false,
                 desIndex: null,
-                tabListOne: ['11月按用途消费结构分析', '11月按行业消费结构分析'],
-                tabListOne_copy: ['11月按用途消费结构分析', '11月按行业消费结构分析'],
+                tabListOne: ['12月按用途消费结构分析', '12月按行业消费结构分析'],
+                tabListOne_copy: ['12月按用途消费结构分析', '12月按行业消费结构分析'],
                 tabListOne_New:['按用途消费结构分析','按行业消费结构分析'],
                 tabListTwo: ['调峰煤制气变化趋势分析', '气价煤价对比分析'],
                 tabListTwo_copy: ['调峰煤制气变化趋势分析', '气价煤价对比分析'],

@@ -13,7 +13,7 @@
              v-show="showAll||index==desIndex"
              :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
             <div>{{item.name}}</div>
-            <div>10月产量：{{item.num1}}万吨</div>
+            <div>12月产量：{{item.num1}}万吨</div>
             <div>累计产量：{{item.num2}}万吨</div>
         </div>
 
@@ -46,7 +46,7 @@
             </div>
             <div class="content">
                 <div class="fontSize_div">
-                    <div class="fontSize">7690</div>
+                    <div class="fontSize">39.51</div>
                     <div class="fontSize" style="font-size: 14px">万吨</div>
                 </div>
                 <div id="echartsTen" style="width: 100%;height: 240px"></div>
@@ -133,8 +133,8 @@
                         left: '0.333',
                         top: '0.392',
                         name: '海拉尔油田区域',
-                        num1: '0.7',
-                        num2: '4.2',
+                        num1: '4.2',
+                        num2: '39.51',
                     },
                     {
                         left: '0.693',
@@ -583,11 +583,11 @@
                             },
                             data: [
                                 {
-                                    value: 7109,
+                                    value: 39.51,
                                     name: "中石油",
                                 },
                                 {
-                                    value: 500,
+                                    value: 0,
                                     name: "中石化",
                                 }
                             ],

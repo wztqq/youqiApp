@@ -2310,10 +2310,10 @@ export default {
             length: 15,
             length2: 50,
           },
-          data: [{
+          data: [/*{
             value: arry[0],
             name: "区内供应"
-          },
+          },*/
             {
               value: arry[1],
               name: "区外供应"
@@ -2361,10 +2361,10 @@ export default {
             length: 15,
             length2: 30,
           },
-          data: [{
+          data: [/*{
             value: arry[0],
             name: "中石化"
-          },
+          },*/
             {
               value: arry[1],
               name: "中石油"

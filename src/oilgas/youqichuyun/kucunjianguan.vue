@@ -19,8 +19,8 @@
       <div>{{ item.name }}总库存：{{ item.num1 }}万吨</div>
       <div>上月汽油库存：{{ item.num2 }}万吨</div>
       <div>上月柴油库存：{{ item.total }}万吨</div>
-      <div>上月航煤库存：{{ item.cpy }}万吨</div>
-      <div>上月原油库存：{{ item.city }}万吨</div>
+<!--      <div>上月航煤库存：{{ item.cpy }}万吨</div>
+      <div>上月原油库存：{{ item.city }}万吨</div>-->
     </div>
 
     <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+    <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;display: none">
       <div class="scFristqh">
         <el-tabs v-model="activeNamePie1" @tab-click="handleClick">
           <el-tab-pane :label="tabList_two[0]" name="1"></el-tab-pane>
@@ -89,7 +89,7 @@
 
       </div>
     </div>
-    <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
+    <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;display: none">
       <div class="scFristqh">
         <el-tabs v-model="activeName4" @tab-click="handleClickFour">
           <el-tab-pane :label="tabList_four[0]" name="1"></el-tab-pane>
@@ -203,7 +203,7 @@ export default {
       desList: [
         {
           name: '阿拉善盟',
-          num1: '10.07',
+          num1: '0.07',
           num2: '0.03',
           total: '0.04',
           cpy: '2',
@@ -213,7 +213,7 @@ export default {
         },
         {
           name: '乌海',
-          num1: '10.72',
+          num1: '0.73',
           num2: '0.3',
           total: '0.43',
           cpy: '2',
@@ -223,7 +223,7 @@ export default {
         },
         {
           name: '巴彦淖尔',
-          num1: '10.69',
+          num1: '0.69',
           num2: '0.17',
           total: '0.52',
           cpy: '2',
@@ -233,7 +233,7 @@ export default {
         },
         {
           name: '鄂尔多斯',
-          num1: '13.00',
+          num1: '3.00',
           num2: '0.89',
           total: '2.11',
           cpy: '2',
@@ -243,7 +243,7 @@ export default {
         },
         {
           name: '包头',
-          num1: '11.92',
+          num1: '1.92',
           num2: '0.43',
           total: '1.49',
           cpy: '2',
@@ -253,7 +253,7 @@ export default {
         },
         {
           name: '呼和浩特',
-          num1: '11.75',
+          num1: '1.75',
           num2: '1.04',
           total: '0.71',
           cpy: '2',
@@ -263,7 +263,7 @@ export default {
         },
         {
           name: '乌兰察布',
-          num1: '10.17',
+          num1: '0.17',
           num2: '0.07',
           total: '0.1',
           cpy: '2',
@@ -273,7 +273,7 @@ export default {
         },
         {
           name: '锡林郭勒盟',
-          num1: '11.42',
+          num1: '1.42',
           num2: '0.45',
           total: '0.97',
           cpy: '2',
@@ -283,7 +283,7 @@ export default {
         },
         {
           name: '赤峰',
-          num1: '10.37',
+          num1: '0.37',
           num2: '0.16',
           total: '0.21',
           cpy: '2',
@@ -293,7 +293,7 @@ export default {
         },
         {
           name: '呼伦贝尔',
-          num1: '10.02',
+          num1: '0.02',
           num2: '0.01',
           total: '0.01',
           cpy: '2',
@@ -303,7 +303,7 @@ export default {
         },
         {
           name: '兴安盟',
-          num1: '10.05',
+          num1: '0.05',
           num2: '0.02',
           total: '0.03',
           cpy: '2',
@@ -313,7 +313,7 @@ export default {
         },
         {
           name: '通辽',
-          num1: '12.51',
+          num1: '2.51',
           num2: '0.33',
           total: '1.18',
           cpy: '2',

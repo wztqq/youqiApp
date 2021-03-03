@@ -86,7 +86,7 @@
                     },
                     //海拉尔油田区域
                     {
-                        left: '0.626',
+                        left: '0.676',
                         top: '0.56',
                         src: require('../../assets/img/produce-fx/sc_yj.png'),
                         cls: 'clickbtn2'
@@ -814,21 +814,21 @@
             background-color: #fff;
         }
         .clickbtn {
-            width: 20px;
+            width: 16px;
             position: absolute;
-            height: 20px;
+            height: 16px;
             z-index: 2;
         }
         .clickbtn1 {
-            width: 20px;
+            width: 16px;
             position: absolute;
-            height: 20px;
+            height: 16px;
             z-index: 2;
         }
         .clickbtn2 {
-            width: 20px;
+            width: 16px;
             position: absolute;
-            height: 20px;
+            height: 16px;
             z-index: 2;
         }
 

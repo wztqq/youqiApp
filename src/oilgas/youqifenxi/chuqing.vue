@@ -339,7 +339,7 @@
                  @click="shenchanOilHandel('1')">
             <!-- 包尔 -->
             <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示"
-                 :style="{'left':be_click_left(0.469),'top':be_click_top(0.63)}"
+                 :style="{'left':be_click_left(0.479),'top':be_click_top(0.66)}"
                  @click="shenchanOilHandel('2')">
             <!-- 二连 -->
             <img class="clickbtn3" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示"
@@ -411,7 +411,7 @@
                  @click="shenchanGasHandel('1')">
 
             <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示"
-                 :style="{'left':be_click_left(0.489),'top':be_click_top(0.585)}"
+                 :style="{'left':be_click_left(0.519),'top':be_click_top(0.595)}"
                  @click="shenchanGasHandel('2')">
 
             <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示"
@@ -419,7 +419,7 @@
                  @click="shenchanGasHandel('3')">
 
             <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示"
-                 :style="{'left':be_click_left(0.679),'top':be_click_top(0.242)}"
+                 :style="{'left':be_click_left(0.699),'top':be_click_top(0.282)}"
                  @click="shenchanGasHandel('4')">
           </div>
         </div>
@@ -3512,15 +3512,15 @@ export default {
 }
 
 .clickbtn2 {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   position: absolute;
   z-index: 1;
 }
 
 .clickbtn3 {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   position: absolute;
   z-index: 1;
 }

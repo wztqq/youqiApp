@@ -96,7 +96,7 @@ export default {
         },
         //海拉尔油田区域
         {
-          left: '0.633',
+          left: '0.676',
           top: '0.558',
           src: require('../../assets/img/produce-fx/sc_yj.png'),
           cls: 'clickbtn2'
@@ -1064,20 +1064,21 @@ export default {
   .clickbtn {
     position: absolute;
     z-index: 2;
-    width: 20px;
+    width: 16px;
+    height: 16px;
   }
 
   .clickbtn1 {
-    width: 20px;
+    width: 16px;
     position: absolute;
-    height: 20px;
+    height: 16px;
     z-index: 2;
   }
 
   .clickbtn2 {
-    width: 20px;
+    width: 16px;
     position: absolute;
-    height: 20px;
+    height: 16px;
     z-index: 2;
   }
 

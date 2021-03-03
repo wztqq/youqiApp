@@ -334,27 +334,27 @@
           <!--生产分析原油地图弹窗-->
           <div>
             <!-- 吉祥 -->
-            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示"
+            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.326),'top':be_click_top(0.712)}"
                  @click="shenchanOilHandel('1')">
             <!-- 包尔 -->
-            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示"
+            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.469),'top':be_click_top(0.63)}"
                  @click="shenchanOilHandel('2')">
             <!-- 二连 -->
-            <img class="clickbtn3" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示"
+            <img class="clickbtn3" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.55),'top':be_click_top(0.54)}"
                  @click="shenchanOilHandel('3')">
             <!-- 海拉尔 -->
-            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示"
+            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.649),'top':be_click_top(0.297)}"
                  @click="shenchanOilHandel('4')">
 
-            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示"
+            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.713),'top':be_click_top(0.518)}"
                  @click="shenchanOilHandel('5')">
             <!-- 科尔康 -->
-            <img class="clickbtn2" src="../../assets/img/YouqiGongying/y_gy.png" alt="图片未显示"
+            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_yj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.779),'top':be_click_top(0.55)}"
                  @click="shenchanOilHandel('6')">
             <!-- <div class="clickbtn1" :style="{'left':be_click_left(0.333),'top':be_click_top(0.718)}"
@@ -406,19 +406,19 @@
           <!--生产分析气田地图弹窗-->
           <div>
 
-            <img class="clickbtn3" src="../../assets/img/YouqiGongying/q_gy.png" alt="图片未显示"
+            <img class="clickbtn3" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.34),'top':be_click_top(0.75)}"
                  @click="shenchanGasHandel('1')">
 
-            <img class="clickbtn2" src="../../assets/img/YouqiGongying/q_gy.png" alt="图片未显示"
+            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.489),'top':be_click_top(0.585)}"
                  @click="shenchanGasHandel('2')">
 
-            <img class="clickbtn2" src="../../assets/img/YouqiGongying/q_gy.png" alt="图片未显示"
+            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.639),'top':be_click_top(0.501)}"
                  @click="shenchanGasHandel('3')">
 
-            <img class="clickbtn2" src="../../assets/img/YouqiGongying/q_gy.png" alt="图片未显示"
+            <img class="clickbtn2" src="../../assets/img/produce-fx/sc_qj.png" alt="图片未显示"
                  :style="{'left':be_click_left(0.679),'top':be_click_top(0.242)}"
                  @click="shenchanGasHandel('4')">
           </div>
@@ -426,6 +426,7 @@
 
 
         <img class="map" :src="proShow?srcpro:srcpro1" alt="图片未显示">
+        <img class="map2"  src="../../assets/img/produce-fx/hotmap_gas.png" alt="图片未显示">
         <div class="chart" style="margin-bottom: 10px;height:280px" v-show="proShow">
           <div class="tab_oil">
                         <span v-for="(item,index) in tablist_four" :key='index' @click="tabButton_four(index)"
@@ -3411,7 +3412,14 @@ export default {
 
 <style scoped lang="scss">
 
-
+.map2 {
+  left:125px;
+  top:175px;
+  width: 168.5px;
+  height: 188px;
+  position: absolute;
+  z-index: 0;
+}
 /* 弹出框 */
 .tanchuang {
   position: absolute;
@@ -3504,15 +3512,15 @@ export default {
 }
 
 .clickbtn2 {
-  width: 34.5px;
-  height: 34.5px;
+  width: 20px;
+  height: 20px;
   position: absolute;
   z-index: 1;
 }
 
 .clickbtn3 {
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
   position: absolute;
   z-index: 1;
 }

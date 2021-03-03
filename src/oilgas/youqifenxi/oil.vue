@@ -2,9 +2,8 @@
   <div class="child1" style="background-color: #E6E8EC;">
     <img
         class="map"
-        src="../../assets/img/地图.png"
+        src="../../assets/img/produce-fx/producemap.png"
     />
-    <img class="map2" src="../../assets/img/produce-fx/hotmap_gas.png" alt="图片未显示">
     <!--地图定位-->
     <img :class="item.cls" :src="item.src" alt="图片未显示" v-for="(item,index) in posList"
          :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}" @click="showDes(index)">
@@ -13,10 +12,9 @@
          v-for="(item,index) in desList"
          v-show="showAll||index==desIndex"
          :style="{'left':be_click_left(item.left),'top':be_click_top(item.top)}">
-      <div>{{ item.name }}</div>
-      <div>12月供应：{{ item.num1 }}万吨</div>
-      <div>累计供应：{{ item.num2 }}万吨</div>
-
+      <div>{{item.name}}</div>
+      <div>油田个数：{{item.num1}}个</div>
+      <div>探明储量：{{item.num2}}万吨</div>
     </div>
 
     <!--饼图-->
@@ -33,34 +31,25 @@
           <div id="echartsOne" style="width:100%;height:240px;"></div>
         </div>
         <div v-show="activeNamePie==='2'">
-          <div id="echartsThree" style="width:100%;height:240px;" ref="second"></div>
+          <div class="fontSize_div">
+            <div class="fontSize">{{pie_one}}</div>
+            <div class="fontSize" style="font-size: 14px">万吨</div>
+          </div>
+          <div id="echartsNine" style="width:100%;height:240px;" ref="second"></div>
 
         </div>
       </div>
     </div>
     <div style="background-color: #fff;padding-top: 18px;margin-top: 6px;">
-      <div class="scFristqh">
-        <el-tabs v-model="activeName" @tab-click="handle">
-          <el-tab-pane :label=tabList_two[0] name="1"></el-tab-pane>
-          <el-tab-pane :label=tabList_two[1] name="2" :laze="true"></el-tab-pane>
-        </el-tabs>
+      <div class="title">
+        原油生产结构企业占比分析
       </div>
-      <div class="tabs-content">
-
-        <div v-show="activeName==='1'">
-          <div class="fontSize_div">
-            <div class="fontSize">{{ pie_one }}</div>
-            <div class="fontSize" style="font-size: 14px">万吨</div>
-          </div>
-          <div id="echartsFour" style="width:100%;height:240px;"></div>
+      <div class="content">
+        <div class="fontSize_div">
+          <div class="fontSize">39.51</div>
+          <div class="fontSize" style="font-size: 14px">万吨</div>
         </div>
-        <div v-show="activeName==='2'">
-          <div class="fontSize_div">
-            <div class="fontSize">{{ pie_two }}</div>
-            <div class="fontSize" style="font-size: 14px">万吨</div>
-          </div>
-          <div id="echartsTwo" style="width:100%;height:240px;"></div>
-        </div>
+        <div id="echartsTen" style="width: 100%;height: 240px"></div>
       </div>
     </div>
   </div>
@@ -68,98 +57,98 @@
 
 <script>
 export default {
-  name: 'child1',
+  name: 'oil',
   data() {
     return {
       posList: [
         //吉祥油田区域
         {
-          left: '0.333',
-          top: '0.918',
-          src: require('../../assets/img/produce-fx/sc_yj.png'),
+          left: '0.32',
+          top: '0.72',
+          src: require('../../assets/img/produce-fx/youtong.png'),
           cls: 'clickbtn'
 
         },
         //包尔油田区域
         {
-          left: '0.503',
-          top: '0.918',
-          src: require('../../assets/img/produce-fx/sc_yj.png'),
+          left: '0.51',
+          top: '0.642',
+          src: require('../../assets/img/produce-fx/youtong.png'),
           cls: 'clickbtn'
         },
         //二连油田区域
         {
-          left: '0.603',
-          top: '0.788',
-          src: require('../../assets/img/produce-fx/sc_yj.png'),
+          left: '0.626',
+          top: '0.56',
+          src: require('../../assets/img/produce-fx/youtong.png'),
           cls: 'clickbtn1'
         },
         //海拉尔油田区域
         {
-          left: '0.633',
-          top: '0.558',
-          src: require('../../assets/img/produce-fx/sc_yj.png'),
+          left: '0.72',
+          top: '0.285',
+          src: require('../../assets/img/produce-fx/youtong.png'),
           cls: 'clickbtn2'
         },
         //科尔沁油田区域
         {
-          left: '0.743',
-          top: '0.748',
-          src: require('../../assets/img/produce-fx/sc_yj.png'),
+          left: '0.752',
+          top: '0.542',
+          src: require('../../assets/img/produce-fx/youtong.png'),
           cls: 'clickbtn2'
         },
         //科尔康油田区域
         {
-          left: '0.783',
-          top: '0.838',
-          src: require('../../assets/img/produce-fx/sc_yj.png'),
+          left: '0.81',
+          top: '0.595',
+          src: require('../../assets/img/produce-fx/youtong.png'),
           cls: 'clickbtn'
         }
       ],//地图弹窗位置
       desList: [
         {
-          left: '0.023',
-          top: '0.882',
+          left: '0.03',
+          top: '0.5',
           name: '吉祥油田区域',
-          num1: '0.7',
-          num2: '4.2',
+          num1: '2',
+          num2: '562',
         },
 
         {
-          left: '0.243',
-          top: '0.742',
+          left: '0.392',
+          top: '0.74',
           name: '包尔油田区域',
-          num1: '0.7',
-          num2: '4.2',
+          num1: '2',
+          num2: '750',
         },
 
         {
-          left: '0.313',
-          top: '0.562',
+          left: '0.332',
+          top: '0.358',
           name: '二连油田区域',
-          num1: '0.7',
-          num2: '4.2',
+          num1: '6',
+          num2: '7500',
         },
         {
-          left: '0.343',
-          top: '0.392',
+          left: '0.406',
+          top: '0.13',
           name: '海拉尔油田区域',
-          num1: '3.7',
-          num2: '39.51',
+          num1: '7',
+          num2: '15229.71',
         },
         {
           left: '0.696',
-          top: '0.572',
+          top: '0.354',
           name: '科尔沁油田区域',
-          num1: '0.7',
-          num2: '4.2',
+          num1: '3',
+          num2: '1125',
         },
         {
-          left: '0.693',
-          top: '0.912',
+          left: '0.697',
+          top: '0.67',
           name: '科尔康油田区域',
-          num1: '0.7',
-          num2: '4.2',
+          num1: '2',
+          num2: '375',
         }
 
       ],//地图上方信息展示
@@ -167,10 +156,7 @@ export default {
       activeNamePie: '1',
       screenWidth: document.body.clientWidth, // 屏幕宽
       screenLeft: "",
-      pie_one: 7.5,
-      pie_oneAry: [7.5, 0.715, 0.73, 2.25, 1.875, 0.84, 1.055],
-      pie_two: 7.5,
-      pie_twoAry: [7.5, 1.1, 1.01, 1.5, 1.71, 1.37, 1.01],
+      pie_PieTwo: 8,
       showAll: true,
       desIndex: null,
       YuanYou_OneSerData: [
@@ -210,117 +196,10 @@ export default {
           change: [13, 5, 2, -7, 12, -5, 2, 9, -5, 3],
         }]
       ],
-      YuanYou_TwoSerData: [
-        [
-          {
-            inside: [3, 3.2, 5.1, 12.2, 5.8, 14.3, 16.3, 9, 5.2],
-            outside: [2, 2.2, 4.1, 11.2, 4.8, 13.3, 15.3, 8, 4.2]
-          }
-        ],
-        [
-          {
-            inside: [4, 4.2, 6.1, 14.2, 8.8, 16.3, 19.3, 9, 5.2],
-            outside: [2, 3.2, 4.1, 11.2, 4.8, 13.3, 15.3, 8, 4.2]
-          }
-        ],
-        [
-          {
-            inside: [3, 6.2, 5.1, 16.2, 7.8, 16.3, 18.3, 11, 6.2],
-            outside: [2, 4.2, 4.1, 11.2, 4.8, 13.3, 15.3, 8, 4.2]
-          }
-        ],
-        [
-          {
-            inside: [3, 3.2, 5.1, 12.2, 5.8, 14.3, 16.3, 9, 5.2],
-            outside: [2, 2.2, 4.1, 11.2, 4.8, 13.3, 15.3, 8, 4.2]
-          }
-        ],
-        [
-          {
-            inside: [4, 4.2, 6.1, 14.2, 8.8, 16.3, 19.3, 9, 5.2],
-            outside: [2, 3.2, 4.1, 11.2, 4.8, 13.3, 15.3, 8, 4.2]
-          }
-        ],
-        [
-          {
-            inside: [3, 6.2, 5.1, 16.2, 7.8, 16.3, 18.3, 11, 6.2],
-            outside: [2, 4.2, 4.1, 11.2, 4.8, 13.3, 15.3, 8, 4.2]
-          }
-        ],
-        [
-          {
-            inside: [3, 3.2, 5.1, 12.2, 5.8, 14.3, 16.3, 9, 5.2],
-            outside: [2, 2.2, 4.1, 11.2, 4.8, 13.3, 15.3, 8, 4.2]
-          }
-        ],
-      ],
-      YuanYou_ThreeSerData: [
-        [{
-          name: '中石油',
-          value: 7
-        },
-          {
-            name: '中石化',
-            value: 0.5
-          }
-        ],
-        [{
-          name: '中石油',
-          value: 0.65
-        },
-          {
-            name: '中石化',
-            value: 0.065
-          }
-        ],
-        [{
-          name: '中石油',
-          value: 0.68
-        },
-          {
-            name: '中石化',
-            value: 0.05
-          }
-        ],
-        [{
-          name: '中石油',
-          value: 2.1
-        },
-          {
-            name: '中石化',
-            value: 0.15
-          }
-        ],
-        [{
-          name: '中石油',
-          value: 1.75
-        },
-          {
-            name: '中石化',
-            value: 0.125
-          }
-        ],
-        [{
-          name: '中石油',
-          value: 0.76
-        },
-          {
-            name: '中石化',
-            value: 0.08
-          }
-        ],
-        [{
-          name: '中石油',
-          value: 1.01
-        },
-          {
-            name: '中石化',
-            value: 0.045
-          }
-        ]
-      ],
+      pie_one: 7.5,
+      pie_oneAry: [7.5, 0.715, 0.73, 2.25, 1.875, 0.84, 1.055],
       YuanYou_FourLengend: [
-        ['海拉尔油田区域', '二连油田区域', '科尔沁油田区域', '其他'],
+        ['海拉尔油田区域', '二连油田区域', '科尔沁油田区域'],
         ['吉祥油田', '达尔其油田'],
         ['包尔油田', '赛罕油田'],
         ['乌里雅斯太油田', '宝力格油田', '新苏木油田', '哈达图油田', '乌兰诺尔油田', '锡林油田'],
@@ -342,10 +221,6 @@ export default {
           {
             name: '科尔沁油田区域',
             value: 1.3
-          },
-          {
-            name: '其他',
-            value: 3
           }
         ],
         [
@@ -441,18 +316,15 @@ export default {
           }
         ]
       ],
-      tabList: ['原油月供应量趋势分析', '原油区内区外供应分析'],
-      tabList_copy: ['原油月供应量趋势分析', '原油区内区外供应分析'],
-      tabList_two: ['原油供应结构企业占比分析', '油田供应分布分析'],
-      tabList_two_copy: ['原油供应结构企业占比分析', '油田供应分布分析'],
+      tabList: ['原油月产量趋势分析', '油田产量分布分析'],
+      tabList_copy: ['原油月产量趋势分析', '油田产量分布分析'],
       city: ['吉祥', '包尔', '二连', '海拉尔', '科尔沁', '科尔康']
-
     };
   },
   mounted() {
-    //原油月供应量趋势分析
+    //原油月产量趋势分析
     this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[0]);
-    this.ZhuYaoQiYeZhanBi_pie('echartsFour', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
+    this.YuanYou_Three('echartsTen')
 
 
   },
@@ -464,7 +336,7 @@ export default {
     be_click_top(a) {
       return 314.5 * a + 'px'
     },
-    //原油月供应量趋势分析
+    //原油月产量趋势分析
     YuanYou_One(name, series) {
       let echarts = require("echarts");
       let myChart = echarts.init(document.getElementById(name));
@@ -593,192 +465,7 @@ export default {
         ],
       });
     },
-    //区内区外供应对比分析
-    QuNeiQuwaiGingYingDuiBi_twobar(name, series) {
-      let echarts = require("echarts");
-      let myChart = echarts.init(document.getElementById(name));
-      myChart.setOption({
-        tooltip: {
-          trigger: "axis",
-          formatter(params) {
-            return params[0].name + '</br>' + params[0].seriesName + ':' + params[0].value + '万吨' + '</br>' +
-                params[1].seriesName + ':' +
-                params[1].value + '万吨'
-          }
-        },
-
-        legend: {
-          data: ["区内供应量", "区外供应量"],
-        },
-        xAxis: [
-          {
-            type: "category",
-            data: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-            ],
-            axisPointer: {
-              type: "shadow",
-            },
-            axisLabel: {
-              fontSize: 12,
-            },
-            axisLine: {
-              lineStyle: {
-                color: "#9B9DA1", // 颜色
-                width: 1, // 粗细
-              },
-            },
-            axisTick: {
-              show: false,
-            },
-          },
-        ],
-        yAxis: [
-          {
-            name: "万吨 / 月",
-            type: "value",
-            min: 0,
-            max: 20,
-            interval: 2,
-            axisLabel: {
-              fontSize: 12,
-            },
-            axisLine: {
-              lineStyle: {
-                color: "#9B9DA1", // 颜色
-                width: 1, // 粗细
-              },
-            },
-            axisTick: {
-              show: false,
-            },
-          },
-        ],
-        series: [
-          {
-            name: "区内供应量",
-            type: "bar",
-            barWidth: 4,
-            itemStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {offset: 0, color: "#44c2fd"},
-                {offset: 1, color: "#5f59f7"},
-              ]),
-            },
-            data: series[0].inside,
-          },
-          {
-            name: "区外供应量",
-            type: "bar",
-            barWidth: 4,
-            itemStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {offset: 0, color: "#ffc700"},
-                {offset: 1, color: "#ff9200"},
-              ]),
-            },
-            data: series[0].outside,
-          },
-        ],
-      });
-    },
-
-    // 原油月供应量趋势分析tab切换
-    handlePieClick(tab, event) {
-      if (tab.index == 1) {
-        if (this.desIndex == null) {
-          this.$nextTick(() => {
-            this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[0]);
-          })
-
-        } else {
-          this.$nextTick(() => {
-            this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[this.desIndex + 1]);
-          })
-        }
-
-      }
-    },
-    //原油供应结构
-    handle(tab, event) {
-      if (tab.index == 1) {
-        if (this.desIndex == null) {
-          this.$nextTick(() => {
-            this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[0]);
-          })
-
-        } else {
-          this.$nextTick(() => {
-            this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[this.desIndex + 1]);
-          })
-        }
-
-      }
-    },
-    //原油供应结构企业占比分析
-    drawLine(name, series) {
-      var echarts = require("echarts");
-      var myChart = echarts.init(document.getElementById(name));
-      myChart.setOption({
-        tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b}: {c}万吨 ({d}%)",
-        },
-        legend: {
-          orient: "horizontal",
-          bottom: 10,
-          left: "center",
-          itemGap: 10,
-          data: ['中石油', '中石化'],
-          itemWidth: 15,
-          itemHeight: 10,
-        },
-        series: [
-          {
-            name: "油田供应分布分析",
-            type: "pie",
-            radius: ["40%", "55%"],
-            center: ["50%", "40%"],
-            label: {
-              formatter: "{b|{b}} \n\n{per|{d}%}",
-              padding: [0, -50],
-              rich: {
-                per: {
-                  fontSize: 12,
-                  color: "#9FA0A5",
-                },
-                b: {
-                  fontSize: 12,
-                  color: "#9FA0A5",
-                },
-              },
-            },
-            labelLine: {
-              length: 15,
-              length2: 50,
-            },
-            data: series,
-            color: [
-              "#44c2fd",
-              "#22ffc2",
-              "#ffc522",
-              "#ff1a40",
-              "#d527b7",
-              "#0000ff",
-            ],
-          },
-        ],
-      });
-    },
-    //油田供应分布分析
+    // 油田产量分布分析
     ZhuYaoQiYeZhanBi_pie(name, lengend, series) {
       let echarts = require("echarts");
       let myChart = echarts.init(document.getElementById(name));
@@ -801,7 +488,7 @@ export default {
         },
         series: [
           {
-            name: "原油供应结构企业占比",
+            name: "油田产量分布分析",
             type: "pie",
             radius: ["40%", "55%"],
             center: ["50%", "40%"],
@@ -838,38 +525,106 @@ export default {
         ]
       });
     },
+
+    // 天然气月产量柱状图切换
+    handlePieClick(tab, event) {
+      if (tab.index == 1) {
+        if (this.desIndex == null) {
+          this.$nextTick(() => {
+            this.ZhuYaoQiYeZhanBi_pie('echartsNine', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
+          })
+
+        } else {
+          this.$nextTick(() => {
+            this.ZhuYaoQiYeZhanBi_pie('echartsNine', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
+          })
+        }
+
+      }
+    },
+    //原油月生产结构企业占比
+    YuanYou_Three(name, arry) {
+      let echarts = require("echarts");
+      let myChart = echarts.init(document.getElementById(name));
+      myChart.setOption({
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b}: {c} ({d}%)",
+        },
+        legend: {
+          orient: "horizontal",
+          bottom: 20,
+          left: "center",
+          itemGap: 15,
+          data: ["中石油", "中石化"],
+          itemWidth: 15,
+          itemHeight: 10,
+        },
+
+        series: [
+          {
+            name: "原油生产结构企业占比:",
+            type: "pie",
+            radius: ["40%", "55%"],
+            center: ["50%", "40%"],
+            label: {
+              formatter: "{per|{d}%\n}",
+              padding: [0, -40, 5],
+              rich: {
+                per: {
+                  fontSize: 12,
+                  color: "#9FA0A5",
+                },
+              },
+            },
+            labelLine: {
+              length: 15,
+              length2: 30,
+            },
+            data: [
+              {
+                value: 39.51,
+                name: "中石油",
+              },
+              {
+                value: 0,
+                name: "中石化",
+              }
+            ],
+            color: [
+              "#44c2fd",
+              "#22ffc2",
+              "#ffc522",
+              "#ff1a40",
+              "#d527b7",
+              "#0000ff",
+            ],
+          },
+        ],
+      });
+    },
+
     // 点击地图的点联动
     showDes(index) {
       if (this.desIndex == index) {
-        this.showAll = true;
-        this.desIndex = null;
-        this.tabList = this.tabList_copy;
-        this.tabList_two = this.tabList_two_copy
         this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[0]);
         this.pie_one = this.pie_oneAry[0]
-        this.pie_two = this.pie_twoAry[0]
-        if (this.activeName == 2) {
-          this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[0]);
+        if(this.activeNamePie==2){
+          this.ZhuYaoQiYeZhanBi_pie('echartsNine', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
         }
-        if (this.activeNamePie == 2) {
-          this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[0]);
-        }
-        this.ZhuYaoQiYeZhanBi_pie('echartsFour', this.YuanYou_FourLengend[0], this.YuanYou_FourSerData[0])
+        this.tabList = this.tabList_copy
+        this.showAll = true;
+        this.desIndex = null;
+
       } else {
+        this.pie_one = this.pie_oneAry[index + 1]
+        this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[index + 1]);
+        if(this.activeNamePie==2){
+          this.ZhuYaoQiYeZhanBi_pie('echartsNine', this.YuanYou_FourLengend[index + 1], this.YuanYou_FourSerData[index + 1])
+        }
+        this.tabList = [this.city[index] + this.tabList_copy[0], this.city[index] + this.tabList_copy[1]]
         this.desIndex = index;
         this.showAll = false;
-        this.pie_one = this.pie_oneAry[index + 1]
-        this.pie_two = this.pie_twoAry[index + 1]
-        this.tabList = [this.city[index] + this.tabList_copy[0], this.city[index] + this.tabList_copy[1]]
-        if (this.activeName == 2) {
-          this.drawLine("echartsTwo", this.YuanYou_ThreeSerData[index + 1]);
-        }
-        this.tabList_two = [this.city[index] + this.tabList_two_copy[0], this.city[index] + this.tabList_two_copy[1]]
-        this.YuanYou_One("echartsOne", this.YuanYou_OneSerData[index + 1]);
-        if (this.activeNamePie == 2) {
-          this.QuNeiQuwaiGingYingDuiBi_twobar("echartsThree", this.YuanYou_TwoSerData[index + 1]);
-        }
-        this.ZhuYaoQiYeZhanBi_pie('echartsFour', this.YuanYou_FourLengend[index + 1], this.YuanYou_FourSerData[index + 1])
       }
 
 
@@ -889,7 +644,6 @@ export default {
     color: #fff;
     width: 113px;
   }
-
   .map {
     margin-top: 93px;
     /*height: 309px;*/
@@ -1007,15 +761,6 @@ export default {
     top: 93px;
   }
 
-  .map2 {
-    left: 125px;
-    top: 175px;
-    width: 168.5px;
-    height: 188px;
-    position: absolute;
-    z-index: 0;
-  }
-
   .tanchuang_one {
     position: absolute;
     width: 100%;
@@ -1060,24 +805,22 @@ export default {
     width: 1100px;
     background-color: #fff;
   }
-
   .clickbtn {
-    position: absolute;
-    z-index: 2;
     width: 20px;
+    position: absolute;
+    height: 20px;
+    z-index: 2;
   }
-
   .clickbtn1 {
-    width: 20px;
+    width: 35px;
     position: absolute;
-    height: 20px;
+    height: 35px;
     z-index: 2;
   }
-
   .clickbtn2 {
-    width: 20px;
+    width: 25px;
     position: absolute;
-    height: 20px;
+    height: 25px;
     z-index: 2;
   }
 
